@@ -5,6 +5,10 @@
     column-gap: 30px;
 }
 
+.logo {
+    max-width: none;
+}
+
 .navbar {
     &__items {
         display: flex;

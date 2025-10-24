@@ -2,11 +2,11 @@
     <div class="form">
         <div v-if="form.hasErrors">{{ form.errors }}</div>
         <div class="form__control">
-            <label>E-Mail</label>
+            <label>E-Mail *</label>
             <input type="email" v-model="form.email" />
         </div>
         <div class="form__control">
-            <label>Passwort</label>
+            <label>Passwort *</label>
             <input type="password" v-model="form.password" />
         </div>
         <button type="button" @click="onSubmit">Einloggen</button>
