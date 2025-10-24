@@ -1,24 +1,22 @@
 <template>
     <div class="form">
         <div class="form__control">
-            <label>Vorname</label>
+            <label>Vorname *</label>
             <input type="text" v-model="form.first_name" />
         </div>
         <div class="form__control">
-            <label>Nachname</label>
+            <label>Nachname *</label>
             <input type="text" v-model="form.last_name" />
         </div>
         <div class="form__control">
-            <label>E-Mail</label>
+            <label>E-Mail *</label>
             <input type="email" v-model="form.email" />
         </div>
         <div class="form__control">
-            <label>Passwort</label>
+            <label>Passwort *</label>
             <input type="password" v-model="form.password" />
         </div>
-        <p>
-            Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.
-        </p>
+        <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
         <button type="button" @click="onSubmit">Registrieren</button>
     </div>
 </template>
@@ -27,14 +25,14 @@
 import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: ""
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
 });
 
 function onSubmit(): void {
-    form.post("/register");
+    form.post('/register');
 }
 </script>
 
