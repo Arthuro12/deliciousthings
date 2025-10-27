@@ -27,37 +27,6 @@ function onSubmit(): void {
 </script>
 
 <style scoped lang="scss">
-.form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 16px;
-
-    &__control {
-        display: flex;
-        flex-direction: column;
-        row-gap: 8px;
-        margin-bottom: 14px;
-    }
-}
-
-input {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 12px 22px;
-    font-size: 17px;
-}
-
-button {
-    font-size: 17px;
-    line-height: 17px;
-    padding: 12px 22px;
-    background-color: #e680a5;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-}
-
 button {
     margin-top: 14px;
 }

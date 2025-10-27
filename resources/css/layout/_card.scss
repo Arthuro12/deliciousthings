@@ -1,0 +1,18 @@
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.card-layout {
+    background-color: white;
+    border: 1px solid #d8dae0;
+    border-radius: 16px;
+    padding: 48px 40px;
+    max-width: 500px;
+    margin: auto;
+
+    a.button {
+        display: block;
+        margin-top: 16px;
+    }
+}

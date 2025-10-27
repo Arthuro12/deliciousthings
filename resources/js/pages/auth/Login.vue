@@ -1,29 +1,16 @@
 <template>
-    <div class="wrapper">
-        <div><a href="/"><AppLogo /></a></div>
-        <LoginForm />
-        <Link class="button button--primary" href="/register">Neues Konto erstellen</Link>
-    </div>
+    <AuthLayout>
+        <div class="card-layout">
+            <h1 class="heading">Anmelden</h1>
+            <LoginForm />
+            <Link class="button button--primary" href="/register">Neues Konto erstellen</Link>
+        </div>
+    </AuthLayout>
 </template>
 
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
 
-import AppLogo from '@/components/icons/AppLogo.vue';
-import LoginForm from '@/components/auth/LoginForm.vue';
+import LoginForm from "@/components/auth/LoginForm.vue";
+import AuthLayout from "@/layout/AuthLayout.vue";
 </script>
-
-<style scoped>
-.wrapper {
-    padding: 2rem;
-}
-
-.logo {
-    text-align: center;
-}
-
-.heading {
-    margin-top: 48px;
-    margin-bottom: 40px;
-}
-</style>
