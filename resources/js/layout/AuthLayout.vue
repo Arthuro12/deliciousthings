@@ -7,8 +7,6 @@
 
 <script setup lang="ts">
 import AppLogo from "@/components/icons/AppLogo.vue";
-
-document.body.style.backgroundColor = "#fcf1f5";
 </script>
 
 <style scoped>
