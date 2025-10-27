@@ -1,6 +1,7 @@
 <template>
-    <div>{{ auth.user }}</div>
-    <AppLayout />
+    <AppLayout>
+        <div>{{ auth.user }}</div>
+    </AppLayout>
 </template>
 
 <script setup lang="ts">
