@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar">
-        <BurgerMenu class="icon--large cursor--pointer" @click="showMenu = true" />
+        <BurgerMenu class="menu__button icon--large cursor--pointer" @click="toggleMenu(true)" />
         <ul v-show="showMenu" class="navbar__items">
-            <Close class="icon--large close-button cursor--pointer" @click="showMenu = false" />
+            <Close class="menu__button icon--large cursor--pointer" @click="toggleMenu(false)" />
             <li class="navbar__item">
                 <Link class="button button--primary" href="/login">Anmelden</Link>
             </li>
@@ -17,13 +17,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 
 import BurgerMenu from "../icons/BurgerMenu.vue";
 import Close from "../icons/Close.vue";
 
-const isAuthenticated = usePage().props.auth.user != null;
+import { useIsMobile } from "@/composables/is-mobile";
 
-const showMenu = ref(false);
+const isAuthenticated = usePage().props.auth.user != null;
+const { isMobile } = useIsMobile();
+
+const showMenu = ref(!isMobile.value);
+
+watch(isMobile, (newValue) => {
+    toggleMenu(!newValue);
+});
+
+/**
+ * Toggles the visibility of the navigation menu.
+ * 
+ * @param isVisible - Whether the menu should be displayed or hidden
+ */
+function toggleMenu(isVisible: boolean): void {
+    showMenu.value = isVisible;
+}
 </script>
