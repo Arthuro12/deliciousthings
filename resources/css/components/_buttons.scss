@@ -1,0 +1,23 @@
+button {
+    font-size: 17px;
+    line-height: 17px;
+    padding: 12px 22px;
+    background-color: #e680a5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.button {
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.button--primary {
+    color: #e680a5;
+}
+
+.button--secondary {
+    color: #071948;
+}
