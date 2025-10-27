@@ -1,24 +1,48 @@
-    .navbar {
-        &__items {
+@use '../abstracts/breakpoints';
+
+.navbar {
+    &__items {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+        position: fixed;
+        background-color: white;
+        padding: 1rem 2rem;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        .navbar__item {
             display: flex;
-            flex-direction: column;
-            row-gap: 24px;
-            position: fixed;
-            background-color: white;
-            padding: 1rem 2rem;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
+            line-height: 25px;
+            border-bottom: 0.5px solid #e680a5;
+            padding-bottom: 1rem;
+        }
+
+        .navbar__item > a.button {
+            display: block;
+            text-align: center;
+        }
+
+        > .menu__button {
+            align-self: end;
+        }
+    }
+
+    @include breakpoints.respond-to('medium') {
+        .menu__button {
+            display: none;
+        }
+
+        &__items {
+            position: static;
+            column-gap: 24px;
+            flex-direction: row;
 
             .navbar__item {
-                height: 45px;
-                line-height: 25px;
-                border-bottom: 0.5px solid #e680a5;
-            }
-
-            .close-button {
-                align-self: end;
+                border: none;
             }
         }
     }
+}
