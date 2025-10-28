@@ -1,8 +1,6 @@
 <template>
     <header class="app-header">
-        <div>
-            <a href="/"><AppLogo class="logo" /></a>
-        </div>
+        <a class="logo" href="/"><AppLogo class="logo" /></a>
         <AppNavbar />
     </header>
 
