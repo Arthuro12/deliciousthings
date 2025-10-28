@@ -1,20 +1,20 @@
 <template>
     <div class="form">
         <div class="form__control">
-            <label>Vorname *</label>
-            <input type="text" v-model="form.first_name" />
+            <label for="first-name">Vorname *</label>
+            <input type="text" id="first-name" v-model="form.first_name" />
         </div>
         <div class="form__control">
-            <label>Nachname *</label>
-            <input type="text" v-model="form.last_name" />
+            <label for="last-name">Nachname *</label>
+            <input type="text" id="last-name" v-model="form.last_name" />
         </div>
         <div class="form__control">
-            <label>E-Mail *</label>
-            <input type="email" v-model="form.email" />
+            <label for="email">E-Mail *</label>
+            <input type="email" id="email" v-model="form.email" />
         </div>
         <div class="form__control">
-            <label>Passwort *</label>
-            <input type="password" v-model="form.password" />
+            <label for="password">Passwort *</label>
+            <input type="password" id="password" v-model="form.password" />
         </div>
         <p class="info-text">Sie haben bereits ein Konto? <Link class="button button--primary" href="/login">Anmelden</Link></p>
         <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
