@@ -6,7 +6,9 @@
     &__control {
         display: flex;
         flex-direction: column;
-        row-gap: 8px;
-        margin-bottom: 14px;
+    }
+
+    input {
+        border-radius: 8px;
     }
 }
