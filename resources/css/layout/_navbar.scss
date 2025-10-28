@@ -1,9 +1,7 @@
 @use '../abstracts/breakpoints';
 
 .navbar {
-    &__items {
-        display: flex;
-        flex-direction: column;
+    &__menu {
         row-gap: 24px;
         position: fixed;
         background-color: white;
@@ -12,6 +10,21 @@
         left: 0;
         height: 100%;
         width: 100%;
+    }
+
+    .navbar__menu.navbar__items  
+    .navbar__item:last-child {
+        border: 0;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    &__items {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
 
         .navbar__item {
             display: flex;
