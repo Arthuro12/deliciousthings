@@ -17,10 +17,6 @@
         border: 0;
     }
 
-    button {
-        width: 100%;
-    }
-
     &__items {
         display: flex;
         flex-direction: column;
@@ -28,9 +24,13 @@
 
         .navbar__item {
             display: flex;
-            line-height: 25px;
             border-bottom: 0.5px solid #e680a5;
             padding-bottom: 1rem;
+        }
+        
+        .navbar__item > .button--primary,
+        .navbar__item > .button--secondary {
+            width: 100%;
         }
 
         .navbar__item > a.button {
@@ -43,7 +43,21 @@
         }
     }
 
+    &__link {
+        font-size: 1rem;
+        color: #2c2933;
+        padding: 0;
+    }
+
+    &__link:hover {
+        color: #e680a5;
+    }
+
     @include breakpoints.respond-to('medium') {
+        &__menu {
+            padding: 0;
+        }
+
         .menu__button {
             display: none;
         }
@@ -55,7 +69,12 @@
 
             .navbar__item {
                 border: none;
+                padding-bottom: 0;
             }
+        }
+
+        &__link {
+            padding: 12px 22px;
         }
     }
 }

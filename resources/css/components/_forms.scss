@@ -6,6 +6,10 @@
     &__control {
         display: flex;
         flex-direction: column;
+
+        a {
+            margin-top: 8px;
+        }
     }
 
     input {

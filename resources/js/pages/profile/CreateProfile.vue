@@ -1,12 +1,14 @@
 <template>
     <AppLayout>
-        <div>{{ auth.user }}</div>
+        <ProfileForm />
     </AppLayout>
 </template>
 
 <script setup lang="ts">
-import AppLayout from '@/layout/AppLayout.vue';
-import type { Auth } from '@/types';
+import ProfileForm from "@/components/profile/ProfileForm.vue";
+import AppLayout from "@/layout/AppLayout.vue";
+
+import type { Auth } from "@/types";
 
 defineProps<{
     auth: Auth;

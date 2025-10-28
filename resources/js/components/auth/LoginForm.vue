@@ -8,10 +8,10 @@
         <div class="form__control">
             <label for="password">Passwort *</label>
             <input type="password" id="password" v-model="form.password" />
-            <Link class="button button--primary" href="">Passwort vergessen?</Link>
+            <Link href="">Passwort vergessen?</Link>
         </div>
-        <button type="button" @click="onSubmit">Einloggen</button>
-        <Link class="button button--primary" href="/register">Neues Konto erstellen</Link>
+        <button class="button button--primary" type="button" @click="onSubmit">Einloggen</button>
+        <Link href="/register">Neues Konto erstellen</Link>
     </div>
 </template>
 

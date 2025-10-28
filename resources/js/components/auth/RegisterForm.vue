@@ -1,5 +1,5 @@
 <template>
-    <div class="form">
+    <div class="form auth-form">
         <div class="form__control">
             <label for="first-name">Vorname *</label>
             <input type="text" id="first-name" v-model="form.first_name" />
@@ -16,9 +16,9 @@
             <label for="password">Passwort *</label>
             <input type="password" id="password" v-model="form.password" />
         </div>
-        <p class="info-text">Sie haben bereits ein Konto? <Link class="button button--primary" href="/login">Anmelden</Link></p>
+        <p class="info-text">Sie haben bereits ein Konto? <Link href="/login">Anmelden</Link></p>
         <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
-        <button type="button" @click="onSubmit">Registrieren</button>
+        <button class="button button--primary" type="button" @click="onSubmit">Registrieren</button>
     </div>
 </template>
 

@@ -3,15 +3,20 @@
         <BurgerMenu class="menu__button icon--large cursor--pointer" @click="toggleMenu(true)" />
         <ul v-show="showMenu" class="navbar__menu navbar__items">
             <Close class="menu__button icon--large cursor--pointer" @click="toggleMenu(false)" />
-            <li class="navbar__item" v-if="isAuthenticated">
-                <Link as="button" href="/logout" method="post">Abmelden</Link>
-            </li>
+            <ul class="navbar__items" v-if="isAuthenticated">
+                <li class="navbar__item" >
+                    <Link class="navbar__link" href="/profile">Profil erstellen</Link>
+                </li>
+                <li class="navbar__item" v-if="isAuthenticated">
+                    <Link class="button button--secondary" as="button" href="/logout" method="post">Abmelden</Link>
+                </li>
+            </ul>
             <ul class="navbar__items" v-else>
                 <li class="navbar__item">
-                    <Link class="button button--primary" href="/login">Anmelden</Link>
+                    <Link class="navbar__link" href="/login">Anmelden</Link>
                 </li>
                 <li class="navbar__item">
-                    <Link class="button button--secondary" href="/register">Beitreten</Link>
+                    <Link class="button button--primary" href="/register">Beitreten</Link>
                 </li>
             </ul>
         </ul>
