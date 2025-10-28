@@ -12,7 +12,19 @@
         }
     }
 
+    &__helper-text {
+        margin-top: 8px;
+    }
+
     input {
         border-radius: 8px;
     }
+}
+
+input.is-invalid:focus-visible {
+    outline: none;
+}
+
+input.is-invalid {
+    border: 2px solid #f73003;
 }
