@@ -1,5 +1,9 @@
 /** Rules for authentication pages. */
 
-.auth-form .form__control:nth-child(2) a.button  {
-    margin-top: 16px;
+.auth-form {
+    a  {
+        color: #e680a5;
+        padding: 0;
+        text-align: start;
+    }
 }
