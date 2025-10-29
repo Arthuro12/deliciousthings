@@ -13,7 +13,35 @@ export interface User {
     name: string;
     email: string;
     avatar?: string;
-    // email_verified_at: string | null;
-    // created_at: string;
-    // updated_at: string;
 }
+
+export type ArtisanProfile = {
+    name: string;
+    companyName: string;
+    phone?: string;
+    email: string;
+    biography: string;
+    specialities: Specialitiy[];
+    address?: Address | null;
+    instagramUrl?: string;
+    websiteUrl?: string;
+    averageRate: string;
+    offersDelivery: boolean;
+}
+
+export type Address = {
+    street: string;
+    houseNumber: string;
+    postalCode: string;
+    city: string;
+    country: string;
+    addressLine2?: string;
+}
+
+export type Speciality = {
+    key: string;
+    label: string;
+}
+
+export type ClassType = string | Record<string, boolean>;
+export type VueClass = ClassType | ClassType[] | VueClass[];

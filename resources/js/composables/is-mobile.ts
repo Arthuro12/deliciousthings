@@ -7,7 +7,7 @@ const MOBILE_BREAKPOINT = 767;
  * 
  * @param width - The width of the user's device
  */
-const isSmallDevice = (width: number) => width <= MOBILE_BREAKPOINT;
+const isSmallDevice = (width: number): boolean => width <= MOBILE_BREAKPOINT;
 
 export function useIsMobile() {
     const isMobile = ref(isSmallDevice(window.innerWidth));
