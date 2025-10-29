@@ -38,8 +38,9 @@
         </div>
         <div class="form__control">
             <label for="password">Passwort *</label>
-            <input                :class="{
-                'is-invalid': hasRequiredError(form.errors.password || '')
+            <input                
+                :class="{
+                    'is-invalid': hasRequiredError(form.errors.password || '')
                 }"  
                 type="password" 
                 id="password" 
