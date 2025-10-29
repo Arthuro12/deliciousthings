@@ -1,30 +1,43 @@
 <template>
     <div>
         <h1>Profil erstellen</h1>
-
         <div>
-            <label for="name">Name *</label>
-            <input type="text" id="name" />
+            <header>Persönliche Daten</header>
+            <TextField 
+                id="name" 
+                type="text" 
+                label="Name"
+                v-model:model="profile.name"
+            ></TextField>
+            <TextField 
+                id="company-name" 
+                type="text" 
+                label="Firmenname (optional)"
+                v-model:model="profile.companyName"
+            ></TextField>
+            <div>
+                <label>Biographie</label>
+                <textarea v-model="profile.biography"></textarea>
+            </div>
         </div>
         <div>
-            <label>Firmenname (optional)</label>
-            <input type="text" />
+            <header>Kontaktdaten</header>
+            <TextField 
+                type="text" 
+                id="phone" 
+                label="Telefonnummer (optional)"
+                v-model:model="profile.phone"
+            ></TextField>
+            <TextField 
+                type="text" 
+                id="email" 
+                label="E-Mail-Adresse *"
+                v-model:model="profile.email"
+            ></TextField>
         </div>
         <div>
-            <label>Telefonnummer (optional)</label>
-            <input type="text" id="phone" />
-        </div>
-        <div>
-            <label>E-Mail-Adresse</label>
-            <input type="text" id="email" />
-        </div>
-        <div>
-            <label>Biographie</label>
-            <textarea></textarea>
-        </div>
-        <div>
+            <header>Spezialitäten</header>
             <select id="specialities">
-                <option value="">Wählen Sie Ihre Spezialitäten aus</option>
                 <option>Torten</option>
                 <option>Kuchen</option>
                 <option>Gebäck</option>
@@ -36,27 +49,42 @@
             </select>
         </div>
         <div>
-            <h4>Adressdaten</h4>
+            <h4>Adressdaten (Optional)</h4>
             <div>
-                <label>Straße</label>
-                <input type="text" id="street" />
+                <TextField 
+                    type="text" 
+                    id="street" 
+                    label="Straße"
+                ></TextField>
             </div>
             <div>
-                <label>Hausnummer</label>
-                <input type="text" id="house-number" />
+                <TextField 
+                    type="text" 
+                    id="house-number" 
+                    label="Hausnummer"
+                ></TextField>
             </div>
             <div>
-                <label>PLZ</label>
-                <input type="text" id="postal-code" />
+                <TextField 
+                    type="text" 
+                    id="postal-code" 
+                    label="PLZ"
+                ></TextField>
             </div>
             <div>
-                <label>Ort</label>
-                <input type="text" id="city" />
+                <TextField 
+                    type="text" 
+                    id="city" 
+                    label="Ort"
+                ></TextField>
             </div>
             <div>
-                <label>Land</label>
                 <!-- Défaut à Berlin et pas éditable -->
-                <input type="text" id="country" />
+                <TextField 
+                    type="text" 
+                    id="country" 
+                    label="Land"
+                ></TextField>
             </div>
         </div>
         <div>
@@ -65,25 +93,43 @@
             <div>Bildervorschau</div>
         </div>
         <div>
-            <h4>Netzwerk</h4>
+            <header>Netzwerk</header>
             <div>
-                <span>Instagram-Profil: </span>
-                <input type="text" />
+                <!-- TODO: validate and sanitize urls -->
+                <span>Instagram-Profil-Url: </span>
+                <TextField 
+                    type="text" 
+                    id="instagram" 
+                ></TextField>
             </div>
             <div>
-                <span>Webseite: </span>
-                <input type="text" />
+                <span>Webseite-Url: </span>
+                <TextField 
+                    type="text" 
+                    id="website" 
+                ></TextField>
             </div>
         </div>
         <div>
-            <input type="checkbox" /> Ich kann liefern
-            <div>
-                <label>Preis</label>
-                <input type="text" />
-            </div>
+            <header>Zusätzliche Informationen</header>
+            <div><input type="checkbox" /> Ich kann liefern</div>
+            <TextField 
+                type="text" 
+                id="average-rate" 
+                label="Durchschnittspreis (in Euro)"
+            ></TextField>
         </div>
-
-        <button type="button">Mein Profil erstellen</button>
+        <button class="button button--primary" type="button">Mein Profil erstellen</button>
         <p>Ihr Profil ist sofort nach der Erstellung sichtbar.</p>
     </div>
 </template>
+
+<script setup lang="ts">
+import { useForm } from "@inertiajs/vue3";
+import TextField from "../presentation/TextField.vue";
+
+import { defaultProfile } from "@/utils/artisans";
+import type { ArtisanProfile } from "@/types";
+
+const profile = useForm<ArtisanProfile>(defaultProfile());
+</script>
