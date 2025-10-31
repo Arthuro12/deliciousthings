@@ -14,6 +14,3 @@ import AppLogo from "@/components/icons/AppLogo.vue";
 import AppNavbar from "@/components/presentation/AppNavbar.vue";
 import AppFooter from "@/components/presentation/AppFooter.vue";
 </script>
-
-<style scoped>
-</style>

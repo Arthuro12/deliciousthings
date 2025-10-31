@@ -22,5 +22,5 @@ Route::controller(SessionController::class)->group(function () {
 });
 
 Route::get('/profile', function () {
-    return Inertia::render('profile/CreateProfile', ['user' => null]);
+    return Inertia::render('profile/CreateProfile');
 })->middleware('auth')->name('profile.create');
