@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-field__wrapper">
         <label v-if="label" :for="id">{{ label }}</label>
         <slot name="leadingIcon"></slot>
         <input 
@@ -29,6 +29,11 @@ const model = defineModel("model", {
 </script>
 
 <style scoped>
+.text-field__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 input.is-invalid:focus-visible {
     outline: none;
 }

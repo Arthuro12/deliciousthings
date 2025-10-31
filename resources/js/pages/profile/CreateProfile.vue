@@ -1,6 +1,8 @@
 <template>
     <AppLayout>
-        <ProfileForm />
+        <main class="create-profile-page">
+            <ProfileForm class="card-layout" />
+        </main>
     </AppLayout>
 </template>
 
