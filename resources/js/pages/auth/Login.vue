@@ -1,6 +1,6 @@
 <template>
     <AuthLayout>
-        <div :style="{ width: '500px' }" class="card-layout">
+        <div :style="{ maxWidth: '500px' }" class="card-layout">
             <h1 class="heading">Anmelden</h1>
             <LoginForm />
         </div>
