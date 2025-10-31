@@ -48,7 +48,7 @@
             />
             <HelperText v-if="hasRequiredError(form.errors.password || '')" class="form__helper-text" :text="FORM_ERRORS.REQUIRED" />
         </div>
-        <p class="info-text">Sie haben bereits ein Konto? <Link href="/login">Anmelden</Link></p>
+        <p>Sie haben bereits ein Konto? <Link href="/login">Anmelden</Link></p>
         <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
         <button class="button button--primary" type="button" @click="onSubmit">Registrieren</button>
     </div>
