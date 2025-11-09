@@ -5,16 +5,16 @@
             <div class="row">
                 <header>Persönliche Daten</header>
                 <TextField 
-                    id="name" 
+                    id="username" 
                     type="text" 
-                    label="Name"
-                    v-model:model="profile.name"
+                    label="Benutzername"
+                    v-model:model="profile.username"
                 ></TextField>
                 <TextField 
                     id="company-name" 
                     type="text" 
                     label="Firmenname (optional)"
-                    v-model:model="profile.companyName"
+                    v-model:model="profile.company_name"
                 ></TextField>
                 <TextZone id="biography" rows="10" label="Bio" v-model:model="profile.biography" />
             </div>
@@ -24,7 +24,7 @@
                     type="text" 
                     id="phone" 
                     label="Telefonnummer (optional)"
-                    v-model:model="profile.phone"
+                    v-model:model="profile.e164phone"
                 ></TextField>
                 <TextField 
                     type="text" 
@@ -50,35 +50,7 @@
         </div>
         <AppDivider variant="horizontal" />
         <div class="wrapper">
-            <div class="row">
-                <header>Adressdaten (Optional)</header>
-                <TextField 
-                    type="text" 
-                    id="street" 
-                    label="Straße"
-                ></TextField>
-                <TextField 
-                    type="text" 
-                    id="house-number" 
-                    label="Hausnummer"
-                ></TextField>
-                <TextField 
-                    type="text" 
-                    id="postal-code" 
-                    label="PLZ"
-                ></TextField>
-                <TextField 
-                    type="text" 
-                    id="city" 
-                    label="Ort"
-                ></TextField>
-                <!-- Défaut à Berlin et pas éditable -->
-                <TextField 
-                    type="text" 
-                    id="country" 
-                    label="Land"
-                ></TextField>
-            </div>
+            <AddressForm v-model:address="profile.address" />
         </div>
         <AppDivider variant="horizontal" />
         <div class="wrapper">
@@ -96,6 +68,7 @@
                     <TextField 
                         type="text" 
                         id="instagram" 
+                        v-model:model="profile.instagram_url"
                     ></TextField>
                 </div>
                 <div>
@@ -103,6 +76,7 @@
                     <TextField 
                         type="text" 
                         id="website" 
+                        v-model:model="profile.website_url"
                     ></TextField>
                 </div>
             </div>
@@ -110,31 +84,46 @@
         <AppDivider variant="horizontal" />
         <div class="wrapper">
             <header>Zusätzliche Informationen</header>
-            <div><input type="checkbox" /> Ich kann liefern</div>
+            <div class="checkbox-input-wrapper">
+                <input id="offers-delivery" type="checkbox" v-model="profile.offers_delivery" /> 
+                <label for="offers-delivery">Ich kann liefern</label>
+            </div>
             <TextField 
                 type="text" 
                 id="average-rate" 
                 label="Durchschnittspreis (in Euro)"
+                v-model:model="profile.average_rate"
             ></TextField>
         </div>
         <div>
-            <button class="button button--primary" type="button">Mein Profil erstellen</button>
+            <button 
+                class="button button--primary" 
+                type="button"
+                @click="emit('submit', profile)"
+            >
+                Mein Profil erstellen
+            </button>
             <p class="info-text">Ihr Profil ist sofort nach der Erstellung sichtbar.</p>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
 import TextZone from "../presentation/TextZone.vue";
 import TextField from "../presentation/TextField.vue";
+import AddressForm from "../addresses/AddressForm.vue";
 
 import { defaultProfile } from "@/utils/artisans";
 import type { ArtisanProfile } from "@/types";
 
-const profile = useForm<ArtisanProfile>(defaultProfile());
+const emit = defineEmits<{
+    (e: 'submit', value: ArtisanProfile): void,
+}>();
+
+const profile = ref(defaultProfile());
 </script>
 
 <style scoped>

@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
 import ShowError from "@/components/presentation/ShowError.vue";
@@ -49,7 +49,7 @@ const form = useForm({
 
 const authenticationFailed = ref(false);
 
-function onSubmit(): void {
+async function onSubmit(): Promise<void> {
     form.clearErrors();
     if (!form.email) {
         form.setError('email', FORM_ERRORS.REQUIRED);
@@ -59,6 +59,8 @@ function onSubmit(): void {
         form.setError('password', FORM_ERRORS.REQUIRED);
         return;
     }
+
+    await fetch("/sanctum/csrf-cookie");
 
     form.post('/login', {
         onError: () => {

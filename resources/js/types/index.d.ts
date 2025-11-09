@@ -8,38 +8,46 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     auth: Auth;
 };
 
+export type Media = {
+    category: string | null;
+    caption: string | null;
+    path: string;
+};
+
 export interface User {
     id: number;
     name: string;
     email: string;
-    avatar?: string;
+    media?: string;
 }
 
 export type ArtisanProfile = {
-    name: string;
-    companyName: string;
-    phone?: string;
+    username: string;
+    company_name: string;
+    e164phone?: string;
     email: string;
     biography: string;
+    medias: Media[];
     specialities: Specialitiy[];
-    address?: Address | null;
-    instagramUrl?: string;
-    websiteUrl?: string;
-    averageRate: string;
-    offersDelivery: boolean;
+    address?: Address;
+    instagram_url?: string;
+    website_url?: string;
+    average_rate: string;
+    offers_delivery: boolean;
 }
 
 export type Address = {
     street: string;
     houseNumber: string;
-    postalCode: string;
+    postalCode?: string | null;
     city: string;
     country: string;
-    addressLine2?: string;
+    addressLine2: string | null;
 }
 
 export type Speciality = {
     key: string;
+    name: string;
     label: string;
 }
 

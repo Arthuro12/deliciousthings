@@ -5,6 +5,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -21,6 +22,9 @@ Route::controller(SessionController::class)->group(function () {
     Route::post('/logout', 'destroy');
 });
 
-Route::get('/profile', function () {
-    return Inertia::render('profile/CreateProfile');
-})->middleware('auth')->name('profile.create');
+Route::group(['prefix' => 'users/{user}/', 'middleware' => 'auth'], function () {
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('profile/create', 'create')->name('profile');
+        Route::post('profile', 'store');
+    });
+});
