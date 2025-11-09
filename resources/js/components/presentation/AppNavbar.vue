@@ -5,7 +5,7 @@
             <Close class="menu__button icon--large cursor--pointer" @click="toggleMenu(false)" />
             <ul class="navbar__items" v-if="isAuthenticated">
                 <li class="navbar__item" >
-                    <Link class="navbar__link" href="/profile">Profil erstellen</Link>
+                    <Link class="navbar__link" :href='`/users/${userId}/profile/create`'>Profil erstellen</Link>
                 </li>
                 <li class="navbar__item" v-if="isAuthenticated">
                     <Link class="button button--secondary" as="button" href="/logout" method="post">Abmelden</Link>
@@ -32,8 +32,11 @@ import Close from "../icons/Close.vue";
 
 import { useIsMobile } from "@/composables/is-mobile";
 
-const isAuthenticated = usePage().props.auth.user != null;
+const { auth } = usePage().props;
 const { isMobile } = useIsMobile();
+
+const isAuthenticated = auth.user != null;
+const userId = auth.user?.id ?? "";
 
 const showMenu = ref(!isMobile.value);
 
