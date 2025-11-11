@@ -22,6 +22,11 @@ export function defaultProfile(): ArtisanProfile {
     };
 }
 
+/**
+ * Gets a default address.
+ * 
+ * @returns A default default address.
+ */
 export function defaultAddress(): Address {
     return {
         street: "",

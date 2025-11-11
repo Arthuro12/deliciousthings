@@ -16,7 +16,7 @@
                     label="Firmenname (optional)"
                     v-model:model="profile.company_name"
                 ></TextField>
-                <TextZone id="biography" rows="10" label="Bio" v-model:model="profile.biography" />
+                <AppTextArea id="biography" rows="10" label="Bio" v-model:model="profile.biography" />
             </div>
             <div class="row">
                 <header>Kontaktdaten</header>
@@ -37,15 +37,14 @@
         <AppDivider variant="horizontal" />
         <div class="wrapper">
             <header>Spezialitäten</header>
-            <select id="specialities">
-                <option>Torten</option>
-                <option>Kuchen</option>
-                <option>Gebäck</option>
-                <option>Praline</option>
-                <option>Brot</option>
-                <option>Brötchen</option>
-                <option>Eis</option>
-                <option>Schokoladen</option>
+            <select 
+                id="specialities"
+                multiple
+                v-model=profile.specialities
+            >
+                <option v-for="speciality in specialities" :key="speciality.key">
+                    {{ speciality.label }}
+                </option>
             </select>
         </div>
         <AppDivider variant="horizontal" />
@@ -109,21 +108,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
-import TextZone from "../presentation/TextZone.vue";
+import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
 import AddressForm from "../addresses/AddressForm.vue";
 
+import { fetchAll } from "@/api";
 import { defaultProfile } from "@/utils/artisans";
-import type { ArtisanProfile } from "@/types";
+import type { ArtisanProfile, Speciality } from "@/types";
 
 const emit = defineEmits<{
     (e: 'submit', value: ArtisanProfile): void,
 }>();
 
-const profile = ref(defaultProfile());
+const profile = ref<ArtisanProfile>(defaultProfile());
+
+const specialities = ref<Speciality[]>([]);
+
+async function fecthSpecialities(): Promise<void> {
+    const { data } = await fetchAll<Speciality[]>("/api/specialities");
+    specialities.value = data;
+}
+
+fecthSpecialities();
+
+// watch(
+//     () => profile, 
+//     () => {
+//         console.log(profile.value.specialities)
+//     }, { deep: true }
+// );
 </script>
 
 <style scoped>
