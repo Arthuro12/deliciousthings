@@ -1,12 +1,14 @@
 <template>
-    <header class="app-header">
-        <a class="logo" href="/"><AppLogo class="logo" /></a>
-        <AppNavbar />
-    </header>
+    <UApp>
+        <header class="app-header">
+            <a class="logo" href="/"><AppLogo class="logo" /></a>
+            <AppNavbar />
+        </header>
 
-    <slot></slot>
+        <slot></slot>
 
-    <AppFooter />
+        <AppFooter />
+    </UApp>
 </template>
 
 <script setup lang="ts">

@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Link, router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
 import ShowError from "@/components/presentation/ShowError.vue";

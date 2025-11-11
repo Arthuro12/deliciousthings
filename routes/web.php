@@ -22,7 +22,7 @@ Route::controller(SessionController::class)->group(function () {
     Route::post('/logout', 'destroy');
 });
 
-Route::group(['prefix' => 'users/{user}/', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'users/{user}/', 'middleware' => 'auth:sanctum'], function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get('profile/create', 'create')->name('profile');
         Route::post('profile', 'store');

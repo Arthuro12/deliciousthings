@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Speciality extends Model
 {
     protected $fillable = ['key', 'name', 'label'];
+
+    protected $visible = ['key', 'name', 'label'];
 }
