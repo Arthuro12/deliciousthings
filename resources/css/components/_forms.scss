@@ -26,5 +26,5 @@ input.is-invalid:focus-visible {
 }
 
 input.is-invalid {
-    border: 2px solid #f73003;
+    border: 2px solid var(--color-error-40);
 }

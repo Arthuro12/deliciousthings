@@ -1,6 +1,6 @@
 import type { Response } from "@/types/api";
 
-export async function fetchAll<T>(url: string): Promise<Response<T>> {
+export async function get<T>(url: string): Promise<Response<T>> {
     let error = null;
     let data = null;
 

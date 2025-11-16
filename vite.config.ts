@@ -22,7 +22,7 @@ export default defineConfig({
             },
         }),
         ui({
-            inertia: true
+            inertia: true,
         })
         // wayfinder({
         //     formVariants: true,

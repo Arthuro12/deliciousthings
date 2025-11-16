@@ -7,19 +7,19 @@
 }
 
 .button--primary {
-    background-color: #e680a5;
+    background-color: var(--color-primary-50);
     color: white;
     border-radius: 5px;
 }
 
 .button--secondary {
     background: none;
-    color: #e680a5;
-    border: 1px solid #e680a5;
+    color: var(--color-primary-50);
+    border: 1px solid var(--color-primary-50);
     border-radius: 5px;
 }
 
 .button--tertiary {
     background: none;
-    color:#e680a5;
+    color: var(--color-primary-50);
 }

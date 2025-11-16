@@ -1,3 +1,4 @@
+@use 'base/root';
 @use 'base/reset';
 @use 'base/base';
 @use 'base/typography';
@@ -10,5 +11,6 @@
 @use 'components/forms';
 @use 'components/buttons';
 @use 'components/inputs';
+@use 'components/select';
 @use 'pages/auth';
 @use 'pages/profile';
