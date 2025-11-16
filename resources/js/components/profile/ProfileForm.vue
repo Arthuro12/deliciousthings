@@ -37,15 +37,14 @@
         <AppDivider variant="horizontal" />
         <div class="wrapper">
             <header>Spezialitäten</header>
-            <select 
-                id="specialities"
-                multiple
-                v-model=profile.specialities
-            >
-                <option v-for="speciality in specialities" :key="speciality.key">
-                    {{ speciality.label }}
-                </option>
-            </select>
+            <NuxtSelect
+                placeholder="Wählen Sie Ihre Spezialitäten aus"
+                value-key="key" 
+                label-key="label" 
+                multiple 
+                :items="specialityStore.specialities"
+                v-model="profile.specialities" 
+            />
         </div>
         <AppDivider variant="horizontal" />
         <div class="wrapper">
@@ -108,38 +107,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, onMounted } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
 import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
 import AddressForm from "../addresses/AddressForm.vue";
+import NuxtSelect from "@/third-party/nuxtui/NuxtSelect.vue";
 
-import { fetchAll } from "@/api";
+import { useSpecialityStore } from "@/stores/speciality";
 import { defaultProfile } from "@/utils/artisans";
-import type { ArtisanProfile, Speciality } from "@/types";
+import type { ArtisanProfile } from "@/types/users";
 
 const emit = defineEmits<{
     (e: 'submit', value: ArtisanProfile): void,
 }>();
 
+const specialityStore = useSpecialityStore();
 const profile = ref<ArtisanProfile>(defaultProfile());
 
-const specialities = ref<Speciality[]>([]);
-
-async function fecthSpecialities(): Promise<void> {
-    const { data } = await fetchAll<Speciality[]>("/api/specialities");
-    specialities.value = data;
-}
-
-fecthSpecialities();
-
-// watch(
-//     () => profile, 
-//     () => {
-//         console.log(profile.value.specialities)
-//     }, { deep: true }
-// );
+onMounted(async () => {
+    await specialityStore.getSpecialities();
+});
 </script>
 
 <style scoped>

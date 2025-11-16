@@ -47,7 +47,7 @@ import { ref, watch } from "vue";
 
 import TextField from "../presentation/TextField.vue";
 
-import type { Address } from "@/types";
+import type { Address } from "@/types/users";
 import { defaultAddress } from "@/utils/artisans";
 
 const formIsVisible = ref(false);

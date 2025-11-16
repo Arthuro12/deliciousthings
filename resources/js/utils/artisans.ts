@@ -1,4 +1,4 @@
-import type { Address, ArtisanProfile } from "@/types";
+import type { Address, ArtisanProfile } from "@/types/users";
 
 /**
  * Gets a default artisan profile.
