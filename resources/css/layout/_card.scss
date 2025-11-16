@@ -1,5 +1,5 @@
 body:has(.card-layout)  {
-    background-color: #fcf1f5;
+    background-color: var(--color-primary-10);
 }
 
 .heading {
@@ -9,7 +9,7 @@ body:has(.card-layout)  {
 
 .card-layout {
     background-color: white;
-    border: 1px solid #d8dae0;
+    border: 1px solid var(--color-neutral-10);
     border-radius: 16px;
     padding: 48px 40px;
     margin: auto;
