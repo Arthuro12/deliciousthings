@@ -30,17 +30,17 @@ import { Link, usePage } from "@inertiajs/vue3";
 import BurgerMenu from "../icons/BurgerMenu.vue";
 import Close from "../icons/Close.vue";
 
-import { useIsMobile } from "@/composables/is-mobile";
+import { useResponsive } from "@/composables/use-responsive";
 
 const { auth } = usePage().props;
-const { isMobile } = useIsMobile();
+const { isSmallDevice } = useResponsive();
 
 const isAuthenticated = auth.user != null;
 const userId = auth.user?.id ?? "";
 
-const showMenu = ref(!isMobile.value);
+const showMenu = ref(!isSmallDevice.value);
 
-watch(isMobile, (newValue) => {
+watch(isSmallDevice, (newValue) => {
     toggleMenu(!newValue);
 });
 
