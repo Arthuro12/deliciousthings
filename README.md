@@ -2,7 +2,7 @@
 
 **DELICIOUSthings is a platform that connects pastry chefs and bakers with customers.**
 
-## Developer environment
+## Developer guide
 
 ### Installation
 
@@ -46,13 +46,13 @@ We recommend that all developers use [Visual Studio Code](https://code.visualstu
 - Laravel Extra Intellisense
 - Vue (official)
 
-## YouTube tutorials
+### YouTube tutorials
 
 - [Laravel Demo App](https://youtu.be/SqTdHCTWqks?si=cnznR3omXj2GBndO) with an Laravel instructor
 - [Laravel Inertia App](https://www.youtube.com/watch?v=QyqrYdhSku0&t=439s) with an Laravel instructor
 - [Vue Demo App](https://www.youtube.com/watch?v=s9URD3PefTk&t=230s) from [Vue Mastery](https://www.youtube.com/@VueMastery) 
 
-## Important links
+### Important links
 
 - Laravel Herd [getting started](https://herd.laravel.com/docs/macos/getting-started/installation)
 - [Inertia](https://inertiajs.com/)
