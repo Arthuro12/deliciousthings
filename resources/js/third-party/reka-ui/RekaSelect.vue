@@ -1,5 +1,5 @@
 <template>
-    <SelectRoot v-model="selectedValue">
+    <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger>
             <SelectValue :placeholder="placeholder" />
         </SelectTrigger>
@@ -10,6 +10,7 @@
                         v-for="item in items" 
                         :value="getItemValue(item)" 
                         :key="item.label"
+                        
                     >
                         <SelectItemText>
                             {{ getItemLabel(item) }}
@@ -34,13 +35,16 @@ import {
     SelectTrigger,
     SelectViewport,
 } from "reka-ui";
-import type { AcceptableValue } from "reka-ui";
 
-import type { SelectProps, SelectItem as SelectItemType } from "@/types/ui";
+import type { 
+    SelectProps, 
+    SelectItem as SelectItemType,
+    SelectValue as SelectValueType,
+} from "@/types/ui";
 
 const props = defineProps<SelectProps>();
 
-const selectedValue = defineModel<AcceptableValue | AcceptableValue[] | undefined>("selectedValue", {
+const selectedValue = defineModel<SelectValueType>("selectedValue", {
     default: undefined
 });
 
