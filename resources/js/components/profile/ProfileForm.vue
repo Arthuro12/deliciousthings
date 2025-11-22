@@ -42,6 +42,7 @@
                 :items="specialityStore.specialities"
                 label-prop="label"
                 value-prop="key"
+                multiple
                 v-model:selected-value="profile.specialities"
             />
         </div>
