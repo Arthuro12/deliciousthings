@@ -37,14 +37,6 @@
         <AppDivider variant="horizontal" />
         <div class="wrapper">
             <header>Spezialitäten</header>
-            <NuxtSelect
-                placeholder="Wählen Sie Ihre Spezialitäten aus"
-                value-key="key" 
-                label-key="label" 
-                multiple 
-                :items="specialityStore.specialities"
-                v-model="profile.specialities" 
-            />
         </div>
         <AppDivider variant="horizontal" />
         <div class="wrapper">
@@ -113,7 +105,6 @@ import AppDivider from "../presentation/AppDivider.vue";
 import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
 import AddressForm from "../addresses/AddressForm.vue";
-import NuxtSelect from "@/third-party/nuxtui/NuxtSelect.vue";
 
 import { useSpecialityStore } from "@/stores/speciality";
 import { defaultProfile } from "@/utils/artisans";
