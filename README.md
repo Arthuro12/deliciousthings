@@ -36,6 +36,7 @@
 
 ## Important links
 
+- Laravel Herd [getting started](https://herd.laravel.com/docs/macos/getting-started/installation)
 - [Inertia](https://inertiajs.com/)
 - [Vue.js](https://vuejs.org/)
 - [Reka](https://reka-ui.com/)
