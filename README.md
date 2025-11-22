@@ -22,6 +22,13 @@
     - `npm run dev`
     - `herd open` to open the app in your browser
 
+### IDE
+
+We recommend that all developers use [Visual Studio Code](https://code.visualstudio.com/), so that we have a common standard for IDE configurations.
+
+1. Commands
+    - `code .` open VS code from your terminal
+
 ### Versioning
 
 1. VCS
