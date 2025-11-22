@@ -11,6 +11,7 @@
 3. After you have installed and configured Herd and your local DBMS, open your terminal and move to the `~/Herd` directory on your system with `cd ~/Herd`
 4. Use `git clone https://github.com/Arthuro12/deliciousthings.git` to clone the repository
 5. Run the following commands:
+    - `cd deliciousthings`
     - `composer install`
     - `cp .env.example .env`
     - `php artisan key:generate` 
