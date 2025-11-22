@@ -38,7 +38,7 @@
 
 - Laravel Herd [getting started](https://herd.laravel.com/docs/macos/getting-started/installation)
 - [Inertia](https://inertiajs.com/)
-- [Vue.js](https://vuejs.org/)
-- [Reka](https://reka-ui.com/)
 - [Laravel](https://laravel.com/)
 - [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum#spa-authentication) - Authenticate SPA 
+- [Vue.js](https://vuejs.org/)
+- [Reka](https://reka-ui.com/)
