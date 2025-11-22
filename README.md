@@ -12,8 +12,8 @@
 4. Use `git clone https://github.com/Arthuro12/deliciousthings.git` to clone the repository
 5. Run the following commands:
     - `cd deliciousthings`
-    - `composer install`
     - `cp .env.example .env`
+    - `composer install`
     - `php artisan key:generate` 
     - `php artisan migrate` will run the migration files
     - `php artisan route:cache`
