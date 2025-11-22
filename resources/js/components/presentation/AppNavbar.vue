@@ -30,10 +30,10 @@ import { Link, usePage } from "@inertiajs/vue3";
 import BurgerMenu from "../icons/BurgerMenu.vue";
 import Close from "../icons/Close.vue";
 
-import { useResponsive } from "@/composables/use-responsive";
+import { useDeviceSize } from "@/composables/use-devce-size.js";
 
 const { auth } = usePage().props;
-const { isSmallDevice } = useResponsive();
+const { isSmallDevice } = useDeviceSize();
 
 const isAuthenticated = auth.user != null;
 const userId = auth.user?.id ?? "";
