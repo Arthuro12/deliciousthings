@@ -17,7 +17,7 @@ const isDeviceWidthInRange = (width: number, range: BreakpointRange = 'small'): 
     return width <= SMALL_DEVICE_BREAKPOINT;
 }
 
-export function useResponsive() {
+export function useDeviceSize() {
     const isSmallDevice = ref(isDeviceWidthInRange(window.innerWidth));
 
     function setIsSmallDevice(): void {

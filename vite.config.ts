@@ -3,7 +3,6 @@ import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
-import ui from '@nuxt/ui/vite'
 
 export default defineConfig({
     plugins: [
@@ -21,9 +20,6 @@ export default defineConfig({
                 },
             },
         }),
-        ui({
-            inertia: true,
-        })
         // wayfinder({
         //     formVariants: true,
         // }),
