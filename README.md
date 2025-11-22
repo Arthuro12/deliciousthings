@@ -1,5 +1,7 @@
 # DELICIOUSthings
 
+![Deliciousthings logo](public/logo.svg)
+
 **DELICIOUSthings is a platform that connects pastry chefs and bakers with customers.**
 
 ## Developer environment
@@ -12,6 +14,7 @@
 4. Use `git clone https://github.com/Arthuro12/deliciousthings.git` to clone the repository
 5. Run the following commands:
 - `composer install` 
+- `composer migrate` will run the migration files
 - `npm install`
 - `npm run dev`
 - `herd open` to open the app in your browser
@@ -39,4 +42,4 @@
 - [Vue.js](https://vuejs.org/)
 - [Reka](https://reka-ui.com/)
 - [Laravel](https://laravel.com/)
-- [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum#main-content) - Authenticate SPA 
+- [Laravel Sanctum](m/docs/12.x/sanctum#spa-authentication) - Authenticate SPA 
