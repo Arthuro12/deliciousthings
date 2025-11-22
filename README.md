@@ -40,4 +40,4 @@
 - [Vue.js](https://vuejs.org/)
 - [Reka](https://reka-ui.com/)
 - [Laravel](https://laravel.com/)
-- [Laravel Sanctum](m/docs/12.x/sanctum#spa-authentication) - Authenticate SPA 
+- [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum#spa-authentication) - Authenticate SPA 
