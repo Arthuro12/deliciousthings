@@ -39,6 +39,12 @@
 - Laravel Extra Intellisense
 - Vue (official)
 
+## YouTube tutorials
+
+- [Laravel Demo App](https://youtu.be/SqTdHCTWqks?si=cnznR3omXj2GBndO) with an Laravel instructor
+- [Laravel Inertia App](https://www.youtube.com/watch?v=QyqrYdhSku0&t=439s) with an Laravel instructor
+- [Vue Demo App](https://www.youtube.com/watch?v=s9URD3PefTk&t=230s) from [Vue Mastery](https://www.youtube.com/@VueMastery) 
+
 ## Important links
 
 - Laravel Herd [getting started](https://herd.laravel.com/docs/macos/getting-started/installation)
