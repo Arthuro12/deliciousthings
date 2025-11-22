@@ -1,5 +1,3 @@
-# DELICIOUSthings
-
 ![Deliciousthings logo](public/logo.svg)
 
 **DELICIOUSthings is a platform that connects pastry chefs and bakers with customers.**
