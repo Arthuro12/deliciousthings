@@ -20,10 +20,10 @@
 ### Versioning
 
 1. VCS
-- git
+    - git
 2. git clients
-- [Fork](https://git-fork.com) 
-- [GitHub Desktop](https://desktop.github.com/download/)
+    - [Fork](https://git-fork.com) 
+    - [GitHub Desktop](https://desktop.github.com/download/)
 
 ### Plugins
 
