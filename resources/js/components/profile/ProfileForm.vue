@@ -37,6 +37,13 @@
         <AppDivider variant="horizontal" />
         <div class="wrapper">
             <header>Spezialitäten</header>
+            <RekaSelect 
+                placeholder="Spezialitäten auswählen" 
+                :items="specialityStore.specialities"
+                label-prop="label"
+                value-prop="key"
+                v-model:selected-value="profile.specialities"
+            />
         </div>
         <AppDivider variant="horizontal" />
         <div class="wrapper">
@@ -105,6 +112,7 @@ import AppDivider from "../presentation/AppDivider.vue";
 import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
 import AddressForm from "../addresses/AddressForm.vue";
+import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 
 import { useSpecialityStore } from "@/stores/speciality";
 import { defaultProfile } from "@/utils/artisans";
