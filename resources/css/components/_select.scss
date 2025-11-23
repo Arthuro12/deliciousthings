@@ -1,12 +1,31 @@
-.nuxt-select__label {
-    padding: 12px;
-    border: 1px solid black;
-    border-radius: 5px;
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
+.select {
+    &__dropdown-button {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        border: 1px solid var(--color-neutral-50);
+        border-radius: 5px;
+    }
 
-    .nuxt-select__leading {
-        color: black;
+    &__content {
+        padding: 12px;
+        background-color: var(--color-neutral-0);
+        border: 1px solid var(--color-neutral-50);
+        border-radius: 5px;
+        width: var(--reka-select-trigger-width);
+    }
+
+    &__item {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    &__item:focus-visible {
+        outline: none;    
+    }
+
+    &__item[data-highlighted] {
+        background-color: var(--color-primary-10);
+        border-radius: 5px;
     }
 }
