@@ -102,7 +102,8 @@
             <AppButton 
                 class="submit-button"
                 type="button" 
-                action="primary"
+                layout="text"
+                variant="primary"
                 @click="emit('submit', profile)"
             >
                 <template #text>Mein Profil erstellen</template>

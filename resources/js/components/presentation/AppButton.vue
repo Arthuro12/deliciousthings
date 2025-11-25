@@ -1,7 +1,7 @@
 <template>
     <button 
         class="button"
-        :class="[actionClass, variantClass]" 
+        :class="[variantClass, layoutClass]" 
         :type="type"
     >
         <slot name="leading" />
@@ -11,14 +11,14 @@
 </template>
 
 <script setup lang="ts">
-import { ACTION_CLASSES, VARIANT_CLASSES } from '@/constants';
+import { BUTTON_CLASSES } from '@/constants';
 
-const { action, variant = "standard" } = defineProps<{
+const { variant, layout = "text" } = defineProps<{
     type: "button" | "submit" | "reset";
-    action: "primary" | "secondary" | "tertiary";
-    variant?: "standard" | "icon";
+    variant: "primary" | "secondary" | "tertiary";
+    layout: "text" | "icon" | "with-icon";
 }>();
 
-const actionClass = ACTION_CLASSES.BUTTON[action];
-const variantClass = VARIANT_CLASSES.BUTTON[variant];
+const layoutClass = BUTTON_CLASSES.LAYOUTS[layout];
+const variantClass = BUTTON_CLASSES.VARIANTS[variant];
 </script>
