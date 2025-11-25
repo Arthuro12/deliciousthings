@@ -6,9 +6,8 @@
         border-radius: 0;
         padding: 24px;
 
-        .button {
+        .row > .submit-button {
             width: 100%;
-            margin-bottom: 12px;
 
             @include breakpoints.respond-to('medium') {
                 width: 30%;

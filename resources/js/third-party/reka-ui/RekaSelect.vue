@@ -28,14 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDownIcon } from 'lucide-vue-next';
+import { ChevronDownIcon } from "lucide-vue-next";
 import {
     SelectValue,
     SelectContent,
-    // SelectGroup,
     SelectItem,
     SelectItemText,
-    // SelectItemIndicator,
     SelectPortal,
     SelectRoot,
     SelectTrigger,

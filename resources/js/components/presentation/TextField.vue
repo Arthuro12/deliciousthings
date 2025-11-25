@@ -3,6 +3,7 @@
         <label v-if="label" :for="id">{{ label }}</label>
         <slot name="leadingIcon"></slot>
         <input 
+            :id="id"
             :class="{
                 'is-invalid': error
             }" 
@@ -14,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import type { VueClass } from "@/types";
+import type { VueClass } from "@/types/ui";
 const { id, type, error, label } = defineProps<{
     id?: string;
     type: string;
@@ -28,7 +29,7 @@ const model = defineModel("model", {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .text-field__wrapper {
     display: flex;
     flex-direction: column;
@@ -39,6 +40,6 @@ input.is-invalid:focus-visible {
 }
 
 input.is-invalid {
-    border: 2px solid #f73003;
+    border: 2px solid var(--color-error-40);
 }
 </style>

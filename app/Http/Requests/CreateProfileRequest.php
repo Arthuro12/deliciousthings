@@ -25,12 +25,23 @@ class CreateProfileRequest extends FormRequest
             'username' => 'string|required|max:5',
             'company_name' => 'nullable|string',
             'e164phone' => 'nullable|string',
+            'email' => 'required|string',
             'biography' => 'nullable|string',
             'average_rate' => 'string|required',
             'website_url' => 'nullable|string',
             'instagram_url' => 'nullable|string',
-            'offers_delivery' => 'boolean'
-            // Defines rules for address, medias and specialities
+            'offers_delivery' => 'boolean',
+            'address' => 'array:street,house_number,postal_code,city,country,address_line_2',
+            'address.street' => 'nullable|string',
+            'address.house_number' => 'nullable|string',
+            'address.postal_code' => 'nullable|string',
+            'address.city' => 'nullable|string',
+            'address.country' => 'nullable|string',
+            'address.addres_line_2' => 'nullable|string',
+            'speciality' => 'array:key,name,label',
+            'speciality.key' => 'required|string',
+            'speciality.name' => 'required|string',
+            'speciality.label' => 'required|string',
         ];
     }
 }

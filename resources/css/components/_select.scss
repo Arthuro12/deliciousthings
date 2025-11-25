@@ -21,9 +21,11 @@
     }
 
     &__item:focus-visible {
-        outline: none;    
+        outline: none;     
     }
 
+    // The `data-highlighted` attribute is set by Reka Ui and will be present on select items
+    // when they are highlighted.
     &__item[data-highlighted] {
         background-color: var(--color-primary-10);
         border-radius: 5px;

@@ -1,8 +1,8 @@
 <template>
     <div class="profile-form">
         <h1>Profil erstellen</h1>
-        <div class="wrapper">
-            <div class="row">
+        <div class="row">
+            <div class="wrapper">
                 <header>Persönliche Daten</header>
                 <TextField 
                     id="username" 
@@ -18,7 +18,7 @@
                 ></TextField>
                 <AppTextArea id="biography" rows="10" label="Bio" v-model:model="profile.biography" />
             </div>
-            <div class="row">
+            <div class="wrapper">
                 <header>Kontaktdaten</header>
                 <TextField 
                     type="text" 
@@ -35,7 +35,7 @@
             </div>
         </div>
         <AppDivider variant="horizontal" />
-        <div class="wrapper">
+        <div class="row">
             <header>Spezialitäten</header>
             <RekaSelect 
                 placeholder="Spezialitäten auswählen" 
@@ -47,21 +47,26 @@
             />
         </div>
         <AppDivider variant="horizontal" />
-        <div class="wrapper">
+        <div class="row">
             <AddressForm v-model:address="profile.address" />
         </div>
         <AppDivider variant="horizontal" />
-        <div class="wrapper">
+        <div class="row">
             <header>Fotos für Ihre Bildergalerie</header>
-            <input type="file" />
-            <div>Bildervorschau</div>
+            <UploadFiles
+                id="gallery"
+                accept=".jpg, .jpeg, .png"
+                multiple
+                :model-value="selectedFiles"
+                @update:model-value="updateFileSelection"
+            />
         </div>
         <AppDivider variant="horizontal" />
-        <div class="wrapper">
-            <div class="row">
+        <div class="row">
+            <div class="wrapper">
                 <header>Netzwerk</header>
                 <div>
-                    <!-- TODO: validate and sanitize urls -->
+                    <!-- Todo: validate and sanitize urls -->
                     <span>Instagram-Profil-Url: </span>
                     <TextField 
                         type="text" 
@@ -80,7 +85,7 @@
             </div>
         </div>
         <AppDivider variant="horizontal" />
-        <div class="wrapper">
+        <div class="row">
             <header>Zusätzliche Informationen</header>
             <div class="checkbox-input-wrapper">
                 <input id="offers-delivery" type="checkbox" v-model="profile.offers_delivery" /> 
@@ -93,14 +98,15 @@
                 v-model:model="profile.average_rate"
             ></TextField>
         </div>
-        <div>
-            <button 
-                class="button button--primary" 
-                type="button"
+        <div class="row">
+            <AppButton 
+                class="submit-button"
+                type="button" 
+                action="primary"
                 @click="emit('submit', profile)"
             >
-                Mein Profil erstellen
-            </button>
+                <template #text>Mein Profil erstellen</template>
+            </AppButton>
             <p class="info-text">Ihr Profil ist sofort nach der Erstellung sichtbar.</p>
         </div>
     </div>
@@ -110,6 +116,8 @@
 import { ref, onMounted } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
+import AppButton from "../presentation/AppButton.vue";
+import UploadFiles from "../presentation/UploadFiles.vue";
 import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
 import AddressForm from "../addresses/AddressForm.vue";
@@ -120,11 +128,19 @@ import { defaultProfile } from "@/utils/artisans";
 import type { ArtisanProfile } from "@/types/users";
 
 const emit = defineEmits<{
-    (e: 'submit', value: ArtisanProfile): void,
+    (e: 'photos-uploaded', value: File[]): void;
+    (e: 'submit', value: ArtisanProfile): void;
 }>();
 
 const specialityStore = useSpecialityStore();
 const profile = ref<ArtisanProfile>(defaultProfile());
+
+const selectedFiles = ref<File[]>([]);
+
+function updateFileSelection(files: File[]): void {
+    selectedFiles.value = files;
+    emit('photos-uploaded', selectedFiles.value)
+}
 
 onMounted(async () => {
     await specialityStore.getSpecialities();
@@ -144,10 +160,10 @@ onMounted(async () => {
 }
 
 .wrapper {
-    row-gap: 20px;
+    row-gap: 16px;
 }
 
 .row {
-    row-gap: 16px;
+    row-gap: 20px;
 }
 </style>

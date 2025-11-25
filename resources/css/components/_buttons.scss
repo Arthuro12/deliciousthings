@@ -1,25 +1,38 @@
 .button {
+    display: flex;
+    justify-content: center;
     font-size: 1rem;
     line-height: 1.4;
     padding: 12px 22px;
     text-align: center;
+    border-radius: 5px;
     cursor: pointer;
 }
+
+// Rules for button action types.
 
 .button--primary {
     background-color: var(--color-primary-50);
     color: white;
-    border-radius: 5px;
 }
 
 .button--secondary {
     background: none;
     color: var(--color-primary-50);
     border: 1px solid var(--color-primary-50);
-    border-radius: 5px;
+
+    &:hover {
+        background-color: var(--color-primary-10);
+    }
 }
 
 .button--tertiary {
     background: none;
-    color: var(--color-primary-50);
+    color: var(--color-primary-10);
+}
+
+// Rules for button variants.
+
+.button--icon {
+    padding: 6px;
 }
