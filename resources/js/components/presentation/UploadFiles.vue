@@ -21,8 +21,8 @@
             <AppButton 
                 class="delete-button"
                 type="button" 
-                action="secondary" 
-                variant="icon"
+                layout="icon"
+                variant="secondary" 
             >
                 <template #leading>
                     <TrashIcon :size="20" />
