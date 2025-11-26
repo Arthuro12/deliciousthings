@@ -26,7 +26,14 @@
             <HelperText v-if="hasRequiredError(form.errors.password || '')" class="form__helper-text" :text="FORM_ERRORS.REQUIRED" />
             <Link href="">Passwort vergessen?</Link>
         </div>
-        <button class="button button--primary" type="button" @click="onSubmit">Einloggen</button>
+        <AppButton
+            type="button"
+            variant="primary"
+            layout="text"
+            @click="onSubmit"
+        >
+            <template #text>Einloggen</template>
+        </AppButton>
         <Link href="/register">Neues Konto erstellen</Link>
     </div>
 </template>
@@ -36,6 +43,7 @@ import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
+import AppButton from "@/components/presentation/AppButton.vue";
 import ShowError from "@/components/presentation/ShowError.vue";
 import HelperText from "@/components/presentation/HelperText.vue";
 

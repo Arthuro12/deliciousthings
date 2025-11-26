@@ -50,7 +50,14 @@
         </div>
         <p>Sie haben bereits ein Konto? <Link href="/login">Anmelden</Link></p>
         <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
-        <button class="button button--primary" type="button" @click="onSubmit">Registrieren</button>
+        <AppButton
+            type="button"
+            variant="primary"
+            layout="text"
+            @click="onSubmit"
+        >
+            <template #text>Registrieren</template>
+        </AppButton>
     </div>
 </template>
 
@@ -58,6 +65,7 @@
 import { useForm } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 
+import AppButton from "@/components/presentation/AppButton.vue"; 
 import HelperText from "../presentation/HelperText.vue";
 
 import { FORM_ERRORS } from "@/constants";
