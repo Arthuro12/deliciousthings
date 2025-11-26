@@ -42,6 +42,7 @@ class CreateProfileRequest extends FormRequest
             'speciality.key' => 'required|string',
             'speciality.name' => 'required|string',
             'speciality.label' => 'required|string',
+            'medias' => 'array|size:0'
         ];
     }
 }
