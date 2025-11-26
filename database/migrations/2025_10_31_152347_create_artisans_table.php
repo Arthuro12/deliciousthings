@@ -28,7 +28,7 @@ return new class extends Migration
         Schema::create('medias', function (Blueprint $table) {
             $table->id();
             $table->morphs('mediable');
-            $table->text('category')->nullable(); // Example: album, avatar
+            $table->text('category')->nullable(); // Example: gallery, avatar
             $table->text('path');
             $table->text('caption')->nullable();
             $table->timestamps();
