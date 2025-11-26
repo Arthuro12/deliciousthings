@@ -8,7 +8,7 @@
                     <Link class="navbar__link" :href='`/users/${userId}/profile/create`'>Profil erstellen</Link>
                 </li>
                 <li class="navbar__item" v-if="isAuthenticated">
-                    <Link class="button button--secondary" as="button" href="/logout" method="post">Abmelden</Link>
+                    <Link class="button button--text button--secondary" as="button" href="/logout" method="post">Abmelden</Link>
                 </li>
             </ul>
             <ul class="navbar__items" v-else>
@@ -16,7 +16,7 @@
                     <Link class="navbar__link" href="/login">Anmelden</Link>
                 </li>
                 <li class="navbar__item">
-                    <Link class="button button--primary" href="/register">Beitreten</Link>
+                    <Link class="button button--text button--primary" href="/register">Beitreten</Link>
                 </li>
             </ul>
         </ul>
