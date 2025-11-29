@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('artisans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->unique()->constrained();
             $table->string('username');
             $table->string('company_name')->nullable();
             $table->string('e164phone')->nullable();
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('medias', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->morphs('mediable');
             $table->text('category')->nullable(); // Example: gallery, avatar
@@ -49,12 +50,13 @@ return new class extends Migration
         Schema::create('specialities', function (Blueprint $table) {
             $table->id();
             $table->string('key');
+            // $table->enum('category'); // 1. sweet, 2. salty (note: Use Enum case class)
             $table->string('name');
             $table->string('label');
             $table->timestamps();
         });
 
-        Schema::create('artisan_specialitie', function (Blueprint $table) {
+        Schema::create('artisan_speciality', function (Blueprint $table) {
             $table->id();
             $table->string('artisan_id');
             $table->string('speciality_id');
@@ -70,7 +72,7 @@ return new class extends Migration
         Schema::dropIfExists('artisans');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('specialities');
-        Schema::dropIfExists('artisan_specialitie');
+        Schema::dropIfExists('artisan_speciality');
         Schema::dropIfExists('medias');
     }
 };

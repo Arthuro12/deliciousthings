@@ -6,3 +6,12 @@ input[type="email"] {
     padding: 12px;
     font-size: 16px;
 }
+
+.text-area__wrapper {
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+        padding: 12px;
+    }
+}

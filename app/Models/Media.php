@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Media extends Model
 {
+    protected $fillable = ['category', 'path', 'caption'];
+
     /**
      * Get the parent commentable model (post or video).
      */

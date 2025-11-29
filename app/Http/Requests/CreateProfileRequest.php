@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+use App\Rules\FileList;
 
 class CreateProfileRequest extends FormRequest
 {
@@ -21,8 +24,13 @@ class CreateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
+        $address = $this->data()['address'];
+        $requiredAddressFields = array_any($address, function ($value) {
+            return !is_null($value);
+        });
+
         return [
-            'username' => 'string|required|max:5',
+            'username' => 'string|required|min:5',
             'company_name' => 'nullable|string',
             'e164phone' => 'nullable|string',
             'email' => 'required|string',
@@ -32,17 +40,18 @@ class CreateProfileRequest extends FormRequest
             'instagram_url' => 'nullable|string',
             'offers_delivery' => 'boolean',
             'address' => 'array:street,house_number,postal_code,city,country,address_line_2',
-            'address.street' => 'nullable|string',
-            'address.house_number' => 'nullable|string',
-            'address.postal_code' => 'nullable|string',
-            'address.city' => 'nullable|string',
-            'address.country' => 'nullable|string',
+            'address.street' => Rule::requiredIf($requiredAddressFields),
+            'address.house_number' => Rule::requiredIf($requiredAddressFields),
+            'address.postal_code' => Rule::requiredIf($requiredAddressFields),
+            'address.city' => Rule::requiredIf($requiredAddressFields),
+            'address.country' => Rule::requiredIf($requiredAddressFields),
             'address.addres_line_2' => 'nullable|string',
-            'speciality' => 'array:key,name,label',
-            'speciality.key' => 'required|string',
-            'speciality.name' => 'required|string',
-            'speciality.label' => 'required|string',
-            'medias' => 'array|size:0'
+            'specialities' => 'array',
+            'specialities.*.key' => 'required|string',
+            'specialities.*.name' => 'required|string',
+            'specialities.*.label' => 'required|string',
+            'medias' => 'array|size:0',
+            'gallery' => new FileList,
         ];
     }
 }

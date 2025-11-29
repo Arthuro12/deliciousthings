@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -20,11 +22,6 @@ class Artisan extends Model
         'offers_delivery',
     ];
 
-    public function specialities(): HasMany
-    {
-        return $this->hasMany(Speciality::class);
-    }
-
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
@@ -33,5 +30,15 @@ class Artisan extends Model
     public function medias(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediable');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function specialities(): BelongsToMany
+    {
+        return $this->belongsToMany(Speciality::class);
     }
 }

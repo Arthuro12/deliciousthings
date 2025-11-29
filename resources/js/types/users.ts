@@ -12,11 +12,11 @@ export interface User {
 
 export type Address = {
     street: string;
-    houseNumber: string;
-    postalCode?: string | null;
+    house_number: string;
+    postal_code?: string | null;
     city: string;
     country: string;
-    addressLine2: string | null;
+    address_line_2: string | null;
 }
 
 export type Speciality = {
