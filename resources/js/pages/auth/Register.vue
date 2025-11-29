@@ -1,7 +1,7 @@
 <template>
     <AuthLayout>
         <div :style="{ maxWidth: '500px' }" class="card-layout">
-            <h1 class="heading">Erstelle dein kostenlose Konto</h1>
+            <h1 class="heading">Erstelle dein kostenloses Konto</h1>
             <RegisterForm />
         </div>
     </AuthLayout>

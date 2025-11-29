@@ -12,7 +12,7 @@
                 type="text" 
                 id="house-number" 
                 label="Hausnummer"
-                v-model:model="address.houseNumber"
+                v-model:model="address.house_number"
             />
             <TextField 
                 type="text" 
@@ -57,12 +57,12 @@ const address = defineModel<Address>("address", {
     required: false
 });
 
-const addressLine2 = ref(address.value.addressLine2 ?? "");
-const postalCode = ref(address.value.postalCode ?? "");
+const postalCode = ref(address.value.postal_code ?? "");
+const addressLine2 = ref(address.value.address_line_2 ?? "");
 
 watch([postalCode, addressLine2], ([newPostalCode, newAddressLine2]) => {
-    address.value.postalCode = newPostalCode;
-    address.value.addressLine2 = newAddressLine2;
+    address.value.postal_code = newPostalCode;
+    address.value.address_line_2 = newAddressLine2;
 });
 </script>
 

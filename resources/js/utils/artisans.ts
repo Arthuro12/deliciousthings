@@ -30,10 +30,10 @@ export function defaultProfile(): ArtisanProfile {
 export function defaultAddress(): Address {
     return {
         street: "",
-        houseNumber: "",
-        postalCode: null,
+        house_number: "",
+        postal_code: null,
         city: "",
-        country: "Deutschland",
-        addressLine2: null
+        country: "",
+        address_line_2: null
     };
 }

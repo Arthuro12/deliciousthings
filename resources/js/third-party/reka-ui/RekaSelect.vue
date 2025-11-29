@@ -14,7 +14,7 @@
                     <SelectItem 
                         class="select__item"
                         v-for="item in items" 
-                        :value="getItemValue(item)" 
+                        :value="item" 
                         :key="getItemLabel(item)"
                     >
                         <SelectItemText>
@@ -61,16 +61,6 @@ const items = computed(() => props.items ?? []);
 function getItemLabel(item: SelectItemType): string {
     if (props.labelProp && typeof item == "object" && item) {
         return item[props.labelProp] ?? "";
-    }
-    return "";
-}
-
-/**
- * Gets the item value.
- */
-function getItemValue(item: SelectItemType): string {
-    if (props.valueProp && typeof item == "object" && item) {
-        return item[props.valueProp] ?? "";
     }
     return "";
 }
