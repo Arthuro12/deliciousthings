@@ -25,3 +25,56 @@
         }
     }
 }
+
+.show-profile-page {
+    &.row {
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 24px;
+
+        > .column {
+            margin-bottom: 24px;
+
+            > div:not(:last-of-type) {
+                margin-bottom: 24px;
+            }
+        }
+
+        > .column > div > h4 {
+            margin-bottom: 14px;
+        }
+
+        .card {
+            min-width: 300px;
+            max-width: 744px;
+        }
+
+        @include breakpoints.respond-to('medium') {
+            flex-direction: row;
+            column-gap: 42px;
+            max-width: 1000px;
+            margin: auto;
+
+            > .column:first-of-type {
+                flex-basis: 60%;
+            }
+
+            > .column:last-of-type {
+                flex-basis: 40%;
+            }
+        }
+    }
+
+    .profile__avatar {
+        margin-bottom: 12px;
+    }
+
+    .profile__title {
+        font-size: 1.125rem;
+        font-weight: 500;
+    }
+
+    .profile__subtitle {
+        color: var(--color-neutral-30);
+    }
+}

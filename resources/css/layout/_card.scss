@@ -1,16 +1,21 @@
-body:has(.card-layout)  {
-    background-color: var(--color-primary-10);
-}
-
-.heading {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.card-layout {
+.card {
     background-color: white;
     border: 1px solid var(--color-neutral-10);
     border-radius: 16px;
-    padding: 48px 40px;
+    padding: 22px;
     margin: auto;
+}
+
+.card-layout {
+    @extend .card;
+    padding: 48px 40px;
+
+    .heading {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+}
+
+body:has(.card-layout)  {
+    background-color: var(--color-primary-10);
 }

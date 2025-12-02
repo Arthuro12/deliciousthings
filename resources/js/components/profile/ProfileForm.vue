@@ -48,7 +48,7 @@
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
-            <AddressForm v-model:address="profile.address" />
+            <AddressForm v-model:address="profile.first_address" />
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
@@ -160,11 +160,11 @@ onMounted(async () => {
     flex-direction: column;
 }
 
-.wrapper {
-    row-gap: 16px;
-}
-
 .row {
     row-gap: 20px;
+}
+
+.wrapper {
+    row-gap: 16px;
 }
 </style>

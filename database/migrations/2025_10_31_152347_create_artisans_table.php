@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('company_name')->nullable();
             $table->string('e164phone')->nullable();
             $table->string('email');
-            $table->string('biography');
+            $table->text('biography');
             $table->string('website_url')->nullable();
             $table->string('instagram_url')->nullable();
             $table->string('average_rate');
@@ -73,6 +73,6 @@ return new class extends Migration
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('specialities');
         Schema::dropIfExists('artisan_speciality');
-        Schema::dropIfExists('medias');
+        Schema::dropIfExists('media');
     }
 };

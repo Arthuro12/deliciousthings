@@ -30,8 +30,7 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return Inertia::render('profile/CreateProfile', [
-            'user' => $user
-        ]);
+        $createProfilePageUrl = route('profile.create', $user->id);
+        return  redirect($createProfilePageUrl);
     }
 }

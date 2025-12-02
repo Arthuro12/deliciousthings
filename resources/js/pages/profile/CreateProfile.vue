@@ -1,4 +1,4 @@
-    <template>
+<template>
     <AppLayout>
         <main class="create-profile-page">
             <ProfileForm 
@@ -32,6 +32,10 @@ const profileForm = useForm<ProfileFormData>(formData);
 
 function submit(profile: ArtisanProfile): void {
     Object.assign(profileForm, profile);
-    profileForm.post(`/users/${auth.user.id}/profile`);        
+    profileForm.post(`/users/${auth.user.id}/profile`, {
+        onError(event) {
+            console.log(event)
+        }
+    });    
 }
 </script>

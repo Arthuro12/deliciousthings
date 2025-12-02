@@ -5,7 +5,8 @@ export interface Auth {
 
 export interface User {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
     media?: string;
 }
@@ -39,7 +40,8 @@ export type ArtisanProfile = {
     biography: string;
     medias: Media[];
     specialities: Speciality[];
-    address?: Address;
+    addresses: Address[];
+    first_address?: Address;
     instagram_url?: string;
     website_url?: string;
     average_rate: string;
