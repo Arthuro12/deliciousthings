@@ -22,9 +22,16 @@ class Artisan extends Model
         'offers_delivery',
     ];
 
+    protected $appends = ['first_address'];
+
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function getFirstAddressAttribute()
+    {
+        return $this->addresses()->first();
     }
 
     public function medias(): MorphMany
@@ -32,13 +39,13 @@ class Artisan extends Model
         return $this->morphMany(Media::class, 'mediable');
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function specialities(): BelongsToMany
     {
         return $this->belongsToMany(Speciality::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

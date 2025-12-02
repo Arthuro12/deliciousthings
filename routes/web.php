@@ -24,7 +24,8 @@ Route::controller(SessionController::class)->group(function () {
 
 Route::group(['prefix' => 'users/{user}/', 'middleware' => 'auth:sanctum'], function () {
     Route::controller(ProfileController::class)->group(function () {
-        Route::get('profile/create', 'create')->name('profile');
+        Route::get('profile/create', 'create')->name('profile.create');
+        Route::get('profile/{artisan}', 'show')->name('profile.show');
         Route::post('profile', 'store');
     });
 });

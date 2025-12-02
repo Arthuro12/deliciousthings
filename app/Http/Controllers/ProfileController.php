@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Artisan;
@@ -14,6 +15,15 @@ class ProfileController extends Controller
     public function create()
     {
         return Inertia::render('profile/CreateProfile');
+    }
+
+    public function show(User $user, Artisan $artisan)
+    {
+        $artisan = $artisan->load(['specialities'])->toArray();
+
+        return Inertia::render('profile/ShowProfile', [
+            'artisan' => $artisan,
+        ]);
     }
 
     public function store(CreateProfileRequest $request, User $user)
@@ -31,7 +41,6 @@ class ProfileController extends Controller
             'average_rate' => $attrs['average_rate'],
             'offers_delivery' => $attrs['offers_delivery'],
         ]);
-
         $artisan = $user->artisan()->save($artisan);
 
         $selectedSpecialies = array_map(function ($value) {
@@ -51,12 +60,12 @@ class ProfileController extends Controller
         }
 
         $artisan->addresses()->create([
-            'street' => $attrs['address']['street'],
-            'house_number' => $attrs['address']['house_number'],
-            'postal_code' => $attrs['address']['postal_code'],
-            'city' => $attrs['address']['city'],
-            'country' => $attrs['address']['country'],
-            'address_line_2' => $attrs['address']['address_line_2'],
+            'street' => $attrs['first_address']['street'],
+            'house_number' => $attrs['first_address']['house_number'],
+            'postal_code' => $attrs['first_address']['postal_code'],
+            'city' => $attrs['first_address']['city'],
+            'country' => $attrs['first_address']['country'],
+            'address_line_2' => $attrs['first_address']['address_line_2'],
         ]);
 
         // return back()->withError();

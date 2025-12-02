@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar">
-        <BurgerMenu class="menu__button icon--large cursor--pointer" @click="toggleMenu(true)" />
+        <MenuIcon class="menu__button cursor--pointer" @click="toggleMenu(true)" />
         <ul v-show="showMenu" class="navbar__menu navbar__items">
-            <Close class="menu__button icon--large cursor--pointer" @click="toggleMenu(false)" />
+            <XIcon class="menu__button cursor--pointer" @click="toggleMenu(false)" />
             <ul class="navbar__items" v-if="isAuthenticated">
                 <li class="navbar__item" >
                     <Link class="navbar__link" :href='`/users/${userId}/profile/create`'>Profil erstellen</Link>
@@ -27,8 +27,7 @@
 import { ref, watch } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 
-import BurgerMenu from "../icons/BurgerMenu.vue";
-import Close from "../icons/Close.vue";
+import { MenuIcon, XIcon } from "lucide-vue-next";
 
 import { useDeviceSize } from "@/composables/use-devce-size.js";
 
