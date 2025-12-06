@@ -1,5 +1,5 @@
 <template>
-    <div class="form auth-form">
+    <form class="form__group auth-form">
         <ShowError v-if="authenticationFailed" :message="FORM_ERRORS.FAILED" />
         <div class="form__control">
             <label for="email">E-Mail *</label>
@@ -27,15 +27,15 @@
             <Link href="">Passwort vergessen?</Link>
         </div>
         <AppButton
-            type="button"
+            type="submit"
             variant="primary"
             layout="text"
-            @click="onSubmit"
+            @click.prevent="onSubmit"
         >
             <template #text>Einloggen</template>
         </AppButton>
         <Link href="/register">Neues Konto erstellen</Link>
-    </div>
+    </form>
 </template>
 
 <script setup lang="ts">
