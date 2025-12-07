@@ -21,7 +21,7 @@ class ProfileController extends Controller
 
     public function show(User $user, Artisan $artisan)
     {
-        $artisan = $artisan->load(['specialities', 'diet_types', 'medias'])->toArray();
+        $artisan = $artisan->load(['specialities', 'dietTypes', 'medias'])->toArray();
 
         $gallery = [];
         foreach ($artisan['medias'] as $key => $file) {

@@ -3,8 +3,7 @@
         <label :for="id">{{ label }}</label>
         <textarea 
             :id="id"  
-            :rows="rows"
-            
+            :rows="rows"       
             v-model.trim="model"
         >
         </textarea>
