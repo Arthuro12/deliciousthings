@@ -1,5 +1,8 @@
 <template>
     <AppLayout>
+        <Head>
+            <title>Profile erstellen</title>
+        </Head>
         <main class="create-profile-page">
             <ProfileForm 
                 class="card-layout" 
@@ -11,6 +14,7 @@
 </template>
 
 <script setup lang="ts">
+import { Head } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
 import ProfileForm from "@/components/profile/ProfileForm.vue";

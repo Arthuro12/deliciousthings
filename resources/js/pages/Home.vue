@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import AppLayout from "@/layout/AppLayout.vue";
 import { Head } from "@inertiajs/vue3";
+
+import AppLayout from "@/layout/AppLayout.vue";
 </script>
 
 <template>
-    <Head title="Deliciousthings | Konditoren und Bäcker finden"></Head>
-    <AppLayout />
+    <AppLayout>
+        <Head>
+            <title>Konditoren und Bäcker online finden</title>
+        </Head>
+    </AppLayout>
 </template>
