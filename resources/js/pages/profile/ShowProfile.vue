@@ -1,5 +1,8 @@
 <template>
     <AppLayout>
+        <Head>
+            <title>{{  artisan.company_name || artisan.username  }}</title>
+        </Head>
         <main class="row show-profile-page">
             <div class="column">
                 <div class="profile__intro">
@@ -10,8 +13,8 @@
                     </div>
                 </div>
                 <div>
-                    <h4>Biography</h4>
-                    <p>{{ artisan.biography }}</p>
+                    <h4>Über</h4>
+                    <p>{{ artisan.about }}</p>
                 </div>
                 <div>
                     <h4>Spezialitäten</h4>
@@ -21,6 +24,23 @@
                             :key="sepciality.key" 
                             :text="sepciality.label"
                         />
+                    </div>
+                </div>
+                <div class="gallery">
+                    <h4>Galerie</h4>
+                    <div >
+                        <img :src="gallery[0].url" />
+                        <AppButton
+                            class="transparent show-gallery-button" 
+                            type="button" 
+                            variant="neutral" 
+                            layout="with-icon"
+                        >
+                            <template #leading><ImageIcon :size="22" /></template>
+                            <template #text>
+                                <p>{{ gallery.length }}</p>
+                            </template>
+                        </AppButton>
                     </div>
                 </div>
                 <div v-if="address">
@@ -43,7 +63,7 @@
             <div class="column">
                 <div class="card">
                     <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.website_url" target="_blank">{{ artisan.website_url }}</a></p>
-                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.instagram_url" target="_blank">{{ artisan.instagram_url }}</a></p>
+                    <p class="contact"><InstagramIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.instagram_url" target="_blank">{{ artisan.instagram_url }}</a></p>
                     <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="link contact__text">{{ artisan.e164phone }}</span></p>
                 </div>
             </div>
@@ -54,16 +74,31 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import { ExternalLinkIcon, PhoneIcon, MapPinIcon } from "lucide-vue-next";
+import { Head } from "@inertiajs/vue3";
+
+import { 
+    ExternalLinkIcon, 
+    InstagramIcon,
+    PhoneIcon, 
+    MapPinIcon,
+    ImageIcon,
+} from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
+import AppButton from "@/components/presentation/AppButton.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
+
 
 import type { ArtisanProfile, Auth } from "@/types/users";
 
-const { auth, artisan } = defineProps<{
+export type Image = {
+    url: string;
+};
+
+const { auth, artisan, gallery } = defineProps<{
     auth: Auth;
     artisan: ArtisanProfile;
+    gallery: Image[];
 }>();
 
 const address = artisan.first_address;
@@ -102,5 +137,32 @@ const userName = computed(() => {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.gallery {
+//     display: flex;
+//     flex-direction: column;
+//     row-gap: 14px;
+
+//     &__image {
+//         border-radius: 10px;
+//         height: 350px;
+//     }
+
+//     :deep(>.root) {
+//         display: flex;
+//         flex-direction: column;
+//         row-gap: 12px
+// ;
+//         > .container + .gallery__navigation {
+//             display: flex;
+//         }
+//     }
+}
+
+.show-gallery-button {
+    position: relative;
+    top: -40px;
+    left: 10px;
 }
 </style>
