@@ -13,6 +13,7 @@ export const BUTTON_CLASSES = Object.freeze({
     VARIANTS: {
         primary: "button--primary",
         secondary: "button--secondary",
-        tertiary: "button--secondary",
+        tertiary: "button--tertiary",
+        neutral: "button--neutral",
     },
 });
