@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDownIcon } from "lucide-vue-next";
 import {
     SelectValue,
     SelectContent,
@@ -39,6 +38,7 @@ import {
     SelectTrigger,
     SelectViewport,
 } from "reka-ui";
+import { ChevronDownIcon } from "lucide-vue-next";
 
 import type { 
     SelectProps, 
