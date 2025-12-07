@@ -16,20 +16,23 @@ return new class extends Migration
             $table->foreignId('user_id')->unique()->constrained();
             $table->string('username');
             $table->string('company_name')->nullable();
+            $table->string('main_occupation')->default('other');
             $table->string('e164phone')->nullable();
             $table->string('email');
-            $table->text('biography');
+            $table->string('short_description', 200)->nullable();
+            $table->text('about');
             $table->string('website_url')->nullable();
             $table->string('instagram_url')->nullable();
             $table->string('average_rate');
             $table->boolean('offers_delivery');
+            $table->boolean('pick_up_on_site');
             $table->timestamps();
         });
 
         Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->morphs('mediable');
-            $table->text('category')->nullable(); // Example: gallery, avatar
+            $table->text('category')->nullable(); // Values: gallery, avatar, cover
             $table->text('path');
             $table->text('caption')->nullable();
             $table->timestamps();
@@ -56,10 +59,25 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('diet_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('key');
+            $table->string('name');
+            $table->string('label');
+            $table->timestamps();
+        });
+
         Schema::create('artisan_speciality', function (Blueprint $table) {
             $table->id();
             $table->string('artisan_id');
             $table->string('speciality_id');
+            $table->timestamps();
+        });
+
+        Schema::create('artisan_diet_type', function (Blueprint $table) {
+            $table->id();
+            $table->string('artisan_id');
+            $table->string('diet_type_id');
             $table->timestamps();
         });
     }
@@ -73,6 +91,8 @@ return new class extends Migration
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('specialities');
         Schema::dropIfExists('artisan_speciality');
+        Schema::dropIfExists('diet_types');
+        Schema::dropIfExists('artisan_diet_type');
         Schema::dropIfExists('media');
     }
 };

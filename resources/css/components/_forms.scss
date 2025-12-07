@@ -1,7 +1,9 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 16px;
+    &__group {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+    }
 
     &__control {
         display: flex;

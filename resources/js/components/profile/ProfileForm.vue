@@ -16,7 +16,24 @@
                     label="Firmenname (optional)"
                     v-model:model="profile.company_name"
                 ></TextField>
-                <AppTextArea id="biography" rows="10" label="Bio" v-model:model="profile.biography" />
+                <TextField 
+                    id="main-occupation" 
+                    type="text" 
+                    label="Hauptbeschäftigung"
+                    v-model:model="profile.main_occupation"
+                ></TextField>
+                <AppTextArea 
+                    id="short-description" 
+                    rows="7" 
+                    label="kurze Beschreibung" 
+                    v-model:model="profile.short_description" 
+                />
+                <AppTextArea 
+                    id="about" 
+                    rows="10" 
+                    label="Über" 
+                    v-model:model="profile.about" 
+                />
             </div>
             <div class="wrapper">
                 <header>Kontaktdaten</header>
@@ -46,6 +63,17 @@
                 v-model:selected-value="profile.specialities"
             />
         </div>
+        <div class="row">
+            <header>angebotene Diäten</header>
+            <RekaSelect 
+                placeholder="Diäten auswählen" 
+                :items="dietTypeStore.dietTypes"
+                label-prop="label"
+                value-prop="key"
+                multiple
+                v-model:selected-value="profile.diet_types"
+            />
+        </div>
         <AppDivider variant="horizontal" />
         <div class="row">
             <AddressForm v-model:address="profile.first_address" />
@@ -53,7 +81,7 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <header>Fotos für Ihre Bildergalerie</header>
-            <UploadFiles
+            <FileUpload
                 id="gallery"
                 accept=".jpg, .jpeg, .png"
                 multiple
@@ -87,10 +115,16 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <header>Zusätzliche Informationen</header>
-            <div class="checkbox-input-wrapper">
-                <input id="offers-delivery" type="checkbox" v-model="profile.offers_delivery" /> 
-                <label for="offers-delivery">Ich kann liefern</label>
-            </div>
+            <RekaCheckbox 
+                id="offers-delivery" 
+                label="Ich bitte Lieferung an" 
+                v-model="profile.offers_delivery"
+            />
+            <RekaCheckbox 
+                id="pick-up-on-site" 
+                label="Abholung vor Ort" 
+                v-model="profile.pick_up_on_site"
+            />
             <TextField 
                 type="text" 
                 id="average-rate" 
@@ -118,33 +152,38 @@ import { ref, onMounted } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
 import AppButton from "../presentation/AppButton.vue";
-import UploadFiles from "../presentation/UploadFiles.vue";
+import FileUpload from "../presentation/FileUpload.vue";
 import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
 import AddressForm from "../addresses/AddressForm.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
+import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 
+import { useDietTypeStore } from "@/stores/diet-type";
 import { useSpecialityStore } from "@/stores/speciality";
 import { defaultProfile } from "@/utils/artisans";
+import type { FileValue } from "@/types/ui";
 import type { ArtisanProfile } from "@/types/users";
 
 const emit = defineEmits<{
-    (e: 'photos-uploaded', value: File[]): void;
+    (e: 'photos-uploaded', value: FileValue): void;
     (e: 'submit', value: ArtisanProfile): void;
 }>();
 
 const specialityStore = useSpecialityStore();
+const dietTypeStore = useDietTypeStore();
 const profile = ref<ArtisanProfile>(defaultProfile());
 
-const selectedFiles = ref<File[]>([]);
+const selectedFiles = ref<FileValue>([]);
 
-function updateFileSelection(files: File[]): void {
+function updateFileSelection(files: FileValue): void {
     selectedFiles.value = files;
     emit('photos-uploaded', selectedFiles.value)
 }
 
 onMounted(async () => {
     await specialityStore.getSpecialities();
+    await dietTypeStore.getDietTypes();
 });
 </script>
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Speciality extends Model
+class DietType extends Model
 {
     protected $fillable = ['key', 'name', 'label'];
 
@@ -14,6 +14,6 @@ class Speciality extends Model
     public function artisans(): BelongsToMany
     {
         return $this->belongsToMany(Speciality::class)
-            ->withTimestamps();;
+            ->withTimestamps();
     }
 }

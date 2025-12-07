@@ -1,4 +1,10 @@
-import type { Address, ArtisanProfile, Media, Speciality } from "@/types/users";
+import type { 
+    Address, 
+    ArtisanProfile, 
+    Media, 
+    Speciality,
+    DietType, 
+} from "@/types/users";
 
 /**
  * Gets a default artisan profile.
@@ -9,17 +15,21 @@ export function defaultProfile(): ArtisanProfile {
     return {
         username: "",
         company_name: "",
+        main_occupation: "other",
         e164phone: "",
         email: "",
-        biography: "",
+        short_description: "",
+        about: "",
         medias: <Media[]>[],
         specialities: <Speciality[]>[],
+        diet_types: <DietType[]>[],
         addresses: <Address[]>[],
         first_address: defaultAddress(),
         average_rate: "",
         instagram_url: "",
         website_url: "",
-        offers_delivery: false
+        offers_delivery: false,
+        pick_up_on_site: false,
     };
 }
 

@@ -26,6 +26,12 @@ export type Speciality = {
     label: string;
 }
 
+export type DietType = {
+    key: string;
+    name: string;
+    label: string;
+}
+
 export type Media = {
     category: string | null;
     caption: string | null;
@@ -35,15 +41,19 @@ export type Media = {
 export type ArtisanProfile = {
     username: string;
     company_name: string;
+    main_occupation: string;
     e164phone?: string;
     email: string;
-    biography: string;
+    short_description: string | null;
+    about: string;
     medias: Media[];
     specialities: Speciality[];
+    diet_types: DietType[];
     addresses: Address[];
     first_address?: Address;
     instagram_url?: string;
     website_url?: string;
     average_rate: string;
     offers_delivery: boolean;
+    pick_up_on_site: boolean;
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="form auth-form">
+    <form class="form__group auth-form">
         <div class="form__control">
             <label for="first-name">Vorname *</label>
             <input 
@@ -51,14 +51,14 @@
         <p>Sie haben bereits ein Konto? <Link href="/login">Anmelden</Link></p>
         <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
         <AppButton
-            type="button"
+            type="submit"
             variant="primary"
             layout="text"
-            @click="onSubmit"
+            @click.prevent="onSubmit"
         >
             <template #text>Registrieren</template>
         </AppButton>
-    </div>
+    </form>
 </template>
 
 <script setup lang="ts">

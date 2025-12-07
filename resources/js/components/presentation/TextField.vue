@@ -8,7 +8,7 @@
                 'is-invalid': error
             }" 
             :type="type"
-            v-model="model"
+            v-model.trim="model"
         />
         <slot name="helper"></slot>
     </div>
