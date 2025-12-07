@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Profile erstellen</title>
+            <title>Profil erstellen</title>
         </Head>
         <main class="create-profile-page">
             <ProfileForm 
