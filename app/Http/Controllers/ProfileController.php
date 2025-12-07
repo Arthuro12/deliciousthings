@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Artisan;
 use App\Models\Speciality;
+use App\Models\DietType;
 use App\Http\Requests\CreateProfileRequest;
 
 class ProfileController extends Controller
@@ -19,10 +21,16 @@ class ProfileController extends Controller
 
     public function show(User $user, Artisan $artisan)
     {
-        $artisan = $artisan->load(['specialities'])->toArray();
+        $artisan = $artisan->load(['specialities', 'diet_types', 'medias'])->toArray();
+
+        $gallery = [];
+        foreach ($artisan['medias'] as $key => $file) {
+            $gallery[$key]['url'] = Storage::url($file['path']);
+        }
 
         return Inertia::render('profile/ShowProfile', [
             'artisan' => $artisan,
+            'gallery' => $gallery,
         ]);
     }
 
@@ -33,13 +41,16 @@ class ProfileController extends Controller
         $artisan = new Artisan([
             'username' => $attrs['username'],
             'company_name' => $attrs['company_name'],
+            'main_occupation' => $attrs['main_occupation'],
             'e164phone' => $attrs['e164phone'],
             'email' => $attrs['email'],
-            'biography' => $attrs['biography'],
+            'short_description' => $attrs['short_description'],
+            'about' => $attrs['about'],
             'website_url' => $attrs['website_url'],
             'instagram_url' => $attrs['instagram_url'],
             'average_rate' => $attrs['average_rate'],
             'offers_delivery' => $attrs['offers_delivery'],
+            'pick_up_on_site' => $attrs['pick_up_on_site'],
         ]);
         $artisan = $user->artisan()->save($artisan);
 
@@ -51,8 +62,16 @@ class ProfileController extends Controller
             $artisan->specialities()->attach($speciality->id);
         }
 
+        $selectedDietTypes = array_map(function ($value) {
+            return $value['key'];
+        }, $attrs['diet_types']);
+        $dietTypes = DietType::whereIn('key', $selectedDietTypes)->get();
+        foreach ($dietTypes as $type) {
+            $artisan->dietTypes()->attach($type->id);
+        }
+
         foreach ($request->file('gallery') as $image) {
-            $path = $image->storePublicly('gallery');
+            $path = $image->storePublicly('gallery', 'public');
             $artisan->medias()->create([
                 'category' => 'gallery',
                 'path' => $path

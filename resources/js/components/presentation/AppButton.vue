@@ -15,7 +15,7 @@ import { BUTTON_CLASSES } from '@/constants';
 
 const { variant, layout = "text" } = defineProps<{
     type: "button" | "submit" | "reset";
-    variant: "primary" | "secondary" | "tertiary";
+    variant: "primary" | "secondary" | "tertiary" | "neutral";
     layout: "text" | "icon" | "with-icon";
 }>();
 

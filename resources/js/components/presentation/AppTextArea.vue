@@ -1,7 +1,13 @@
 <template>
     <div class="text-area__wrapper">
         <label :for="id">{{ label }}</label>
-        <textarea :id="id" v-model="model" :rows="rows"></textarea>
+        <textarea 
+            :id="id"  
+            :rows="rows"
+            
+            v-model.trim="model"
+        >
+        </textarea>
     </div>
 </template>
 
@@ -12,5 +18,5 @@ defineProps<{
     label: string;
 }>();
 
-const model = defineModel("model", { default: "" });
+const model = defineModel<string | null>("model", { default: "" });
 </script>

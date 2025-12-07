@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-
-use App\Rules\FileList;
+use Illuminate\Validation\Rules\File;
 
 class CreateProfileRequest extends FormRequest
 {
@@ -32,13 +31,16 @@ class CreateProfileRequest extends FormRequest
         return [
             'username' => 'string|required|min:5',
             'company_name' => 'nullable|string',
+            'main_occupation' => 'required|string',
             'e164phone' => 'nullable|string',
             'email' => 'required|string',
-            'biography' => 'nullable|string',
+            'short_description' => 'nullable|string|max:200',
+            'about' => 'required|string',
             'average_rate' => 'string|required',
             'website_url' => 'nullable|string',
             'instagram_url' => 'nullable|string',
             'offers_delivery' => 'boolean',
+            'pick_up_on_site' => 'boolean',
             'addresses' => 'array|size:0',
             'first_address' => 'array:street,house_number,postal_code,city,country,address_line_2',
             'first_address.street' => Rule::requiredIf($requiredAddressFields),
@@ -51,8 +53,13 @@ class CreateProfileRequest extends FormRequest
             'specialities.*.key' => 'required|string',
             'specialities.*.name' => 'required|string',
             'specialities.*.label' => 'required|string',
+            'diet_types' => 'array',
+            'diet_types.*.key' => 'required|string',
+            'diet_types.*.name' => 'required|string',
+            'diet_types.*.label' => 'required|string',
             'medias' => 'array|size:0',
-            'gallery' => new FileList,
+            'gallery' => 'array|between:3,6',
+            'gallery.*' => File::image(),
         ];
     }
 }
