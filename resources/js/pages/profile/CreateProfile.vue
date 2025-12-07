@@ -17,6 +17,7 @@ import ProfileForm from "@/components/profile/ProfileForm.vue";
 import AppLayout from "@/layout/AppLayout.vue";
 
 import { defaultProfile } from "@/utils/artisans";
+import type { FileValue } from "@/types/ui";
 import type { Auth } from "@/types/users";
 import type { ArtisanProfile } from "@/types/users";
 
@@ -24,7 +25,7 @@ const { auth } = defineProps<{
     auth: Auth;
 }>();
 
-export type ProfileFormData = ArtisanProfile & { gallery: File[] | null };
+export type ProfileFormData = ArtisanProfile & { gallery: FileValue };
 
 const formData: ProfileFormData = Object.assign(defaultProfile(), { gallery: null });
 
@@ -34,7 +35,7 @@ function submit(profile: ArtisanProfile): void {
     Object.assign(profileForm, profile);
     profileForm.post(`/users/${auth.user.id}/profile`, {
         onError(event) {
-            console.log(event)
+            console.error(event);
         }
     });    
 }
