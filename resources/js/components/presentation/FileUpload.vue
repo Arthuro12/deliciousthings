@@ -15,20 +15,23 @@
             />
             <slot name="helper"></slot>
         </div>
-        <div class="preview" v-for="(file, idx) in modelValue" :key="`${file.name}-${idx}`">
-            <img class="preview__img" :alt="file.name" :src="createFileUrl(file)" />
-            <p class="preview__text" :style="{ 'font-size': '14px'  }">{{ file.name }}</p>
-            <AppButton 
-                class="delete-button"
-                type="button" 
-                layout="icon"
-                variant="secondary" 
-            >
-                <template #leading>
-                    <TrashIcon :size="20" />
-                </template>
-            </AppButton>
-        </div>
+        <template v-if="modelValue">
+            <div class="preview" v-for="(file, idx) in (Array.isArray(modelValue)) ? modelValue : [modelValue]" :key="`${file.name}-${idx}`">
+                <img class="preview__img" :alt="file.name" :src="createFileUrl(file)" />
+                <p class="preview__text" :style="{ 'font-size': '14px'  }">{{ file.name }}</p>
+                <AppButton 
+                    class="delete-button"
+                    type="button" 
+                    layout="icon"
+                    variant="secondary"
+                    @click="removeFile(idx)" 
+                >
+                    <template #leading>
+                        <TrashIcon :size="20" />
+                    </template>
+                </AppButton>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -36,6 +39,8 @@
 import { UploadIcon, TrashIcon } from "lucide-vue-next";
 
 import AppButton from "./AppButton.vue";
+
+import type { FileValue } from "@/types/ui";
 
 const { multiple = false } = defineProps<{
     id: string;
@@ -47,9 +52,7 @@ const { multiple = false } = defineProps<{
     multiple?: boolean;
 }>();
 
-const modelValue = defineModel<File[]>("modelValue", {
-    default: <File[]>[]
-});
+const modelValue = defineModel<FileValue>("modelValue", { required: true });
 
 /**
  * Triggers updates on the `modelValue`.
@@ -57,10 +60,14 @@ const modelValue = defineModel<File[]>("modelValue", {
  */
 function onUpdate(event: Event): void {
     const files = Array.from((event.target as HTMLInputElement)?.files ?? []);
-    if (multiple) {
+    if (multiple && Array.isArray(modelValue.value)) {
         modelValue.value = [...modelValue.value, ...files];
-    } else {
-        modelValue.value = [files[0]];
+    }
+}
+
+function removeFile(index: number): void {
+    if (multiple && Array.isArray(modelValue.value)) {
+        modelValue.value.splice(index, 1);
     }
 }
 
