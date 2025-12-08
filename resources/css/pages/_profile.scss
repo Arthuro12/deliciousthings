@@ -29,7 +29,7 @@
 .show-profile-page {
     &.row {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         padding: 24px;
 
         > .column {
