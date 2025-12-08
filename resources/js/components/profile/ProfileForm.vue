@@ -8,31 +8,31 @@
                     id="username" 
                     type="text" 
                     label="Benutzername"
-                    v-model:model="profile.username"
+                    v-model="profile.username"
                 ></TextField>
                 <TextField 
                     id="company-name" 
                     type="text" 
                     label="Firmenname (optional)"
-                    v-model:model="profile.company_name"
+                    v-model="profile.company_name"
                 ></TextField>
                 <TextField 
                     id="main-occupation" 
                     type="text" 
-                    label="Hauptbeschäftigung"
-                    v-model:model="profile.main_occupation"
+                    label="Hauptbeschäftigung (optional)"
+                    v-model="profile.main_occupation"
                 ></TextField>
                 <AppTextArea 
                     id="short-description" 
                     rows="7" 
                     label="kurze Beschreibung" 
-                    v-model:model="profile.short_description" 
+                    v-model="profile.short_description" 
                 />
                 <AppTextArea 
                     id="about" 
                     rows="10" 
                     label="Über" 
-                    v-model:model="profile.about" 
+                    v-model="profile.about" 
                 />
             </div>
             <div class="wrapper">
@@ -41,13 +41,13 @@
                     type="text" 
                     id="phone" 
                     label="Telefonnummer (optional)"
-                    v-model:model="profile.e164phone"
+                    v-model="profile.e164phone"
                 ></TextField>
                 <TextField 
                     type="text" 
                     id="email" 
-                    label="E-Mail-Adresse *"
-                    v-model:model="profile.email"
+                    label="E-Mail-Adresse"
+                    v-model="profile.email"
                 ></TextField>
             </div>
         </div>
@@ -93,21 +93,21 @@
         <div class="row">
             <div class="wrapper">
                 <header>Netzwerk</header>
+                <!-- Todo: validate and sanitize urls -->
                 <div>
-                    <!-- Todo: validate and sanitize urls -->
-                    <span>Instagram-Profil-Url: </span>
-                    <TextField 
-                        type="text" 
-                        id="instagram" 
-                        v-model:model="profile.instagram_url"
-                    ></TextField>
-                </div>
-                <div>
-                    <span>Webseite-Url: </span>
+                    <span>Webseite-Url (optional)</span>
                     <TextField 
                         type="text" 
                         id="website" 
-                        v-model:model="profile.website_url"
+                        v-model="profile.website_url"
+                    ></TextField>
+                </div>
+                <div>
+                    <span>Instagram-Profil-Url (optional)</span>
+                    <TextField 
+                        type="text" 
+                        id="instagram" 
+                        v-model="profile.instagram_url"
                     ></TextField>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 type="text" 
                 id="average-rate" 
                 label="Durchschnittspreis (in Euro)"
-                v-model:model="profile.average_rate"
+                v-model="profile.average_rate"
             ></TextField>
         </div>
         <div class="row">

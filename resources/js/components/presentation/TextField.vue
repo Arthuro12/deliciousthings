@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import type { VueClass } from "@/types/ui";
+
 const { id, type, error, label } = defineProps<{
     id?: string;
     type: string;
@@ -24,9 +25,7 @@ const { id, type, error, label } = defineProps<{
     inputClasses?: VueClass;
 }>();
 
-const model = defineModel("model", {
-    default: ""
-});
+const model = defineModel({ default: "" });
 </script>
 
 <style scoped lang="scss">

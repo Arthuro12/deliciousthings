@@ -12,14 +12,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::controller(RegistrationController::class)->group(function () {
-    Route::get('/register', 'create');
+    Route::get('/register', 'create')->name('register.create');
     Route::post('/register', 'store');
 });
 
 Route::controller(SessionController::class)->group(function () {
     Route::get('/login', 'create')->name('login');
-    Route::post('/login', 'store');
-    Route::post('/logout', 'destroy');
+    Route::post('/login', 'store')->name('login.store');
+    Route::post('/logout', 'destroy')->name('login.destroy');
 });
 
 Route::group(['prefix' => 'users/{user}/', 'middleware' => 'auth:sanctum'], function () {
