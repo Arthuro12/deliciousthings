@@ -15,7 +15,7 @@ export function defaultProfile(): ArtisanProfile {
     return {
         username: "",
         company_name: "",
-        main_occupation: "other",
+        main_occupation: "",
         e164phone: "",
         email: "",
         short_description: "",
