@@ -10,7 +10,7 @@
                 <CheckIcon color="#e680a5" :size="16"/>
             </CheckboxIndicator>
         </CheckboxRoot>
-        <label :for="id">{{ label }}</label>
+        <label class="reka-checkbox__label" :for="id">{{ label }}</label>
     </div>
 </template>
 
@@ -26,9 +26,7 @@ defineProps<{
     label: string;
 }>();
 
-const modelValue = defineModel<CheckboxValue>("modelValue", {
-    default: "indeterminate"
-});
+const modelValue = defineModel<CheckboxValue>({ default: "indeterminate" });
 </script>
 
 <style scoped lang="scss">
@@ -46,6 +44,10 @@ const modelValue = defineModel<CheckboxValue>("modelValue", {
         border: 1px solid var(--color-neutral-10);
         border-radius: 5px;
         padding: 2px;
+    }
+
+    &__label {
+        cursor: pointer;
     }
 }
 </style>

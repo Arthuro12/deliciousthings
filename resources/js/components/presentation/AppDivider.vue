@@ -1,11 +1,16 @@
 <template>
-    <div :class="{ 'horizontal': variant == 'horizontal', 'vertical': variant == 'vertical' }"></div>
+    <div :class="dividerClass"></div>
 </template>
 
 <script setup lang="ts">
 const { variant = "horizontal" } = defineProps<{
     variant: "horizontal" | "vertical";
 }>();
+
+const dividerClass = { 
+    'horizontal': variant == 'horizontal', 
+    'vertical': variant == 'vertical' 
+}
 </script>
 
 <style scoped>

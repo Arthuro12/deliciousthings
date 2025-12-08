@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->unique()->constrained();
             $table->string('username');
             $table->string('company_name')->nullable();
-            $table->string('main_occupation')->default('other');
+            $table->string('main_occupation');
             $table->string('e164phone')->nullable();
             $table->string('email');
             $table->string('short_description', 200)->nullable();

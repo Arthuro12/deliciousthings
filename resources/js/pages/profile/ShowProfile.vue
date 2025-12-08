@@ -62,8 +62,8 @@
             </div>
             <div class="column">
                 <div class="card">
-                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.website_url" target="_blank">{{ artisan.website_url }}</a></p>
-                    <p class="contact"><InstagramIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.instagram_url" target="_blank">{{ artisan.instagram_url }}</a></p>
+                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.website_url" target="_blank">Webseite</a></p>
+                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
                     <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="link contact__text">{{ artisan.e164phone }}</span></p>
                 </div>
             </div>
@@ -78,7 +78,6 @@ import { Head } from "@inertiajs/vue3";
 
 import { 
     ExternalLinkIcon, 
-    InstagramIcon,
     PhoneIcon, 
     MapPinIcon,
     ImageIcon,
@@ -87,7 +86,6 @@ import {
 import AppLayout from "@/layout/AppLayout.vue";
 import AppButton from "@/components/presentation/AppButton.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
-
 
 import type { ArtisanProfile, Auth } from "@/types/users";
 

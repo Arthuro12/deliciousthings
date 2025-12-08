@@ -17,5 +17,5 @@ defineProps<{
     label: string;
 }>();
 
-const model = defineModel<string | null>("model", { default: "" });
+const model = defineModel<string | null>({ default: "" });
 </script>
