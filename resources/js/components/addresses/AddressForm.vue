@@ -95,7 +95,7 @@ watch([postalCode, addressLine2], ([newPostalCode, newAddressLine2]) => {
     align-items: center;
     column-gap: 12px;
     color: var(--color-neutral-50);
-    padding: 6px;
+    padding: 12px;
     margin-bottom: 16px;
     width: 100%;
 

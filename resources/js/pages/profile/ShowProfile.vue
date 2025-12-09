@@ -9,8 +9,15 @@
                     <img class="profile__avatar" src="" alt="Profile photo" />
                     <div>
                         <p class="profile__title">{{ userName }}</p>
-                        <p class="profile__subtitle" v-if="artisan.company_name">{{ artisan.company_name }}</p>
+                        <p class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</p>
+                        <!-- <div class="profile__subtitle" v-if="artisan.company_name || artisan.main_occupation">
+                            <p v-if="artisan.company_name">{{ artisan.company_name }}</p>
+                            <p v-if="artisan.main_occupation">{{ artisan.main_occupation }}</p>
+                        </div> -->
                     </div>
+                </div>
+                <div>
+                    <p>{{ artisan.short_description }}</p>
                 </div>
                 <div>
                     <h4>Über</h4>
@@ -18,11 +25,21 @@
                 </div>
                 <div>
                     <h4>Spezialitäten</h4>
-                    <div class="specialities">
+                    <div class="profile__specialities">
                         <AppTag 
                             v-for="sepciality in artisan.specialities" 
                             :key="sepciality.key" 
                             :text="sepciality.label"
+                        />
+                    </div>
+                </div>
+                <div v-if="artisan.diet_types.length > 0">
+                    <h4>angebotene Ernährungsformen</h4>
+                    <div class="profile__diet-types">
+                        <AppTag 
+                            v-for="dietType in artisan.diet_types" 
+                            :key="dietType.key" 
+                            :text="dietType.label"
                         />
                     </div>
                 </div>
@@ -52,12 +69,13 @@
                         </p>
                     </div>
                 </div>
-                <div>
+                <div class="profile__services">
                     <h4>Leistungen</h4>
-                    <div>
-                        <p>Durchschnittpreis: {{ artisan.average_rate }}</p>
-                        <p>{{ `Ich biete ${artisan.offers_delivery ? 'Lieferung' : 'keine Lieferung'} an` }}</p>
+                    <div class="profile__service-option">
+                        <p v-if="Boolean(artisan.offers_delivery)"><CheckIcon color="#e680a5" :size="20" />Lieferdienst</p>
+                        <p v-if="Boolean(artisan.pick_up_on_site)"><CheckIcon color="#e680a5" :size="20" />Abholung vor Ort</p>
                     </div>
+                    <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
                 </div>
             </div>
             <div class="column">
@@ -77,10 +95,11 @@ import { computed } from "vue";
 import { Head } from "@inertiajs/vue3";
 
 import { 
-    ExternalLinkIcon, 
-    PhoneIcon, 
+    CheckIcon,
+    ExternalLinkIcon,
+    ImageIcon, 
     MapPinIcon,
-    ImageIcon,
+    PhoneIcon, 
 } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
@@ -100,6 +119,17 @@ const { auth, artisan, gallery } = defineProps<{
 }>();
 
 const address = artisan.first_address;
+
+const pageSubtitle = computed(() => {
+    if (artisan.company_name || artisan.main_occupation) {
+        const textOutput = `${artisan.company_name && artisan.main_occupation 
+            ? `${artisan.company_name} | ${artisan.main_occupation}` 
+            : !artisan.main_occupation ? `${artisan.company_name}` 
+            : `${artisan.main_occupation}`}`;
+        return textOutput;
+    }
+    return "";
+});
 
 const userName = computed(() => {
     const user = auth.user;
@@ -131,10 +161,21 @@ const userName = computed(() => {
     }
 }
 
-.specialities {
+.profile__specialities, .profile__diet-types {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.profile__services {
+    > .profile__service-option {
+        margin-bottom: 12px;
+
+        > p {
+            display: flex;
+            column-gap: 12px;
+        }
+    }
 }
 
 .gallery {
