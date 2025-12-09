@@ -10,7 +10,7 @@
                         class="profile__avatar" 
                         src="" 
                         alt="Profilbild"
-                        :fallback-text="artisan.company_name || userName" 
+                        :user-name="artisan.company_name || userName" 
                     />
                     <div>
                         <h1 class="profile__title">{{ userName }}</h1>

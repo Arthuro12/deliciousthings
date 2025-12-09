@@ -2,7 +2,7 @@
     <RekaAvatar 
         :src="src" 
         :alt="alt" 
-        :fallback-text="fallbackText"
+        :name="userName"
     />
 </template>
 
@@ -12,6 +12,6 @@ import RekaAvatar from "@/third-party/reka-ui/RekaAvatar.vue";
 defineProps<{
     src: string;
     alt: string;
-    fallbackText?: string;
+    userName?: string;
 }>();
 </script>
