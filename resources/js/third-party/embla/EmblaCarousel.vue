@@ -36,6 +36,9 @@ import emblaCarouselVue from "embla-carousel-vue";
 
 import AppButton from "@/components/presentation/AppButton.vue";
 
+/**
+ * @see {@link https://github.com/davidjerleke/embla-carousel/blob/master/packages/embla-carousel/src/components/Alignment.ts}
+ */
 export type AlignmentOptionType =
     | 'start'
     | 'center'
