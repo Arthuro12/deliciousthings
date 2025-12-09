@@ -31,7 +31,7 @@ class CreateProfileRequest extends FormRequest
         return [
             'username' => 'string|required|min:5',
             'company_name' => 'nullable|string',
-            'main_occupation' => 'required|string',
+            'main_occupation' => 'nullable|string',
             'e164phone' => 'nullable|string',
             'email' => 'required|string',
             'short_description' => 'nullable|string|max:200',
