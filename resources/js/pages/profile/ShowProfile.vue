@@ -8,17 +8,18 @@
                 <div class="profile__intro">
                     <img class="profile__avatar" src="" alt="Profile photo" />
                     <div>
-                        <p class="profile__title">{{ userName }}</p>
-                        <p class="profile__subtitle" v-if="artisan.company_name">{{ artisan.company_name }}</p>
+                        <h1 class="profile__title">{{ userName }}</h1>
+                        <h2 class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</h2>
                     </div>
                 </div>
+                <div><p>{{ artisan.short_description }}</p></div>
                 <div>
                     <h4>Über</h4>
                     <p>{{ artisan.about }}</p>
                 </div>
                 <div>
                     <h4>Spezialitäten</h4>
-                    <div class="specialities">
+                    <div class="profile__specialities">
                         <AppTag 
                             v-for="sepciality in artisan.specialities" 
                             :key="sepciality.key" 
@@ -26,22 +27,25 @@
                         />
                     </div>
                 </div>
+                <div v-if="artisan.diet_types.length > 0">
+                    <h4>angebotene Ernährungsformen</h4>
+                    <div class="profile__diet-types">
+                        <AppTag 
+                            v-for="dietType in artisan.diet_types" 
+                            :key="dietType.key" 
+                            :text="dietType.label"
+                        />
+                    </div>
+                </div>
                 <div class="gallery">
                     <h4>Galerie</h4>
-                    <div >
-                        <img :src="gallery[0].url" />
-                        <AppButton
-                            class="transparent show-gallery-button" 
-                            type="button" 
-                            variant="neutral" 
-                            layout="with-icon"
-                        >
-                            <template #leading><ImageIcon :size="22" /></template>
-                            <template #text>
-                                <p>{{ gallery.length }}</p>
-                            </template>
-                        </AppButton>
-                    </div>
+                    <EmblaCarousel 
+                        class="gallery__carousel" 
+                        :slides="gallery"
+                        v-slot="{ slide }"
+                    >
+                        <img class="gallery__image" :src="slide.url" />
+                    </EmblaCarousel>
                 </div>
                 <div v-if="address">
                     <div class="card location">
@@ -52,12 +56,13 @@
                         </p>
                     </div>
                 </div>
-                <div>
+                <div class="profile__services">
                     <h4>Leistungen</h4>
-                    <div>
-                        <p>Durchschnittpreis: {{ artisan.average_rate }}</p>
-                        <p>{{ `Ich biete ${artisan.offers_delivery ? 'Lieferung' : 'keine Lieferung'} an` }}</p>
+                    <div class="profile__service-option">
+                        <p v-if="Boolean(artisan.offers_delivery)"><CheckIcon color="#e680a5" :size="20" />Lieferdienst</p>
+                        <p v-if="Boolean(artisan.pick_up_on_site)"><CheckIcon color="#e680a5" :size="20" />Abholung vor Ort</p>
                     </div>
+                    <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
                 </div>
             </div>
             <div class="column">
@@ -77,15 +82,15 @@ import { computed } from "vue";
 import { Head } from "@inertiajs/vue3";
 
 import { 
-    ExternalLinkIcon, 
-    PhoneIcon, 
+    CheckIcon,
+    ExternalLinkIcon,
     MapPinIcon,
-    ImageIcon,
+    PhoneIcon, 
 } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
-import AppButton from "@/components/presentation/AppButton.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
+import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 
 import type { ArtisanProfile, Auth } from "@/types/users";
 
@@ -100,6 +105,17 @@ const { auth, artisan, gallery } = defineProps<{
 }>();
 
 const address = artisan.first_address;
+
+const pageSubtitle = computed(() => {
+    if (artisan.company_name || artisan.main_occupation) {
+        const textOutput = `${artisan.company_name && artisan.main_occupation 
+            ? `${artisan.company_name} | ${artisan.main_occupation}` 
+            : !artisan.main_occupation ? `${artisan.company_name}` 
+            : `${artisan.main_occupation}`}`;
+        return textOutput;
+    }
+    return "";
+});
 
 const userName = computed(() => {
     const user = auth.user;
@@ -131,31 +147,29 @@ const userName = computed(() => {
     }
 }
 
-.specialities {
+.profile__specialities, .profile__diet-types {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
 }
 
+.profile__services {
+    > .profile__service-option {
+        margin-bottom: 12px;
+
+        > p {
+            display: flex;
+            column-gap: 12px;
+        }
+    }
+}
+
 .gallery {
-//     display: flex;
-//     flex-direction: column;
-//     row-gap: 14px;
-
-//     &__image {
-//         border-radius: 10px;
-//         height: 350px;
-//     }
-
-//     :deep(>.root) {
-//         display: flex;
-//         flex-direction: column;
-//         row-gap: 12px
-// ;
-//         > .container + .gallery__navigation {
-//             display: flex;
-//         }
-//     }
+    &__image {
+        width: 100%;
+        max-height: 200px;
+        border-radius: 20px;
+    }
 }
 
 .show-gallery-button {

@@ -64,7 +64,7 @@
             />
         </div>
         <div class="row">
-            <header>angebotene Diäten</header>
+            <header>angebotene Ernährungsformen</header>
             <RekaSelect 
                 placeholder="Diäten auswählen" 
                 :items="dietTypeStore.dietTypes"

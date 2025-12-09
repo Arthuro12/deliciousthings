@@ -4,9 +4,9 @@
         :class="[variantClass, layoutClass]" 
         :type="type"
     >
-        <slot name="leading" />
-        <slot name="text" />
-        <slot name="trailing" />
+        <slot name="leading"></slot>
+        <slot name="text"></slot>
+        <slot name="trailing"></slot>
     </button>
 </template>
 
@@ -16,7 +16,7 @@ import { BUTTON_CLASSES } from '@/constants';
 const { variant, layout = "text" } = defineProps<{
     type: "button" | "submit" | "reset";
     layout: "text" | "icon" | "with-icon";
-    variant: "primary" | "secondary" | "tertiary" | "neutral";
+    variant: "primary" | "secondary" | "tertiary";
 }>();
 
 const layoutClass = BUTTON_CLASSES.LAYOUTS[layout];

@@ -54,10 +54,10 @@ class ProfileController extends Controller
         ]);
         $artisan = $user->artisan()->save($artisan);
 
-        $selectedSpecialies = array_map(function ($value) {
+        $selectedSpecialities = array_map(function ($value) {
             return $value['key'];
         }, $attrs['specialities']);
-        $specialities = Speciality::whereIn('key', $selectedSpecialies)->get();
+        $specialities = Speciality::whereIn('key', $selectedSpecialities)->get();
         foreach ($specialities as $speciality) {
             $artisan->specialities()->attach($speciality->id);
         }

@@ -34,7 +34,8 @@ class Artisan extends Model
 
     public function dietTypes(): BelongsToMany
     {
-        return $this->belongsToMany(DietType::class);
+        return $this->belongsToMany(DietType::class)
+            ->withTimestamps();;
     }
 
     public function getFirstAddressAttribute()
@@ -49,7 +50,8 @@ class Artisan extends Model
 
     public function specialities(): BelongsToMany
     {
-        return $this->belongsToMany(Speciality::class);
+        return $this->belongsToMany(Speciality::class)
+            ->withTimestamps();;
     }
 
     public function user(): BelongsTo

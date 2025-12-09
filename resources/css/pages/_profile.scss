@@ -52,7 +52,7 @@
         @include breakpoints.respond-to('medium') {
             flex-direction: row;
             column-gap: 42px;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: auto;
 
             > .column:first-of-type {
@@ -72,9 +72,12 @@
     .profile__title {
         font-size: 1.125rem;
         font-weight: 500;
+        color: var(--color-neutral-50);
     }
 
     .profile__subtitle {
+        font-size: 1rem;
+        font-weight: 500;
         color: var(--color-neutral-30);
     }
 }
