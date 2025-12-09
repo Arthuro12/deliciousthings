@@ -8,12 +8,8 @@
                 <div class="profile__intro">
                     <img class="profile__avatar" src="" alt="Profile photo" />
                     <div>
-                        <p class="profile__title">{{ userName }}</p>
-                        <p class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</p>
-                        <!-- <div class="profile__subtitle" v-if="artisan.company_name || artisan.main_occupation">
-                            <p v-if="artisan.company_name">{{ artisan.company_name }}</p>
-                            <p v-if="artisan.main_occupation">{{ artisan.main_occupation }}</p>
-                        </div> -->
+                        <h1 class="profile__title">{{ userName }}</h1>
+                        <h2 class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</h2>
                     </div>
                 </div>
                 <div>
