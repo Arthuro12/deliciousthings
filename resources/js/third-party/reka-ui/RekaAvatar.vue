@@ -40,12 +40,19 @@ function getAvatarText(text: string): string {
 </script>
 
 <style scoped lang="scss">
+@use "../../../css/abstracts/breakpoints" as breakpoints;
+
 .avatar {
     &__image,
     &__fallback {
         border-radius: 50%;
-        width: 200px;
-        height: 200px;
+        width: 120px;
+        height: 120px;
+
+        @include breakpoints.respond-to('medium') {
+            width: 200px;
+            height: 200px;
+        }
     }
 
     &__fallback {
