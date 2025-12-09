@@ -6,7 +6,12 @@
         <main class="row show-profile-page">
             <div class="column">
                 <div class="profile__intro">
-                    <img class="profile__avatar" src="" alt="Profile photo" />
+                    <ProfileAvartar 
+                        class="profile__avatar" 
+                        src="" 
+                        alt="Profilbild"
+                        :fallback-text="artisan.company_name || userName" 
+                    />
                     <div>
                         <h1 class="profile__title">{{ userName }}</h1>
                         <h2 class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</h2>
@@ -91,6 +96,7 @@ import {
 import AppLayout from "@/layout/AppLayout.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
+import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 
 import type { ArtisanProfile, Auth } from "@/types/users";
 
