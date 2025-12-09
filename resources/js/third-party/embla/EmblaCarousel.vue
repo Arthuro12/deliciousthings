@@ -1,10 +1,5 @@
 <template>
     <div class="embla-carousel__root">
-        <AppButton type="button" variant="tertiary" layout="icon">
-            <template #leading>
-                <ChevronLeftIcon @click="scrollPrev" />
-            </template>
-        </AppButton>
         <div class="embla-carousel__container" ref="emblaCarousel">
             <div class="embla-carousel__content">
                 <div class="embla-carousel__slide" v-for="(slide, idx) in slides" :key="idx">
@@ -12,11 +7,26 @@
                 </div>
             </div>
         </div>
-        <AppButton type="button" variant="tertiary" layout="icon">
-            <template #leading>
-                <ChevronRightIcon @click="scrollNext" />
-            </template>
-        </AppButton>
+        <div class="embla-carousel__navigation-buttons">
+            <AppButton 
+                type="button" 
+                variant="tertiary" 
+                layout="icon"
+            >
+                <template #leading>
+                    <ChevronLeftIcon @click="scrollPrev" />
+                </template>
+            </AppButton>
+            <AppButton 
+                type="button" 
+                variant="tertiary" 
+                layout="icon"
+            >
+                <template #leading>
+                    <ChevronRightIcon @click="scrollNext" />
+                </template>
+            </AppButton>
+        </div>
     </div>
 </template>
 
@@ -26,15 +36,29 @@ import emblaCarouselVue from "embla-carousel-vue";
 
 import AppButton from "@/components/presentation/AppButton.vue";
 
+export type AlignmentOptionType =
+    | 'start'
+    | 'center'
+    | 'end'
+    | ((viewSize: number, snapSize: number, index: number) => number)
+
 type CarouselProps<T> = {
     slides: T[];
-    active: boolean;
-    align: string
+    active?: boolean;
+    align?: AlignmentOptionType;
 };
 
-const { slides, active } = defineProps<CarouselProps<T>>();
+const { 
+    slides, 
+    active = true, 
+    align = "start" 
+} = defineProps<CarouselProps<T>>();
 
-const [ emblaCarousel, emblaApi ] = emblaCarouselVue({ loop: true, active, align: "start" });
+const [emblaCarousel, emblaApi] = emblaCarouselVue({ 
+    loop: true, 
+    active, 
+    align 
+});
 
 /**
  * Scrolls to next slide.
@@ -61,9 +85,15 @@ function scrollPrev(): void {
         display: flex;
 
         .embla-carousel__slide {
-            flex: 0 0 100%;
+            flex: 0 0 50%;
+            padding-left: 10px;
             min-width: 0;
         }
+    }
+
+    &__navigation-buttons {
+        display: flex;
+        justify-content: end;        
     }
 }
 </style>

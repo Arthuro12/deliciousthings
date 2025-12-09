@@ -12,9 +12,7 @@
                         <h2 class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</h2>
                     </div>
                 </div>
-                <div>
-                    <p>{{ artisan.short_description }}</p>
-                </div>
+                <div><p>{{ artisan.short_description }}</p></div>
                 <div>
                     <h4>Über</h4>
                     <p>{{ artisan.about }}</p>
@@ -41,20 +39,13 @@
                 </div>
                 <div class="gallery">
                     <h4>Galerie</h4>
-                    <div >
-                        <img :src="gallery[0].url" />
-                        <AppButton
-                            class="transparent show-gallery-button" 
-                            type="button" 
-                            variant="neutral" 
-                            layout="with-icon"
-                        >
-                            <template #leading><ImageIcon :size="22" /></template>
-                            <template #text>
-                                <p>{{ gallery.length }}</p>
-                            </template>
-                        </AppButton>
-                    </div>
+                    <EmblaCarousel 
+                        class="gallery__carousel" 
+                        :slides="gallery"
+                        v-slot="{ slide }"
+                    >
+                        <img class="gallery__image" :src="slide.url" />
+                    </EmblaCarousel>
                 </div>
                 <div v-if="address">
                     <div class="card location">
@@ -93,14 +84,13 @@ import { Head } from "@inertiajs/vue3";
 import { 
     CheckIcon,
     ExternalLinkIcon,
-    ImageIcon, 
     MapPinIcon,
     PhoneIcon, 
 } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
-import AppButton from "@/components/presentation/AppButton.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
+import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 
 import type { ArtisanProfile, Auth } from "@/types/users";
 
@@ -175,24 +165,11 @@ const userName = computed(() => {
 }
 
 .gallery {
-//     display: flex;
-//     flex-direction: column;
-//     row-gap: 14px;
-
-//     &__image {
-//         border-radius: 10px;
-//         height: 350px;
-//     }
-
-//     :deep(>.root) {
-//         display: flex;
-//         flex-direction: column;
-//         row-gap: 12px
-// ;
-//         > .container + .gallery__navigation {
-//             display: flex;
-//         }
-//     }
+    &__image {
+        width: 100%;
+        max-height: 200px;
+        border-radius: 20px;
+    }
 }
 
 .show-gallery-button {
