@@ -16,13 +16,16 @@ import { computed } from "vue";
 
 import { AvatarRoot, AvatarImage, AvatarFallback } from "reka-ui";
 
-const { src, alt = "", fallbackText } = defineProps<{
+const { src, alt = "", name } = defineProps<{
     src: string;
     alt: string;
-    fallbackText?: string;
+    /**
+     * The name to use to derive the fallback text.
+     */
+    name?: string;
 }>();
 
-const avatarText = computed(() => getAvatarText(fallbackText ?? ""));
+const avatarText = computed(() => getAvatarText(name ?? ""));
 
 /**
  * Gets the fallback text to display in the when to image hasn't loaded.
