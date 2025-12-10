@@ -1,4 +1,3 @@
-
 export interface Auth {
     user: User;
 }
@@ -9,6 +8,7 @@ export interface User {
     last_name: string;
     email: string;
     media?: string;
+    artisan_profile?: ArtisanProfile;
 }
 
 export type Address = {
@@ -39,6 +39,7 @@ export type Media = {
 };
 
 export type ArtisanProfile = {
+    id?: number;
     username: string;
     company_name: string;
     main_occupation: string;
