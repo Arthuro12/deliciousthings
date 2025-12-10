@@ -1,7 +1,9 @@
-a.link {
-    color: var(--color-neutral-30);
+a {
+    &.link--neutral {
+        color: var(--color-neutral-30);
 
-    &:hover {
-        border-bottom: 2px solid var(--color-neutral-30);
+        &:hover {
+            border-bottom: 2px solid var(--color-neutral-30);
+        }
     }
 }

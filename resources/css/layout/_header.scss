@@ -3,11 +3,23 @@
 .app-header {
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
-    column-gap: 30px;
     background-color: white;
+
+    .header__sidebar {
+        margin-right: 12px;
+    }
+
+    .header__separator {
+        flex: 1;
+    }
+
+    .navbar__menu {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+    }
 
     @include breakpoints.respond-to('medium') {
         position: sticky;

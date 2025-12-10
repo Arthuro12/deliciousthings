@@ -72,9 +72,9 @@
             </div>
             <div class="column">
                 <div class="card">
-                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.website_url" target="_blank">Webseite</a></p>
-                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link contact__link" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
-                    <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="link contact__text">{{ artisan.e164phone }}</span></p>
+                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.website_url" target="_blank">Webseite</a></p>
+                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
+                    <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.e164phone }}</span></p>
                 </div>
             </div>
         </main>
@@ -135,7 +135,7 @@ const userName = computed(() => {
     column-gap: 12px;
     align-items: center;
     
-    span {
+    &__text {
         color: var(--color-neutral-30);
     }
 
