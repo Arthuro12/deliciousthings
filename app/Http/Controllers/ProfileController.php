@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 
 use App\Models\User;
 use App\Models\Artisan;
@@ -21,10 +22,17 @@ class ProfileController extends Controller
 
     public function show(User $user, Artisan $artisan)
     {
-        $artisan = $artisan->load(['specialities', 'dietTypes', 'medias'])->toArray();
+        $artisan = $artisan->load([
+            'specialities', 
+            'dietTypes', 
+            'medias', 
+        ])->toArray();
 
         $gallery = [];
-        foreach ($artisan['medias'] as $key => $file) {
+        $galleryMedias = Arr::where($artisan['medias'], function ($value) {
+            return $value['category'] == 'gallery';
+        });
+        foreach ($galleryMedias as $key => $file) {
             $gallery[$key]['url'] = Storage::url($file['path']);
         }
 
@@ -39,7 +47,7 @@ class ProfileController extends Controller
         $attrs = $request->validated();
 
         $artisan = new Artisan([
-            'username' => $attrs['username'],
+            'name' => $attrs['name'],
             'company_name' => $attrs['company_name'],
             'main_occupation' => $attrs['main_occupation'],
             'e164phone' => $attrs['e164phone'],
@@ -87,7 +95,17 @@ class ProfileController extends Controller
             'address_line_2' => $attrs['first_address']['address_line_2'],
         ]);
 
-        // return back()->withError();
-        // redirect("/");
+        $gallery = [];
+        $galleryMedias = Arr::where($artisan['medias'], function ($value) {
+            return $value['category'] == 'gallery';
+        });
+        foreach ($galleryMedias as $key => $file) {
+            $gallery[$key]['url'] = Storage::url($file['path']);
+        }
+
+        return Inertia::render('profile/ShowProfile',[
+            'artisan' => $artisan,
+            'gallery' => $gallery
+        ]);
     }
 }

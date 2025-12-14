@@ -29,18 +29,18 @@ class CreateProfileRequest extends FormRequest
         });
 
         return [
-            'username' => 'string|required|min:5',
+            'name' => 'required|string|min:5',
             'company_name' => 'nullable|string',
             'main_occupation' => 'nullable|string',
             'e164phone' => 'nullable|string',
             'email' => 'required|string',
             'short_description' => 'nullable|string|max:200',
             'about' => 'required|string',
-            'average_rate' => 'string|required',
+            'average_rate' => 'required|string',
             'website_url' => 'nullable|string',
             'instagram_url' => 'nullable|string',
-            'offers_delivery' => 'boolean',
-            'pick_up_on_site' => 'boolean',
+            'offers_delivery' => 'required|boolean',
+            'pick_up_on_site' => 'required|boolean',
             'addresses' => 'array|size:0',
             'first_address' => 'array:street,house_number,postal_code,city,country,address_line_2',
             'first_address.street' => Rule::requiredIf($requiredAddressFields),

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Artisan extends Model
 {
     protected $fillable = [
-        'username',
+        'name',
         'company_name',
         'main_occupation',
         'e164phone',

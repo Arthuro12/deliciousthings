@@ -3,12 +3,12 @@
         <h1>Profil erstellen</h1>
         <div class="row">
             <div class="wrapper">
-                <header>Persönliche Daten</header>
+                <header>Basisprofil</header>
                 <TextField 
-                    id="username" 
+                    id="profile-name" 
                     type="text" 
-                    label="Benutzername"
-                    v-model="profile.username"
+                    label="Profilname"
+                    v-model="profile.name"
                 ></TextField>
                 <TextField 
                     id="company-name" 
@@ -163,16 +163,16 @@ import { useDietTypeStore } from "@/stores/diet-type";
 import { useSpecialityStore } from "@/stores/speciality";
 import { defaultProfile } from "@/utils/artisans";
 import type { FileValue } from "@/types/ui";
-import type { ArtisanProfile } from "@/types/users";
+import type { ArtisanPublicProfile } from "@/types/users";
 
 const emit = defineEmits<{
     (e: 'photos-uploaded', value: FileValue): void;
-    (e: 'submit', value: ArtisanProfile): void;
+    (e: 'submit', value: ArtisanPublicProfile): void;
 }>();
 
 const specialityStore = useSpecialityStore();
 const dietTypeStore = useDietTypeStore();
-const profile = ref<ArtisanProfile>(defaultProfile());
+const profile = ref<ArtisanPublicProfile>(defaultProfile());
 
 const selectedFiles = ref<FileValue>([]);
 
