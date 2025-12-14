@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>{{  artisan.company_name || artisan.username  }}</title>
+            <title>{{  artisan.company_name || artisan.name  }}</title>
         </Head>
         <main class="row show-profile-page">
             <div class="column">
@@ -10,12 +10,21 @@
                         class="profile__avatar" 
                         src="" 
                         alt="Profilbild"
-                        :user-name="artisan.company_name || userName" 
+                        :user-name="artisan.company_name || artisan.name" 
                     />
                     <div>
-                        <h1 class="profile__title">{{ userName }}</h1>
+                        <h1 class="profile__title">{{ artisan.name }}</h1>
                         <h2 class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</h2>
                     </div>
+                    <!-- <div>
+                        <AppButton
+                            type="button"
+                            variant="primary"
+                            layout="text"
+                        >
+                            <template #text>Handwerker*in kontaktieren</template>
+                        </AppButton>
+                    </div> -->
                 </div>
                 <div><p>{{ artisan.short_description }}</p></div>
                 <div>
@@ -26,9 +35,9 @@
                     <h4>Spezialitäten</h4>
                     <div class="profile__specialities">
                         <AppTag 
-                            v-for="sepciality in artisan.specialities" 
-                            :key="sepciality.key" 
-                            :text="sepciality.label"
+                            v-for="speciality in artisan.specialities" 
+                            :key="speciality.key" 
+                            :text="speciality.label"
                         />
                     </div>
                 </div>
@@ -98,14 +107,14 @@ import AppTag from "@/components/presentation/AppTag.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 
-import type { ArtisanProfile, Auth } from "@/types/users";
+import type { ArtisanProfile } from "@/types/users";
+import AppButton from "@/components/presentation/AppButton.vue";
 
 export type Image = {
     url: string;
 };
 
-const { auth, artisan, gallery } = defineProps<{
-    auth: Auth;
+const { artisan, gallery } = defineProps<{
     artisan: ArtisanProfile;
     gallery: Image[];
 }>();
@@ -121,11 +130,6 @@ const pageSubtitle = computed(() => {
         return textOutput;
     }
     return "";
-});
-
-const userName = computed(() => {
-    const user = auth.user;
-    return `${user.first_name} ${user.last_name}`;
 });
 </script>
 
@@ -176,11 +180,5 @@ const userName = computed(() => {
         max-height: 200px;
         border-radius: 20px;
     }
-}
-
-.show-gallery-button {
-    position: relative;
-    top: -40px;
-    left: 10px;
 }
 </style>

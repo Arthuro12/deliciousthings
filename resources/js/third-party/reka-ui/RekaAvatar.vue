@@ -33,7 +33,7 @@ const avatarText = computed(() => getAvatarText(name ?? ""));
  * @param text 
  */
 function getAvatarText(text: string): string {
-    const fragments = text.split(" ");
+    const fragments = text.split(" ").slice(0, 2);
     const output = fragments.map(fragment => fragment.slice(0, 1).toUpperCase()).join("");
     return output;
 }

@@ -1,6 +1,6 @@
 import type { 
     Address, 
-    ArtisanProfile, 
+    ArtisanPublicProfile, 
     Media, 
     Speciality,
     DietType, 
@@ -11,9 +11,9 @@ import type {
  * 
  * @returns A default artisan profile.
  */
-export function defaultProfile(): ArtisanProfile {
+export function defaultProfile(): ArtisanPublicProfile {
     return {
-        username: "",
+        name: "",
         company_name: "",
         main_occupation: "",
         e164phone: "",

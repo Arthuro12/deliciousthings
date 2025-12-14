@@ -1,13 +1,13 @@
 export interface Auth {
-    user: User;
+    user: User | null;
 }
 
 export interface User {
-    id: number;
+    id?: number;
     first_name: string;
     last_name: string;
+    full_name: string;
     email: string;
-    media?: string;
     artisan_profile?: ArtisanProfile;
 }
 
@@ -40,7 +40,10 @@ export type Media = {
 
 export type ArtisanProfile = {
     id?: number;
-    username: string;
+    /**
+     * The public profile name.
+     */
+    name: string;
     company_name: string;
     main_occupation: string;
     e164phone?: string;
@@ -57,4 +60,7 @@ export type ArtisanProfile = {
     average_rate: string;
     offers_delivery: boolean;
     pick_up_on_site: boolean;
+    user: User;
 }
+
+export type ArtisanPublicProfile = Omit<ArtisanProfile, "user">;

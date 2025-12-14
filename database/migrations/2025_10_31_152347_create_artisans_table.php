@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('artisans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained();
-            $table->string('username');
+            $table->string('name')->unique();
             $table->string('company_name')->nullable();
             $table->string('main_occupation')->nullable();
             $table->string('e164phone')->nullable();
