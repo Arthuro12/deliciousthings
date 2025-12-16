@@ -11,13 +11,13 @@ use App\Models\User;
 use App\Models\Artisan;
 use App\Models\Speciality;
 use App\Models\DietType;
-use App\Http\Requests\CreateProfileRequest;
+use App\Http\Requests\CreateArtisanRequest;
 
-class ProfileController extends Controller
+class ArtisanController extends Controller
 {
     public function create()
     {
-        return Inertia::render('profile/CreateProfile');
+        return Inertia::render('artisan/CreateArtisan');
     }
 
     public function show(User $user, Artisan $artisan)
@@ -36,13 +36,13 @@ class ProfileController extends Controller
             $gallery[$key]['url'] = Storage::url($file['path']);
         }
 
-        return Inertia::render('profile/ShowProfile', [
+        return Inertia::render('artisan/ShowArtisan', [
             'artisan' => $artisan,
             'gallery' => $gallery,
         ]);
     }
 
-    public function store(CreateProfileRequest $request, User $user)
+    public function store(CreateArtisanRequest $request, User $user)
     {
         $attrs = $request->validated();
 
@@ -102,8 +102,8 @@ class ProfileController extends Controller
         foreach ($galleryMedias as $key => $file) {
             $gallery[$key]['url'] = Storage::url($file['path']);
         }
-
-        return Inertia::render('profile/ShowProfile',[
+        
+        return Inertia::render('artisan/ShowArtisan',[
             'artisan' => $artisan,
             'gallery' => $gallery
         ]);
