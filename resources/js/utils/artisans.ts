@@ -11,7 +11,7 @@ import type {
  * 
  * @returns A default artisan profile.
  */
-export function defaultProfile(): ArtisanPublicProfile {
+export function defaultArtisan(): ArtisanPublicProfile {
     return {
         name: "",
         company_name: "",

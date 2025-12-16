@@ -1,53 +1,21 @@
 <template>
-    <div class="profile-form">
+    <div class="artisan-form">
         <h1>Profil erstellen</h1>
         <div class="row">
-            <div class="wrapper">
-                <header>Basisprofil</header>
-                <TextField 
-                    id="profile-name" 
-                    type="text" 
-                    label="Profilname"
-                    v-model="profile.name"
-                ></TextField>
-                <TextField 
-                    id="company-name" 
-                    type="text" 
-                    label="Firmenname (optional)"
-                    v-model="profile.company_name"
-                ></TextField>
-                <TextField 
-                    id="main-occupation" 
-                    type="text" 
-                    label="Hauptbeschäftigung (optional)"
-                    v-model="profile.main_occupation"
-                ></TextField>
-                <AppTextArea 
-                    id="short-description" 
-                    rows="7" 
-                    label="kurze Beschreibung" 
-                    v-model="profile.short_description" 
-                />
-                <AppTextArea 
-                    id="about" 
-                    rows="10" 
-                    label="Über" 
-                    v-model="profile.about" 
-                />
-            </div>
+            <BasisProfileForm class="wrapper" v-model:profile="artisan" />
             <div class="wrapper">
                 <header>Kontaktdaten</header>
                 <TextField 
                     type="text" 
                     id="phone" 
                     label="Telefonnummer (optional)"
-                    v-model="profile.e164phone"
+                    v-model="artisan.e164phone"
                 ></TextField>
                 <TextField 
                     type="text" 
                     id="email" 
                     label="E-Mail-Adresse"
-                    v-model="profile.email"
+                    v-model="artisan.email"
                 ></TextField>
             </div>
         </div>
@@ -60,23 +28,23 @@
                 label-prop="label"
                 value-prop="key"
                 multiple
-                v-model:selected-value="profile.specialities"
+                v-model:selected-value="artisan.specialities"
             />
         </div>
         <div class="row">
-            <header>angebotene Ernährungsformen</header>
+            <header>Angebotene Ernährungsformen</header>
             <RekaSelect 
                 placeholder="Diäten auswählen" 
                 :items="dietTypeStore.dietTypes"
                 label-prop="label"
                 value-prop="key"
                 multiple
-                v-model:selected-value="profile.diet_types"
+                v-model:selected-value="artisan.diet_types"
             />
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
-            <AddressForm v-model:address="profile.first_address" />
+            <AddressForm v-model:address="artisan.first_address" />
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
@@ -99,7 +67,7 @@
                     <TextField 
                         type="text" 
                         id="website" 
-                        v-model="profile.website_url"
+                        v-model="artisan.website_url"
                     ></TextField>
                 </div>
                 <div>
@@ -107,7 +75,7 @@
                     <TextField 
                         type="text" 
                         id="instagram" 
-                        v-model="profile.instagram_url"
+                        v-model="artisan.instagram_url"
                     ></TextField>
                 </div>
             </div>
@@ -118,18 +86,18 @@
             <RekaCheckbox 
                 id="offers-delivery" 
                 label="Ich bitte Lieferung an" 
-                v-model="profile.offers_delivery"
+                v-model="artisan.offers_delivery"
             />
             <RekaCheckbox 
                 id="pick-up-on-site" 
                 label="Abholung vor Ort" 
-                v-model="profile.pick_up_on_site"
+                v-model="artisan.pick_up_on_site"
             />
             <TextField 
                 type="text" 
                 id="average-rate" 
                 label="Durchschnittspreis (in Euro)"
-                v-model="profile.average_rate"
+                v-model="artisan.average_rate"
             ></TextField>
         </div>
         <div class="row">
@@ -138,7 +106,7 @@
                 type="button" 
                 layout="text"
                 variant="primary"
-                @click="emit('submit', profile)"
+                @click="emit('submit', artisan)"
             >
                 <template #text>Mein Profil erstellen</template>
             </AppButton>
@@ -153,15 +121,15 @@ import { ref, onMounted } from "vue";
 import AppDivider from "../presentation/AppDivider.vue";
 import AppButton from "../presentation/AppButton.vue";
 import FileUpload from "../presentation/FileUpload.vue";
-import AppTextArea from "../presentation/AppTextArea.vue";
 import TextField from "../presentation/TextField.vue";
+import BasisProfileForm from "../profile/BasisProfileForm.vue";
 import AddressForm from "../addresses/AddressForm.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 
 import { useDietTypeStore } from "@/stores/diet-type";
 import { useSpecialityStore } from "@/stores/speciality";
-import { defaultProfile } from "@/utils/artisans";
+import { defaultArtisan } from "@/utils/artisans";
 import type { FileValue } from "@/types/ui";
 import type { ArtisanPublicProfile } from "@/types/users";
 
@@ -172,7 +140,7 @@ const emit = defineEmits<{
 
 const specialityStore = useSpecialityStore();
 const dietTypeStore = useDietTypeStore();
-const profile = ref<ArtisanPublicProfile>(defaultProfile());
+const artisan = ref<ArtisanPublicProfile>(defaultArtisan());
 
 const selectedFiles = ref<FileValue>([]);
 
@@ -186,24 +154,3 @@ onMounted(async () => {
     await dietTypeStore.getDietTypes();
 });
 </script>
-
-<style scoped>
-.profile-form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 40px;
-}
-
-.wrapper, .row {
-    display: flex;
-    flex-direction: column;
-}
-
-.row {
-    row-gap: 20px;
-}
-
-.wrapper {
-    row-gap: 16px;
-}
-</style>

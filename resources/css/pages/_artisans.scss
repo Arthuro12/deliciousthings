@@ -1,32 +1,6 @@
 @use '../abstracts/breakpoints';
 
-.create-profile-page {
-    .profile-form {
-        width: 100%;
-        border-radius: 0;
-        padding: 24px;
-
-        .row > .submit-button {
-            width: 100%;
-
-            @include breakpoints.respond-to('medium') {
-                width: 30%;
-            }
-
-            @include breakpoints.respond-to('large') {
-                width: 50%;
-            }
-        }
-
-        @include breakpoints.respond-to('large') {
-            margin: 40px auto;
-            width: 50%;
-            border-radius: 16px;
-        }
-    }
-}
-
-.show-profile-page {
+.show-artisan-page {
     &.row {
         display: flex;
         flex-direction: column;

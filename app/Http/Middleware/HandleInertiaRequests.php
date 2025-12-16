@@ -40,7 +40,7 @@ class HandleInertiaRequests extends Middleware
         if ($requestUser) {
             $authUser = $requestUser->only(['id', 'first_name', 'last_name']);
             $authUser['artisan_profile'] = $requestUser->artisan?->only(['id', 'name']);
-        }    
+        }  
 
         return [
             ...parent::share($request),

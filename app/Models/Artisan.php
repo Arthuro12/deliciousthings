@@ -27,6 +27,19 @@ class Artisan extends Model
 
     protected $appends = ['first_address'];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'offers_delivery' => 'boolean',
+            'pick_up_on_site' => 'boolean',
+        ];
+    }
+
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);

@@ -38,7 +38,7 @@ export type Media = {
     path: string;
 };
 
-export type ArtisanProfile = {
+export type BasisProfile = {
     id?: number;
     /**
      * The public profile name.
@@ -51,6 +51,10 @@ export type ArtisanProfile = {
     short_description: string | null;
     about: string;
     medias: Media[];
+};
+
+export type ArtisanProfile = BasisProfile & {
+    medias: Media[];
     specialities: Speciality[];
     diet_types: DietType[];
     addresses: Address[];
@@ -61,6 +65,6 @@ export type ArtisanProfile = {
     offers_delivery: boolean;
     pick_up_on_site: boolean;
     user: User;
-}
+};
 
 export type ArtisanPublicProfile = Omit<ArtisanProfile, "user">;
