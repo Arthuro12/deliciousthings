@@ -54,6 +54,7 @@ We recommend that all developers use [Visual Studio Code](https://code.visualstu
 
 ### Important links
 
+- Learn Laravel from scratch [Bootcamp from Laravel](https://youtu.be/MOLZOXqaomM?si=43d3_vcWKnm8d5XT)
 - Laravel Herd [getting started](https://herd.laravel.com/docs/macos/getting-started/installation)
 - [Inertia](https://inertiajs.com/)
 - [Laravel](https://laravel.com/)
