@@ -25,8 +25,8 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            $createProfilePageUrl = route('profile.create', $request->user()->id);
-            return redirect()->intended($createProfilePageUrl);
+            $createArtisanPageUrl = route('artisan.create', $request->user()->id);
+            return redirect()->intended($createArtisanPageUrl);
         }
 
         return back()->withErrors(['email' => 'The provided credential do not match our records.']);

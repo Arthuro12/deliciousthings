@@ -3,10 +3,10 @@
         <Head>
             <title>Profil erstellen</title>
         </Head>
-        <main class="create-profile-page">
-            <ProfileForm 
+        <main>
+            <ArtisanForm 
                 class="card-layout" 
-                @photos-uploaded="(photos) => profileForm.gallery = photos"
+                @photos-uploaded="(photos) => artisanForm.gallery = photos"
                 @submit="submit" 
             />
         </main>
@@ -17,10 +17,10 @@
 import { Head } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
-import ProfileForm from "@/components/profile/ProfileForm.vue";
+import ArtisanForm from "@/components/artisan/ArtisanForm.vue";
 import AppLayout from "@/layout/AppLayout.vue";
 
-import { defaultProfile } from "@/utils/artisans";
+import { defaultArtisan } from "@/utils/artisans";
 import type { FileValue } from "@/types/ui";
 import type { Auth } from "@/types/users";
 import type { ArtisanPublicProfile } from "@/types/users";
@@ -31,17 +31,17 @@ const { auth } = defineProps<{
 
 export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
 
-const formData: ProfileFormData = Object.assign(defaultProfile(), { gallery: null });
+const formData: ProfileFormData = Object.assign(defaultArtisan(), { gallery: null });
 
-const profileForm = useForm<ProfileFormData>(formData);
+const artisanForm = useForm<ProfileFormData>(formData);
 
-function submit(profile: ArtisanPublicProfile): void {
+function submit(artisan: ArtisanPublicProfile): void {
     try {
         if (!auth.user) {
             throw new Error("Can not create profile.");
         }
-        Object.assign(profileForm, profile);
-        profileForm.post(`/users/${auth.user.id}/profile`, {
+        Object.assign(artisanForm, artisan);
+        artisanForm.post(`/users/${auth.user.id}/artisan`, {
             onError(event) {}
         }); 
     } catch (error: any) {

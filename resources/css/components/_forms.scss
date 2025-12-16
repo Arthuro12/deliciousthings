@@ -1,3 +1,5 @@
+@use '../abstracts/breakpoints';
+
 .form {
     &__group {
         display: flex;
@@ -29,4 +31,44 @@ input.is-invalid:focus-visible {
 
 input.is-invalid {
     border: 2px solid var(--color-error-40);
+}
+
+.artisan-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    width: 100%;
+    border-radius: 0;
+    padding: 24px;
+
+    .wrapper, .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wrapper {
+        row-gap: 16px;
+    }
+
+    .row {
+        row-gap: 20px;
+    }
+
+    .row > .submit-button {
+        width: 100%;
+
+        @include breakpoints.respond-to('medium') {
+            width: 30%;
+        }
+
+        @include breakpoints.respond-to('large') {
+            width: 50%;
+        }
+    }
+
+    @include breakpoints.respond-to('large') {
+        margin: 40px auto;
+        width: 50%;
+        border-radius: 16px;
+    }
 }

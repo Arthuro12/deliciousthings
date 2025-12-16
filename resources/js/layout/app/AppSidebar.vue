@@ -22,10 +22,10 @@
                 </div>
                 <ul class="sidebar__menu" v-if="isAuthenticated">
                     <li class="sidebar__item" v-if="hasArtisanProfile">
-                        <Link class="sidebar__link" :href="`/users/${userId}/profile/${artisanProfileId}`">Mein Profil</Link>
+                        <Link class="sidebar__link" :href="`/users/${userId}/artisan/${artisanProfileId}`">Mein Profil</Link>
                     </li>
                     <li class="sidebar__item" v-else>
-                        <Link class="sidebar__link" :href="`/users/${userId}/profile/create`">Profil erstellen</Link>
+                        <Link class="sidebar__link" :href="`/users/${userId}/artisan/create`">Profil erstellen</Link>
                     </li>
                     <li class="sidebar__item">
                         <Link
@@ -78,7 +78,7 @@ const showContent = ref(false);
 
 const isAuthenticated = auth.user != null;
 const hasArtisanProfile = auth.user?.artisan_profile != undefined;
-const userId = auth.user?.id.toString() || "";
+const userId = auth.user?.id?.toString() || "";
 const artisanProfileId = auth.user?.artisan_profile?.id?.toString() || "";                
 </script>
 

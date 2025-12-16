@@ -3,7 +3,7 @@
         <Head>
             <title>{{  artisan.company_name || artisan.name  }}</title>
         </Head>
-        <main class="row show-profile-page">
+        <main class="row show-artisan-page">
             <div class="column">
                 <div class="profile__intro">
                     <ProfileAvartar 
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div v-if="artisan.diet_types.length > 0">
-                    <h4>angebotene Ernährungsformen</h4>
+                    <h4>Angebotene Ernährungsformen</h4>
                     <div class="profile__diet-types">
                         <AppTag 
                             v-for="dietType in artisan.diet_types" 
@@ -73,8 +73,8 @@
                 <div class="profile__services">
                     <h4>Leistungen</h4>
                     <div class="profile__service-option">
-                        <p v-if="Boolean(artisan.offers_delivery)"><CheckIcon color="#e680a5" :size="20" />Lieferdienst</p>
-                        <p v-if="Boolean(artisan.pick_up_on_site)"><CheckIcon color="#e680a5" :size="20" />Abholung vor Ort</p>
+                        <p v-if="artisan.offers_delivery"><CheckIcon color="#e680a5" :size="20" />Lieferdienst</p>
+                        <p v-if="artisan.pick_up_on_site"><CheckIcon color="#e680a5" :size="20" />Abholung vor Ort</p>
                     </div>
                     <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
                 </div>
