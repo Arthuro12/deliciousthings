@@ -30,7 +30,7 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        $createArtisanPageUrl = route('artisan.create', $user->id);
+        $createArtisanPageUrl = route('artisan.profile.create');
         return  redirect($createArtisanPageUrl);
     }
 }

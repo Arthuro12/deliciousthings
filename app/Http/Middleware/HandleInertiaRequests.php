@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -34,20 +35,29 @@ class HandleInertiaRequests extends Middleware
      * @return array<string, mixed>
      */
     public function share(Request $request): array
-    {        
-        $requestUser = $request->user();
-        $authUser = null;
-        if ($requestUser) {
-            $authUser = $requestUser->only(['id', 'first_name', 'last_name']);
-            $authUser['artisan_profile'] = $requestUser->artisan?->only(['id', 'name']);
+    {     
+        $authenticatedUser = $request->user();
+        $userAccount = null;
+        if ($authenticatedUser) {
+            //dd($authenticatedUser->artisan);
+            Log::notice("User artisan profile: {$authenticatedUser->artisan}: HandleInertiaRequests");
+            $authenticatedUser = $authenticatedUser->fresh(['artisan']);
+            $userAccount = $authenticatedUser->only(['id', 'first_name', 'last_name']);
+            $userAccount['artisan_profile'] = $authenticatedUser->artisan?->only(['id', 'name']);
+            Log::notice("User artisan profile: {$authenticatedUser->artisan}");
         }  
 
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => $authUser,
+                'user' => $userAccount,
             ],
+            'flash' => function () use ($request) {
+                return [
+                    'info' => $request->session()->get('info'),
+                ];
+            }
         ];
     }
 }

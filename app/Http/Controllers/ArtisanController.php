@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 
@@ -20,16 +21,21 @@ class ArtisanController extends Controller
         return Inertia::render('artisan/CreateArtisan');
     }
 
-    public function show(User $user, Artisan $artisan)
+    public function show(Request $request)
     {
-        $artisan = $artisan->load([
+        if (is_null($request->user()->artisan)) {
+            $createArtisanPageUrl = route('artisan.profile.create');
+            return redirect($createArtisanPageUrl)->with('info', __('No existing profile.'));
+        }
+
+        $profile = $request->user()->artisan->load([
             'specialities', 
             'dietTypes', 
             'medias', 
         ])->toArray();
 
         $gallery = [];
-        $galleryMedias = Arr::where($artisan['medias'], function ($value) {
+        $galleryMedias = Arr::where($profile['medias'], function ($value) {
             return $value['category'] == 'gallery';
         });
         foreach ($galleryMedias as $key => $file) {
@@ -37,14 +43,15 @@ class ArtisanController extends Controller
         }
 
         return Inertia::render('artisan/ShowArtisan', [
-            'artisan' => $artisan,
+            'artisan' => $profile,
             'gallery' => $gallery,
         ]);
     }
 
-    public function store(CreateArtisanRequest $request, User $user)
+    public function store(CreateArtisanRequest $request)
     {
         $attrs = $request->validated();
+        // $user = $request->user();
 
         $artisan = new Artisan([
             'name' => $attrs['name'],
@@ -60,7 +67,8 @@ class ArtisanController extends Controller
             'offers_delivery' => $attrs['offers_delivery'],
             'pick_up_on_site' => $attrs['pick_up_on_site'],
         ]);
-        $artisan = $user->artisan()->save($artisan);
+        $artisan = $request->user()->artisan()->save($artisan);
+        Log::notice("From User artisan profile: {$request->user()->artisan}: ArtisanController");
 
         $selectedSpecialities = array_map(function ($value) {
             return $value['key'];
@@ -95,16 +103,26 @@ class ArtisanController extends Controller
             'address_line_2' => $attrs['first_address']['address_line_2'],
         ]);
 
+        $profile = $artisan->load([
+            'specialities', 
+            'dietTypes', 
+            'medias', 
+        ])->toArray();
         $gallery = [];
-        $galleryMedias = Arr::where($artisan['medias'], function ($value) {
+        $galleryMedias = Arr::where($profile['medias'], function ($value) {
             return $value['category'] == 'gallery';
         });
         foreach ($galleryMedias as $key => $file) {
             $gallery[$key]['url'] = Storage::url($file['path']);
         }
         
+        //Todo: Refresh authenticated user after profile creation to properly
+        // update the navigation menu in frontend.
+        // $user->fresh(['artisan']);
+        // dd($user->artisan());
+        
         return Inertia::render('artisan/ShowArtisan',[
-            'artisan' => $artisan,
+            'artisan' => $profile,
             'gallery' => $gallery
         ]);
     }

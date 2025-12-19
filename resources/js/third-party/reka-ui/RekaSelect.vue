@@ -1,5 +1,5 @@
 <template>
-    <SelectRoot :multiple v-model="selectedValue">
+    <SelectRoot class="select__root" :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
             <SelectValue :placeholder="placeholder" />
             <ChevronDownIcon />

@@ -22,7 +22,7 @@
                             variant="primary"
                             layout="text"
                         >
-                            <template #text>Handwerker*in kontaktieren</template>
+                            <template #text>Kontakt aufnehmen</template>
                         </AppButton>
                     </div> -->
                 </div>
@@ -108,7 +108,6 @@ import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 
 import type { ArtisanProfile } from "@/types/users";
-import AppButton from "@/components/presentation/AppButton.vue";
 
 export type Image = {
     url: string;
@@ -157,7 +156,8 @@ const pageSubtitle = computed(() => {
     }
 }
 
-.profile__specialities, .profile__diet-types {
+.profile__specialities, 
+.profile__diet-types {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;

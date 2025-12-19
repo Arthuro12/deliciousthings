@@ -22,10 +22,10 @@ Route::controller(SessionController::class)->group(function () {
     Route::post('/logout', 'destroy')->name('login.destroy');
 });
 
-Route::group(['prefix' => 'users/{user}/', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::controller(ArtisanController::class)->group(function () {
-        Route::get('artisan/create', 'create')->name('artisan.create');
-        Route::get('artisan/{artisan}', 'show')->name('artisan.show');
-        Route::post('artisan', 'store');
+        Route::get('/artisan/profile/create', 'create')->name('artisan.profile.create');
+        Route::get('/artisan/profile', 'show')->name('artisan.profile.show');
+        Route::post('/artisan/profile', 'store');
     });
 });
