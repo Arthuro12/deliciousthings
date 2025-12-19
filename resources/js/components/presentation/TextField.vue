@@ -33,12 +33,4 @@ const model = defineModel({ default: "" });
     display: flex;
     flex-direction: column;
 }
-
-input.is-invalid:focus-visible {
-    outline: none;
-}
-
-input.is-invalid {
-    border: 2px solid var(--color-error-40);
-}
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div class="reka-checkbox__wrapper">
+    <div class="checkbox__wrapper">
         <CheckboxRoot 
-            class="reka-checkbox__root" 
+            class="checkbox__root" 
             :as="as" 
             :id="id"
             v-model="modelValue"
@@ -10,7 +10,7 @@
                 <CheckIcon color="#e680a5" :size="16"/>
             </CheckboxIndicator>
         </CheckboxRoot>
-        <label class="reka-checkbox__label" :for="id">{{ label }}</label>
+        <label class="checkbox__label" :for="id">{{ label }}</label>
     </div>
 </template>
 
@@ -30,7 +30,7 @@ const modelValue = defineModel<CheckboxValue>({ default: "indeterminate" });
 </script>
 
 <style scoped lang="scss">
-.reka-checkbox {
+.checkbox {
     &__wrapper {
         display: flex;
         column-gap: 12px;

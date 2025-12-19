@@ -44,8 +44,8 @@ export type BasisProfile = {
      * The public profile name.
      */
     name: string;
-    company_name: string;
-    main_occupation: string;
+    company_name?: string;
+    main_occupation?: string;
     e164phone?: string;
     email: string;
     short_description: string | null;

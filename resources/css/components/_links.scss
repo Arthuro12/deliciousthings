@@ -1,9 +1,15 @@
-a {
-    &.link--neutral {
-        color: var(--color-neutral-30);
-
-        &:hover {
-            border-bottom: 2px solid var(--color-neutral-30);
-        }
+.link {
+    &:hover {
+        text-decoration: underline;
     }
+}
+
+.link--primary {
+    color: var(--color-primary-50);
+    @extend .link;
+}
+
+.link--neutral {
+    color: var(--color-neutral-30);
+    @extend .link;
 }

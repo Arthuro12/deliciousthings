@@ -1,0 +1,23 @@
+.toast {
+    &__item {
+        position: fixed;
+        border-radius: 5px;
+        background-color: var(--color-neutral-50);
+        opacity: 0.7;
+        color: var(--color-primary-0);
+        padding: 0.8rem;
+        min-width: 200px;
+        width: 60%;
+        bottom: 10px;
+        right: 10px;
+        list-style-type: none;
+    }
+
+    &--error {
+        > .toast__item {
+            background-color: var(--color-error-20);
+            color: var(--color-neutral-50);
+            opacity: 1;
+        }
+    }
+}

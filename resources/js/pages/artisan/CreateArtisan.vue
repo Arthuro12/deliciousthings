@@ -4,6 +4,13 @@
             <title>Profil erstellen</title>
         </Head>
         <main>
+            <RekaToast  
+                to="body" 
+                severity="error" 
+                :default-open="showAlert"
+                :title="pageAlertMessage" 
+                :duration="3000"          
+            />
             <ArtisanForm 
                 class="card-layout" 
                 @photos-uploaded="(photos) => artisanForm.gallery = photos"
@@ -14,35 +21,42 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
-import ArtisanForm from "@/components/artisan/ArtisanForm.vue";
 import AppLayout from "@/layout/AppLayout.vue";
+import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
+import ArtisanForm from "@/components/artisan/ArtisanForm.vue";
 
 import { defaultArtisan } from "@/utils/artisans";
-import type { FileValue } from "@/types/ui";
+import type { FlashMessage, FileValue } from "@/types/ui";
 import type { Auth } from "@/types/users";
 import type { ArtisanPublicProfile } from "@/types/users";
 
-const { auth } = defineProps<{
+const { auth, flash } = defineProps<{
     auth: Auth;
+    flash: FlashMessage;
 }>();
 
 export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
 
 const formData: ProfileFormData = Object.assign(defaultArtisan(), { gallery: null });
-
 const artisanForm = useForm<ProfileFormData>(formData);
+
+const pageAlertMessage = computed(() => flash.info);
+
+const showAlert = ref(Boolean(pageAlertMessage.value));
 
 function submit(artisan: ArtisanPublicProfile): void {
     try {
         if (!auth.user) {
             throw new Error("Can not create profile.");
         }
+
         Object.assign(artisanForm, artisan);
-        artisanForm.post(`/users/${auth.user.id}/artisan`, {
-            onError(event) {}
+        artisanForm.post(`/artisan/profile`, {
+            onError: () => {}
         }); 
     } catch (error: any) {
         console.error(error);
