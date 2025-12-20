@@ -107,13 +107,14 @@ import AppTag from "@/components/presentation/AppTag.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 
+import { defaultArtisan } from "@/utils/artisans";
 import type { ArtisanProfile } from "@/types/users";
 
 export type Image = {
     url: string;
 };
 
-const { artisan, gallery } = defineProps<{
+const { artisan = defaultArtisan(), gallery } = defineProps<{
     artisan: ArtisanProfile;
     gallery: Image[];
 }>();

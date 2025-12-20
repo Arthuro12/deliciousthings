@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
-use App\Models\User;
 use App\Models\Artisan;
 use App\Models\Speciality;
 use App\Models\DietType;
@@ -51,7 +51,8 @@ class ArtisanController extends Controller
     public function store(CreateArtisanRequest $request)
     {
         $attrs = $request->validated();
-        // $user = $request->user();
+
+        $user = $request->user();
 
         $artisan = new Artisan([
             'name' => $attrs['name'],
@@ -67,8 +68,7 @@ class ArtisanController extends Controller
             'offers_delivery' => $attrs['offers_delivery'],
             'pick_up_on_site' => $attrs['pick_up_on_site'],
         ]);
-        $artisan = $request->user()->artisan()->save($artisan);
-        Log::notice("From User artisan profile: {$request->user()->artisan}: ArtisanController");
+        $artisan = $user->artisan()->save($artisan);
 
         $selectedSpecialities = array_map(function ($value) {
             return $value['key'];
@@ -102,28 +102,24 @@ class ArtisanController extends Controller
             'country' => $attrs['first_address']['country'],
             'address_line_2' => $attrs['first_address']['address_line_2'],
         ]);
+        $user->refresh();
+        Auth::setUser($user);
 
-        $profile = $artisan->load([
-            'specialities', 
-            'dietTypes', 
-            'medias', 
-        ])->toArray();
-        $gallery = [];
-        $galleryMedias = Arr::where($profile['medias'], function ($value) {
-            return $value['category'] == 'gallery';
-        });
-        foreach ($galleryMedias as $key => $file) {
-            $gallery[$key]['url'] = Storage::url($file['path']);
-        }
-        
-        //Todo: Refresh authenticated user after profile creation to properly
-        // update the navigation menu in frontend.
-        // $user->fresh(['artisan']);
-        // dd($user->artisan());
-        
-        return Inertia::render('artisan/ShowArtisan',[
-            'artisan' => $profile,
-            'gallery' => $gallery
-        ]);
+        // $profile = $artisan->load([
+        //     'specialities', 
+        //     'dietTypes', 
+        //     'medias', 
+        // ])->toArray();
+        // $galleryMedias = Arr::where($profile['medias'], function ($value) {
+        //     return $value['category'] == 'gallery';
+        // });
+        // foreach ($galleryMedias as $key => $file) {
+        //     $gallery[$key]['url'] = Storage::url($file['path']);
+        // }
+
+        Log::notice("Controller Auth user: " . json_encode(Auth::user()->artisan) . " ArtisanController");
+
+        $artisanShowPageUrl = route('artisan.profile.show');
+        return redirect($artisanShowPageUrl);
     }
 }
