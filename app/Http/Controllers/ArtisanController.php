@@ -105,18 +105,6 @@ class ArtisanController extends Controller
         $user->refresh();
         Auth::setUser($user);
 
-        // $profile = $artisan->load([
-        //     'specialities', 
-        //     'dietTypes', 
-        //     'medias', 
-        // ])->toArray();
-        // $galleryMedias = Arr::where($profile['medias'], function ($value) {
-        //     return $value['category'] == 'gallery';
-        // });
-        // foreach ($galleryMedias as $key => $file) {
-        //     $gallery[$key]['url'] = Storage::url($file['path']);
-        // }
-
         Log::notice("Controller Auth user: " . json_encode(Auth::user()->artisan) . " ArtisanController");
 
         $artisanShowPageUrl = route('artisan.profile.show');
