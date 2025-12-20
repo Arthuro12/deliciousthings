@@ -39,12 +39,9 @@ class HandleInertiaRequests extends Middleware
         $authenticatedUser = $request->user();
         $userAccount = null;
         if ($authenticatedUser) {
-            //dd($authenticatedUser->artisan);
-            Log::notice("User artisan profile: {$authenticatedUser->artisan}: HandleInertiaRequests");
             $authenticatedUser = $authenticatedUser->fresh(['artisan']);
             $userAccount = $authenticatedUser->only(['id', 'first_name', 'last_name']);
             $userAccount['artisan_profile'] = $authenticatedUser->artisan?->only(['id', 'name']);
-            Log::notice("User artisan profile: {$authenticatedUser->artisan}");
         }  
 
         return [
