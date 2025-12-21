@@ -93,14 +93,22 @@ class ArtisanController extends Controller
             ]);
         }
 
-        $artisan->addresses()->create([
-            'street' => $attrs['first_address']['street'],
-            'house_number' => $attrs['first_address']['house_number'],
-            'postal_code' => $attrs['first_address']['postal_code'],
-            'city' => $attrs['first_address']['city'],
-            'country' => $attrs['first_address']['country'],
-            'address_line_2' => $attrs['first_address']['address_line_2'],
-        ]);
+        $hasRequiredAddressFields = Arr::every($attrs['first_address'], function ($value, $key) {
+            if ($key == 'address_line_2') {
+                return true;
+            }
+            return !is_null($value);
+        });
+        if ($hasRequiredAddressFields) {
+            $artisan->addresses()->create([
+                'street' => $attrs['first_address']['street'],
+                'house_number' => $attrs['first_address']['house_number'],
+                'postal_code' => $attrs['first_address']['postal_code'],
+                'city' => $attrs['first_address']['city'],
+                'country' => $attrs['first_address']['country'],
+                'address_line_2' => $attrs['first_address']['address_line_2'],
+            ]);
+        }
 
         Log::notice("Artisan profile successfully created");
         

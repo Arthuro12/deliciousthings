@@ -48,7 +48,7 @@ class CreateArtisanRequest extends FormRequest
             'first_address.postal_code' => Rule::requiredIf($requiredAddressFields),
             'first_address.city' => Rule::requiredIf($requiredAddressFields),
             'first_address.country' => Rule::requiredIf($requiredAddressFields),
-            'first_address.addres_line_2' => 'nullable|string',
+            'first_address.address_line_2' => 'nullable|string',
             'specialities' => 'array',
             'specialities.*.key' => 'required|string',
             'specialities.*.name' => 'required|string',
