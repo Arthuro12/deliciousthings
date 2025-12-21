@@ -3,6 +3,13 @@
         <Head>
             <title>{{  artisan.company_name || artisan.name  }}</title>
         </Head>
+        <RekaToast  
+            to="body" 
+            severity="success" 
+            :default-open="showAlert"
+            :title="pageAlertMessage" 
+            :duration="3000"          
+        />
         <main class="row show-artisan-page">
             <div class="column">
                 <div class="profile__intro">
@@ -91,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed , ref} from "vue";
 
 import { Head } from "@inertiajs/vue3";
 
@@ -104,22 +111,35 @@ import {
 
 import AppLayout from "@/layout/AppLayout.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
+import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 
-import { defaultArtisan } from "@/utils/artisans";
+import { FlashProps } from "@/types/ui";
 import type { ArtisanProfile } from "@/types/users";
 
 export type Image = {
     url: string;
 };
 
-const { artisan = defaultArtisan(), gallery } = defineProps<{
+const { flash, artisan, gallery, } = defineProps<{
     artisan: ArtisanProfile;
     gallery: Image[];
+    flash: FlashProps;
 }>();
 
 const address = artisan.first_address;
+
+const pageAlertMessage = computed(() => {
+    if ("info" in flash) {
+        return flash.info || flash.success || flash.error || "";
+    } else if ("severity" in flash) {
+        return flash.message;
+    }
+    return "";
+});
+
+const showAlert = ref(Boolean(pageAlertMessage.value));
 
 const pageSubtitle = computed(() => {
     if (artisan.company_name || artisan.main_occupation) {

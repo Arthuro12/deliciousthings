@@ -4,9 +4,16 @@ export type ClassType = string | Record<string, boolean>;
 
 export type VueClass = ClassType | ClassType[] | VueClass[];
 
-export type FlashMessage = {
-    info: string;
+export type ToastSeverityType = "info" | "success" | "error";
+
+export type FlashSession = Record<ToastSeverityType, string>;
+
+export type FlashToast = {
+    severity: ToastSeverityType;
+    message: string;
 };
+
+export type FlashProps = FlashSession | FlashToast;
 
 export type FileValue = File[] | File | null;
 

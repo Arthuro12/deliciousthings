@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
@@ -25,8 +26,7 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            $createArtisanPageUrl = route('artisan.profile.create');
-            return redirect()->intended($createArtisanPageUrl);
+            return redirect('/');
         }
 
         return back()->withErrors(['message' => __('The provided credential do not match our records.')], 'login');
@@ -38,6 +38,7 @@ class SessionController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Log::notice(now()->toString() . json_encode(Auth::user()));
 
         return redirect('/');
     }

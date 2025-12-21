@@ -24,8 +24,7 @@ class ArtisanController extends Controller
     public function show(Request $request)
     {
         if (is_null($request->user()->artisan)) {
-            $createArtisanPageUrl = route('artisan.profile.create');
-            return redirect($createArtisanPageUrl)->with('info', __('No existing profile.'));
+            return to_route('artisan.profile.create')->with('info', __('No existing profile.'));
         }
 
         $profile = $request->user()->artisan->load([
@@ -102,12 +101,9 @@ class ArtisanController extends Controller
             'country' => $attrs['first_address']['country'],
             'address_line_2' => $attrs['first_address']['address_line_2'],
         ]);
-        $user->refresh();
-        Auth::setUser($user);
 
-        Log::notice("Controller Auth user: " . json_encode(Auth::user()->artisan) . " ArtisanController");
-
-        $artisanShowPageUrl = route('artisan.profile.show');
-        return redirect($artisanShowPageUrl);
+        Log::notice("Artisan profile successfully created");
+        
+        return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));;
     }
 }
