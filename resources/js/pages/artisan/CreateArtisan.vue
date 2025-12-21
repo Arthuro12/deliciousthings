@@ -6,7 +6,7 @@
         <RekaToast  
             to="body" 
             :default-open="showAlert"
-            :title="pageAlertMessage" 
+            :title="alertMessage" 
             :duration="3000"          
         />
         <main>
@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 
@@ -28,31 +27,27 @@ import AppLayout from "@/layout/AppLayout.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import ArtisanForm from "@/components/artisan/ArtisanForm.vue";
 
+import { useAlert } from "@/composables/use-alert";
 import { defaultArtisan } from "@/utils/artisans";
 import type { FlashProps, FileValue } from "@/types/ui";
 import type { Auth } from "@/types/users";
 import type { ArtisanPublicProfile } from "@/types/users";
+
+export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
 
 const { auth, flash } = defineProps<{
     auth: Auth;
     flash: FlashProps;
 }>();
 
-export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
+const {
+    showAlert,
+    alertMessage
+} = useAlert(flash);
+
 
 const formData: ProfileFormData = Object.assign(defaultArtisan(), { gallery: null });
 const artisanForm = useForm<ProfileFormData>(formData);
-
-const pageAlertMessage = computed(() => {
-    if ("info" in flash) {
-        return flash.info || flash.success || "";
-    } else if ("severity" in flash) {
-        return flash.message;
-    }
-    return "";
-});
-
-const showAlert = ref(Boolean(pageAlertMessage.value));
 
 function submit(artisan: ArtisanPublicProfile): void {
     try {

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\Artisan;
 use App\Models\Speciality;
@@ -50,8 +49,7 @@ class ArtisanController extends Controller
     public function store(CreateArtisanRequest $request)
     {
         $attrs = $request->validated();
-
-        $user = $request->user();
+        $user = $request->user(); // Stores the request author to keep it up to date. 
 
         $artisan = new Artisan([
             'name' => $attrs['name'],
@@ -110,7 +108,7 @@ class ArtisanController extends Controller
             ]);
         }
 
-        Log::notice("Artisan profile successfully created");
+        Log::success("Artisan profile successfully created!");
         
         return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));;
     }
