@@ -7,7 +7,7 @@
             to="body" 
             severity="success" 
             :default-open="showAlert"
-            :title="pageAlertMessage" 
+            :title="alertMessage" 
             :duration="3000"          
         />
         <main class="row show-artisan-page">
@@ -98,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed , ref} from "vue";
+import { computed } from "vue";
 
 import { Head } from "@inertiajs/vue3";
 
@@ -115,6 +115,7 @@ import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 
+import { useAlert } from "@/composables/use-alert";
 import { FlashProps } from "@/types/ui";
 import type { ArtisanProfile } from "@/types/users";
 
@@ -128,18 +129,12 @@ const { flash, artisan, gallery, } = defineProps<{
     flash: FlashProps;
 }>();
 
+const {
+    showAlert,
+    alertMessage
+} = useAlert(flash);
+
 const address = artisan.first_address;
-
-const pageAlertMessage = computed(() => {
-    if ("info" in flash) {
-        return flash.info || flash.success || flash.error || "";
-    } else if ("severity" in flash) {
-        return flash.message;
-    }
-    return "";
-});
-
-const showAlert = ref(Boolean(pageAlertMessage.value));
 
 const pageSubtitle = computed(() => {
     if (artisan.company_name || artisan.main_occupation) {
