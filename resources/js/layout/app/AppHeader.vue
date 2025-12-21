@@ -29,12 +29,15 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 import { Link, usePage } from "@inertiajs/vue3";
 import { UserIcon } from "lucide-vue-next";
 
 import AppLogo from "@/components/icons/AppLogo.vue";
 import AppSidebar from "./AppSidebar.vue";
 
-const { auth } = usePage().props;
-const isAuthenticated = auth.user != null;
+const authenticatedUser = computed(() => usePage().props.auth.user);
+
+const isAuthenticated = computed(() => authenticatedUser.value != null);
 </script>

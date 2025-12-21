@@ -20,7 +20,8 @@
             <ToastPortal :to="to">
                 <ToastViewport 
                     :class="{
-                        'toast--error': severity == 'error'
+                        'toast--error': severity == 'error',
+                        'toast--success': severity == 'success',
                     }" 
                 />
             </ToastPortal>
@@ -40,17 +41,20 @@ import {
     ToastViewport
 } from "reka-ui";
 
+import type { ToastSeverityType } from "@/types/ui";
+
 type ToastType = "foreground" | "background";
 
 const { 
     to = "body", 
     type = "foreground",
+    severity,
     swipeDirection = "down",
     defaultOpen = undefined, 
     open = undefined,
 } = defineProps<{
     to?: string;
-    severity: "error";
+    severity?: ToastSeverityType;
     type?: ToastType;
     swipeDirection?: "right" | "left" | "up" | "down";
     defaultOpen?: boolean;

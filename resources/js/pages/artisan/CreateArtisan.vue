@@ -3,14 +3,13 @@
         <Head>
             <title>Profil erstellen</title>
         </Head>
+        <RekaToast  
+            to="body" 
+            :default-open="showAlert"
+            :title="pageAlertMessage" 
+            :duration="3000"          
+        />
         <main>
-            <RekaToast  
-                to="body" 
-                severity="error" 
-                :default-open="showAlert"
-                :title="pageAlertMessage" 
-                :duration="3000"          
-            />
             <ArtisanForm 
                 class="card-layout" 
                 @photos-uploaded="(photos) => artisanForm.gallery = photos"
@@ -30,13 +29,13 @@ import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import ArtisanForm from "@/components/artisan/ArtisanForm.vue";
 
 import { defaultArtisan } from "@/utils/artisans";
-import type { FlashMessage, FileValue } from "@/types/ui";
+import type { FlashProps, FileValue } from "@/types/ui";
 import type { Auth } from "@/types/users";
 import type { ArtisanPublicProfile } from "@/types/users";
 
 const { auth, flash } = defineProps<{
     auth: Auth;
-    flash: FlashMessage;
+    flash: FlashProps;
 }>();
 
 export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
@@ -44,7 +43,14 @@ export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
 const formData: ProfileFormData = Object.assign(defaultArtisan(), { gallery: null });
 const artisanForm = useForm<ProfileFormData>(formData);
 
-const pageAlertMessage = computed(() => flash.info);
+const pageAlertMessage = computed(() => {
+    if ("info" in flash) {
+        return flash.info || flash.success || "";
+    } else if ("severity" in flash) {
+        return flash.message;
+    }
+    return "";
+});
 
 const showAlert = ref(Boolean(pageAlertMessage.value));
 

@@ -12,14 +12,14 @@ defineProps<{
 }>();
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .wrapper {
     display: flex;
     align-items: center;
     column-gap: 4px;
 
     > p {
-        color: #f73003;
+        color: var(--color-input-error);
     }
 }
 </style>

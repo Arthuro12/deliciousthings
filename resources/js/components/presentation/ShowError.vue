@@ -10,7 +10,7 @@ defineProps<{
 
 <style scoped>
 p {
-    background-color: var(--color-error-20);
+    background-color: var(--color-error-10);
     color: var(--color-error-50);
     text-align: center;
     padding: 1rem;

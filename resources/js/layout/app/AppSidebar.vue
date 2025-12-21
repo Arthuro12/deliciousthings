@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref } from "vue";
 
 import { Link, usePage } from "@inertiajs/vue3";
 import { MenuIcon, XIcon } from "lucide-vue-next";
@@ -69,21 +69,16 @@ const props = defineProps<{
     zIndex?: number;
 }>();
 
-const { auth } = usePage().props;
-
 const top = ref(props.top ?? 0);
 const left = ref(props.left ?? 0);
 const zIndex = ref(props.zIndex ?? 1);
 const showContent = ref(false);
 
-const isAuthenticated = computed(() => auth.user != null);
+const authenticatedUser = computed(() => usePage().props.auth.user);
 
-const hasArtisanProfile = computed(() => auth.user?.artisan_profile != undefined);
+const hasArtisanProfile = computed(() => authenticatedUser.value?.artisan_profile != undefined);
 
-// onUpdated();
-watchEffect(() => {
-    console.log(auth);
-});
+const isAuthenticated = computed(() => authenticatedUser.value != null);
 </script>
 
 <style scoped lang="scss">
