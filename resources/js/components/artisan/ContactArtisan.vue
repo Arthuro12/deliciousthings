@@ -48,7 +48,7 @@ import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
     flex-direction: column;
     row-gap: 16px;
     width: 700px;
-    margin-bottom: 24px;
+    margin: 24px 0;
 }
 
 .dialog-actions {

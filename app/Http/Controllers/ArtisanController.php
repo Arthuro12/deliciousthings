@@ -108,7 +108,7 @@ class ArtisanController extends Controller
             ]);
         }
 
-        Log::success("Artisan profile successfully created!");
+        Log::notice("Artisan profile successfully created!");
         
         return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));;
     }

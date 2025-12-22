@@ -20,23 +20,14 @@
                         <template #leading><XIcon /></template>
                     </AppButton>
                 </div>
-                <ul class="sidebar__menu" v-if="isAuthenticated">
-                    <li class="sidebar__item" v-if="hasArtisanProfile">
+                <ul class="sidebar__menu" v-if="authStore.isAuthenticated()">
+                    <li class="sidebar__item" v-if="authStore.showArtisanProfileLinks()">
                         <Link class="sidebar__link" href="/artisan/profile">Mein Profil</Link>
                     </li>
                     <li class="sidebar__item" v-else>
                         <Link class="sidebar__link" href="/artisan/profile/create">Profil erstellen</Link>
                     </li>
-                    <li class="sidebar__item">
-                        <Link
-                            class="button button--secondary button--text" 
-                            as="button" 
-                            href="/logout" 
-                            method="post"
-                        >
-                            Abmelden
-                        </Link>
-                    </li>
+                    <li class="sidebar__item"><LogoutButton /></li>
                 </ul>
                 <ul class="sidebar__menu" v-else>
                     <li class="sidebar__item">
@@ -55,13 +46,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 
 import { Link, usePage } from "@inertiajs/vue3";
 import { MenuIcon, XIcon } from "lucide-vue-next";
 
 import AppOverlay from "@/components/presentation/AppOverlay.vue";
 import AppButton from "@/components/presentation/AppButton.vue";
+import LogoutButton from "@/components/auth/LogoutButton.vue";
+
+import { useAuth } from "@/stores/auth";
 
 const props = defineProps<{
     top?: string;
@@ -69,16 +63,20 @@ const props = defineProps<{
     zIndex?: number;
 }>();
 
+const authStore = useAuth();
+iniUser();
+
 const top = ref(props.top ?? 0);
 const left = ref(props.left ?? 0);
 const zIndex = ref(props.zIndex ?? 1);
 const showContent = ref(false);
 
-const authenticatedUser = computed(() => usePage().props.auth.user);
-
-const hasArtisanProfile = computed(() => authenticatedUser.value?.artisan_profile != undefined);
-
-const isAuthenticated = computed(() => authenticatedUser.value != null);
+function iniUser(): void {
+    const user = usePage().props.auth.user;
+    if (user) {
+        authStore.setUser(user);
+    }
+}
 </script>
 
 <style scoped lang="scss">
