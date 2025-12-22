@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>{{  artisan.company_name || artisan.name  }}</title>
+            <title>{{ artisan.company_name || artisan.name }}</title>
         </Head>
         <RekaToast  
             to="body" 
@@ -23,15 +23,6 @@
                         <h1 class="profile__title">{{ artisan.name }}</h1>
                         <h2 class="profile__subtitle" v-if="pageSubtitle">{{ pageSubtitle }}</h2>
                     </div>
-                    <!-- <div>
-                        <AppButton
-                            type="button"
-                            variant="primary"
-                            layout="text"
-                        >
-                            <template #text>Kontakt aufnehmen</template>
-                        </AppButton>
-                    </div> -->
                 </div>
                 <div><p>{{ artisan.short_description }}</p></div>
                 <div>
@@ -85,13 +76,17 @@
                     </div>
                     <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
                 </div>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.website_url" target="_blank">Webseite</a></p>
-                    <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
-                    <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.e164phone }}</span></p>
+                <div>
+                    <h4>Netzwerk</h4>
+                    <div class="card">
+                        <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.website_url" target="_blank">Webseite</a></p>
+                        <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
+                        <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.e164phone }}</span></p>
+                    </div>
                 </div>
+            </div>
+            <div class="column contact-dialog-wrapper">
+                <ContactArtisan />
             </div>
         </main>
     </AppLayout>
@@ -114,6 +109,7 @@ import AppTag from "@/components/presentation/AppTag.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
+import ContactArtisan from "@/components/artisan/ContactArtisan.vue";
 
 import { useAlert } from "@/composables/use-alert";
 import { FlashProps } from "@/types/ui";
@@ -149,6 +145,8 @@ const pageSubtitle = computed(() => {
 </script>
 
 <style scoped lang="scss">
+@use '../../../css/abstracts/breakpoints' as breakpoints;
+
 .contact {
     display: flex;
     column-gap: 12px;
@@ -195,6 +193,22 @@ const pageSubtitle = computed(() => {
         width: 100%;
         max-height: 200px;
         border-radius: 20px;
+    }
+}
+
+.contact-dialog-wrapper {
+    position: sticky;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 8px 24px;
+    border-radius: 8px;
+    width: 100%;
+    height: fit-content;
+
+    @include breakpoints.respond-to('medium') {
+        top: 20px;
+        width: 40%;
     }
 }
 </style>

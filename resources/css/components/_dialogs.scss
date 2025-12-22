@@ -1,0 +1,19 @@
+.dialog {
+    &__title {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__content {
+        position: fixed;
+        background-color: var(--color-neutral-0);
+        border-radius: 10px;
+        height: fit-content;
+        min-width: 300px;
+        padding: 2rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow: auto;
+    }
+}
