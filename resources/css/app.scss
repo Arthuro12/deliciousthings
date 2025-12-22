@@ -6,11 +6,13 @@
 @use 'layout/header';
 @use 'layout/footer';
 @use 'layout/card';
+@use 'layout/overlay';
 @use 'components/checkbox';
 @use 'components/forms';
 @use 'components/links';
 @use 'components/buttons';
 @use 'components/inputs';
-@use 'components/select';
 @use 'components/toasts';
+@use 'components/dialogs';
+@use 'components/select';
 @use 'pages/artisans';
