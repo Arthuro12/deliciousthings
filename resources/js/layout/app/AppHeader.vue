@@ -4,17 +4,8 @@
         <a href="/"><AppLogo class="logo" /></a>
         <div class="header__separator"></div>
         <nav class="navbar">
-            <ul v-if="isAuthenticated">
-                <li>
-                    <Link
-                        class="button button--secondary button--text" 
-                        as="button" 
-                        href="/logout" 
-                        method="post"
-                    >
-                        Abmelden
-                    </Link>
-                </li>
+            <ul v-if="authStore.isAuthenticated()">
+                <li><LogoutButton /></li>
             </ul>
             <ul class="navbar__menu" v-else>
                 <li>
@@ -29,15 +20,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-
 import { Link, usePage } from "@inertiajs/vue3";
 import { UserIcon } from "lucide-vue-next";
 
 import AppLogo from "@/components/icons/AppLogo.vue";
 import AppSidebar from "./AppSidebar.vue";
+import LogoutButton from "@/components/auth/LogoutButton.vue";
 
-const authenticatedUser = computed(() => usePage().props.auth.user);
+import { useAuth } from "@/stores/auth";
 
-const isAuthenticated = computed(() => authenticatedUser.value != null);
+const authStore = useAuth();
+iniUser();
+
+function iniUser(): void {
+    const user = usePage().props.auth.user;
+    if (user) {
+        authStore.setUser(user);
+    }
+}
 </script>
