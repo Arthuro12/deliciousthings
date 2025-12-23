@@ -20,8 +20,9 @@
                         <template #leading><XIcon /></template>
                     </AppButton>
                 </div>
-                <ul class="sidebar__menu" v-if="authStore.isAuthenticated()">
-                    <li class="sidebar__item" v-if="authStore.showArtisanProfileLinks()">
+                <ul class="sidebar__menu" v-if="isAuthenticated">
+                    <li class="sidebar__item" v-if="showArtisanProfileLinks">
+                        <Link class="sidebar__link" href="/artisan/profile/edit">Profil bearbeiten</Link>
                         <Link class="sidebar__link" href="/artisan/profile">Mein Profil</Link>
                     </li>
                     <li class="sidebar__item" v-else>
@@ -55,7 +56,7 @@ import AppOverlay from "@/components/presentation/AppOverlay.vue";
 import AppButton from "@/components/presentation/AppButton.vue";
 import LogoutButton from "@/components/auth/LogoutButton.vue";
 
-import { useAuth } from "@/stores/auth";
+import { useAuth } from "@/composables/use-auth";
 
 const props = defineProps<{
     top?: string;
@@ -63,20 +64,12 @@ const props = defineProps<{
     zIndex?: number;
 }>();
 
-const authStore = useAuth();
-iniUser();
+const { isAuthenticated, showArtisanProfileLinks } = useAuth(usePage().props.auth);
 
 const top = ref(props.top ?? 0);
 const left = ref(props.left ?? 0);
 const zIndex = ref(props.zIndex ?? 1);
 const showContent = ref(false);
-
-function iniUser(): void {
-    const user = usePage().props.auth.user;
-    if (user) {
-        authStore.setUser(user);
-    }
-}
 </script>
 
 <style scoped lang="scss">

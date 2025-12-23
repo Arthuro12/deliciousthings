@@ -17,7 +17,7 @@ export function useAlert(flash: Reactive<FlashProps>) {
     const showAlert = computed(() => Boolean(alertMessage.value));
 
     return {
-        showAlert: showAlert,
-        alertMessage: alertMessage,
+        showAlert,
+        alertMessage,
     }
 }
