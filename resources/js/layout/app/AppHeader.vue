@@ -4,7 +4,7 @@
         <a href="/"><AppLogo class="logo" /></a>
         <div class="header__separator"></div>
         <nav class="navbar">
-            <ul v-if="authStore.isAuthenticated()">
+            <ul v-if="isAuthenticated">
                 <li><LogoutButton /></li>
             </ul>
             <ul class="navbar__menu" v-else>
@@ -27,15 +27,7 @@ import AppLogo from "@/components/icons/AppLogo.vue";
 import AppSidebar from "./AppSidebar.vue";
 import LogoutButton from "@/components/auth/LogoutButton.vue";
 
-import { useAuth } from "@/stores/auth";
+import { useAuth } from "@/composables/use-auth";
 
-const authStore = useAuth();
-iniUser();
-
-function iniUser(): void {
-    const user = usePage().props.auth.user;
-    if (user) {
-        authStore.setUser(user);
-    }
-}
+const { isAuthenticated } = useAuth(usePage().props.auth);
 </script>
