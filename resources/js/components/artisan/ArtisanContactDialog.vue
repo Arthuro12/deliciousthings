@@ -42,13 +42,21 @@ import AppTextArea from "../presentation/AppTextArea.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../../css/abstracts/breakpoints' as breakpoints;
+
 .contact-artisan-form {
     display: flex;
     flex-direction: column;
     row-gap: 16px;
-    width: 700px;
+    min-width: 300px;
+    max-width: 700px;
     margin: 24px 0;
+
+    @include breakpoints.respond-to('medium') {
+        min-width: 600px;
+        max-width: 800px;
+    }
 }
 
 .dialog-actions {

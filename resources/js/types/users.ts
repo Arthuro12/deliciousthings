@@ -38,7 +38,12 @@ export type Media = {
     path: string;
 };
 
-export type BasisProfile = {
+export type Image = {
+    id?: number;
+    url: string;
+};
+
+export type BasicProfile = {
     id?: number;
     /**
      * The public profile name.
@@ -53,7 +58,7 @@ export type BasisProfile = {
     medias: Media[];
 };
 
-export type ArtisanProfile = BasisProfile & {
+export type ArtisanProfile = BasicProfile & {
     medias: Media[];
     specialities: Speciality[];
     diet_types: DietType[];

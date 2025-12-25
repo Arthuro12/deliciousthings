@@ -1,8 +1,8 @@
 <template>
     <div class="artisan-form">
-        <h1>Profil erstellen</h1>
+        <h1>Profil {{ artisan == undefined ? 'erstellen' : 'bearbeiten' }}</h1>
         <div class="row">
-            <BasisProfileForm class="wrapper" v-model:profile="artisan" />
+            <BasicProfileForm class="wrapper" v-model:profile="artisan" />
             <div class="wrapper">
                 <header>Kontaktdaten</header>
                 <TextField 
@@ -43,9 +43,9 @@
             />
         </div>
         <AppDivider variant="horizontal" />
-        <div class="row">
-            <AddressForm v-model:address="artisan.first_address" />
-        </div>
+        <AddressCollapsible class="row" v-slot="{ show }">
+            <AddressForm v-show="show" v-model:address="artisan.first_address" />
+        </AddressCollapsible>
         <AppDivider variant="horizontal" />
         <div class="row">
             <header>Fotos für Ihre Bildergalerie</header>
@@ -122,7 +122,8 @@ import AppDivider from "../presentation/AppDivider.vue";
 import AppButton from "../presentation/AppButton.vue";
 import FileUpload from "../presentation/FileUpload.vue";
 import TextField from "../presentation/TextField.vue";
-import BasisProfileForm from "../profile/BasisProfileForm.vue";
+import BasicProfileForm from "../profile/BasicProfileForm.vue";
+import AddressCollapsible from "../addresses/AddressFormCollapsible.vue";
 import AddressForm from "../addresses/AddressForm.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
@@ -133,6 +134,10 @@ import { defaultArtisan } from "@/utils/artisans";
 import type { FileValue } from "@/types/ui";
 import type { ArtisanPublicProfile } from "@/types/users";
 
+const { defaultValue } = defineProps<{
+    defaultValue?: ArtisanPublicProfile;
+}>();
+
 const emit = defineEmits<{
     (e: 'photos-uploaded', value: FileValue): void;
     (e: 'submit', value: ArtisanPublicProfile): void;
@@ -140,7 +145,7 @@ const emit = defineEmits<{
 
 const specialityStore = useSpecialityStore();
 const dietTypeStore = useDietTypeStore();
-const artisan = ref<ArtisanPublicProfile>(defaultArtisan());
+const artisan = ref<ArtisanPublicProfile>(defaultValue ?? defaultArtisan());
 
 const selectedFiles = ref<FileValue>([]);
 

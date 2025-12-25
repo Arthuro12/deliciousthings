@@ -38,7 +38,7 @@
 import TextField from "../presentation/TextField.vue";
 import AppTextArea from "../presentation/AppTextArea.vue";
 
-import type { BasisProfile } from "@/types/users";
+import type { BasicProfile } from "@/types/users";
 
-const profile = defineModel<BasisProfile>("profile", { required: true });
+const profile = defineModel<BasicProfile>("profile", { required: true });
 </script>
