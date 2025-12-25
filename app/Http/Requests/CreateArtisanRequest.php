@@ -42,6 +42,7 @@ class CreateArtisanRequest extends FormRequest
             'offers_delivery' => 'required|boolean',
             'pick_up_on_site' => 'required|boolean',
             'addresses' => 'array|size:0',
+            'medias' => 'array|size:0',
             'first_address' => 'array:street,house_number,postal_code,city,country,address_line_2',
             'first_address.street' => Rule::requiredIf($requiredAddressFields),
             'first_address.house_number' => Rule::requiredIf($requiredAddressFields),
@@ -57,7 +58,6 @@ class CreateArtisanRequest extends FormRequest
             'diet_types.*.key' => 'required|string',
             'diet_types.*.name' => 'required|string',
             'diet_types.*.label' => 'required|string',
-            'medias' => 'array|size:0',
             'gallery' => 'array|between:3,6',
             'gallery.*' => File::image(),
         ];
