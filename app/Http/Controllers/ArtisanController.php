@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 
 use App\Models\Artisan;
@@ -86,12 +85,14 @@ class ArtisanController extends Controller
             $artisan->specialities()->attach($speciality->id);
         }
 
-        $selectedDietTypes = array_map(function ($value) {
-            return $value['key'];
-        }, $attrs['diet_types']);
-        $dietTypes = DietType::whereIn('key', $selectedDietTypes)->get();
-        foreach ($dietTypes as $type) {
-            $artisan->dietTypes()->attach($type->id);
+        if (!empty($attrs['diet_types'])) {
+            $selectedDietTypes = array_map(function ($value) {
+                return $value['key'];
+            }, $attrs['diet_types']);
+            $dietTypes = DietType::whereIn('key', $selectedDietTypes)->get();
+            foreach ($dietTypes as $type) {
+                $artisan->dietTypes()->attach($type->id);
+            }
         }
 
         foreach ($request->file('gallery') as $image) {

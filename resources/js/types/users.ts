@@ -61,7 +61,7 @@ export type BasicProfile = {
 export type ArtisanProfile = BasicProfile & {
     medias: Media[];
     specialities: Speciality[];
-    diet_types: DietType[];
+    diet_types?: DietType[];
     addresses: Address[];
     first_address?: Address;
     instagram_url?: string;
