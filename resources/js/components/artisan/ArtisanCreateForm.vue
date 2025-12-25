@@ -21,26 +21,30 @@
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
-            <header>Spezialitäten</header>
-            <RekaSelect 
-                placeholder="Spezialitäten auswählen" 
-                :items="specialityStore.specialities"
-                label-prop="label"
-                value-prop="key"
-                multiple
-                v-model:selected-value="artisan.specialities"
-            />
+            <div class="wrapper">
+                <header>Spezialitäten</header>
+                <RekaSelect 
+                    placeholder="Spezialitäten auswählen" 
+                    :items="specialityStore.specialities"
+                    label-prop="label"
+                    value-prop="key"
+                    multiple
+                    v-model:selected-value="artisan.specialities"
+                />
+            </div>
         </div>
         <div class="row">
-            <header>Angebotene Ernährungsformen</header>
-            <RekaSelect 
-                placeholder="Diäten auswählen" 
-                :items="dietTypeStore.dietTypes"
-                label-prop="label"
-                value-prop="key"
-                multiple
-                v-model:selected-value="artisan.diet_types"
-            />
+            <div class="wrapper">
+                <header>Angebotene Ernährungsformen</header>
+                <RekaSelect 
+                    placeholder="Diäten auswählen" 
+                    :items="dietTypeStore.dietTypes"
+                    label-prop="label"
+                    value-prop="key"
+                    multiple
+                    v-model:selected-value="artisan.diet_types"
+                />
+            </div>
         </div>
         <AppDivider variant="horizontal" />
         <AddressCollapsible class="row" v-slot="{ show }">
@@ -48,14 +52,16 @@
         </AddressCollapsible>
         <AppDivider variant="horizontal" />
         <div class="row">
-            <header>Fotos für Ihre Bildergalerie</header>
-            <FileUpload
-                id="gallery"
-                accept=".jpg, .jpeg, .png"
-                multiple
-                :model-value="selectedFiles"
-                @update:model-value="updateFileSelection"
-            />
+            <div class="wrapper">
+                 <header>Fotos für Ihre Bildergalerie</header>
+                <FileUpload
+                    id="gallery"
+                    accept=".jpg, .jpeg, .png"
+                    multiple
+                    :model-value="selectedFiles"
+                    @update:model-value="updateFileSelection"
+                />
+            </div>
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
@@ -82,23 +88,25 @@
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
-            <header>Zusätzliche Informationen</header>
-            <RekaCheckbox 
-                id="offers-delivery" 
-                label="Ich bitte Lieferung an" 
-                v-model="artisan.offers_delivery"
-            />
-            <RekaCheckbox 
-                id="pick-up-on-site" 
-                label="Abholung vor Ort" 
-                v-model="artisan.pick_up_on_site"
-            />
-            <TextField 
-                type="text" 
-                id="average-rate" 
-                label="Durchschnittspreis (in Euro)"
-                v-model="artisan.average_rate"
-            ></TextField>
+            <div class="wrapper">
+                <header>Zusätzliche Informationen</header>
+                <RekaCheckbox 
+                    id="offers-delivery" 
+                    label="Ich bitte Lieferung an" 
+                    v-model="artisan.offers_delivery"
+                />
+                <RekaCheckbox 
+                    id="pick-up-on-site" 
+                    label="Abholung vor Ort" 
+                    v-model="artisan.pick_up_on_site"
+                />
+                <TextField 
+                    type="text" 
+                    id="average-rate" 
+                    label="Durchschnittspreis (in Euro)"
+                    v-model="artisan.average_rate"
+                ></TextField>
+            </div>
         </div>
         <div class="row">
             <AppButton 
@@ -146,7 +154,6 @@ const emit = defineEmits<{
 const specialityStore = useSpecialityStore();
 const dietTypeStore = useDietTypeStore();
 const artisan = ref<ArtisanPublicProfile>(defaultValue ?? defaultArtisan());
-
 const selectedFiles = ref<FileValue>([]);
 
 function updateFileSelection(files: FileValue): void {
