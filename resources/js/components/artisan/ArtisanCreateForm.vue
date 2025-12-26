@@ -1,8 +1,10 @@
 <template>
     <div class="artisan-form">
-        <h1>Profil {{ artisan == undefined ? 'erstellen' : 'bearbeiten' }}</h1>
+        <h1>Profil erstellen</h1>
         <div class="row">
-            <BasicProfileForm class="wrapper" v-model:profile="artisan" />
+            <BasicProfileForm v-model:profile="basicProfile">
+                <template #header><header>Allgemeine Informationen</header></template>
+            </BasicProfileForm>
             <div class="wrapper">
                 <header>Kontaktdaten</header>
                 <TextField 
@@ -89,7 +91,7 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header>Zusätzliche Informationen</header>
+                <header>Leistungen</header>
                 <RekaCheckbox 
                     id="offers-delivery" 
                     label="Ich bitte Lieferung an" 
@@ -124,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, watch, onMounted } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
 import AppButton from "../presentation/AppButton.vue";
@@ -138,13 +140,9 @@ import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 
 import { useDietTypeStore } from "@/stores/diet-type";
 import { useSpecialityStore } from "@/stores/speciality";
-import { defaultArtisan } from "@/utils/artisans";
+import { defaultArtisan, defaultArtisanBasicProfile } from "@/utils/artisans";
 import type { FileValue } from "@/types/ui";
 import type { ArtisanPublicProfile } from "@/types/users";
-
-const { defaultValue } = defineProps<{
-    defaultValue?: ArtisanPublicProfile;
-}>();
 
 const emit = defineEmits<{
     (e: 'photos-uploaded', value: FileValue): void;
@@ -153,7 +151,8 @@ const emit = defineEmits<{
 
 const specialityStore = useSpecialityStore();
 const dietTypeStore = useDietTypeStore();
-const artisan = ref<ArtisanPublicProfile>(defaultValue ?? defaultArtisan());
+const artisan = ref<ArtisanPublicProfile>(defaultArtisan());
+const basicProfile = ref(defaultArtisanBasicProfile(artisan.value));
 const selectedFiles = ref<FileValue>([]);
 
 function updateFileSelection(files: FileValue): void {
@@ -165,4 +164,16 @@ onMounted(async () => {
     await specialityStore.getSpecialities();
     await dietTypeStore.getDietTypes();
 });
+
+watch(
+    basicProfile, 
+    () => {
+        artisan.value.name = basicProfile.value.name;
+        artisan.value.company_name = basicProfile.value.company_name;
+        artisan.value.main_occupation = basicProfile.value.main_occupation;
+        artisan.value.short_description = basicProfile.value.short_description;
+        artisan.value.about = basicProfile.value.about;
+    }, 
+    { deep: true }
+);
 </script>

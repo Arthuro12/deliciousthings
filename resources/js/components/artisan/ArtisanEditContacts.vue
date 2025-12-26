@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <header>Kontaktdaten</header>
+    <div class="form__group">
+        <slot name="header"></slot>
         <TextField 
             type="text" 
             id="phone" 
@@ -13,6 +13,7 @@
             label="E-Mail-Adresse"
             v-model="email"
         ></TextField>
+        <slot name="action" :data="{ email, phone }"></slot>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <header>Spezialitäten</header>
+    <div class="form__group">
+        <slot name="header"></slot>
         <RekaSelect 
             placeholder="Spezialitäten auswählen" 
             :items="options"
@@ -9,6 +9,7 @@
             multiple
             v-model:selected-value="selectedSpecialities"
         />
+        <slot name="action" :data="selectedSpecialities"></slot>
     </div>
 </template>
 

@@ -1,13 +1,7 @@
 <template>
-    <div>
+    <div class="form__group">
         <BasicProfileForm v-model:profile="artisan" />
-        <AppButton
-            type="button"
-            layout="text"
-            variant="primary"
-        >
-            <template #text>Speichern</template>
-        </AppButton>
+        <slot name="action" :data="artisan"></slot>
     </div>
 </template>
 
@@ -16,12 +10,11 @@ import { ref } from "vue";
 
 import BasicProfileForm from "../profile/BasicProfileForm.vue"; 
 
-import type { ArtisanPublicProfile } from "@/types/users";
-import AppButton from "../presentation/AppButton.vue";
+import type { BasicProfile } from "@/types/users";
 
 const props = defineProps<{
-    artisan: ArtisanPublicProfile;
+    profile: BasicProfile;
 }>();
 
-const artisan = ref(props.artisan);
+const artisan = ref({ ...props.profile });
 </script>

@@ -51,14 +51,13 @@ export type BasicProfile = {
     name: string;
     company_name?: string;
     main_occupation?: string;
-    e164phone?: string;
-    email: string;
     short_description: string | null;
     about: string;
-    medias: Media[];
 };
 
 export type ArtisanProfile = BasicProfile & {
+    email: string;
+    e164phone: string;
     medias: Media[];
     specialities: Speciality[];
     diet_types?: DietType[];

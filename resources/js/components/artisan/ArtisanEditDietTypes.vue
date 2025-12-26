@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <header>Spezialitäten</header>
+    <div class="form__group">
+        <slot name="header"></slot>
         <RekaSelect 
-            placeholder="Spezialitäten auswählen" 
+            placeholder="Diäten auswählen" 
             :items="options"
             label-prop="label"
             value-prop="key"
             multiple
             v-model:selected-value="selectedTypes"
         />
+        <slot name="action" :data="selectedTypes"></slot>
     </div>
 </template>
 
@@ -21,8 +22,8 @@ import type { DietType } from "@/types/users";
 
 const props = defineProps<{
     options: DietType[];
-    types: DietType[];
+    types?: DietType[];
 }>();
 
-const selectedTypes = ref(props.types);
+const selectedTypes = ref(props.types ?? []);
 </script>

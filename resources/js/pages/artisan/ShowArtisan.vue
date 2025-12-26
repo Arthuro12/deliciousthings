@@ -39,7 +39,7 @@
                         />
                     </div>
                 </div>
-                <div v-if="artisan.diet_types.length > 0">
+                <div v-if="artisan.diet_types && artisan.diet_types.length > 0">
                     <h4>Angebotene Ernährungsformen</h4>
                     <div class="profile__diet-types">
                         <AppTag 
