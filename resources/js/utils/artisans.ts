@@ -1,10 +1,27 @@
 import type { 
     Address, 
     ArtisanPublicProfile, 
+    BasicProfile,
     Media, 
     Speciality,
     DietType, 
 } from "@/types/users";
+
+/**
+ * Gets a default address.
+ * 
+ * @returns A default default address.
+ */
+export function defaultAddress(): Address {
+    return {
+        street: "",
+        house_number: "",
+        postal_code: null,
+        city: "",
+        country: "",
+        address_line_2: null
+    };
+}
 
 /**
  * Gets a default artisan profile.
@@ -33,18 +50,12 @@ export function defaultArtisan(): ArtisanPublicProfile {
     };
 }
 
-/**
- * Gets a default address.
- * 
- * @returns A default default address.
- */
-export function defaultAddress(): Address {
+export function defaultArtisanBasicProfile(profile: ArtisanPublicProfile): BasicProfile {
     return {
-        street: "",
-        house_number: "",
-        postal_code: null,
-        city: "",
-        country: "",
-        address_line_2: null
+        name: profile.name,
+        company_name: profile.company_name,
+        main_occupation: profile.main_occupation,
+        short_description: profile.short_description,
+        about: profile.about,
     };
-}
+};

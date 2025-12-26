@@ -25,7 +25,7 @@ import { useForm } from "@inertiajs/vue3";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
-import ArtisanForm from "@/components/artisan/ArtisanForm.vue";
+import ArtisanForm from "@/components/artisan/ArtisanCreateForm.vue";
 
 import { useAlert } from "@/composables/use-alert";
 import { defaultArtisan } from "@/utils/artisans";
@@ -44,7 +44,6 @@ const {
     showAlert,
     alertMessage
 } = useAlert(flash);
-
 
 const formData: ProfileFormData = Object.assign(defaultArtisan(), { gallery: null });
 const artisanForm = useForm<ProfileFormData>(formData);

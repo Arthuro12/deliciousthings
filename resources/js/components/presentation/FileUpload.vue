@@ -52,7 +52,7 @@ const { multiple = false } = defineProps<{
     multiple?: boolean;
 }>();
 
-const modelValue = defineModel<FileValue>("modelValue", { required: true });
+const modelValue = defineModel<FileValue>("modelValue", { required: false, default: null });
 
 /**
  * Triggers updates on the `modelValue`.

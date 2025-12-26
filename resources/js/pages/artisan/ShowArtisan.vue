@@ -39,7 +39,7 @@
                         />
                     </div>
                 </div>
-                <div v-if="artisan.diet_types.length > 0">
+                <div v-if="artisan.diet_types && artisan.diet_types.length > 0">
                     <h4>Angebotene Ernährungsformen</h4>
                     <div class="profile__diet-types">
                         <AppTag 
@@ -109,15 +109,13 @@ import AppTag from "@/components/presentation/AppTag.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
-import ContactArtisan from "@/components/artisan/ContactArtisan.vue";
+import ContactArtisan from "@/components/artisan/ArtisanContactDialog.vue";
 
 import { useAlert } from "@/composables/use-alert";
 import { FlashProps } from "@/types/ui";
-import type { ArtisanProfile } from "@/types/users";
+import type { ArtisanProfile, Image } from "@/types/users";
 
-export type Image = {
-    url: string;
-};
+
 
 const { flash, artisan, gallery, } = defineProps<{
     artisan: ArtisanProfile;
