@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <header>Allgemeine Informationen</header>
+    <div class="form__group">
+        <slot name="header"></slot>
         <TextField 
             id="profile-name" 
             type="text" 
@@ -41,4 +41,5 @@ import AppTextArea from "../presentation/AppTextArea.vue";
 import type { BasicProfile } from "@/types/users";
 
 const profile = defineModel<BasicProfile>("profile", { required: true });
+profile.value = { ...profile.value };
 </script>
