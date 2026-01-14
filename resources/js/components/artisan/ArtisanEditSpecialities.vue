@@ -7,15 +7,24 @@
             label-prop="label"
             value-prop="key"
             multiple
-            v-model:selected-value="selectedSpecialities"
+            v-model:selected-value="form.specialities"
         />
-        <slot name="action" :data="selectedSpecialities"></slot>
+        <AppButton
+            class="align-end"
+            type="button"
+            layout="text"
+            variant="primary"
+            @click="syncSpecialities"
+        >
+            <template #text>Speichern</template>
+        </AppButton>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
+import AppButton from "../presentation/AppButton.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 
 import type { Speciality } from "@/types/users";
@@ -25,5 +34,9 @@ const props = defineProps<{
     specialities: Speciality[];
 }>();
 
-const selectedSpecialities = ref(props.specialities);
+const form = useForm({ specialities: [...props.specialities] });
+
+function syncSpecialities(): void {
+    form.put("/artisan/profile/specialities");
+}
 </script>

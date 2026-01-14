@@ -4,18 +4,18 @@
             type="text" 
             id="street" 
             label="Straße"
-            v-model="address.street"
+            v-model="form.street"
         />
         <TextField 
             type="text" 
             id="house-number" 
             label="Hausnummer"
-            v-model="address.house_number"
+            v-model="form.house_number"
         />
         <TextField 
             type="text" 
             id="address-line-2" 
-            label="Adresszusatz"
+            label="Adresszusatz (optional)"
             v-model="addressLine2"
         />
         <TextField 
@@ -28,38 +28,49 @@
             type="text" 
             id="city" 
             label="Ort"
-            v-model="address.city"
+            v-model="form.city"
         />
         <TextField 
             type="text" 
             id="country" 
             label="Land"
-            v-model="address.country"
+            v-model="form.country"
         />
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { reactive, ref, watch } from "vue";
 
 import TextField from "../presentation/TextField.vue";
 
 import { defaultAddress } from "@/utils/artisans";
 import type { Address } from "@/types/users";
 
-const address = defineModel<Address>("address", {
-    default: defaultAddress(),
-    required: false
-});
-address.value = { ...address.value };
+const { address = defaultAddress() } = defineProps<{
+    address?: Address;
+}>();
 
-const postalCode = ref(address.value.postal_code ?? "");
-const addressLine2 = ref(address.value.address_line_2 ?? "");
+const emits = defineEmits<{
+    (e: 'update:address', value: Address): void;
+}>();
+
+const form = reactive({ ...address });
+const postalCode = ref(form.postal_code ?? "");
+const addressLine2 = ref(form.address_line_2 ?? "");
 
 watch([postalCode, addressLine2], ([newPostalCode, newAddressLine2]) => {
-    address.value.postal_code = newPostalCode;
-    address.value.address_line_2 = newAddressLine2;
+    form.postal_code = newPostalCode;
+    form.address_line_2 = newAddressLine2;
 });
+
+watch(
+    () => form, 
+    (newForm) => {
+        emits("update:address", newForm);
+    }, 
+    { deep: true }
+);
 </script>
 
 <style scoped lang="scss">

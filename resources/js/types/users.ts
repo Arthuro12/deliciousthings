@@ -12,6 +12,7 @@ export interface User {
 }
 
 export type Address = {
+    id?: number;
     street: string;
     house_number: string;
     postal_code?: string | null;

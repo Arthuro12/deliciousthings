@@ -53,6 +53,7 @@ class HandleInertiaRequests extends Middleware
                 return [
                     'info' => $request->session()->get('info'),
                     'success' => $request->session()->get('success'),
+                    'error' => $request->session()->get('error'),
                 ];
             }
         ];

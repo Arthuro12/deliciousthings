@@ -50,7 +50,7 @@ export function defaultArtisan(): ArtisanPublicProfile {
     };
 }
 
-export function defaultArtisanBasicProfile(profile: ArtisanPublicProfile): BasicProfile {
+export function getBasicProfile(profile: ArtisanPublicProfile): BasicProfile {
     return {
         name: profile.name,
         company_name: profile.company_name,

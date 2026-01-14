@@ -12,7 +12,7 @@
         <main>
             <ArtisanForm 
                 class="card-layout" 
-                @photos-uploaded="(photos) => artisanForm.gallery = photos"
+                @photos-updated="(photos) => artisanForm.gallery = photos"
                 @submit="submit" 
             />
         </main>
@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";

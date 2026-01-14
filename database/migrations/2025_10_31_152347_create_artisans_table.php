@@ -32,7 +32,7 @@ return new class extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->morphs('mediable');
-            $table->text('category')->nullable(); // Values: gallery, avatar, cover
+            $table->text('category')->nullable(); // Values: gallery, profile_photo, cover
             $table->text('path');
             $table->text('caption')->nullable();
             $table->timestamps();
@@ -40,7 +40,7 @@ return new class extends Migration
 
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('artisan_id')->nullable();
+            $table->morphs('addressable');
             $table->string('street');
             $table->string('house_number');
             $table->string('postal_code')->nullable();

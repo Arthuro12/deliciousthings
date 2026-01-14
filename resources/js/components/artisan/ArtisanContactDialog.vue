@@ -1,10 +1,5 @@
 <template>
-    <RekaDialog 
-        title="Kontaktformular"
-        trigger-button-text="Kontakt aufnehmen"
-        close-button-text="Nachricht senden"
-        dialog-actions-class="dialog-actions"
-    >
+    <RekaDialog title="Kontaktformular">
         <template #trigger>
             <AppButton
                 type="button"

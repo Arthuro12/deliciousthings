@@ -20,7 +20,6 @@
                 <img class="preview__img" :alt="file.name" :src="createFileUrl(file)" />
                 <p class="preview__text" :style="{ 'font-size': '14px'  }">{{ file.name }}</p>
                 <AppButton 
-                    class="delete-button"
                     type="button" 
                     layout="icon"
                     variant="secondary"

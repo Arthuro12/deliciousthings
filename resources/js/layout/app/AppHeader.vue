@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { Link, usePage } from "@inertiajs/vue3";
+
 import { UserIcon } from "lucide-vue-next";
 
 import AppLogo from "@/components/icons/AppLogo.vue";

@@ -140,24 +140,24 @@ import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 
 import { useDietTypeStore } from "@/stores/diet-type";
 import { useSpecialityStore } from "@/stores/speciality";
-import { defaultArtisan, defaultArtisanBasicProfile } from "@/utils/artisans";
+import { defaultArtisan, getBasicProfile } from "@/utils/artisans";
 import type { FileValue } from "@/types/ui";
 import type { ArtisanPublicProfile } from "@/types/users";
 
 const emit = defineEmits<{
-    (e: 'photos-uploaded', value: FileValue): void;
+    (e: 'photos-updated', value: FileValue): void;
     (e: 'submit', value: ArtisanPublicProfile): void;
 }>();
 
 const specialityStore = useSpecialityStore();
 const dietTypeStore = useDietTypeStore();
 const artisan = ref<ArtisanPublicProfile>(defaultArtisan());
-const basicProfile = ref(defaultArtisanBasicProfile(artisan.value));
+const basicProfile = ref(getBasicProfile(artisan.value));
 const selectedFiles = ref<FileValue>([]);
 
 function updateFileSelection(files: FileValue): void {
     selectedFiles.value = files;
-    emit('photos-uploaded', selectedFiles.value)
+    emit('photos-updated', selectedFiles.value)
 }
 
 onMounted(async () => {

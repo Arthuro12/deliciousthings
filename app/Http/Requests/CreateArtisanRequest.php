@@ -24,7 +24,7 @@ class CreateArtisanRequest extends FormRequest
     public function rules(): array
     {
         $address = $this->data()['first_address'];
-        $requiredAddressFields = array_any($address, function ($value) {
+        $requireAddressFields = array_any($address, function ($value) {
             return !is_null($value);
         });
 
@@ -33,7 +33,7 @@ class CreateArtisanRequest extends FormRequest
             'company_name' => 'nullable|string',
             'main_occupation' => 'nullable|string',
             'e164phone' => 'nullable|string',
-            'email' => 'required|string',
+            'email' => 'required|email',
             'short_description' => 'nullable|string|max:200',
             'about' => 'required|string',
             'average_rate' => 'required|string',
@@ -44,13 +44,13 @@ class CreateArtisanRequest extends FormRequest
             'addresses' => 'array|size:0',
             'medias' => 'array|size:0',
             'first_address' => 'array:street,house_number,postal_code,city,country,address_line_2',
-            'first_address.street' => Rule::requiredIf($requiredAddressFields),
-            'first_address.house_number' => Rule::requiredIf($requiredAddressFields),
-            'first_address.postal_code' => Rule::requiredIf($requiredAddressFields),
-            'first_address.city' => Rule::requiredIf($requiredAddressFields),
-            'first_address.country' => Rule::requiredIf($requiredAddressFields),
+            'first_address.street' => Rule::requiredIf($requireAddressFields),
+            'first_address.house_number' => Rule::requiredIf($requireAddressFields),
+            'first_address.postal_code' => Rule::requiredIf($requireAddressFields),
+            'first_address.city' => Rule::requiredIf($requireAddressFields),
+            'first_address.country' => Rule::requiredIf($requireAddressFields),
             'first_address.address_line_2' => 'nullable|string',
-            'specialities' => 'required|array|min:1',
+            'specialities' => 'required|array',
             'specialities.*.key' => 'required|string',
             'specialities.*.name' => 'required|string',
             'specialities.*.label' => 'required|string',

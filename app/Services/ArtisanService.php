@@ -26,6 +26,7 @@ class ArtisanService
         $galleryMedias = Arr::where($medias, function ($value) {
             return $value['category'] == 'gallery';
         });
+        $gallery = [];
         foreach ($galleryMedias as $key => $media) {
             $gallery[$key]['id'] = $media['id'];
             $gallery[$key]['url'] = Storage::url($media['path']);

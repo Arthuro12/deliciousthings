@@ -1,5 +1,7 @@
 {
     "No existing profile.": "Sie haben noch keine Profilseite.",
     "The provided credential do not match our records.": "Die von Ihnen eingegebene Anmeldedaten sind falsch. Bitte prüfen Sie Ihre E-Mail-Adresse und Ihr passwort.",
-    "Your profile has been successfully created.": "Ihr Profil wurde erfolgreich erstellt."
+    "Your profile has been successfully created.": "Ihr Profil wurde erfolgreich erstellt.",
+    "Artisan profile successfully updated.": "Ihr Profil wurde erfolgreich aktualisiert.",
+    "Make sure you have more than 3 photos before deleting the photo.": "Stellen Sie sicher, dass Sie mehr als 3 Fotos haben, bevor Sie das Foto löschen."
 }
