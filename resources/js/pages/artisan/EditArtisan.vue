@@ -170,6 +170,8 @@ watch(
     (newAddress) => {
         if (newAddress) {
             firstAddress.value = { ...newAddress };
+        } else {
+            firstAddress.value = undefined; // We are deliberately forcing the UI update.
         }
     }, 
     { deep: true }
