@@ -32,6 +32,7 @@
 
 <script setup lang="ts" generic="T">
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-vue-next";
+
 import emblaCarouselVue from "embla-carousel-vue";
 
 import AppButton from "@/components/presentation/AppButton.vue";

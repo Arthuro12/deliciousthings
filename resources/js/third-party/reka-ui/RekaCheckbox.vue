@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { CheckboxIndicator, CheckboxRoot } from "reka-ui";
+
 import { CheckIcon } from "lucide-vue-next";
 
 type CheckboxValue = "indeterminate" | boolean | null;

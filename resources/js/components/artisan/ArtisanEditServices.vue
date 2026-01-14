@@ -4,33 +4,35 @@
         <RekaCheckbox 
             id="offers-delivery" 
             label="Ich bitte Lieferung an" 
-            v-model="offersDelivery"
+            v-model="form.offers_delivery"
         />
         <RekaCheckbox 
             id="pick-up-on-site" 
             label="Abholung vor Ort" 
-            v-model="pickUpOnSite"
+            v-model="form.pick_up_on_site"
         />
         <TextField 
             type="text" 
             id="average-rate" 
             label="Durchschnittspreis (in Euro)"
-            v-model="averageRate"
-        ></TextField>
-        <slot 
-            name="action" 
-            :data="{ 
-                offersDelivery,
-                pickUpOnSite,
-                averageRate,
-            }"
-        ></slot>
+            v-model="form.average_rate"
+        />
+        <AppButton
+            class="align-end"
+            type="button"
+            layout="text"
+            variant="primary"
+            @click="updateServices"
+        >
+            <template #text>Speichern</template>
+        </AppButton>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
+import AppButton from "../presentation/AppButton.vue";
 import TextField from "../presentation/TextField.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 
@@ -40,7 +42,13 @@ const props = defineProps<{
     averageRate: string;
 }>();
 
-const offersDelivery = ref(props.offersDelivery);
-const pickUpOnSite = ref(props.pickUpOnSite);
-const averageRate = ref(props.averageRate);
+const form = useForm({
+    offers_delivery: props.offersDelivery,
+    pick_up_on_site: props.pickUpOnSite,
+    average_rate: props.averageRate,
+});
+
+function updateServices(): void {
+    form.patch("/artisan/profile/services");
+}
 </script>

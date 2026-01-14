@@ -35,11 +35,11 @@ import {
     DialogDescription,
     DialogClose,
 } from "reka-ui";
+
 import { XIcon } from "lucide-vue-next";
 
 defineProps<{
     title: string;
     description?: string;
-    closeButtonText: string;
 }>();
 </script>

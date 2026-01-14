@@ -8,7 +8,9 @@
                 'is-invalid': error
             }" 
             :type="type"
-            v-model.trim="model"
+            :value="model"
+            @input="onInput"
+            @change="onChange"
         />
         <slot name="helper"></slot>
     </div>
@@ -17,15 +19,34 @@
 <script setup lang="ts">
 import type { VueClass } from "@/types/ui";
 
-const { id, type, error, label } = defineProps<{
+const { 
+    id, 
+    type, 
+    lazy = true, 
+    error, 
+    label, 
+} = defineProps<{
     id?: string;
     type: string;
+    lazy?: boolean;
     error?: boolean;
     label?: string;
     inputClasses?: VueClass;
 }>();
 
-const model = defineModel({ default: "" });
+const model = defineModel({ default: "", required: false });
+
+function onChange(event: Event): void {
+    if (lazy) {
+        model.value = (event.target as HTMLInputElement).value.trim();
+    }
+}
+
+function onInput(event: Event): void {
+    if (!lazy) {
+        model.value = (event.target as HTMLInputElement).value.trim();
+    }
+}
 </script>
 
 <style scoped lang="scss">

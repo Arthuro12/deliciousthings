@@ -177,10 +177,13 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+    // 'custom' => [
+    //     'attribute-name' => [
+    //         'rule-name' => 'custom-message',
+    //     ],
+    // ],
+    'gallery' => [
+        'max' => 'Sie können nicht mehr als :max Fotos hochladen'
     ],
 
     /*

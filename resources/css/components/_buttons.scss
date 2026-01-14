@@ -44,5 +44,10 @@
 .button--tertiary {
     background: none;
     color: var(--color-primary-50);
+
+    &.button--text,
+    &.button--with-icon {
+        padding: 0;
+    }
 }
 

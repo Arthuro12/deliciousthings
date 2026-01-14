@@ -50,6 +50,7 @@
 import { ref } from "vue";
 
 import { Link, usePage } from "@inertiajs/vue3";
+
 import { MenuIcon, XIcon } from "lucide-vue-next";
 
 import AppOverlay from "@/components/presentation/AppOverlay.vue";

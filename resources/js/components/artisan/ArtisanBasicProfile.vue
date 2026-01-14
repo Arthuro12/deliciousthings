@@ -1,13 +1,22 @@
 <template>
     <div class="form__group">
-        <BasicProfileForm v-model:profile="artisan" />
-        <slot name="action" :data="artisan"></slot>
+        <BasicProfileForm v-model:profile="form" />
+        <AppButton
+            class="align-end"
+            type="button"
+            layout="text"
+            variant="primary"
+            @click="updateBasicProfile"
+        >
+            <template #text>Speichern</template>
+        </AppButton>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
+import AppButton from "../presentation/AppButton.vue";
 import BasicProfileForm from "../profile/BasicProfileForm.vue"; 
 
 import type { BasicProfile } from "@/types/users";
@@ -16,5 +25,9 @@ const props = defineProps<{
     profile: BasicProfile;
 }>();
 
-const artisan = ref({ ...props.profile });
+const form = useForm(Object.assign({}, props.profile));
+
+function updateBasicProfile(): void {
+    form.patch("/artisan/profile/basic");
+}
 </script>

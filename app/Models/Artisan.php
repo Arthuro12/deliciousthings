@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+// use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Artisan extends Model
@@ -40,9 +40,9 @@ class Artisan extends Model
         ];
     }
 
-    public function addresses(): HasMany
+    public function addresses(): MorphMany
     {
-        return $this->hasMany(Address::class);
+        return $this->morphMany(Address::class, 'addressable');
     }
 
     public function dietTypes(): BelongsToMany

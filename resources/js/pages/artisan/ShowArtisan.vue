@@ -52,7 +52,6 @@
                 <div class="gallery">
                     <h4>Galerie</h4>
                     <EmblaCarousel 
-                        class="gallery__carousel" 
                         :slides="gallery"
                         v-slot="{ slide }"
                     >
@@ -60,12 +59,8 @@
                     </EmblaCarousel>
                 </div>
                 <div v-if="address">
-                    <div class="card location">
-                        <MapPinIcon class="icon" color="#e680a5" :size="20" />
-                        <p>
-                            {{ `${address.street} ${address.house_number}` }}<br />
-                            {{ `${address.postal_code} ${address.city} ${address.country}` }}                    
-                        </p>
+                    <div class="card profile-card">
+                        <AddressPreview :address="address" />
                     </div>
                 </div>
                 <div class="profile__services">
@@ -76,12 +71,18 @@
                     </div>
                     <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
                 </div>
-                <div>
+                <div v-show="showContactInfo">
+                    <h4>Kontaktdaten</h4>
+                    <div class="card profile-card">
+                        <p class="profile-card__item" v-if="artisan.email"><MailIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.email }}</span></p>
+                        <p class="profile-card__item" v-if="artisan.e164phone"><PhoneIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.e164phone }}</span></p>
+                    </div>
+                </div>
+                <div v-show="showNetworkInfo">
                     <h4>Netzwerk</h4>
-                    <div class="card">
-                        <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.website_url" target="_blank">Webseite</a></p>
-                        <p class="contact"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
-                        <p class="contact"><PhoneIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.e164phone }}</span></p>
+                    <div class="card profile-card">
+                        <p class="profile-card__item" v-if="artisan.website_url"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.website_url" target="_blank">Webseite</a></p>
+                        <p class="profile-card__item" v-if="artisan.instagram_url"><ExternalLinkIcon color="#e680a5" :size="20" /><a class="link--neutral" :href="artisan.instagram_url" target="_blank">Instragram-Seite</a></p>
                     </div>
                 </div>
             </div>
@@ -100,8 +101,8 @@ import { Head } from "@inertiajs/vue3";
 import { 
     CheckIcon,
     ExternalLinkIcon,
-    MapPinIcon,
     PhoneIcon, 
+    MailIcon,
 } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
@@ -109,13 +110,12 @@ import AppTag from "@/components/presentation/AppTag.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
+import AddressPreview from "@/components/addresses/AddressPreview.vue";
 import ContactArtisan from "@/components/artisan/ArtisanContactDialog.vue";
 
 import { useAlert } from "@/composables/use-alert";
 import { FlashProps } from "@/types/ui";
 import type { ArtisanProfile, Image } from "@/types/users";
-
-
 
 const { flash, artisan, gallery, } = defineProps<{
     artisan: ArtisanProfile;
@@ -140,6 +140,10 @@ const pageSubtitle = computed(() => {
     }
     return "";
 });
+
+const showContactInfo = computed(() => artisan.email || artisan.e164phone);
+
+const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_url);
 </script>
 
 <style scoped lang="scss">
@@ -149,22 +153,17 @@ const pageSubtitle = computed(() => {
     display: flex;
     column-gap: 12px;
     align-items: center;
-    
-    &__text {
-        color: var(--color-neutral-30);
-    }
-
-    &:not(:last-of-type) {
-        margin-bottom: 12px;
-    }
 }
 
-.location {
+.profile-card {
     display: flex;
-    column-gap: 12px;
+    flex-direction: column;
+    row-gap: 12px;
 
-    .icon {
-        align-self: center;
+    &__item {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
     }
 }
 
@@ -192,6 +191,11 @@ const pageSubtitle = computed(() => {
         max-height: 200px;
         border-radius: 20px;
     }
+}
+
+.address-details {
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-dialog-wrapper {

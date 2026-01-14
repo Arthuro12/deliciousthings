@@ -5,21 +5,30 @@
             type="text" 
             id="phone" 
             label="Telefonnummer (optional)"
-            v-model="phone"
-        ></TextField>
+            v-model="form.phone"
+        />
         <TextField 
             type="text" 
             id="email" 
             label="E-Mail-Adresse"
-            v-model="email"
-        ></TextField>
-        <slot name="action" :data="{ email, phone }"></slot>
+            v-model="form.email"
+        />
+        <AppButton
+            class="align-end"
+            type="button"
+            layout="text"
+            variant="primary"
+            @click="updateContact"
+        >
+            <template #text>Speichern</template>
+        </AppButton>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
+import AppButton from "../presentation/AppButton.vue";
 import TextField from "../presentation/TextField.vue";
 
 const props = defineProps<{
@@ -27,6 +36,12 @@ const props = defineProps<{
     email: string;
 }>();
 
-const phone = ref(props.phone);
-const email = ref(props.email);
+const form = useForm({
+    phone: props.phone,
+    email: props.email,
+});
+
+function updateContact(): void {
+    form.patch("/artisan/profile/contact");
+}
 </script>

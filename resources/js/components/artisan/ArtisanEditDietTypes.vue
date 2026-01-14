@@ -7,15 +7,24 @@
             label-prop="label"
             value-prop="key"
             multiple
-            v-model:selected-value="selectedTypes"
+            v-model:selected-value="form.diet_types"
         />
-        <slot name="action" :data="selectedTypes"></slot>
+        <AppButton
+            class="align-end"
+            type="button"
+            layout="text"
+            variant="primary"
+            @click="updateDietTypes"
+        >
+            <template #text>Speichern</template>
+        </AppButton>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
+import AppButton from "../presentation/AppButton.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 
 import type { DietType } from "@/types/users";
@@ -25,5 +34,9 @@ const props = defineProps<{
     types?: DietType[];
 }>();
 
-const selectedTypes = ref(props.types ?? []);
+const form = useForm({ diet_types: [...props.types ?? []] });
+
+function updateDietTypes(): void {
+    form.put("/artisan/profile/diet-types");
+}
 </script>
