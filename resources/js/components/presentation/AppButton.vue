@@ -1,8 +1,13 @@
 <template>
     <button 
         class="button"
-        :class="[variantClass, layoutClass]" 
+        :class="[
+            variantClass, 
+            layoutClass,
+            `${disabled ? 'button--disabled' : ''}`
+        ]" 
         :type="type"
+        :disabled="disabled"
     >
         <slot name="leading"></slot>
         <slot name="text"></slot>
@@ -11,14 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { BUTTON_CLASSES } from '@/constants';
+import { ref } from "vue";
+import { BUTTON_CLASSES } from "@/constants";
 
-const { variant, layout = "text" } = defineProps<{
+const { variant, layout = "text", disabled = false } = defineProps<{
     type: "button" | "submit" | "reset";
     layout: "text" | "icon" | "with-icon";
     variant?: "primary" | "secondary" | "tertiary";
+    disabled?: boolean; 
 }>();
 
-const layoutClass = BUTTON_CLASSES.LAYOUTS[layout];
-const variantClass = variant ? BUTTON_CLASSES.VARIANTS[variant] : "";
+const layoutClass = ref(BUTTON_CLASSES.LAYOUTS[layout]);
+const variantClass = ref(variant ? BUTTON_CLASSES.VARIANTS[variant] : "");
 </script>

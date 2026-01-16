@@ -18,7 +18,7 @@ import { AvatarRoot, AvatarImage, AvatarFallback } from "reka-ui";
 
 const { src, alt = "", name } = defineProps<{
     src: string;
-    alt: string;
+    alt?: string;
     /**
      * The name to use to derive the fallback text.
      */

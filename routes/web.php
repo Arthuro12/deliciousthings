@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/artisan/profile/edit', 'edit')->name('artisan.profile.edit');
         Route::get('/artisan/profile', 'show')->name('artisan.profile.show');
         Route::post('/artisan/profile', 'store');
+        Route::put('/artisan/profile/photo', 'storeProfilePhoto');
+        Route::delete('/artisan/profile/photo/{media}', 'deleteProfilePhoto');
         Route::patch('/artisan/profile/basic', 'updateBasicProfile');
         Route::patch('/artisan/profile/contact', 'updateContact');
         Route::put('/artisan/profile/specialities', 'syncSpecialities');

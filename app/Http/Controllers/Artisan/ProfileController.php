@@ -34,13 +34,15 @@ class ProfileController extends Controller
     {
         $artisan = $request->user()->artisan;
 
+        $profilePhoto = $this->artisanService->getProfilePhoto($artisan);
         $profile = $this->artisanService
             ->getProfile($artisan, ['specialities', 'dietTypes']);
         $gallery = $this->artisanService->getGallery($artisan);
 
         return Inertia::render('artisan/EditArtisan', [
             'artisan' => $profile,
-            'gallery' => $gallery
+            'profile_photo' => $profilePhoto,
+            'gallery' => $gallery,
         ]);
     }
 
@@ -51,12 +53,15 @@ class ProfileController extends Controller
             return to_route('artisan.profile.create')->with('info', __('No existing profile.'));
         }
 
+        
+        $profilePhoto = $this->artisanService->getProfilePhoto($artisan);
         $profile = $this->artisanService
             ->getProfile($artisan, ['specialities', 'dietTypes']);
         $gallery = $this->artisanService->getGallery($artisan);
 
         return Inertia::render('artisan/ShowArtisan', [
             'artisan' => $profile,
+            'profile_photo' => $profilePhoto,
             'gallery' => $gallery,
         ]);
     }
@@ -155,6 +160,19 @@ class ProfileController extends Controller
         return back()->with('success', 'Das Bild wurde gelöscht');
     }
 
+    public function deleteProfilePhoto(Request $request, Media $media)
+    {
+        $photo = $request->user()->artisan->medias()->find($media->id);
+        if (is_null($photo)) {
+            abort(403);
+        }
+
+        $photo->delete();
+        Storage::disk('public')->delete($photo->path);
+
+        return back()->with('success', 'Das Profilbild wurde gelöscht');
+    }
+
     public function storeAddress(Request $request, Address $address)
     {
         $attrs = $request->validate([
@@ -174,6 +192,22 @@ class ProfileController extends Controller
                 'country' => $attrs['country'],
                 'address_line_2' => $attrs['address_line_2'],
             ]   
+        );
+
+        return back()->with('success', __('Artisan profile successfully updated.'));
+    }
+
+    public function storeProfilePhoto(Request $request)
+    {
+        $attrs = $request->validate([
+            'profile_photo' => File::image(),
+        ]);
+
+        $profilePhoto = $attrs['profile_photo'];
+        $path = $profilePhoto->storePublicly('profile_photo', 'public');
+        $request->user()->artisan->medias()->updateorCreate(
+            ['category' => 'profile_photo'],
+            ['path' => $path, 'category' => 'profile_photo']
         );
 
         return back()->with('success', __('Artisan profile successfully updated.'));
