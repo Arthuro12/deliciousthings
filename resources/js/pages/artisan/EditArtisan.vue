@@ -5,6 +5,11 @@
         </Head>
         <main class="edit-artisan-page">
             <div class="card-layout content">
+                <ArtisanProfilePhotoForm 
+                    class="artisan-profile-photo-form" 
+                    :profile-name="artisan.company_name || artisan.name" 
+                    :profile-photo="profile_photo"
+                />
                 <RekaCollapsible 
                     class="artisan-collapsible" 
                     trigger-button-class="artisan-collapsible__trigger"
@@ -128,6 +133,7 @@ import { ChevronDownIcon } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import RekaCollapsible from "@/third-party/reka-ui/RekaCollapsible.vue";
+import ArtisanProfilePhotoForm from "@/components/artisan/ArtisanProfilePhotoForm.vue";
 import ArtisanBasicProfile from "@/components/artisan/ArtisanBasicProfile.vue";
 import ArtisanEditContacts from "@/components/artisan/ArtisanEditContacts.vue";
 import ArtisanEditSpecialities from "@/components/artisan/ArtisanEditSpecialities.vue";
@@ -146,8 +152,13 @@ import type {
     Image, 
 } from "@/types/users";
 
-const { artisan, gallery } = defineProps<{
+const { 
+    artisan,
+    profile_photo, 
+    gallery 
+} = defineProps<{
     artisan: ArtisanPublicProfile;
+    profile_photo?: Image;
     gallery: Image[];
 }>();
 
@@ -184,6 +195,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.artisan-profile-photo-form {
+    /* width: 50%;
+    margin: auto; */
+    margin-bottom: 32px;
+}
+
 .artisan-collapsible {
     border: 1px solid var(--color-neutral-10);
     border-radius: 8px;

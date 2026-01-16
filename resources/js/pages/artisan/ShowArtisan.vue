@@ -15,9 +15,9 @@
                 <div class="profile__intro">
                     <ProfileAvartar 
                         class="profile__avatar" 
-                        src="" 
-                        alt="Profilbild"
-                        :user-name="artisan.company_name || artisan.name" 
+                        :src="profile_photo?.url ?? ''" 
+                        alt="Profile-Avatar"
+                        :name="artisan.company_name || artisan.name" 
                     />
                     <div>
                         <h1 class="profile__title">{{ artisan.name }}</h1>
@@ -119,6 +119,7 @@ import type { ArtisanProfile, Image } from "@/types/users";
 
 const { flash, artisan, gallery, } = defineProps<{
     artisan: ArtisanProfile;
+    profile_photo?: Image;
     gallery: Image[];
     flash: FlashProps;
 }>();

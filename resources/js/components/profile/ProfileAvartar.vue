@@ -2,7 +2,7 @@
     <RekaAvatar 
         :src="src" 
         :alt="alt" 
-        :name="userName"
+        :name="name"
     />
 </template>
 
@@ -11,7 +11,7 @@ import RekaAvatar from "@/third-party/reka-ui/RekaAvatar.vue";
 
 defineProps<{
     src: string;
-    alt: string;
-    userName?: string;
+    alt?: string;
+    name?: string;
 }>();
 </script>

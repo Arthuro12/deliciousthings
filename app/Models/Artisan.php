@@ -61,6 +61,11 @@ class Artisan extends Model
         return $this->morphMany(Media::class, 'mediable');
     }
 
+    public function profilePhoto()
+    {
+        return $this->medias()->where('category', 'profile_photo')->first();
+    }
+
     public function specialities(): BelongsToMany
     {
         return $this->belongsToMany(Speciality::class)

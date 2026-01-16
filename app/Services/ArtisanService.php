@@ -34,4 +34,19 @@ class ArtisanService
 
         return $gallery;
     }
+
+    /**
+     * Returns the artisan's profile photo if he/she has one.
+     */
+    public function getProfilePhoto(Artisan $artisan): array|null
+    {
+        if (is_null($artisan->profilePhoto())) {
+            return null;
+        }
+
+        return [
+            'id' => $artisan->profilePhoto()->id,
+            'url' => Storage::url($artisan->profilePhoto()->path),
+        ];
+    }
 }

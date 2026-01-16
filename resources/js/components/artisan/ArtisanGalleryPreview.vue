@@ -26,7 +26,7 @@ import AppButton from "../presentation/AppButton.vue";
 
 import type { Image } from "@/types/users";
 
-defineProps<{
+const { gallery } = defineProps<{
     gallery: Image[]
 }>();
 
