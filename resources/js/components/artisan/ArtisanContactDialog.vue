@@ -60,7 +60,7 @@ const form = useForm<Message>({
     content: "",
 });
 
-function sendMessage() {
+function sendMessage(): void {
     form.sent_at = new Date().toISOString();
     form.post("/artisan/messages");
 }
