@@ -31,7 +31,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/artisan/profile/photo', 'storeProfilePhoto');
         Route::delete('/artisan/profile/photo/{media}', 'deleteProfilePhoto');
         Route::patch('/artisan/profile/basic', 'updateBasicProfile');
-        Route::patch('/artisan/profile/contact', 'updateContact');
         Route::put('/artisan/profile/specialities', 'syncSpecialities');
         Route::put('/artisan/profile/diet-types', 'syncDietTypes');
         Route::post('/artisan/profile/addresses', 'storeAddress');
@@ -41,5 +40,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/artisan/profile/gallery/{media}', 'deletePhoto');
         Route::patch('/artisan/profile/services', 'updateServices');
         Route::patch('/artisan/profile/network', 'updateNetwork');
+        Route::post('/artisan/messages', 'sendMessage');
     });
 });

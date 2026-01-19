@@ -32,8 +32,6 @@ class CreateArtisanRequest extends FormRequest
             'name' => 'required|string|min:5',
             'company_name' => 'nullable|string',
             'main_occupation' => 'nullable|string',
-            'e164phone' => 'nullable|string',
-            'email' => 'required|email',
             'short_description' => 'nullable|string|max:200',
             'about' => 'required|string',
             'average_rate' => 'required|string',

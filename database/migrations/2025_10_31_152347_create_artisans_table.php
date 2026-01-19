@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('company_name')->nullable();
             $table->string('main_occupation')->nullable();
-            $table->string('e164phone')->nullable();
-            $table->string('email');
             $table->string('short_description', 200)->nullable();
             $table->text('about');
             $table->string('website_url')->nullable();
@@ -26,15 +24,6 @@ return new class extends Migration
             $table->string('average_rate');
             $table->boolean('offers_delivery');
             $table->boolean('pick_up_on_site');
-            $table->timestamps();
-        });
-
-        Schema::create('media', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('mediable');
-            $table->text('category')->nullable(); // Values: gallery, profile_photo, cover
-            $table->text('path');
-            $table->text('caption')->nullable();
             $table->timestamps();
         });
 
@@ -78,6 +67,15 @@ return new class extends Migration
             $table->id();
             $table->string('artisan_id');
             $table->string('diet_type_id');
+            $table->timestamps();
+        });
+
+        Schema::create('media', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('mediable');
+            $table->text('category')->nullable(); // Values: gallery, profile_photo, cover
+            $table->text('path');
+            $table->text('caption')->nullable();
             $table->timestamps();
         });
     }

@@ -71,13 +71,6 @@
                     </div>
                     <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
                 </div>
-                <div v-show="showContactInfo">
-                    <h4>Kontaktdaten</h4>
-                    <div class="card profile-card">
-                        <p class="profile-card__item" v-if="artisan.email"><MailIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.email }}</span></p>
-                        <p class="profile-card__item" v-if="artisan.e164phone"><PhoneIcon color="#e680a5" :size="20" /><span class="contact__text">{{ artisan.e164phone }}</span></p>
-                    </div>
-                </div>
                 <div v-show="showNetworkInfo">
                     <h4>Netzwerk</h4>
                     <div class="card profile-card">
@@ -98,12 +91,7 @@ import { computed } from "vue";
 
 import { Head } from "@inertiajs/vue3";
 
-import { 
-    CheckIcon,
-    ExternalLinkIcon,
-    PhoneIcon, 
-    MailIcon,
-} from "lucide-vue-next";
+import { CheckIcon, ExternalLinkIcon } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
@@ -141,8 +129,6 @@ const pageSubtitle = computed(() => {
     }
     return "";
 });
-
-const showContactInfo = computed(() => artisan.email || artisan.e164phone);
 
 const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_url);
 </script>

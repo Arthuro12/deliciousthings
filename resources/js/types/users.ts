@@ -57,8 +57,6 @@ export type BasicProfile = {
 };
 
 export type ArtisanProfile = BasicProfile & {
-    email: string;
-    e164phone: string;
     medias: Media[];
     specialities: Speciality[];
     diet_types?: DietType[];
@@ -71,5 +69,14 @@ export type ArtisanProfile = BasicProfile & {
     pick_up_on_site: boolean;
     user: User;
 };
+
+export type Message = {
+    id?: number;
+    artisan_id?: number;
+    sender_email?: string | null;
+    sender_name: string;
+    send_at: string;
+    content: string;
+}
 
 export type ArtisanPublicProfile = Omit<ArtisanProfile, "user">;
