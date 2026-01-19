@@ -28,18 +28,6 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Kontaktdaten</p><ChevronDownIcon :size="20" />
-                    </template>
-                    <template #content>
-                        <ArtisanEditContacts :phone="artisan.e164phone ?? ''" :email="artisan.email" />
-                    </template>
-                </RekaCollapsible>
-                <RekaCollapsible 
-                    class="artisan-collapsible" 
-                    trigger-button-class="artisan-collapsible__trigger"
-                    content-class="artisan-collapsible__content"
-                >
-                    <template #trigger>
                         <p>Spezialitäten</p><ChevronDownIcon :size="20" />
                     </template>
                     <template #content>
@@ -135,7 +123,6 @@ import AppLayout from "@/layout/AppLayout.vue";
 import RekaCollapsible from "@/third-party/reka-ui/RekaCollapsible.vue";
 import ArtisanProfilePhotoForm from "@/components/artisan/ArtisanProfilePhotoForm.vue";
 import ArtisanBasicProfile from "@/components/artisan/ArtisanBasicProfile.vue";
-import ArtisanEditContacts from "@/components/artisan/ArtisanEditContacts.vue";
 import ArtisanEditSpecialities from "@/components/artisan/ArtisanEditSpecialities.vue";
 import ArtisanEditDietTypes from "@/components/artisan/ArtisanEditDietTypes.vue";
 import ArtisanAddressSettings from "@/components/artisan/ArtisanAddressSettings.vue";
@@ -196,8 +183,6 @@ onMounted(() => {
 
 <style scoped>
 .artisan-profile-photo-form {
-    /* width: 50%;
-    margin: auto; */
     margin-bottom: 32px;
 }
 

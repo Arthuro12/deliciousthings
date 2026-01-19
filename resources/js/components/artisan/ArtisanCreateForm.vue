@@ -5,21 +5,6 @@
             <BasicProfileForm v-model:profile="basicProfile">
                 <template #header><header>Allgemeine Informationen</header></template>
             </BasicProfileForm>
-            <div class="wrapper">
-                <header>Kontaktdaten</header>
-                <TextField 
-                    type="text" 
-                    id="phone" 
-                    label="Telefonnummer (optional)"
-                    v-model="artisan.e164phone"
-                ></TextField>
-                <TextField 
-                    type="text" 
-                    id="email" 
-                    label="E-Mail-Adresse"
-                    v-model="artisan.email"
-                ></TextField>
-            </div>
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
