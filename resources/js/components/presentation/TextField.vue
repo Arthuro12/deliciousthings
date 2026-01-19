@@ -34,7 +34,7 @@ const {
     inputClasses?: VueClass;
 }>();
 
-const model = defineModel({ default: "", required: false });
+const model = defineModel<string | null | undefined>({ default: "", required: false });
 
 function onChange(event: Event): void {
     if (lazy) {

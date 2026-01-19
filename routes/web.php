@@ -40,5 +40,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/artisan/profile/gallery/{media}', 'deletePhoto');
         Route::patch('/artisan/profile/services', 'updateServices');
         Route::patch('/artisan/profile/network', 'updateNetwork');
+        Route::post('/artisan/messages', 'sendMessage');
     });
 });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Artisan;
 
 use Inertia\Inertia;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Arr;
@@ -16,6 +18,7 @@ use App\Models\Speciality;
 use App\Models\DietType;
 use App\Models\Address;
 use App\Http\Requests\CreateArtisanRequest;
+use App\Mail\MessageSent;
 use App\Services\ArtisanService;
 
 class ProfileController extends Controller
@@ -131,6 +134,26 @@ class ProfileController extends Controller
         Log::notice("Artisan profile successfully created!");
         
         return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));
+    }
+
+    public function sendMessage(Request $request)
+    {
+        $attrs = $request->validate([
+            'sender_email' => "nullable|string",
+            'sender_name' => "required|string",
+            'content' => 'required|string'
+        ]);
+
+        $request->user()->artisan->messages()->create([
+            'sender_email' => $attrs['sender_email'],
+            'sender_name' => $attrs['sender_name'],
+            'content' => $attrs['content'],
+            'send_at' => Carbon::now(),
+        ]);
+
+        Mail::to($request->user())->send(new MessageSent($attrs['sender_name']));
+
+        return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
     public function deleteAddress(Request $request, Address $address)

@@ -70,4 +70,13 @@ export type ArtisanProfile = BasicProfile & {
     user: User;
 };
 
+export type Message = {
+    id?: number;
+    artisan_id?: number;
+    sender_email?: string | null;
+    sender_name: string;
+    send_at: string;
+    content: string;
+}
+
 export type ArtisanPublicProfile = Omit<ArtisanProfile, "user">;
