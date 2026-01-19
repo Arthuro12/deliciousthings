@@ -75,8 +75,6 @@ class ProfileController extends Controller
             'name' => $attrs['name'],
             'company_name' => $attrs['company_name'],
             'main_occupation' => $attrs['main_occupation'],
-            'e164phone' => $attrs['e164phone'],
-            'email' => $attrs['email'],
             'short_description' => $attrs['short_description'],
             'about' => $attrs['about'],
             'website_url' => $attrs['website_url'],
@@ -289,21 +287,6 @@ class ProfileController extends Controller
             'main_occupation' => $attrs['main_occupation'],
             'short_description' => $attrs['short_description'],
             'about' => $attrs['about'],
-        ]);
-
-        return back()->with('success', __('Artisan profile successfully updated.'));
-    }
-
-    public function updateContact(Request $request)
-    {
-        $attrs = $request->validate([
-            'phone' => 'nullable|string',
-            'email' => 'required|email',
-        ]);
-
-        $request->user()->artisan->update([
-            'e164phone' => $attrs['phone'],
-            'email' => $attrs['email'],
         ]);
 
         return back()->with('success', __('Artisan profile successfully updated.'));
