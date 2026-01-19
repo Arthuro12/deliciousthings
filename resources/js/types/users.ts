@@ -57,8 +57,6 @@ export type BasicProfile = {
 };
 
 export type ArtisanProfile = BasicProfile & {
-    email: string;
-    e164phone: string;
     medias: Media[];
     specialities: Speciality[];
     diet_types?: DietType[];

@@ -33,8 +33,6 @@ export function defaultArtisan(): ArtisanPublicProfile {
         name: "",
         company_name: "",
         main_occupation: "",
-        e164phone: "",
-        email: "",
         short_description: "",
         about: "",
         medias: <Media[]>[],
