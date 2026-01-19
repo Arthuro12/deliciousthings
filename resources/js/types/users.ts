@@ -75,7 +75,7 @@ export type Message = {
     artisan_id?: number;
     sender_email?: string | null;
     sender_name: string;
-    send_at: string;
+    sent_at: string;
     content: string;
 }
 

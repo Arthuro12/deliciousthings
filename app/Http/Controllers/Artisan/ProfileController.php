@@ -139,16 +139,17 @@ class ProfileController extends Controller
     public function sendMessage(Request $request)
     {
         $attrs = $request->validate([
-            'sender_email' => "nullable|string",
-            'sender_name' => "required|string",
-            'content' => 'required|string'
+            'sender_email' => 'nullable|string',
+            'sender_name' => 'required|string',
+            'sent_at' => 'required|date',
+            'content' => 'required|string',
         ]);
 
         $request->user()->artisan->messages()->create([
             'sender_email' => $attrs['sender_email'],
             'sender_name' => $attrs['sender_name'],
             'content' => $attrs['content'],
-            'send_at' => Carbon::now(),
+            'sent_at' => Carbon::parse($attrs['sent_at']),
         ]);
 
         Mail::to($request->user())->send(new MessageSent($attrs['sender_name']));
