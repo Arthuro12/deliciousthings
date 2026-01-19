@@ -13,7 +13,7 @@ class Speciality extends Model
 
     public function artisans(): BelongsToMany
     {
-        return $this->belongsToMany(Speciality::class)
+        return $this->belongsToMany(Artisan::class)
             ->withTimestamps();
     }
 }
