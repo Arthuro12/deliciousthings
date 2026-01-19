@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('sender_email')->nullable();
             $table->string('sender_name');
             $table->longText('content');
-            $table->dateTime('send_at');
+            $table->dateTime('sent_at');
             $table->timestamps();
         });
     }

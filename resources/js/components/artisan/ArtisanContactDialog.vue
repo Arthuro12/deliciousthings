@@ -56,11 +56,12 @@ import type { Message } from "@/types/users";
 const form = useForm<Message>({
     sender_email: "",
     sender_name: "",
-    send_at: "",
+    sent_at: "",
     content: "",
 });
 
-function sendMessage() {
+function sendMessage(): void {
+    form.sent_at = new Date().toISOString();
     form.post("/artisan/messages");
 }
 </script>

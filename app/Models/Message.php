@@ -13,7 +13,7 @@ class Message extends Model
         'sender_email', 
         'sender_name', 
         'content',
-        'send_at'
+        'sent_at'
     ];
 
     public function artisan(): BelongsTo
