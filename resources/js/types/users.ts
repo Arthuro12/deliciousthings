@@ -73,7 +73,7 @@ export type ArtisanProfile = BasicProfile & {
 export type Message = {
     id?: number;
     artisan_id?: number;
-    sender_email?: string | null;
+    sender_email: string;
     sender_name: string;
     sent_at: string;
     content: string;

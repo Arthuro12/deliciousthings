@@ -52,7 +52,7 @@ const { address = defaultAddress() } = defineProps<{
 }>();
 
 const emits = defineEmits<{
-    (e: 'update:address', value: Address): void;
+    (e: "update:address", value: Address): void;
 }>();
 
 const form = reactive({ ...address });

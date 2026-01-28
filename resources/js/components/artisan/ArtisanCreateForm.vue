@@ -130,8 +130,8 @@ import type { FileValue } from "@/types/ui";
 import type { ArtisanPublicProfile } from "@/types/users";
 
 const emit = defineEmits<{
-    (e: 'photos-updated', value: FileValue): void;
-    (e: 'submit', value: ArtisanPublicProfile): void;
+    (e: "photos-updated", value: FileValue): void;
+    (e: "submit", value: ArtisanPublicProfile): void;
 }>();
 
 const specialityStore = useSpecialityStore();
@@ -142,7 +142,7 @@ const selectedFiles = ref<FileValue>([]);
 
 function updateFileSelection(files: FileValue): void {
     selectedFiles.value = files;
-    emit('photos-updated', selectedFiles.value)
+    emit("photos-updated", selectedFiles.value)
 }
 
 onMounted(async () => {

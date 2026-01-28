@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Artisan\ProfileController;
+use App\Http\Controllers\Artisan\MessageController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -40,6 +41,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/artisan/profile/gallery/{media}', 'deletePhoto');
         Route::patch('/artisan/profile/services', 'updateServices');
         Route::patch('/artisan/profile/network', 'updateNetwork');
-        Route::post('/artisan/messages', 'sendMessage');
+    });
+});
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::controller(MessageController::class)->group(function () {
+        Route::get('/artisan/messages', 'index');
+        Route::post('/artisan/messages', 'store');
     });
 });

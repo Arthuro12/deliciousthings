@@ -65,7 +65,7 @@ const {
 }>(); 
 
 const emits = defineEmits<{
-    (e: 'update:open', value: boolean): void;
+    (e: "update:open", value: boolean): void;
 }>();
 
 const isOpen = ref<boolean | undefined>(Boolean(open || defaultOpen || undefined));

@@ -16,9 +16,6 @@
                     </div>
                 </div>
                 <slot></slot>
-                <DialogClose as="div">
-                    <slot name="actions"></slot>
-                </DialogClose>
             </DialogContent>
         </DialogPortal>
     </DialogRoot>
