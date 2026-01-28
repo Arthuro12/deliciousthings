@@ -21,7 +21,10 @@
                     label="Ihre E-Mail-Adresse" 
                     v-model="form.sender_email"
                 />
-                <RichTextEditor v-model:content="form.content" />
+                <div>
+                    <header>Ihre Nachricht</header>
+                    <RichTextEditor v-model:content="form.content" />
+                </div>
                 <AppButton
                     class="align-end"
                     type="button"
