@@ -24,6 +24,7 @@
                     <li class="sidebar__item" v-if="showArtisanProfileLinks">
                         <Link class="sidebar__link" href="/artisan/profile/edit">Profil bearbeiten</Link>
                         <Link class="sidebar__link" href="/artisan/profile">Mein Profil</Link>
+                        <Link class="sidebar__link" href="/artisan/messages">Nachrichten</Link>
                     </li>
                     <li class="sidebar__item" v-else>
                         <Link class="sidebar__link" href="/artisan/profile/create">Profil erstellen</Link>
@@ -85,6 +86,10 @@ const showContent = ref(false);
         max-width: 700px;
         min-width: 350px;
         z-index: v-bind(zIndex);
+        
+        ul {
+            list-style: none;
+        }
 
         > .icon-wrapper {
             display: flex;

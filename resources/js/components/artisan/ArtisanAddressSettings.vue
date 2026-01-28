@@ -58,7 +58,8 @@ function deleteAddress(): void {
 
 .address-form {
     margin-top: 16px;
-    width: 300px;
+    min-width: 200px;
+    max-width: 300px;
 
     @include breakpoints.respond-to('medium') {
         min-width: 600px;

@@ -136,27 +136,6 @@ class ProfileController extends Controller
         return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));
     }
 
-    public function sendMessage(Request $request)
-    {
-        $attrs = $request->validate([
-            'sender_email' => 'nullable|string',
-            'sender_name' => 'required|string',
-            'sent_at' => 'required|date',
-            'content' => 'required|string',
-        ]);
-
-        $request->user()->artisan->messages()->create([
-            'sender_email' => $attrs['sender_email'],
-            'sender_name' => $attrs['sender_name'],
-            'content' => $attrs['content'],
-            'sent_at' => Carbon::parse($attrs['sent_at']),
-        ]);
-
-        Mail::to($request->user())->send(new MessageSent($attrs['sender_name']));
-
-        return back()->with('success', __('Artisan profile successfully updated.'));
-    }
-
     public function deleteAddress(Request $request, Address $address)
     {
         $request->user()->artisan->addresses()->find($address->id)->delete();

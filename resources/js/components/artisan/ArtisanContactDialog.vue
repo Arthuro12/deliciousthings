@@ -18,19 +18,12 @@
                 />
                 <TextField 
                     type="email" 
-                    label="Ihre E-Mail-Adresse (optional)" 
+                    label="Ihre E-Mail-Adresse" 
                     v-model="form.sender_email"
                 />
-                <AppTextArea 
-                    label="Ihre Nachricht" 
-                    rows="7"
-                    v-model="form.content" 
-                />
-            </div>
-        </template>
-        <template #actions>
-            <div class="dialog-actions">
+                <RichTextEditor v-model:content="form.content" />
                 <AppButton
+                    class="align-end"
                     type="button"
                     layout="text"
                     variant="primary"
@@ -48,8 +41,8 @@ import { useForm } from "@inertiajs/vue3";
 
 import AppButton from "../presentation/AppButton.vue";
 import TextField from "../presentation/TextField.vue";
-import AppTextArea from "../presentation/AppTextArea.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
+import RichTextEditor from "@/third-party/tiptap/RichTextEditor.vue";
 
 import type { Message } from "@/types/users";
 
@@ -76,16 +69,11 @@ function sendMessage(): void {
     min-width: 300px;
     max-width: 700px;
     margin: 24px 0;
+    min-width: 200px;
+    max-width: 300px;
 
     @include breakpoints.respond-to('medium') {
         min-width: 600px;
-        max-width: 800px;
     }
-}
-
-.dialog-actions {
-    display: flex;
-    justify-content: end;
-    margin-top: 24px;
 }
 </style>

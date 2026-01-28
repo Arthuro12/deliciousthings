@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('artisan_id')->constrained();
-            $table->string('sender_email')->nullable();
+            $table->string('sender_email');
             $table->string('sender_name');
             $table->longText('content');
             $table->dateTime('sent_at');
