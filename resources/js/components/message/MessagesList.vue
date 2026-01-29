@@ -5,13 +5,18 @@
                 <h4>Meine Nachrichten</h4>
             </header>
             <div class="messages-rows">
-                <button class="message-button" type="button" v-for="message in messages" :key="message.id">
-                    <div class="message-row">
-                        <div>{{ message.sender_name }}</div>
-                        <div :class="$style.content" v-html="message.content"></div>
-                        <div>{{ message.sent_at }}</div>
+                <a 
+                    class="card message-link"
+                    v-for="message in messages" 
+                    :key="message.id"
+                    href=""
+                >
+                    <div class="message-details">
+                        <p class="font-bold">{{ message.sender_name }}</p>
+                         <p class="message-details--content truncate">{{ stripTags(message.content) }}</p>
                     </div>
-                </button>
+                    <div class="message-details"><p>{{ toLocalDate(new Date(message.sent_at), "de-DE") }}</p></div>
+                </a>
             </div>
         </div>
         <div class="fallback-wrapper" v-else>
@@ -33,6 +38,8 @@ import { computed } from "vue";
 
 import { MessageCircleIcon } from "lucide-vue-next";
 
+import { stripTags } from "@/utils/sanitization";
+import { toLocalDate } from "@/utils/date";
 import type { Message } from "@/types/users";
 
 const { messages } = defineProps<{
@@ -59,9 +66,39 @@ const hasMessages = computed(() => messages.length > 0);
     .messages-rows {
         padding: 24px;
 
-        .message-button {
-            text-align: start;
+        .message-link {
+            display: flex;
+            justify-content: space-between;
+
+            .message-details {
+                display: flex;
+            }
+
+            .message-details:first-of-type {
+                flex-direction: column;
+            }
+
+            .message-details:last-of-type {
+                align-items: end;
+            }
+            
+            &:not(:last-of-type) {
+                margin-bottom: 16px;
+            }
+
+            &:hover {
+                box-shadow: 0 0 5px 3px light-dark(var(--color-primary-50), var(--color-neutral-50));
+            }
+
+            .message-details--content {
+                width: 100px;
+
+                @include breakpoints.respond-to('medium') {
+                    width: 200px;
+                }
+            }
         }
+
     }
 
     .fallback-wrapper {
@@ -98,14 +135,6 @@ const hasMessages = computed(() => messages.length > 0);
                 border-radius: 16px;
             }
         }
-    }
-}
-</style>
-
-<style module>
-.content {
-    li {
-        margin-left: 12px;
     }
 }
 </style>
