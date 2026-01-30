@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Nachrich von {{ message.sender_name }}</title>
+            <title>Nachricht von {{ message.sender_name }}</title>
         </Head>
 
         <main class="card-layout message-wrapper">
@@ -48,13 +48,11 @@ const { message } = defineProps<{
     row-gap: 24px;
     height: 900px;
     background: linear-gradient(
-        to bottom right,
+        to bottom,
         var(--color-neutral-0),
-        var(--color-primary-0),
         var(--color-primary-10),
         var(--color-primary-20),
         var(--color-primary-30),
-        var(--color-primary-50), 
     );
 
     .message-card {
