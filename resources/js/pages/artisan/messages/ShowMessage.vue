@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Nachrich von {{ message.sender_name }}</title>
+            <title>Nachricht von {{ message.sender_name }}</title>
         </Head>
 
         <main class="card-layout message-wrapper">
