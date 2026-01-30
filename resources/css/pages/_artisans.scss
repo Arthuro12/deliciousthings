@@ -55,11 +55,5 @@
 .edit-artisan-page {
     & > .card-layout.content {
         min-height: 900px;
-        border-radius: 0;
-
-        @include breakpoints.respond-to('medium') {
-            border-radius: 16px;
-            margin: 48px auto;
-        }
     }
 }
