@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::controller(MessageController::class)->group(function () {
         Route::get('/artisan/messages', 'index');
+        Route::get('/artisan/messages/{message}', 'show');
         Route::post('/artisan/messages', 'store');
     });
 });

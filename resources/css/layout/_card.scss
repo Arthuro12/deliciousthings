@@ -1,3 +1,5 @@
+@use '../abstracts/breakpoints';
+
 .card {
     background-color: white;
     border: 1px solid var(--color-neutral-10);
@@ -8,11 +10,17 @@
 
 .card-layout {
     @extend .card;
+    width: 100%;
     padding: 48px 40px;
+    margin: 48px auto;
 
     .heading {
         text-align: center;
         margin-bottom: 24px;
+    }
+
+    @include breakpoints.respond-to('medium') {
+        width: 50%;
     }
 }
 

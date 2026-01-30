@@ -188,7 +188,7 @@ onMounted(() => {
 
 .artisan-collapsible {
     border: 1px solid var(--color-neutral-10);
-    border-radius: 8px;
+    border-radius: 8px; 
 
     &:not(:last-of-type) {
         margin-bottom: 16px;
