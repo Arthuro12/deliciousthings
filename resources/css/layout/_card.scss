@@ -10,9 +10,9 @@
 
 .card-layout {
     @extend .card;
+    border-radius: 0;
     width: 100%;
     padding: 48px 40px;
-    margin: 48px auto;
 
     .heading {
         text-align: center;
@@ -20,6 +20,8 @@
     }
 
     @include breakpoints.respond-to('medium') {
+        border-radius: 16px;
+        margin: 48px auto;
         width: 50%;
     }
 }

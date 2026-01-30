@@ -4,7 +4,7 @@
             <title>Nachrich von {{ message.sender_name }}</title>
         </Head>
 
-        <main class="card-layout message-container">
+        <main class="card-layout message-wrapper">
             <header>
                  <AppLink
                     href="/artisan/messages"
@@ -42,18 +42,26 @@ const { message } = defineProps<{
 </script>
 
 <style scoped lang="scss">
-.message-container {
+.message-wrapper {
     display: flex;
     flex-direction: column;
     row-gap: 24px;
-    height: 900px; 
+    height: 900px;
+    background: linear-gradient(
+        to bottom right,
+        var(--color-neutral-0),
+        var(--color-primary-0),
+        var(--color-primary-10),
+        var(--color-primary-20),
+        var(--color-primary-30),
+        var(--color-primary-50), 
+    );
 
     .message-card {
         display: flex;
         flex-direction: column;
         row-gap: 12px;
         margin: 0;
-        flex: 1;
 
         &__header {
             background-color: var(--color-primary-10);
