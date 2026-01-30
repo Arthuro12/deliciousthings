@@ -14,3 +14,14 @@ export const BUTTON_CLASSES = Object.freeze({
         tertiary: "button--tertiary",
     },
 });
+
+export const LINK_CLASSES = Object.freeze({
+    VARIANTS: {
+        primary: "link--primary",
+        secondary: "link--secondary",
+        tertiary: "link--tertiary",
+    },
+    SIZES: {
+        medium: "link--medium",
+    }
+});

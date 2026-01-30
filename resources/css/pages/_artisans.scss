@@ -54,12 +54,10 @@
 
 .edit-artisan-page {
     & > .card-layout.content {
-        width: 100%;
         min-height: 900px;
         border-radius: 0;
 
         @include breakpoints.respond-to('medium') {
-            width: 50%;
             border-radius: 16px;
             margin: 48px auto;
         }

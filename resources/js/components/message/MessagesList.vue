@@ -9,11 +9,12 @@
                     class="card message-link"
                     v-for="message in messages" 
                     :key="message.id"
-                    href=""
+                    :href="`/artisan/messages/${message.id}`"
+                    target="_blank"
                 >
                     <div class="message-details">
                         <p class="font-bold">{{ message.sender_name }}</p>
-                         <p class="message-details--content truncate">{{ stripTags(message.content) }}</p>
+                        <p class="message-details--content truncate">{{ stripTags(message.content) }}</p>
                     </div>
                     <div class="message-details"><p>{{ toLocalDate(new Date(message.sent_at), "de-DE") }}</p></div>
                 </a>

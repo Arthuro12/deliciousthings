@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Mail\MessageSent;
 
 class MessageController extends Controller
@@ -41,5 +42,12 @@ class MessageController extends Controller
         Mail::to($request->user())->send(new MessageSent($attrs['sender_name']));
 
         return back()->with('success', __('Artisan profile successfully updated.'));
+    }
+
+    public function show(Message $message) 
+    {
+        return Inertia::render('artisan/messages/ShowMessage', [
+            'message' => $message->toArray()
+        ]);
     }
 }
