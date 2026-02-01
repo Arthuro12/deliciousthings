@@ -18,11 +18,6 @@
             margin-bottom: 14px;
         }
 
-        .card {
-            min-width: 300px;
-            max-width: 744px;
-        }
-
         @include breakpoints.respond-to('medium') {
             flex-direction: row;
             column-gap: 42px;

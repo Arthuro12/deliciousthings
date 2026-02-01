@@ -146,6 +146,7 @@ const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_
     display: flex;
     flex-direction: column;
     row-gap: 12px;
+    max-width: 450px;
 
     &__item {
         display: flex;
