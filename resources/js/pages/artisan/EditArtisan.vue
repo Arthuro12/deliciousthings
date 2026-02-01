@@ -3,8 +3,8 @@
         <Head>
             <title>Profil bearbeiten</title>
         </Head>
-        <main class="edit-artisan-page">
-            <div class="card-layout content">
+        <main class="card-layout wrapper">
+            <div>
                 <ArtisanProfilePhotoForm 
                     class="artisan-profile-photo-form" 
                     :profile-name="artisan.company_name || artisan.name" 
@@ -181,7 +181,21 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../../css/abstracts/breakpoints' as breakpoints;
+
+.wrapper {
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+
+    @include breakpoints.respond-to('large') {
+        border-radius: 16px;
+        margin: 48px auto;
+        width: 50%;
+    }
+}
+
 .artisan-profile-photo-form {
     margin-bottom: 32px;
 }

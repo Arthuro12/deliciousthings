@@ -162,3 +162,38 @@ watch(
     { deep: true }
 );
 </script>
+
+<style scoped lang="scss">
+@use '../../../css/abstracts/breakpoints' as breakpoints;
+
+.artisan-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+
+    .wrapper, .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wrapper {
+        row-gap: 16px;
+    }
+
+    .row {
+        row-gap: 20px;
+    }
+
+    .row > .submit-button {
+        width: 100%;
+
+        @include breakpoints.respond-to('medium') {
+            width: 30%;
+        }
+
+        @include breakpoints.respond-to('large') {
+            width: 50%;
+        }
+    }
+}
+</style>
