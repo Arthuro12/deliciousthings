@@ -9,9 +9,8 @@
             :title="alertMessage" 
             :duration="3000"          
         />
-        <main>
-            <ArtisanForm 
-                class="card-layout" 
+        <main class="card-layout wrapper">
+            <ArtisanForm  
                 @photos-updated="(photos) => artisanForm.gallery = photos"
                 @submit="submit" 
             />
@@ -63,3 +62,19 @@ function submit(artisan: ArtisanPublicProfile): void {
     }   
 }
 </script>
+
+<style scoped lang="scss">
+@use '../../../css/abstracts/breakpoints' as breakpoints;
+
+.wrapper {
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+
+    @include breakpoints.respond-to('large') {
+        border-radius: 16px;
+        margin: 48px auto;
+        width: 50%;
+    }
+}
+</style>
