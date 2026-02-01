@@ -69,13 +69,13 @@ function deleteAddress(): void {
 .address-panel {
     display: flex;
     flex-direction: column;
+    row-gap: 12px;
     border: 1px solid var(--color-neutral-10);
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 16px;
 
     .delete-button {
-        width: 10%;
         align-self: end;
     }
 }
