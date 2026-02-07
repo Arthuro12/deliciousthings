@@ -69,14 +69,6 @@ function sendMessage(): void {
     display: flex;
     flex-direction: column;
     row-gap: 16px;
-    min-width: 300px;
-    max-width: 700px;
     margin: 24px 0;
-    min-width: 200px;
-    max-width: 300px;
-
-    @include breakpoints.respond-to('medium') {
-        min-width: 600px;
-    }
 }
 </style>
