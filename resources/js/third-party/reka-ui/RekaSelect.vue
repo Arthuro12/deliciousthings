@@ -15,10 +15,10 @@
                         class="select__item"
                         v-for="item in items" 
                         :value="item" 
-                        :key="getItemLabel(item)"
+                        :key="getItemProp(item, labelProp)"
                     >
                         <SelectItemText>
-                            {{ getItemLabel(item) }}
+                            {{ getItemProp(item, labelProp) }}
                         </SelectItemText>
                     </SelectItem>
                 </SelectViewport>
@@ -41,25 +41,12 @@ import {
 
 import { ChevronDownIcon } from "lucide-vue-next";
 
-import type { 
-    SelectProps, 
-    SelectItem as SelectItemType,
-    SelectValue as SelectValueType,
-} from "@/types/ui";
+import { getItemProp } from "@/utils/select";
+import type { SelectProps, SelectValue as SelectValueType } from "@/types/ui";
 
-const props = defineProps<SelectProps>();
+defineProps<SelectProps>();
 
 const selectedValue = defineModel<SelectValueType>("selectedValue", {
     default: undefined
 });
-
-/**
- * Gets the item label.
- */
-function getItemLabel(item: SelectItemType): string {
-    if (props.labelProp && typeof item == "object" && item) {
-        return item[props.labelProp] ?? "";
-    }
-    return "";
-}
 </script>
