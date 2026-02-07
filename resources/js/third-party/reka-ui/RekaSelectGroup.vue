@@ -1,5 +1,5 @@
 <template>
-    <SelectRoot class="select__root" :multiple v-model="selectedValue">
+    <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
             <SelectValue :placeholder="placeholder" />
             <ChevronDownIcon />
@@ -15,7 +15,7 @@
                         v-for="(items, key) in groups" 
                         :key
                     >
-                        <SelectLabel>{{ key }}</SelectLabel>
+                        <SelectLabel class="select-group__label">{{ key }}</SelectLabel>
                         <SelectItem 
                             class="select__item"
                             v-for="item in items"

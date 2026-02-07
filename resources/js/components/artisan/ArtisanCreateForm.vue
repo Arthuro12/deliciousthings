@@ -154,11 +154,6 @@ function updateFileSelection(files: FileValue): void {
     emit("photos-updated", selectedFiles.value)
 }
 
-onMounted(async () => {
-    await bakedGoodStore.getBakedGoods();
-    await dietaryOptionStore.getDietaryOptions();
-});
-
 watch(
     basicProfile, 
     () => {
@@ -170,6 +165,11 @@ watch(
     }, 
     { deep: true }
 );
+
+onMounted(async () => {
+    await bakedGoodStore.getBakedGoods();
+    await dietaryOptionStore.getDietaryOptions();
+});
 </script>
 
 <style scoped lang="scss">
