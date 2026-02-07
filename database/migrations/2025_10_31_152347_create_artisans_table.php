@@ -39,34 +39,34 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('specialities', function (Blueprint $table) {
+        Schema::create('baked_goods', function (Blueprint $table) {
             $table->id();
             $table->string('key');
-            // $table->enum('category'); // 1. sweet, 2. salty (note: Use Enum case class)
+            $table->string('name');
+            $table->string('label');
+            $table->string('category');
+            $table->timestamps();
+        });
+
+        Schema::create('dietary_options', function (Blueprint $table) {
+            $table->id();
+            $table->string('key');
             $table->string('name');
             $table->string('label');
             $table->timestamps();
         });
 
-        Schema::create('diet_types', function (Blueprint $table) {
+        Schema::create('artisan_baked_good', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('name');
-            $table->string('label');
+            $table->string('artisan_id');
+            $table->string('baked_good_id');
             $table->timestamps();
         });
 
-        Schema::create('artisan_speciality', function (Blueprint $table) {
+        Schema::create('artisan_dietary_option', function (Blueprint $table) {
             $table->id();
             $table->string('artisan_id');
-            $table->string('speciality_id');
-            $table->timestamps();
-        });
-
-        Schema::create('artisan_diet_type', function (Blueprint $table) {
-            $table->id();
-            $table->string('artisan_id');
-            $table->string('diet_type_id');
+            $table->string('dietary_option_id');
             $table->timestamps();
         });
 
@@ -87,10 +87,10 @@ return new class extends Migration
     {
         Schema::dropIfExists('artisans');
         Schema::dropIfExists('addresses');
-        Schema::dropIfExists('specialities');
-        Schema::dropIfExists('artisan_speciality');
-        Schema::dropIfExists('diet_types');
-        Schema::dropIfExists('artisan_diet_type');
+        Schema::dropIfExists('baked_goods');
+        Schema::dropIfExists('dietary_options');
+        Schema::dropIfExists('artisan_baked_good');
+        Schema::dropIfExists('artisan_dietary_option');
         Schema::dropIfExists('media');
     }
 };

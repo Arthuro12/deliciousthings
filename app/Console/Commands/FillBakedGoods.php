@@ -4,29 +4,29 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Support\DietType;
+use App\Actions\FillBakedGoods as FillBakedGoodsAction;
 
-class FillDietTypes extends Command
+class FillBakedGoods extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:fill-diet-types';
+    protected $signature = 'app:fill-baked-goods';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Fill in the baked goods table';
 
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(FillBakedGoodsAction $action): void
     {
-        DietType::fill();
+        $action->handle();
     }
 }

@@ -4,29 +4,29 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Support\Speciality;
+use App\Actions\FillDietaryOptions as FillDietaryOptionsAction;
 
-class FillSpecialities extends Command
+class FillDietaryOptions extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:fill-specialities';
+    protected $signature = 'app:fill-dietary-options';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Fill in the specialities table';
+    protected $description = 'Fill in the dietary options table';
 
     /**
      * Execute the console command.
      */
-    public function handle(): void
+    public function handle(FillDietaryOptionsAction $action): void
     {
-        Speciality::fill();
+        $action->handle();
     }
 }

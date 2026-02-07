@@ -22,7 +22,7 @@
 import { useForm } from "@inertiajs/vue3";
 
 import AppButton from "@/components/presentation/AppButton.vue";
-import AddressForm from "@/components/addresses/AddressForm.vue";
+import AddressForm from "@/components/address/AddressForm.vue";
 
 import type { Address } from "@/types/users";
 import { defaultAddress } from "@/utils/artisans";

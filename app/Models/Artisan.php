@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-// use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -46,20 +45,16 @@ class Artisan extends Model
         return $this->morphMany(Address::class, 'addressable');
     }
 
-    public function messages(): HasMany
+    public function bakedGoods(): BelongsToMany
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(BakedGood::class)
+            ->withTimestamps();
     }
 
-    public function dietTypes(): BelongsToMany
+    public function dietaryOptions(): BelongsToMany
     {
-        return $this->belongsToMany(DietType::class)
+        return $this->belongsToMany(DietaryOption::class)
             ->withTimestamps();;
-    }
-
-    public function getFirstAddressAttribute()
-    {
-        return $this->addresses()->first();
     }
 
     public function medias(): MorphMany
@@ -67,19 +62,23 @@ class Artisan extends Model
         return $this->morphMany(Media::class, 'mediable');
     }
 
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function profilePhoto()
     {
         return $this->medias()->where('category', 'profile_photo')->first();
     }
 
-    public function specialities(): BelongsToMany
-    {
-        return $this->belongsToMany(Speciality::class)
-            ->withTimestamps();;
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getFirstAddressAttribute()
+    {
+        return $this->addresses()->first();
     }
 }

@@ -1,20 +1,20 @@
 <template>
     <div class="form__group">
         <slot name="header"></slot>
-        <RekaSelect 
-            placeholder="Diäten auswählen" 
-            :items="options"
+        <RekaSelectGroup 
+            placeholder="Backwaren auswählen" 
+            :groups="options"
             label-prop="label"
             value-prop="key"
             multiple
-            v-model:selected-value="form.diet_types"
+            v-model:selected-value="form.baked_goods"
         />
         <AppButton
             class="align-end"
             type="button"
             layout="text"
             variant="primary"
-            @click="updateDietTypes"
+            @click="syncBakedGoods"
         >
             <template #text>Speichern</template>
         </AppButton>
@@ -25,18 +25,18 @@
 import { useForm } from "@inertiajs/vue3";
 
 import AppButton from "../presentation/AppButton.vue";
-import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
+import RekaSelectGroup from "@/third-party/reka-ui/RekaSelectGroup.vue";
 
-import type { DietType } from "@/types/users";
+import type { BakedGood, GroupedBakedGoods } from "@/types/users";
 
 const props = defineProps<{
-    options: DietType[];
-    types?: DietType[];
+    options: GroupedBakedGoods;
+    bakedGoods: BakedGood[];
 }>();
 
-const form = useForm({ diet_types: [...props.types ?? []] });
+const form = useForm({ baked_goods: [...props.bakedGoods] });
 
-function updateDietTypes(): void {
-    form.put("/artisan/profile/diet-types");
+function syncBakedGoods(): void {
+    form.put("/artisan/profile/baked-goods");
 }
 </script>

@@ -21,18 +21,6 @@ export type Address = {
     address_line_2: string | null;
 }
 
-export type Speciality = {
-    key: string;
-    name: string;
-    label: string;
-}
-
-export type DietType = {
-    key: string;
-    name: string;
-    label: string;
-}
-
 export type Media = {
     category: string | null;
     caption: string | null;
@@ -58,8 +46,8 @@ export type BasicProfile = {
 
 export type ArtisanProfile = BasicProfile & {
     medias: Media[];
-    specialities: Speciality[];
-    diet_types?: DietType[];
+    baked_goods: BakedGood[];
+    dietary_options?: DietaryOption[];
     addresses: Address[];
     first_address?: Address;
     instagram_url?: string;
@@ -80,3 +68,18 @@ export type Message = {
 }
 
 export type ArtisanPublicProfile = Omit<ArtisanProfile, "user">;
+
+export type BakedGood = {
+    key: string;
+    name: string;
+    label: string;
+    category: string;
+}
+
+export type DietaryOption = {
+    key: string;
+    name: string;
+    label: string;
+}
+
+export type GroupedBakedGoods = Record<string, BakedGood[]>;

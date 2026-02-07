@@ -22,7 +22,7 @@
         <AppTextArea 
             id="short-description" 
             rows="7" 
-            label="kurze Beschreibung" 
+            label="kurze Beschreibung (optional)" 
             v-model="profile.short_description" 
         />
         <AppTextArea 

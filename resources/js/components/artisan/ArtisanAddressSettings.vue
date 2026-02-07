@@ -38,7 +38,7 @@ import { PencilIcon, TrashIcon } from "lucide-vue-next";
 import AppButton from "../presentation/AppButton.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import ArtisanEditAddress from "./partials/ArtisanEditAddress.vue";
-import AddressPreview from "../addresses/AddressPreview.vue";
+import AddressPreview from "../address/AddressPreview.vue";
 
 import type { Address } from "@/types/users";
 
