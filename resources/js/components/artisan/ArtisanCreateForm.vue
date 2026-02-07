@@ -9,14 +9,14 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header>Spezialitäten</header>
-                <RekaSelect 
-                    placeholder="Spezialitäten auswählen" 
-                    :items="specialityStore.specialities"
+                <header>Angebotene Backwaren</header>
+                <RekaSelectGroup 
+                    placeholder="Backwaren auswählen" 
+                    :groups="bakedGoodsGroups"
                     label-prop="label"
                     value-prop="key"
                     multiple
-                    v-model:selected-value="artisan.specialities"
+                    v-model:selected-value="artisan.baked_goods"
                 />
             </div>
         </div>
@@ -24,12 +24,12 @@
             <div class="wrapper">
                 <header>Angebotene Ernährungsformen</header>
                 <RekaSelect 
-                    placeholder="Diäten auswählen" 
-                    :items="dietTypeStore.dietTypes"
+                    placeholder="Ernährungsformen auswählen" 
+                    :items="dietaryOptionStore.dietaryOptions"
                     label-prop="label"
                     value-prop="key"
                     multiple
-                    v-model:selected-value="artisan.diet_types"
+                    v-model:selected-value="artisan.dietary_options"
                 />
             </div>
         </div>
@@ -111,34 +111,43 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { computed, ref, watch, onMounted } from "vue";
 
 import AppDivider from "../presentation/AppDivider.vue";
 import AppButton from "../presentation/AppButton.vue";
 import FileUpload from "../presentation/FileUpload.vue";
 import TextField from "../presentation/TextField.vue";
 import BasicProfileForm from "../profile/BasicProfileForm.vue";
-import AddressCollapsible from "../addresses/AddressFormCollapsible.vue";
-import AddressForm from "../addresses/AddressForm.vue";
+import AddressCollapsible from "../address/AddressFormCollapsible.vue";
+import AddressForm from "../address/AddressForm.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
+import RekaSelectGroup from "@/third-party/reka-ui/RekaSelectGroup.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 
-import { useDietTypeStore } from "@/stores/diet-type";
-import { useSpecialityStore } from "@/stores/speciality";
+import { useBakedGoodStore } from "@/stores/baked-good";
+import { useDietaryOptionStore } from "@/stores/dietary-option";
 import { defaultArtisan, getBasicProfile } from "@/utils/artisans";
+import { bakedGoodsByCategory, mapGroupsToDisplayName } from "@/utils/baked-good";
 import type { FileValue } from "@/types/ui";
-import type { ArtisanPublicProfile } from "@/types/users";
+import type { ArtisanPublicProfile, GroupedBakedGoods } from "@/types/users";
 
 const emit = defineEmits<{
     (e: "photos-updated", value: FileValue): void;
     (e: "submit", value: ArtisanPublicProfile): void;
 }>();
 
-const specialityStore = useSpecialityStore();
-const dietTypeStore = useDietTypeStore();
+const bakedGoodStore = useBakedGoodStore();
+const dietaryOptionStore = useDietaryOptionStore();
 const artisan = ref<ArtisanPublicProfile>(defaultArtisan());
 const basicProfile = ref(getBasicProfile(artisan.value));
 const selectedFiles = ref<FileValue>([]);
+
+const bakedGoodsGroups = computed<GroupedBakedGoods>(() => {
+    let groups = bakedGoodsByCategory(bakedGoodStore.bakedGoods);
+    groups = mapGroupsToDisplayName(groups);
+
+    return groups;
+});
 
 function updateFileSelection(files: FileValue): void {
     selectedFiles.value = files;
@@ -146,8 +155,8 @@ function updateFileSelection(files: FileValue): void {
 }
 
 onMounted(async () => {
-    await specialityStore.getSpecialities();
-    await dietTypeStore.getDietTypes();
+    await bakedGoodStore.getBakedGoods();
+    await dietaryOptionStore.getDietaryOptions();
 });
 
 watch(

@@ -3,8 +3,8 @@ import type {
     ArtisanPublicProfile, 
     BasicProfile,
     Media, 
-    Speciality,
-    DietType, 
+    BakedGood,
+    DietaryOption, 
 } from "@/types/users";
 
 /**
@@ -36,8 +36,8 @@ export function defaultArtisan(): ArtisanPublicProfile {
         short_description: "",
         about: "",
         medias: <Media[]>[],
-        specialities: <Speciality[]>[],
-        diet_types: <DietType[]>[],
+        baked_goods: <BakedGood[]>[],
+        dietary_options: <DietaryOption[]>[],
         addresses: <Address[]>[],
         first_address: defaultAddress(),
         average_rate: "",

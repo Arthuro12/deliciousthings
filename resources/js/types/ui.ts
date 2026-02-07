@@ -32,3 +32,11 @@ export type SelectProps = {
     valueProp?: string;
     multiple?: boolean;
 }
+
+export type SelectGroupProps = {
+    placeholder?: string;
+    groups: Record<string, SelectItem[]>;
+    labelProp?: string;
+    valueProp?: string;
+    multiple?: boolean;
+};

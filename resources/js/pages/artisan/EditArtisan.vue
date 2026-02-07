@@ -28,12 +28,12 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Spezialitäten</p><ChevronDownIcon :size="20" />
+                        <p>Angebotene Backwaren</p><ChevronDownIcon :size="20" />
                     </template>
                     <template #content>
-                        <ArtisanEditSpecialities 
-                            :options="specialityStore.specialities" 
-                            :specialities="artisan.specialities"
+                        <ArtisanEditBakedGoods 
+                            :options="bakedGoodsGroups" 
+                            :baked-goods="artisan.baked_goods"
                         />
                     </template>
                 </RekaCollapsible>
@@ -46,9 +46,9 @@
                         <p>Angebotene Ernährungsformen</p><ChevronDownIcon :size="20" />
                     </template>
                     <template #content>
-                        <ArtisanEditDietTypes 
-                            :options="dietTypeStore.dietTypes" 
-                            :types="artisan.diet_types"
+                        <ArtisanEditDietaryOptions 
+                            :options="dietaryOptionStore.dietaryOptions" 
+                            :types="artisan.dietary_options"
                         />
                     </template>
                 </RekaCollapsible>
@@ -113,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref,  watch, onMounted } from "vue";
+import { computed, ref,  watch, onMounted } from "vue";
 
 import { Head } from "@inertiajs/vue3";
 
@@ -123,19 +123,21 @@ import AppLayout from "@/layout/AppLayout.vue";
 import RekaCollapsible from "@/third-party/reka-ui/RekaCollapsible.vue";
 import ArtisanProfilePhotoForm from "@/components/artisan/ArtisanProfilePhotoForm.vue";
 import ArtisanBasicProfile from "@/components/artisan/ArtisanBasicProfile.vue";
-import ArtisanEditSpecialities from "@/components/artisan/ArtisanEditSpecialities.vue";
-import ArtisanEditDietTypes from "@/components/artisan/ArtisanEditDietTypes.vue";
+import ArtisanEditBakedGoods from "@/components/artisan/ArtisanEditBakedGoods.vue";
+import ArtisanEditDietaryOptions from "@/components/artisan/ArtisanEditDietaryOptions.vue";
 import ArtisanAddressSettings from "@/components/artisan/ArtisanAddressSettings.vue";
 import ArtisanAddFotos from "@/components/artisan/ArtisanAddFotos.vue";
 import ArtisanEditNetworkLinks from "@/components/artisan/ArtisanEditNetworkLinks.vue";
 import ArtisanEditServices from "@/components/artisan/ArtisanEditServices.vue";
 
-import { useSpecialityStore } from "@/stores/speciality";
-import { useDietTypeStore } from "@/stores/diet-type";
+import { useBakedGoodStore } from "@/stores/baked-good";
+import { useDietaryOptionStore } from "@/stores/dietary-option";
 import { getBasicProfile } from "@/utils/artisans";
+import { bakedGoodsByCategory, mapGroupsToDisplayName } from "@/utils/baked-good";
 import type { 
     Address,
     ArtisanPublicProfile, 
+    GroupedBakedGoods,
     Image, 
 } from "@/types/users";
 
@@ -149,8 +151,8 @@ const {
     gallery: Image[];
 }>();
 
-const specialityStore = useSpecialityStore();
-const dietTypeStore = useDietTypeStore();
+const bakedGoodStore = useBakedGoodStore();
+const dietaryOptionStore = useDietaryOptionStore();
 
 const firstAddress = ref<Address | undefined>(undefined);
 if (artisan.first_address) {
@@ -162,6 +164,13 @@ const services = {
     pickUpOnSite: artisan.pick_up_on_site,
     averageRate: artisan.average_rate,
 };
+
+const bakedGoodsGroups = computed<GroupedBakedGoods>(() => {
+    let groups = bakedGoodsByCategory(bakedGoodStore.bakedGoods);
+    groups = mapGroupsToDisplayName(groups);
+
+    return groups;
+});
 
 watch(
     () => artisan.first_address, 
@@ -175,9 +184,9 @@ watch(
     { deep: true }
 );
 
-onMounted(() => {
-    specialityStore.getSpecialities();
-    dietTypeStore.getDietTypes();
+onMounted(async () => {
+    await bakedGoodStore.getBakedGoods();
+    await dietaryOptionStore.getDietaryOptions();
 });
 </script>
 

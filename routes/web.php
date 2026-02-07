@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/artisan/profile/photo', 'storeProfilePhoto');
         Route::delete('/artisan/profile/photo/{media}', 'deleteProfilePhoto');
         Route::patch('/artisan/profile/basic', 'updateBasicProfile');
-        Route::put('/artisan/profile/specialities', 'syncSpecialities');
-        Route::put('/artisan/profile/diet-types', 'syncDietTypes');
+        Route::put('/artisan/profile/baked-goods', 'syncBakedGoods');
+        Route::put('/artisan/profile/dietary-options', 'syncDietaryOptions');
         Route::post('/artisan/profile/addresses', 'storeAddress');
         Route::patch('/artisan/profile/addresses/{address}', 'updateAddress');
         Route::delete('/artisan/profile/addresses/{address}', 'deleteAddress');

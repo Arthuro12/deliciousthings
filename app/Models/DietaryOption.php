@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class DietType extends Model
+class DietaryOption extends Model
 {
     protected $fillable = ['key', 'name', 'label'];
 

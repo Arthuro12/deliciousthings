@@ -30,22 +30,22 @@
                     <p>{{ artisan.about }}</p>
                 </div>
                 <div>
-                    <h4>Spezialitäten</h4>
-                    <div class="profile__specialities">
+                    <h4>Angebotene Backwaren</h4>
+                    <div class="profile__baked-goods">
                         <AppTag 
-                            v-for="speciality in artisan.specialities" 
-                            :key="speciality.key" 
-                            :text="speciality.label"
+                            v-for="good in artisan.baked_goods" 
+                            :key="good.key" 
+                            :text="good.label"
                         />
                     </div>
                 </div>
-                <div v-if="artisan.diet_types && artisan.diet_types.length > 0">
+                <div v-if="artisan.dietary_options && artisan.dietary_options?.length > 0">
                     <h4>Angebotene Ernährungsformen</h4>
-                    <div class="profile__diet-types">
+                    <div class="profile__dietary-options">
                         <AppTag 
-                            v-for="dietType in artisan.diet_types" 
-                            :key="dietType.key" 
-                            :text="dietType.label"
+                            v-for="option in artisan.dietary_options" 
+                            :key="option.key" 
+                            :text="option.label"
                         />
                     </div>
                 </div>
@@ -98,7 +98,7 @@ import AppTag from "@/components/presentation/AppTag.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
-import AddressPreview from "@/components/addresses/AddressPreview.vue";
+import AddressPreview from "@/components/address/AddressPreview.vue";
 import ContactArtisan from "@/components/artisan/ArtisanContactDialog.vue";
 
 import { useAlert } from "@/composables/use-alert";
@@ -146,6 +146,7 @@ const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_
     display: flex;
     flex-direction: column;
     row-gap: 12px;
+    max-width: 450px;
 
     &__item {
         display: flex;
@@ -154,8 +155,8 @@ const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_
     }
 }
 
-.profile__specialities, 
-.profile__diet-types {
+.profile__baked-goods, 
+.profile__dietary-options {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;

@@ -38,7 +38,7 @@ import { PencilIcon, TrashIcon } from "lucide-vue-next";
 import AppButton from "../presentation/AppButton.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import ArtisanEditAddress from "./partials/ArtisanEditAddress.vue";
-import AddressPreview from "../addresses/AddressPreview.vue";
+import AddressPreview from "../address/AddressPreview.vue";
 
 import type { Address } from "@/types/users";
 
@@ -69,13 +69,13 @@ function deleteAddress(): void {
 .address-panel {
     display: flex;
     flex-direction: column;
+    row-gap: 12px;
     border: 1px solid var(--color-neutral-10);
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 16px;
 
     .delete-button {
-        width: 10%;
         align-self: end;
     }
 }

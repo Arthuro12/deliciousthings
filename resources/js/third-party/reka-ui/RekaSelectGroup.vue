@@ -11,16 +11,22 @@
                 :side-offset="15"
             >
                 <SelectViewport>
-                    <SelectItem 
-                        class="select__item"
-                        v-for="item in items" 
-                        :value="item" 
-                        :key="getItemLabel(item)"
+                    <SelectGroup 
+                        v-for="(items, key) in groups" 
+                        :key
                     >
-                        <SelectItemText>
-                            {{ getItemLabel(item) }}
-                        </SelectItemText>
-                    </SelectItem>
+                        <SelectLabel>{{ key }}</SelectLabel>
+                        <SelectItem 
+                            class="select__item"
+                            v-for="item in items"
+                            :value="item"
+                            :key="getItemLabel(item)"
+                        >
+                            <SelectItemText>
+                                {{ getItemLabel(item) }}
+                            </SelectItemText>
+                        </SelectItem>
+                    </SelectGroup>
                 </SelectViewport>
             </SelectContent>
         </SelectPortal>
@@ -31,6 +37,8 @@
 import {
     SelectValue,
     SelectContent,
+    SelectGroup,
+    SelectLabel,
     SelectItem,
     SelectItemText,
     SelectPortal,
@@ -42,12 +50,12 @@ import {
 import { ChevronDownIcon } from "lucide-vue-next";
 
 import type { 
-    SelectProps, 
+    SelectGroupProps, 
     SelectItem as SelectItemType,
     SelectValue as SelectValueType,
 } from "@/types/ui";
 
-const props = defineProps<SelectProps>();
+const props = defineProps<SelectGroupProps>();
 
 const selectedValue = defineModel<SelectValueType>("selectedValue", {
     default: undefined

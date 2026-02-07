@@ -17,7 +17,7 @@ class MessageController extends Controller
     public function index() 
     {
         return Inertia::render('artisan/messages/Index',[
-                'messages' => Auth::user()->artisan->messages()->get(),
+                'messages' => Auth::user()->artisan?->messages()->get() ?? [],
             ],
         );
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Support;
+namespace App\Actions;
 
-use App\Models\DietType as DietTypeModel;
+use App\Models\DietaryOption;
 
-class DietType
+class FillDietaryOptions
 {
-    final const DIET_TYPES = [
+    final const DIETARY_OPTIONS = [
         [
             'key' => 'vegan',
             'name' => 'vegan',
@@ -29,15 +29,10 @@ class DietType
         ],
     ];
 
-    /**
-     * Fills in the specialities table.
-     * 
-     * @return void
-     */
-    static public function fill()
+    public function handle(): void
     {
-        foreach (self::DIET_TYPES as $dietType) {
-            DietTypeModel::create($dietType);
+        foreach (self::DIETARY_OPTIONS as $option) {
+            DietaryOption::create($option);
         }
     }
 }

@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Artisan;
 use App\Models\Media;
-use App\Models\Speciality;
-use App\Models\DietType;
+use App\Models\BakedGood;
+use App\Models\DietaryOption;
 use App\Models\Address;
 use App\Http\Requests\CreateArtisanRequest;
 use App\Mail\MessageSent;
@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         $profilePhoto = $this->artisanService->getProfilePhoto($artisan);
         $profile = $this->artisanService
-            ->getProfile($artisan, ['specialities', 'dietTypes']);
+            ->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
         $gallery = $this->artisanService->getGallery($artisan);
 
         return Inertia::render('artisan/EditArtisan', [
@@ -59,7 +59,7 @@ class ProfileController extends Controller
         
         $profilePhoto = $this->artisanService->getProfilePhoto($artisan);
         $profile = $this->artisanService
-            ->getProfile($artisan, ['specialities', 'dietTypes']);
+            ->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
         $gallery = $this->artisanService->getGallery($artisan);
 
         return Inertia::render('artisan/ShowArtisan', [
@@ -88,21 +88,21 @@ class ProfileController extends Controller
         ]);
         $artisan = $user->artisan()->save($artisan);
 
-        $selectedSpecialities = Arr::map($attrs['specialities'], function ($value) {
+        $selectedGoods = Arr::map($attrs['baked_goods'], function ($value) {
             return $value['key'];
         });
-        $specialities = Speciality::whereIn('key', $selectedSpecialities)->get();
-        foreach ($specialities as $speciality) {
-            $artisan->specialities()->attach($speciality->id);
+        $goods = BakedGood::whereIn('key', $selectedGoods)->get();
+        foreach ($goods as $good) {
+            $artisan->bakedGoods()->attach($good->id);
         }
 
-        if (!empty($attrs['diet_types'])) {
-            $selectedDietTypes = Arr::map($attrs['diet_types'], function ($value) {
+        if (!empty($attrs['dietary_options'])) {
+            $selectedDietaryOptions = Arr::map($attrs['dietary_options'], function ($value) {
                 return $value['key'];
             });
-            $dietTypes = DietType::whereIn('key', $selectedDietTypes)->get();
-            foreach ($dietTypes as $type) {
-                $artisan->dietTypes()->attach($type->id);
+            $dietaryOptions = DietaryOption::whereIn('key', $selectedDietaryOptions)->get();
+            foreach ($dietaryOptions as $option) {
+                $artisan->dietaryOptions()->attach($option->id);
             }
         }
 
@@ -214,38 +214,38 @@ class ProfileController extends Controller
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
-    public function syncDietTypes(Request $request)
+    public function syncBakedGoods(Request $request)
     {
         $attrs = $request->validate([
-            'diet_types' => 'nullable|array',
-            'diet_types.*.key' => 'required|string',
-            'diet_types.*.name' => 'required|string',
-            'diet_types.*.label' => 'required|string',
+            'baked_goods' => 'required|array',
+            'baked_goods.*.key' => 'required|string',
+            'baked_goods.*.name' => 'required|string',
+            'baked_goods.*.label' => 'required|string',
         ]);
 
-        $selectedDietTypes = Arr::map($attrs['diet_types'], function ($value) {
+        $selectedBakedGoods = Arr::map($attrs['baked_goods'], function ($value) {
             return $value['key'];
         });
-        $dietTypeIds = DietType::whereIn('key', $selectedDietTypes)->pluck('id')->toArray();
-        $request->user()->artisan->dietTypes()->sync($dietTypeIds);
+        $bakedGoodsIds = BakedGood::whereIn('key', $selectedBakedGoods)->pluck('id')->toArray();
+        $request->user()->artisan->bakedGoods()->sync($bakedGoodsIds);
 
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
-    public function syncSpecialities(Request $request)
+    public function syncDietaryOptions(Request $request)
     {
         $attrs = $request->validate([
-            'specialities' => 'required|array',
-            'specialities.*.key' => 'required|string',
-            'specialities.*.name' => 'required|string',
-            'specialities.*.label' => 'required|string',
+            'dietary_options' => 'required|array',
+            'dietary_options.*.key' => 'required|string',
+            'dietary_options.*.name' => 'required|string',
+            'dietary_options.*.label' => 'required|string',
         ]);
 
-        $selectedSpecialities = Arr::map($attrs['specialities'], function ($value) {
+        $selectedDietaryOptions = Arr::map($attrs['dietary_options'], function ($value) {
             return $value['key'];
         });
-        $specialitieIds = Speciality::whereIn('key', $selectedSpecialities)->pluck('id')->toArray();
-        $request->user()->artisan->specialities()->sync($specialitieIds);
+        $dietaryOptionIds = DietaryOption::whereIn('key', $selectedDietaryOptions)->pluck('id')->toArray();
+        $request->user()->artisan->dietaryOptions()->sync($dietaryOptionIds);
 
         return back()->with('success', __('Artisan profile successfully updated.'));
     }

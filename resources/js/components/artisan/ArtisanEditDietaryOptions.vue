@@ -2,19 +2,19 @@
     <div class="form__group">
         <slot name="header"></slot>
         <RekaSelect 
-            placeholder="Spezialitäten auswählen" 
+            placeholder="Ernährungsformen auswählen" 
             :items="options"
             label-prop="label"
             value-prop="key"
             multiple
-            v-model:selected-value="form.specialities"
+            v-model:selected-value="form.dietary_options"
         />
         <AppButton
             class="align-end"
             type="button"
             layout="text"
             variant="primary"
-            @click="syncSpecialities"
+            @click="syncDietaryOptions"
         >
             <template #text>Speichern</template>
         </AppButton>
@@ -27,16 +27,16 @@ import { useForm } from "@inertiajs/vue3";
 import AppButton from "../presentation/AppButton.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 
-import type { Speciality } from "@/types/users";
+import type { DietaryOption } from "@/types/users";
 
 const props = defineProps<{
-    options: Speciality[];
-    specialities: Speciality[];
+    options: DietaryOption[];
+    types?: DietaryOption[];
 }>();
 
-const form = useForm({ specialities: [...props.specialities] });
+const form = useForm({ dietary_options: [...(props.types ?? [])] });
 
-function syncSpecialities(): void {
-    form.put("/artisan/profile/specialities");
+function syncDietaryOptions(): void {
+    form.put("/artisan/profile/dietary-options");
 }
 </script>
