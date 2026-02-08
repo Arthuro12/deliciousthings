@@ -1,32 +1,47 @@
 @use '../abstracts/breakpoints';
 
 .app-header {
-    ul {
-        list-style: none;
-    }
-
     padding: 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     background-color: white;
+
+    ul {
+        list-style: none;
+    }
 
     .header__sidebar {
         margin-right: 12px;
     }
 
     .header__separator {
-        flex: 1;
+        display: none;
     }
 
-    .navbar__menu {
-        display: flex;
-        align-items: center;
-        column-gap: 12px;
+    .navbar {
+        display: none;
+
+        &__menu {
+            display: flex;
+            align-items: center;
+            column-gap: 12px;
+        }
     }
 
     @include breakpoints.respond-to('medium') {
+        justify-content: start;
         position: sticky;
         box-shadow: 0 1px 5px var(--color-neutral-20);
+
+        .header__separator {
+            display: block;
+            flex: 1;
+        }
+
+        .navbar {
+            display: block;
+        }
     }
 }
