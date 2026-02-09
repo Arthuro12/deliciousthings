@@ -1,5 +1,5 @@
 <template>
-    <SelectRoot class="select__root" :multiple v-model="selectedValue">
+    <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
             <SelectValue :placeholder="placeholder" />
             <ChevronDownIcon />
@@ -15,15 +15,15 @@
                         v-for="(items, key) in groups" 
                         :key
                     >
-                        <SelectLabel>{{ key }}</SelectLabel>
+                        <SelectLabel class="select-group__label">{{ key }}</SelectLabel>
                         <SelectItem 
                             class="select__item"
                             v-for="item in items"
                             :value="item"
-                            :key="getItemLabel(item)"
+                            :key="getItemProp(item, labelProp)"
                         >
                             <SelectItemText>
-                                {{ getItemLabel(item) }}
+                                {{ getItemProp(item, labelProp) }}
                             </SelectItemText>
                         </SelectItem>
                     </SelectGroup>
@@ -49,25 +49,15 @@ import {
 
 import { ChevronDownIcon } from "lucide-vue-next";
 
+import { getItemProp } from "@/utils/select";
 import type { 
     SelectGroupProps, 
-    SelectItem as SelectItemType,
     SelectValue as SelectValueType,
 } from "@/types/ui";
 
-const props = defineProps<SelectGroupProps>();
+defineProps<SelectGroupProps>();
 
 const selectedValue = defineModel<SelectValueType>("selectedValue", {
     default: undefined
 });
-
-/**
- * Gets the item label.
- */
-function getItemLabel(item: SelectItemType): string {
-    if (props.labelProp && typeof item == "object" && item) {
-        return item[props.labelProp] ?? "";
-    }
-    return "";
-}
 </script>

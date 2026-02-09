@@ -5,7 +5,7 @@ const BAKED_GOODS = {
         "breads_and_rolls": "Brot und Brötchen",
         "pastries": "Konditorei",
         "viennoiserie": "Feingebäck",
-        "chocolate": "Chokolade",
+        "chocolate": "Schokolade",
         "fried_sweet_pastries": "Frittiertes / Süßes Gebäck",
     },
 };
