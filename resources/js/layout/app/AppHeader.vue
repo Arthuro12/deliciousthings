@@ -12,7 +12,7 @@
                     <Link href="/login"><UserIcon color="#e680a5" /></Link>
                 </li>
                 <li>
-                    <Link class="button button--primary button--text" href="/register">Beitreten</Link>
+                    <Link class="button button--primary button--medium" href="/register">Beitreten</Link>
                 </li>
             </ul>
         </nav>

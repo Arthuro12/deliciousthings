@@ -1,8 +1,8 @@
 <template>
     <AppButton
         type="button"
-        layout="text"
         variant="secondary"
+        size="medium"
         @click="logout"
     >
         <template #text>Abmelden</template>

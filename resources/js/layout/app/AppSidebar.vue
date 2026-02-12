@@ -33,10 +33,10 @@
                 </ul>
                 <ul class="sidebar__menu" v-else>
                     <li class="sidebar__item">
-                        <Link class="button button--primary button--text" href="/register">Beitreten</Link>
+                        <Link class="button button--primary button--medium" href="/register">Beitreten</Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="button button--secondary button--text" href="/login">Anmelden</Link>
+                        <Link class="button button--secondary button--medium" href="/login">Anmelden</Link>
                     </li>
                 </ul>
             </div>

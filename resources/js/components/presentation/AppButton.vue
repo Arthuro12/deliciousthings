@@ -4,6 +4,7 @@
         :class="[
             variantClass, 
             layoutClass,
+            sizeClass,
             `${disabled ? 'button--disabled' : ''}`
         ]" 
         :type="type"
@@ -19,13 +20,15 @@
 import { ref } from "vue";
 import { BUTTON_CLASSES } from "@/constants";
 
-const { variant, layout = "text", disabled = false } = defineProps<{
+const { layout, variant, size, disabled = false } = defineProps<{
     type: "button" | "submit" | "reset";
-    layout: "text" | "icon" | "with-icon";
+    layout?: "icon" | "with-icon";
     variant?: "primary" | "secondary" | "tertiary";
+    size?: "small" | "medium" | "large";
     disabled?: boolean; 
 }>();
 
-const layoutClass = ref(BUTTON_CLASSES.LAYOUTS[layout]);
+const layoutClass = ref(layout ? BUTTON_CLASSES.LAYOUTS[layout] : "");
 const variantClass = ref(variant ? BUTTON_CLASSES.VARIANTS[variant] : "");
+const sizeClass = ref(size ? BUTTON_CLASSES.SIZES[size] : "");
 </script>

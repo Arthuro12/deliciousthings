@@ -3,8 +3,8 @@
         <template #trigger>
             <AppButton
                 type="button"
-                layout="text"
                 variant="primary"
+                size="medium"
             >
                 <template #text>Kontakt aufnehmen</template>
             </AppButton>
@@ -28,8 +28,8 @@
                 <AppButton
                     class="align-end"
                     type="button"
-                    layout="text"
                     variant="primary"
+                    size="medium"
                     @click="sendMessage"
                 >
                     <template #text>Nachricht senden</template>

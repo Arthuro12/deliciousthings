@@ -20,8 +20,8 @@
         <AppButton
             class="align-end"
             type="button"
-            layout="text"
             variant="primary"
+            size="medium"
             @click="updateNetwork"
         >
             <template #text>Speichern</template>
