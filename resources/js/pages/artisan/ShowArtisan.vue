@@ -49,14 +49,19 @@
                         />
                     </div>
                 </div>
-                <div class="gallery">
+                <div>
                     <h4>Galerie</h4>
-                    <EmblaCarousel 
-                        :slides="gallery"
-                        v-slot="{ slide }"
-                    >
-                        <img class="gallery__image" :src="slide.url" />
-                    </EmblaCarousel>
+                    <div class="gallery__preview">
+                        <div 
+                            v-for="image in gallery" 
+                            :key="image.url" 
+                        >                        
+                                <img 
+                                    class="gallery__image" 
+                                    :src="image.url" 
+                                />
+                        </div>
+                    </div>
                 </div>
                 <div v-if="address">
                     <div class="card profile-card">
@@ -96,7 +101,6 @@ import { CheckIcon, ExternalLinkIcon } from "lucide-vue-next";
 import AppLayout from "@/layout/AppLayout.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
-import EmblaCarousel from "@/third-party/embla/EmblaCarousel.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
 import AddressPreview from "@/components/address/AddressPreview.vue";
 import ContactArtisan from "@/components/artisan/ArtisanContactDialog.vue";
@@ -174,10 +178,18 @@ const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_
 }
 
 .gallery {
+    display: flex;
+    flex-direction: column;
+
+    &__preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+    }
+
     &__image {
         width: 100%;
-        max-height: 200px;
-        border-radius: 20px;
+        height: 250px;
     }
 }
 
