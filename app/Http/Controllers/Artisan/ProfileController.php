@@ -45,7 +45,7 @@ class ProfileController extends Controller
         return Inertia::render('artisan/EditArtisan', [
             'artisan' => $profile,
             'profile_photo' => $profilePhoto,
-            'gallery' => $gallery,
+            'gallery' => [...$gallery],
         ]);
     }
 
@@ -65,7 +65,7 @@ class ProfileController extends Controller
         return Inertia::render('artisan/ShowArtisan', [
             'artisan' => $profile,
             'profile_photo' => $profilePhoto,
-            'gallery' => $gallery,
+            'gallery' => [...$gallery],
         ]);
     }
 
