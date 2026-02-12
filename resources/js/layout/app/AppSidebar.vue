@@ -33,10 +33,10 @@
                 </ul>
                 <ul class="sidebar__menu" v-else>
                     <li class="sidebar__item">
-                        <Link class="button button--primary button--text" href="/register">Beitreten</Link>
+                        <Link class="button button--primary button--medium" href="/register">Beitreten</Link>
                     </li>
                     <li class="sidebar__item">
-                        <Link class="button button--secondary button--text" href="/login">Anmelden</Link>
+                        <Link class="button button--secondary button--medium" href="/login">Anmelden</Link>
                     </li>
                 </ul>
             </div>
@@ -75,6 +75,8 @@ const showContent = ref(false);
 </script>
 
 <style scoped lang="scss">
+@use '../../../css/abstracts/breakpoints' as breakpoints;
+
 .sidebar {
     &__content {
         position: fixed;
@@ -83,8 +85,7 @@ const showContent = ref(false);
         left: v-bind(left);
         top: v-bind(top);
         height: 100%;
-        max-width: 700px;
-        min-width: 350px;
+        width: 90%;
         z-index: v-bind(zIndex);
         
         ul {
@@ -98,6 +99,10 @@ const showContent = ref(false);
             > .sidebar__icon-button {
                 margin-bottom: 24px;
             }
+        }
+
+        @include breakpoints.respond-to('medium') {
+            width: 40%;
         }
     }
 

@@ -13,6 +13,11 @@ export const BUTTON_CLASSES = Object.freeze({
         secondary: "button--secondary",
         tertiary: "button--tertiary",
     },
+    SIZES: {
+        small: "button--small",
+        medium: "button--medium",
+        large: "button--large",
+    },
 });
 
 export const LINK_CLASSES = Object.freeze({

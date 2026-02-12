@@ -37,6 +37,5 @@ import { XIcon } from "lucide-vue-next";
 
 defineProps<{
     title: string;
-    description?: string;
 }>();
 </script>

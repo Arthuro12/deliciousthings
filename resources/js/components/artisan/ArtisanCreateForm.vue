@@ -99,8 +99,8 @@
             <AppButton 
                 class="submit-button"
                 type="button" 
-                layout="text"
                 variant="primary"
+                size="medium"
                 @click="emit('submit', artisan)"
             >
                 <template #text>Mein Profil erstellen</template>

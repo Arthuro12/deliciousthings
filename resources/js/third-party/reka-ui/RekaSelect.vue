@@ -1,7 +1,7 @@
 <template>
     <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
-            <SelectValue :placeholder="placeholder" />
+            <SelectValue class="select__dropdown-text" :placeholder="placeholder" />
             <ChevronDownIcon />
         </SelectTrigger>
         <SelectPortal>

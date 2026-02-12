@@ -15,20 +15,21 @@
         />
         <div class="actions">
             <label 
-                class="button button--primary button--with-icon cursor--pointer" 
+                class="button button--primary button--with-icon button--small cursor--pointer" 
                 for="profile-photo"
             >
-                <UploadIcon color="#fff" />
+                <UploadIcon color="#fff" :size="16" />
                 <p>Bild hochladen</p>
             </label>
             <AppButton
                 type="button"
                 variant="secondary"
                 layout="with-icon"
+                size="small"
                 :disabled="disableDeleteButton"
                 @click="deleteProfilePhoto"
             >
-                <template #leading><TrashIcon /></template>
+                <template #leading><TrashIcon :size="16" /></template>
                 <template #text><p>Bild löschen</p></template>
             </AppButton>
         </div>

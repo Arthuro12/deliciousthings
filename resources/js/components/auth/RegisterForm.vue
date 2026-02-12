@@ -53,7 +53,7 @@
         <AppButton
             type="submit"
             variant="primary"
-            layout="text"
+            size="medium"
             @click.prevent="onSubmit"
         >
             <template #text>Registrieren</template>

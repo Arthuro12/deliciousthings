@@ -9,6 +9,7 @@
         </div>
         <div class="embla-carousel__navigation-buttons">
             <AppButton 
+                class="embla-carousel__navigation-button"
                 type="button" 
                 variant="tertiary" 
                 layout="icon"
@@ -18,6 +19,7 @@
                 </template>
             </AppButton>
             <AppButton 
+                class="embla-carousel__navigation-button"
                 type="button" 
                 variant="tertiary" 
                 layout="icon"
@@ -97,7 +99,15 @@ function scrollPrev(): void {
 
     &__navigation-buttons {
         display: flex;
-        justify-content: end;        
+        column-gap: 12px;
+        justify-content: end;   
+        margin-top: 12px;     
+    }
+
+    &__navigation-button {
+        background-color: var(--color-neutral-0);
+        box-shadow: 0 2px 5px var(--color-neutral-20);
+        border-radius: 50%;
     }
 }
 </style>
