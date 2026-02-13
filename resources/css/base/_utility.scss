@@ -32,3 +32,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.divider--horizontal {
+    border-bottom: 0.5px solid var(--color-neutral-10);
+}
+
+.divider--vertical {
+    border-left: 0.5px solid var(--color-neutral-10);
+}

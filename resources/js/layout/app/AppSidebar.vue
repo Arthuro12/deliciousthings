@@ -21,14 +21,20 @@
                     </AppButton>
                 </div>
                 <ul class="sidebar__menu" v-if="isAuthenticated">
-                    <li class="sidebar__item" v-if="showArtisanProfileLinks">
-                        <Link class="sidebar__link" href="/artisan/profile/edit">Profil bearbeiten</Link>
-                        <Link class="sidebar__link" href="/artisan/profile">Mein Profil</Link>
-                        <Link class="sidebar__link" href="/artisan/messages">Nachrichten</Link>
+                    <li class="sidebar__item">
+                        <div class="artisan-settings">
+                            <header class="settings-header">Für Anbietende</header>
+                            <template v-if="hasArtisanProfile">
+                                <Link class="sidebar__link" href="/artisan/profile/edit">Profil bearbeiten</Link>
+                                <Link class="sidebar__link" href="/artisan/profile">Mein Profil</Link>
+                                <Link class="sidebar__link" href="/artisan/messages">Nachrichten</Link>
+                            </template>
+                            <template>
+                                <Link class="sidebar__link" href="/artisan/profile/create">Profil erstellen</Link>
+                            </template>
+                        </div>
                     </li>
-                    <li class="sidebar__item" v-else>
-                        <Link class="sidebar__link" href="/artisan/profile/create">Profil erstellen</Link>
-                    </li>
+                    <AppDivider variant="horizontal" />
                     <li class="sidebar__item"><LogoutButton /></li>
                 </ul>
                 <ul class="sidebar__menu" v-else>
@@ -54,6 +60,7 @@ import { Link, usePage } from "@inertiajs/vue3";
 
 import { MenuIcon, XIcon } from "lucide-vue-next";
 
+import AppDivider from "@/components/presentation/AppDivider.vue";
 import AppOverlay from "@/components/presentation/AppOverlay.vue";
 import AppButton from "@/components/presentation/AppButton.vue";
 import LogoutButton from "@/components/auth/LogoutButton.vue";
@@ -66,7 +73,7 @@ const props = defineProps<{
     zIndex?: number;
 }>();
 
-const { isAuthenticated, showArtisanProfileLinks } = useAuth(usePage().props.auth);
+const { isAuthenticated, hasArtisanProfile } = useAuth(usePage().props.auth);
 
 const top = ref(props.top ?? 0);
 const left = ref(props.left ?? 0);
@@ -110,9 +117,10 @@ const showContent = ref(false);
         padding: 0;
     }
 
-    &__menu,
-    &__item {
-        margin-bottom: 24px;
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
     }
 
     &__item > .button {
@@ -121,13 +129,17 @@ const showContent = ref(false);
 
     &__link {
         display: flex;
-        color: var(--color-primary-50);
+        color: var(--color-neutral-50);
         padding: 6px;
 
         &:hover {
-            background-color: var(--color-primary-10);
+            background-color: var(--color-neutral-10);
             border-radius: 5px;
         }
     }
+}
+
+.artisan-settings > .settings-header {
+    color: var(--color-neutral-30);
 }
 </style>

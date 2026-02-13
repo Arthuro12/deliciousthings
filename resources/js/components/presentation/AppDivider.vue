@@ -8,17 +8,7 @@ const { variant = "horizontal" } = defineProps<{
 }>();
 
 const dividerClass = { 
-    'horizontal': variant == 'horizontal', 
-    'vertical': variant == 'vertical' 
+    'divider--horizontal': variant == 'horizontal', 
+    'divider--vertical': variant == 'vertical', 
 }
 </script>
-
-<style scoped>
-.horizontal {
-    border-bottom: 0.5px solid grey;
-}
-
-.vertical {
-    border-left: 0.5px solid grey;
-}
-</style>
