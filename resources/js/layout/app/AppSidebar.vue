@@ -29,7 +29,7 @@
                                 <Link class="sidebar__link" href="/artisan/profile">Mein Profil</Link>
                                 <Link class="sidebar__link" href="/artisan/messages">Nachrichten</Link>
                             </template>
-                            <template>
+                            <template v-else>
                                 <Link class="sidebar__link" href="/artisan/profile/create">Profil erstellen</Link>
                             </template>
                         </div>
