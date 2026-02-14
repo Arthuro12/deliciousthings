@@ -1,5 +1,5 @@
 <template>
-    <CollapsibleRoot>
+    <CollapsibleRoot v-model:open="isOpen">
         <CollapsibleTrigger :class="triggerButtonClass">
             <slot name="trigger"></slot>
         </CollapsibleTrigger>   
@@ -20,4 +20,6 @@ defineProps<{
     triggerButtonClass?: VueClass;
     contentClass?: VueClass;
 }>();
+
+const isOpen = defineModel<boolean>("open", { default: false });
 </script>
