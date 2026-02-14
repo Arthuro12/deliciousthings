@@ -1,6 +1,7 @@
 input[type="text"], 
 input[type="password"], 
-input[type="email"] {
+input[type="email"],
+input[type="number"] {
     border: 1px solid black;
     border-radius: 5px;
     padding: 12px;
@@ -9,7 +10,8 @@ input[type="email"] {
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="number"] {
     &.is-invalid {
         border: 2px solid var(--color-input-error);
     }

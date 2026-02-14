@@ -1,7 +1,11 @@
 <template>
     <div class="address-autocomplete-form">
         <div class="autocomplete-input-wrapper">
-            <input id="autocomplete-input" type="text" placeholder="Standort eingeben" />
+            <input 
+                id="autocomplete-input" 
+                type="text" 
+                placeholder="Standort eingeben (optional)" 
+            />
             <MapPinIcon :style="{ color: 'var(--color-neutral-30)' }" />
         </div>
         <div class="suggestion-list-wrapper">
@@ -29,12 +33,11 @@ import { FAKE_ADDRESS_SUGGESTIONS } from "@/fake-data";
     .autocomplete-input-wrapper {
 		position: relative;
 		width: 100%;
-		margin-bottom: 16px;
 
         > input {
 			width: 100%;
             border: 1px solid var(--color-neutral-30);
-            padding: 12px 34px;
+            padding: 14px 34px;
             border-radius: 24px;
 
             &:focus-visible {
@@ -44,14 +47,14 @@ import { FAKE_ADDRESS_SUGGESTIONS } from "@/fake-data";
 
         > svg {
 			position: absolute;
-			top: 12px;
-			left: 2px;
+			top: 14px;
+			left: 5px;
         }
     }
 
 	.suggestion-list-wrapper {
 		width: 97%;
-		margin: auto;
+		margin: auto auto 16px;
 
 		ul {
 			border: 1px solid var(--color-neutral-30);
