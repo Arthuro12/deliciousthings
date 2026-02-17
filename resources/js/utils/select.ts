@@ -2,7 +2,7 @@ import { getProperty } from "@/utils/objects";
 import type { SelectItem } from "@/types/ui";
 
 /**
- * Gets the item prop.
+ * Gets the item prop value.
  * 
  * @param item 
  * @param prop 
