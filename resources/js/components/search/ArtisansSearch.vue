@@ -44,8 +44,8 @@
 							<template #trigger>
 								<header class="services-filter-header">
 									<span class="truncate">Abholart und Durchschnittspreis (in Euro)</span>
-									<PlusIcon v-show="!servicesContentIsVisible" />
-									<MinusIcon v-show="servicesContentIsVisible" />
+									<PlusIcon v-show="!servicesContentIsVisible" color="#696c70" />
+									<MinusIcon v-show="servicesContentIsVisible" color="#696c70" />
 								</header>
 							</template>
 							<template #content>
@@ -146,6 +146,12 @@ onMounted(async () => {
 		margin-top: 20px;
 		width: 100%;
 	}
+
+	@media (max-height: 668px) {
+		max-height: 420px;
+		overflow-y: auto;
+		scrollbar-width: none;
+	}
 }
 
 .filter-options {
@@ -154,6 +160,7 @@ onMounted(async () => {
 	row-gap: 16px;
 
 	:deep(> .select__dropdown-button) {
+		border: 1px solid var(--color-neutral-30);
 		width: 100%;
 	}
 
@@ -170,7 +177,7 @@ onMounted(async () => {
 		}
 
 		.service-options {
-			margin: 0 12px 24px 12px;
+			margin: 12px 12px 24px 12px;
 		}
 	}
 
@@ -187,17 +194,17 @@ onMounted(async () => {
 			flex-direction: column;
 			gap: 12px;
 
+			> .price-input :deep(> input) {
+				border: 1px solid var(--color-neutral-30);
+			}
+
+			> .price-input :deep(> label) {
+				font-size: 14px;
+			}
+
 			@include breakpoints.respond-to('medium') {
 				flex-direction: row;
 			}
-		}
-
-		> .price-input :deep(> input) {
-			border: 1px solid var(--color-neutral-30);
-		}
-
-		> .price-input :deep(> label) {
-			font-size: 14px;
 		}
 	}
 }
