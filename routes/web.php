@@ -7,10 +7,13 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Artisan\ProfileController;
 use App\Http\Controllers\Artisan\MessageController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
+
+Route::get('/search', SearchController::class);
 
 Route::controller(RegistrationController::class)->group(function () {
     Route::get('/register', 'create')->name('register.create');

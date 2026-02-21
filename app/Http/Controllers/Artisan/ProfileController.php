@@ -222,7 +222,7 @@ class ProfileController extends Controller
             'baked_goods.*.name' => 'required|string',
             'baked_goods.*.label' => 'required|string',
         ]);
-
+        
         $selectedBakedGoods = Arr::map($attrs['baked_goods'], function ($value) {
             return $value['key'];
         });

@@ -1,5 +1,8 @@
 <template>
-    <form class="form__group">
+    <form 
+        class="form__group"
+        @submit.prevent="onSubmit"
+    >
         <ShowError v-if="loginErrorMessage" :message="loginErrorMessage" />
         <div class="form__control">
             <label for="email">E-Mail *</label>
@@ -31,7 +34,6 @@
             type="submit"
             variant="primary"
             size="medium"
-            @click.prevent="onSubmit"
         >
             <template #text>Einloggen</template>
         </AppButton>

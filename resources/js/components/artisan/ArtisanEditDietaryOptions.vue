@@ -3,6 +3,7 @@
         <slot name="header"></slot>
         <RekaSelect 
             placeholder="Ernährungsformen auswählen" 
+            show-item-indicator
             :items="options"
             label-prop="label"
             value-prop="key"

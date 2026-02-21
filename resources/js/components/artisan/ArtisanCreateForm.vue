@@ -12,6 +12,7 @@
                 <header>Angebotene Backwaren</header>
                 <RekaSelectGroup 
                     placeholder="Backwaren auswählen" 
+                    show-item-indicator
                     :groups="bakedGoodsGroups"
                     label-prop="label"
                     value-prop="key"
@@ -25,6 +26,7 @@
                 <header>Angebotene Ernährungsformen</header>
                 <RekaSelect 
                     placeholder="Ernährungsformen auswählen" 
+                    show-item-indicator
                     :items="dietaryOptionStore.dietaryOptions"
                     label-prop="label"
                     value-prop="key"

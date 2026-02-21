@@ -6,8 +6,8 @@
 
         <main class="home-page">
             <div>   
-                <section class="hero-section">   
-                    <h1 class="page-title">Finden Sie passende<br /> Konditor/-innen und<br /> Bäcker/-innen</h1>
+                <section class="hero-section"> 
+                    <h1 class="page-title">Finden Sie passende<br />Konditor/-innen und Bäcker/-innen</h1>
                     <ArtisansSearch />
                 </section>
             </div>
@@ -25,13 +25,14 @@ import ArtisansSearch from "@/components/search/ArtisansSearch.vue";
 <style scoped>
 .home-page {
     --title-font-weight: 400;
-    --title-font-size: 2.5rem;
+    --title-font-size: 2rem;
 
     .page-title {
         font-weight: var(--title-font-weight);
         font-size: var(--title-font-size);
         color: var(--color-neutral-50);
         text-align: center;
+        width: 100%;
     }
 
     .hero-section {
