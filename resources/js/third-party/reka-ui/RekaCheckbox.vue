@@ -42,7 +42,7 @@ const modelValue = defineModel<CheckboxValue>({ default: "indeterminate" });
     &__root {
         height: 22px;
         width: 22px;
-        border: 1px solid var(--color-neutral-10);
+        border: 1px solid var(--color-neutral-20);
         border-radius: 5px;
         padding: 2px;
     }
