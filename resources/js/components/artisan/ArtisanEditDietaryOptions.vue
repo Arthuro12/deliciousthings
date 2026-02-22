@@ -3,6 +3,7 @@
         <slot name="header"></slot>
         <RekaSelect 
             placeholder="Ernährungsformen auswählen" 
+            show-item-indicator
             :items="options"
             label-prop="label"
             value-prop="key"
@@ -12,8 +13,8 @@
         <AppButton
             class="align-end"
             type="button"
-            layout="text"
             variant="primary"
+            size="medium"
             @click="syncDietaryOptions"
         >
             <template #text>Speichern</template>

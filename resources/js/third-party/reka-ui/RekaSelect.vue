@@ -1,7 +1,7 @@
 <template>
     <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
-            <SelectValue :placeholder="placeholder" />
+            <SelectValue class="select__dropdown-text" :placeholder="placeholder" />
             <ChevronDownIcon />
         </SelectTrigger>
         <SelectPortal>
@@ -17,6 +17,9 @@
                         :value="item" 
                         :key="getItemProp(item, labelProp)"
                     >
+                        <SelectItemIndicator v-if="showItemIndicator">
+                            <CheckIcon :size="16" />
+                        </SelectItemIndicator>
                         <SelectItemText>
                             {{ getItemProp(item, labelProp) }}
                         </SelectItemText>
@@ -33,13 +36,14 @@ import {
     SelectContent,
     SelectItem,
     SelectItemText,
+    SelectItemIndicator,
     SelectPortal,
     SelectRoot,
     SelectTrigger,
     SelectViewport,
 } from "reka-ui";
 
-import { ChevronDownIcon } from "lucide-vue-next";
+import { CheckIcon, ChevronDownIcon } from "lucide-vue-next";
 
 import { getItemProp } from "@/utils/select";
 import type { SelectProps, SelectValue as SelectValueType } from "@/types/ui";

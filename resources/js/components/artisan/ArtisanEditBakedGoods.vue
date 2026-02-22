@@ -3,6 +3,7 @@
         <slot name="header"></slot>
         <RekaSelectGroup 
             placeholder="Backwaren auswählen" 
+            show-item-indicator
             :groups="options"
             label-prop="label"
             value-prop="key"
@@ -12,8 +13,8 @@
         <AppButton
             class="align-end"
             type="button"
-            layout="text"
             variant="primary"
+            size="medium"
             @click="syncBakedGoods"
         >
             <template #text>Speichern</template>

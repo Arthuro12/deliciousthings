@@ -14,14 +14,14 @@
         <TextField 
             type="text" 
             id="average-rate" 
-            label="Durchschnittspreis (in Euro)"
+            label="Durschnittlicher Einkaufspreis (€)"
             v-model="form.average_rate"
         />
         <AppButton
             class="align-end"
             type="button"
-            layout="text"
             variant="primary"
+            size="medium"
             @click="updateServices"
         >
             <template #text>Speichern</template>

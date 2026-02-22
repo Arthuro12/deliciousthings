@@ -21,6 +21,7 @@ class Artisan extends Model
         'website_url',
         'instagram_url',
         'average_rate',
+        'price_level',
         'offers_delivery',
         'pick_up_on_site'
     ];
