@@ -28,7 +28,10 @@
     }
 
     &__item {
+        display: flex;
+        align-items: center;
         padding: 8px;
+        column-gap: 8px;
         cursor: pointer;
     }
 

@@ -1,7 +1,8 @@
 <template>
     <div class="address-autocomplete-form">
         <div class="autocomplete-input-wrapper">
-            <input 
+            <input
+                class="truncate" 
                 id="autocomplete-input" 
                 type="text" 
                 placeholder="Standort eingeben (optional)" 

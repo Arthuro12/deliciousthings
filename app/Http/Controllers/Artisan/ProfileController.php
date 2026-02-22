@@ -17,6 +17,7 @@ use App\Models\Media;
 use App\Models\BakedGood;
 use App\Models\DietaryOption;
 use App\Models\Address;
+use App\Enums\PriceLevel;
 use App\Http\Requests\CreateArtisanRequest;
 use App\Mail\MessageSent;
 use App\Services\ArtisanService;
@@ -74,6 +75,9 @@ class ProfileController extends Controller
         $attrs = $request->validated();
         $user = $request->user(); // Stores the request author to keep it up to date. 
 
+        $rate = intval($attrs['average_rate']);
+        $price_level = PriceLevel::fromPrice($rate);
+
         $artisan = new Artisan([
             'name' => $attrs['name'],
             'company_name' => $attrs['company_name'],
@@ -83,6 +87,7 @@ class ProfileController extends Controller
             'website_url' => $attrs['website_url'],
             'instagram_url' => $attrs['instagram_url'],
             'average_rate' => $attrs['average_rate'],
+            'price_level' => $price_level,
             'offers_delivery' => $attrs['offers_delivery'],
             'pick_up_on_site' => $attrs['pick_up_on_site'],
         ]);
@@ -222,7 +227,7 @@ class ProfileController extends Controller
             'baked_goods.*.name' => 'required|string',
             'baked_goods.*.label' => 'required|string',
         ]);
-
+        
         $selectedBakedGoods = Arr::map($attrs['baked_goods'], function ($value) {
             return $value['key'];
         });
@@ -318,10 +323,14 @@ class ProfileController extends Controller
             'average_rate' => 'required|string',
         ]);
 
+        $rate = intval($attrs['average_rate']);
+        $price_level = PriceLevel::fromPrice($rate);
+
         $request->user()->artisan->update([
             'offers_delivery' => $attrs['offers_delivery'],
             'pick_up_on_site' => $attrs['pick_up_on_site'],
             'average_rate' => $attrs['average_rate'],
+            'price_level' => $price_level,
         ]);
 
         return back()->with('success', __('Artisan profile successfully updated.'));

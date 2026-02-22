@@ -3,6 +3,7 @@
         <slot name="header"></slot>
         <RekaSelectGroup 
             placeholder="Backwaren auswählen" 
+            show-item-indicator
             :groups="options"
             label-prop="label"
             value-prop="key"
