@@ -92,7 +92,7 @@
                 <TextField 
                     type="text" 
                     id="average-rate" 
-                    label="Durchschnittspreis (in Euro)"
+                    label="Durschnittlicher Einkaufspreis (€)"
                     v-model="artisan.average_rate"
                 ></TextField>
             </div>

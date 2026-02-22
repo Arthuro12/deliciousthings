@@ -14,7 +14,7 @@
         <TextField 
             type="text" 
             id="average-rate" 
-            label="Durchschnittspreis (in Euro)"
+            label="Durschnittlicher Einkaufspreis (€)"
             v-model="form.average_rate"
         />
         <AppButton
