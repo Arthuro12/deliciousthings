@@ -27,7 +27,7 @@
 							label-prop="label"
 							value-prop="key"
 							multiple
-							v-model:selected-value="selectedBakedGoods"
+							v-model:selected-value="form.goods"
 						/>
 						<RekaSelect 
 							class="search-filter"
@@ -37,7 +37,7 @@
 							label-prop="label"
 							value-prop="key"
 							multiple
-							v-model:selected-value="selectedDietaryOptions"
+							v-model:selected-value="form.dietary_options"
 						/>
 						<RekaCollapsible 
 							class="services-filter" 
@@ -56,32 +56,17 @@
 										<RekaCheckbox 
 											id="pick-up-on-site"
 											label="Lieferung angeboten"
-											v-model="offersDelivery"
+											v-model="form.offers_delivery"
 										/>
 										<RekaCheckbox 
 											id="offers-delivery"
 											label="Abholung vor Ort"
-											v-model="pickUpOnSite"
+											v-model="form.pick_up_on_site"
 										/>
 									</div>
-									<div class="average-rate-wrapper form__group">
-										<header>Preis</header>
-										<div class="average-rate">
-											<TextField 
-												class="price-input" 
-												id="min-price" 
-												type="number" 
-												label="Von (€)"
-												v-model="minPrice"
-											/>
-											<TextField 
-												class="price-input" 
-												id="max-price" 
-												type="number"
-												label="Bis (€)"
-												v-model="maxPrice"
-											/>
-										</div>
+									<div class="price-levels-wrapper form__group">
+										<header>Preiskategorie</header>
+										<PriceLevelSelect @updated="(value) => form.price_levels = [...value]" />
 									</div>
 								</div>
 							</template>
@@ -103,7 +88,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { router } from "@inertiajs/vue3";
+import { router, useForm } from "@inertiajs/vue3";
 
 import { 
 	MinusIcon,
@@ -112,46 +97,51 @@ import {
 } from "lucide-vue-next";
 
 import AppButton from "../presentation/AppButton.vue";
-import TextField from "../presentation/TextField.vue";
 import RekaCollapsible from "@/third-party/reka-ui/RekaCollapsible.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 import AddressSearchInput from "./AddressSearchInput.vue";
+import PriceLevelSelect from "./PriceLevelSelect.vue";
 
 import { useBakedGoodStore } from "@/stores/baked-good";
 import { useDietaryOptionStore } from "@/stores/dietary-option";
 import type { BakedGood, DietaryOption } from "@/types/users";
 
-export type PriceRange = {
-	min_price: string;
-	max_price: string;
-};
-
-export type FilterOptions = {
-	offers_delivery?: boolean;
-	pick_up_on_site?: boolean;
+export type SearchFormData = {
+	goods: BakedGood[];
+	dietary_options?: DietaryOption[];
+	price_levels?: string[];
+	offers_delivery?: boolean | null;
+	pick_up_on_site?: boolean | null;
 };
 
 export type SearchFilters = {
 	goods: string[];
 	dietary_options?: string[];
-	price_range?: PriceRange;
-	options?: FilterOptions;
+	price_levels?: string[];
+	offers_delivery?: boolean | null;
+	pick_up_on_site?: boolean | null;
 };
 
 const bakedGoodStore = useBakedGoodStore();
 const dietaryOptionStore = useDietaryOptionStore();
 
-const selectedBakedGoods = ref<BakedGood[]>([]);
-const selectedDietaryOptions = ref<DietaryOption[]>([]);
-const minPrice = ref("");
-const maxPrice = ref("");
-const offersDelivery = ref(false);
-const pickUpOnSite = ref(false);
+const form = useForm<SearchFormData>("ArtisanSearch", {
+	goods: [],
+	dietary_options: [],
+	price_levels: [],
+	offers_delivery: null,
+	pick_up_on_site: null,
+});
 
 const servicesContentIsVisible = ref(false);
 
+/**
+ * Builds search URL query string.
+ * 
+ * @param filters 
+ */
 function buildSearchParameters(filters: SearchFilters): string {
 	const params = new URLSearchParams();
 
@@ -162,15 +152,14 @@ function buildSearchParameters(filters: SearchFilters): string {
 	if (filters.dietary_options && filters.dietary_options.length > 0) {
 		params.set("dietary_option", filters.dietary_options.join(","))
 	}
-	if (filters.price_range) {
-		params.set("min_price", filters.price_range.min_price);
-		params.set("max_price", filters.price_range.max_price);
+	if (filters.price_levels && filters.price_levels.length > 0) {
+		params.set("price_levels", filters.price_levels.join(","));
 	}
-	if (filters.options) {
-		const options = Object.entries(filters.options);
-		options.forEach(([key, value]) => {
-			params.set(key, JSON.stringify(value ? 1 : 0));
-		});
+	if (filters.offers_delivery != null) {
+		params.set("price_levels", JSON.stringify(filters.offers_delivery));
+	}
+	if (filters.pick_up_on_site != null) {
+		params.set("price_levels", JSON.stringify(filters.pick_up_on_site));
 	}
 
 	return params.toString();
@@ -180,25 +169,20 @@ function buildSearchParameters(filters: SearchFilters): string {
  * Search for artisan profiles.
  */
 function onSearch(): void {
-	if (!selectedBakedGoods.value || selectedBakedGoods.value.length == 0) {
+	if (!form.goods || form.goods.length == 0) {
 		return;
 	}
 
 	const filters: SearchFilters = {
-		goods: selectedBakedGoods.value.map(good => good.key),
-		dietary_options: selectedDietaryOptions.value.map(option => option.key),
-		price_range: {
-			min_price: minPrice.value, 
-			max_price: maxPrice.value
-		},
-		options: {
-			offers_delivery: offersDelivery.value,
-			pick_up_on_site: pickUpOnSite.value,
-		},
+		goods: form.goods.map(good => good.key),
+		dietary_options: form.dietary_options?.map(good => good.key),
+		price_levels: form.price_levels,
+		offers_delivery: form.offers_delivery,
+		pick_up_on_site: form.pick_up_on_site,
 	};
 	const urlParams = buildSearchParameters(filters);
 	const searchURL = `/search?${urlParams}`;
-	router.get(searchURL);
+	router.visit(searchURL);
 }
 
 onMounted(async () => {
@@ -264,26 +248,8 @@ onMounted(async () => {
 		justify-content: space-between;
 	}
 
-	.average-rate-wrapper {
+	.price-levels-wrapper {
 		margin-top: 16px;
-
-		.average-rate {
-			display: flex;
-			flex-direction: column;
-			gap: 12px;
-
-			> .price-input :deep(> input) {
-				border: 1px solid var(--color-neutral-30);
-			}
-
-			> .price-input :deep(> label) {
-				font-size: 14px;
-			}
-
-			@include breakpoints.respond-to('medium') {
-				flex-direction: row;
-			}
-		}
 	}
 }
 </style>

@@ -42,3 +42,11 @@ export type SelectGroupProps = {
     valueProp?: string;
     multiple?: boolean;
 };
+
+export type Checkbox = {
+    as?: string;
+    id?: string;
+    name?: string;
+    label?: string;
+    value?: string;
+};

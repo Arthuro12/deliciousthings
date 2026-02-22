@@ -3,15 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Artisan\ProfileController;
 use App\Http\Controllers\Artisan\MessageController;
 use App\Http\Controllers\SearchController;
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/search', SearchController::class);
 

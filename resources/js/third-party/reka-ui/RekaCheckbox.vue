@@ -4,6 +4,8 @@
             class="checkbox__root" 
             :as="as" 
             :id="id"
+            :name="name"
+            :value="value"
             v-model="modelValue"
         >
             <CheckboxIndicator>
@@ -19,13 +21,13 @@ import { CheckboxIndicator, CheckboxRoot } from "reka-ui";
 
 import { CheckIcon } from "lucide-vue-next";
 
-type CheckboxValue = "indeterminate" | boolean | null;
+import type { Checkbox } from "@/types/ui";
 
-defineProps<{
-    as?: string;
-    id?: string;
-    label: string;
-}>();
+export type CheckboxValue = "indeterminate" | boolean | null;
+
+export type CheckboxProps = Checkbox;
+
+defineProps<CheckboxProps>();
 
 const modelValue = defineModel<CheckboxValue>({ default: "indeterminate" });
 </script>
