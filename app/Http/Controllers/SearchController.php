@@ -48,7 +48,7 @@ class SearchController extends Controller
             $artisans->where('offers_delivery', $request->query('offers_delivery'));
         }
         if ($request->has('pick_up_on_site')) {
-            $artisans->where('pick_up_on_site', $request->query('pick_up_on_site'));
+            $artisans->orWhere('pick_up_on_site', $request->query('pick_up_on_site'));
         }
         
         $collections = $artisans->get()->map(function ($collection) {

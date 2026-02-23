@@ -48,9 +48,19 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .wrapper {
     .artisans-search {
+        width: 100%;
+
         :deep(.search-button) {
             border: 1px solid var(--color-neutral-30);
+            width: 150px;
+            margin: auto;
         }
+    }
+
+    > .search {
+        display: flex;
+        justify-content: center;
+        padding: 24px 0;
     }
 
     .search-results {

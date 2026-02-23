@@ -156,10 +156,10 @@ function buildSearchParameters(filters: SearchFilters): string {
 		params.set("price_levels", filters.price_levels.join(","));
 	}
 	if (filters.offers_delivery != null) {
-		params.set("price_levels", JSON.stringify(filters.offers_delivery));
+		params.set("offers_delivery", JSON.stringify(filters.offers_delivery ? 1 : 0));
 	}
 	if (filters.pick_up_on_site != null) {
-		params.set("price_levels", JSON.stringify(filters.pick_up_on_site));
+		params.set("pick_up_on_site", JSON.stringify(filters.pick_up_on_site ? 1 : 0));
 	}
 
 	return params.toString();
@@ -182,7 +182,7 @@ function onSearch(): void {
 	};
 	const urlParams = buildSearchParameters(filters);
 	const searchURL = `/search?${urlParams}`;
-	router.visit(searchURL);
+	router.visit(searchURL, { preserveState: true });
 }
 
 onMounted(async () => {
