@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Artisan;
 
 use Inertia\Inertia;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +25,7 @@ class ProfileController extends Controller
 {
 
     public function __construct(
-        public ArtisanService $artisanService,
+        private ArtisanService $artisanService,
     ) {}
 
     public function create()
@@ -38,15 +37,13 @@ class ProfileController extends Controller
     {
         $artisan = $request->user()->artisan;
 
-        $profilePhoto = $this->artisanService->getProfilePhoto($artisan);
         $profile = $this->artisanService
             ->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
-        $gallery = $this->artisanService->getGallery($artisan);
+        $profile['profile_photo'] = $this->artisanService->getProfilePhoto($artisan);
+        $profile['gallery'] = [...$this->artisanService->getGallery($artisan)];
 
         return Inertia::render('artisan/EditArtisan', [
             'artisan' => $profile,
-            'profile_photo' => $profilePhoto,
-            'gallery' => [...$gallery],
         ]);
     }
 
@@ -57,16 +54,13 @@ class ProfileController extends Controller
             return to_route('artisan.profile.create')->with('info', __('No existing profile.'));
         }
 
-        
-        $profilePhoto = $this->artisanService->getProfilePhoto($artisan);
         $profile = $this->artisanService
             ->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
-        $gallery = $this->artisanService->getGallery($artisan);
+        $profile['profile_photo'] = $this->artisanService->getProfilePhoto($artisan);
+        $profile['gallery'] = [...$this->artisanService->getGallery($artisan)];
 
         return Inertia::render('artisan/ShowArtisan', [
             'artisan' => $profile,
-            'profile_photo' => $profilePhoto,
-            'gallery' => [...$gallery],
         ]);
     }
 

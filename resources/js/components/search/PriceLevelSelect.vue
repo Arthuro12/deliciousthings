@@ -6,15 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
-
 import RekaCheckboxGroup from "@/third-party/reka-ui/RekaCheckboxGroup.vue";
 
 import type { Checkbox } from "@/types/ui";
-
-const emit = defineEmits<{
-    (e: "updated", value: string[]): void;
-}>();
 
 const checkboxes: Checkbox[] = [
     { 
@@ -37,9 +31,5 @@ const checkboxes: Checkbox[] = [
     }
 ];
 
-const value = ref<string[]>([]);
-
-watch(value, (newValue) => {
-    emit("updated", newValue);
-});
+const value = defineModel<string[]>({ default: [] });
 </script>

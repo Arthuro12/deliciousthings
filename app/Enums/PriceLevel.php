@@ -14,16 +14,16 @@ enum PriceLevel: string
             PriceLevel::Inexpensive => '€',
             PriceLevel::Moderate => '€€',
             PriceLevel::HigherEnd => '€€€',
-            default => '',
+            default => '€€€',
         };
     }
 
     public static function fromPrice(int $price) 
     {
         return match(true) {
-            $price <= 15 => PriceLevel::Inexpensive,
-            $price <= 30 => PriceLevel::Moderate,
-            $price > 60 => PriceLevel::HigherEnd,
+            $price <= 35 => PriceLevel::Inexpensive,
+            $price <= 60 => PriceLevel::Moderate,
+            $price <= 100 => PriceLevel::HigherEnd,
             default => PriceLevel::HigherEnd,
         };
     }

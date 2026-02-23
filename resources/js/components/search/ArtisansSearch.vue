@@ -66,7 +66,7 @@
 									</div>
 									<div class="price-levels-wrapper form__group">
 										<header>Preiskategorie</header>
-										<PriceLevelSelect @updated="(value) => form.price_levels = [...value]" />
+										<PriceLevelSelect v-model="form.price_levels" />
 									</div>
 								</div>
 							</template>
@@ -111,7 +111,7 @@ import type { BakedGood, DietaryOption } from "@/types/users";
 export type SearchFormData = {
 	goods: BakedGood[];
 	dietary_options?: DietaryOption[];
-	price_levels?: string[];
+	price_levels: string[];
 	offers_delivery?: boolean | null;
 	pick_up_on_site?: boolean | null;
 };
@@ -119,7 +119,7 @@ export type SearchFormData = {
 export type SearchFilters = {
 	goods: string[];
 	dietary_options?: string[];
-	price_levels?: string[];
+	price_levels: string[];
 	offers_delivery?: boolean | null;
 	pick_up_on_site?: boolean | null;
 };
@@ -152,14 +152,14 @@ function buildSearchParameters(filters: SearchFilters): string {
 	if (filters.dietary_options && filters.dietary_options.length > 0) {
 		params.set("dietary_option", filters.dietary_options.join(","))
 	}
-	if (filters.price_levels && filters.price_levels.length > 0) {
+	if (filters.price_levels.length > 0) {
 		params.set("price_levels", filters.price_levels.join(","));
 	}
 	if (filters.offers_delivery != null) {
-		params.set("price_levels", JSON.stringify(filters.offers_delivery));
+		params.set("offers_delivery", JSON.stringify(filters.offers_delivery ? 1 : 0));
 	}
 	if (filters.pick_up_on_site != null) {
-		params.set("price_levels", JSON.stringify(filters.pick_up_on_site));
+		params.set("pick_up_on_site", JSON.stringify(filters.pick_up_on_site ? 1 : 0));
 	}
 
 	return params.toString();
@@ -182,7 +182,7 @@ function onSearch(): void {
 	};
 	const urlParams = buildSearchParameters(filters);
 	const searchURL = `/search?${urlParams}`;
-	router.visit(searchURL);
+	router.visit(searchURL, { preserveState: true });
 }
 
 onMounted(async () => {

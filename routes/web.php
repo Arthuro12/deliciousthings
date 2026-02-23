@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Artisan\ProfileController;
+use App\Http\Controllers\Artisan\PublicProfileController;
 use App\Http\Controllers\Artisan\MessageController;
 use App\Http\Controllers\SearchController;
 
@@ -53,3 +54,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/artisan/messages', 'store');
     });
 });
+
+Route::get('/artisan/{artisan:name}', [PublicProfileController::class, 'show']);

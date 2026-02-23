@@ -23,8 +23,7 @@
         border: 1px solid var(--color-neutral-50);
         border-radius: 5px;
         width: var(--reka-select-trigger-width);
-        max-height: 400px;
-        overflow-y: auto;
+        max-height: var(--reka-select-content-available-height);
     }
 
     &__item {
@@ -44,6 +43,12 @@
     &__item[data-highlighted] {
         background-color: var(--color-primary-10);
         border-radius: 5px;
+    }
+
+    &__scroll-button {
+        display: flex;
+        justify-content: center;
+        height: 25px;
     }
 }
 

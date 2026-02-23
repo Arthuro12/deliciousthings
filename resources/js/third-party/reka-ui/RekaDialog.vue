@@ -1,24 +1,26 @@
 <template>
-    <DialogRoot>
-        <DialogTrigger as="div">
-            <slot name="trigger"></slot>
-        </DialogTrigger>
-        <DialogPortal>
-            <DialogOverlay class="app-overlay" />
-            <DialogContent class="dialog__content">
-                <div>
-                    <div class="dialog__title">
-                        <DialogTitle as="h4">{{ title }}</DialogTitle>
-                        <DialogClose><XIcon /></DialogClose>
-                    </div>
+    <div>
+        <DialogRoot>
+            <DialogTrigger as="div">
+                <slot name="trigger"></slot>
+            </DialogTrigger>
+            <DialogPortal>
+                <DialogOverlay class="app-overlay" />
+                <DialogContent class="dialog__content">
                     <div>
-                        <DialogDescription as="div"><slot name="description"></slot></DialogDescription>
+                        <div class="dialog__title">
+                            <DialogTitle as="h4">{{ title }}</DialogTitle>
+                            <DialogClose><XIcon /></DialogClose>
+                        </div>
+                        <div>
+                            <DialogDescription as="div"><slot name="description"></slot></DialogDescription>
+                        </div>
                     </div>
-                </div>
-                <slot></slot>
-            </DialogContent>
-        </DialogPortal>
-    </DialogRoot>
+                    <slot></slot>
+                </DialogContent>
+            </DialogPortal>
+        </DialogRoot>
+    </div>
 </template>
 
 <script setup lang="ts">
