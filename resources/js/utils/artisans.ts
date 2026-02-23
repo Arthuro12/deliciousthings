@@ -1,5 +1,7 @@
+import { PriceLevel } from "@/enums";
 import type { 
     Address, 
+    ArtisanProfile,
     ArtisanPublicProfile, 
     BasicProfile,
     Media, 
@@ -28,7 +30,7 @@ export function defaultAddress(): Address {
  * 
  * @returns A default artisan profile.
  */
-export function defaultArtisan(): ArtisanPublicProfile {
+export function defaultArtisan(): ArtisanProfile {
     return {
         name: "",
         company_name: "",
@@ -48,7 +50,7 @@ export function defaultArtisan(): ArtisanPublicProfile {
     };
 }
 
-export function getBasicProfile(profile: ArtisanPublicProfile): BasicProfile {
+export function getBasicProfile(profile: ArtisanProfile | ArtisanPublicProfile): BasicProfile {
     return {
         name: profile.name,
         company_name: profile.company_name,
@@ -57,3 +59,21 @@ export function getBasicProfile(profile: ArtisanPublicProfile): BasicProfile {
         about: profile.about,
     };
 };
+
+export function getPriceDisplay(price: string): string {
+    if (! price.endsWith("€")) return `${price} €`;
+    return price;
+}
+
+export function getPriceLevelSymbol(level: PriceLevel) {
+    switch (level) {
+        case PriceLevel.Inexpensive:
+            return "€";
+        case PriceLevel.Moderate:
+            return "€€";
+        case PriceLevel.HigherEnd:
+            return "€€€";
+        default:
+            return "€€€";
+    }
+}

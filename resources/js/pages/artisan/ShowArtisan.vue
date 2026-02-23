@@ -15,7 +15,7 @@
                 <div class="profile__intro">
                     <ProfileAvartar 
                         class="profile__avatar" 
-                        :src="profile_photo?.url ?? ''" 
+                        :src="artisan.profile_photo?.url ?? ''" 
                         alt="Profile-Avatar"
                         :name="artisan.company_name || artisan.name" 
                     />
@@ -53,7 +53,7 @@
                     <h4>Galerie</h4>
                     <div class="gallery__preview">
                         <div 
-                            v-for="image in gallery" 
+                            v-for="image in artisan.gallery" 
                             :key="image.url" 
                         >                        
                                 <img 
@@ -74,7 +74,7 @@
                         <p v-if="artisan.offers_delivery"><CheckIcon color="#e680a5" :size="20" />Lieferdienst</p>
                         <p v-if="artisan.pick_up_on_site"><CheckIcon color="#e680a5" :size="20" />Abholung vor Ort</p>
                     </div>
-                    <div><p>Durchschnittpreis: {{ artisan.average_rate }}</p></div>
+                    <div><p>Durchschnittpreis: {{ getPriceDisplay(artisan.average_rate) }}</p></div>
                 </div>
                 <div v-show="showNetworkInfo">
                     <h4>Netzwerk</h4>
@@ -106,13 +106,12 @@ import AddressPreview from "@/components/address/AddressPreview.vue";
 import ContactArtisan from "@/components/artisan/ArtisanContactDialog.vue";
 
 import { useAlert } from "@/composables/use-alert";
-import { FlashProps } from "@/types/ui";
-import type { ArtisanProfile, Image } from "@/types/users";
+import { getPriceDisplay } from "@/utils/artisans";
+import type { FlashProps } from "@/types/ui";
+import type { ArtisanPublicProfile } from "@/types/users";
 
-const { flash, artisan, gallery, } = defineProps<{
-    artisan: ArtisanProfile;
-    profile_photo?: Image;
-    gallery: Image[];
+const { artisan, flash } = defineProps<{
+    artisan: ArtisanPublicProfile;
     flash: FlashProps;
 }>();
 

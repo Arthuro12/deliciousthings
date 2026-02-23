@@ -4,7 +4,7 @@
             <AvatarImage 
                 class="avatar__image" 
                 :src="src" 
-                :alt="alt" 
+                :alt="alt"
             />
             <AvatarFallback class="avatar__fallback">{{ avatarText }}</AvatarFallback>
         </AvatarRoot>
@@ -16,6 +16,8 @@ import { computed } from "vue";
 
 import { AvatarRoot, AvatarImage, AvatarFallback } from "reka-ui";
 
+import { getNameIntials } from "@/utils/users";
+ 
 const { src, alt = "", name } = defineProps<{
     src: string;
     alt?: string;
@@ -25,18 +27,7 @@ const { src, alt = "", name } = defineProps<{
     name?: string;
 }>();
 
-const avatarText = computed(() => getAvatarText(name ?? ""));
-
-/**
- * Gets the fallback text to display in the when to image hasn't loaded.
- * 
- * @param text 
- */
-function getAvatarText(text: string): string {
-    const fragments = text.split(" ").slice(0, 2);
-    const output = fragments.map(fragment => fragment.slice(0, 1).toUpperCase()).join("");
-    return output;
-}
+const avatarText = computed(() => getNameIntials(name ?? ""));
 </script>
 
 <style scoped lang="scss">
@@ -46,6 +37,8 @@ function getAvatarText(text: string): string {
     &__image,
     &__fallback {
         border-radius: 50%;
+        width: 100%;
+        height: 100%;
         width: 120px;
         height: 120px;
 

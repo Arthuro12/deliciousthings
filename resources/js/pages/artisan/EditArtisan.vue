@@ -8,7 +8,7 @@
                 <ArtisanProfilePhotoForm 
                     class="artisan-profile-photo-form" 
                     :profile-name="artisan.company_name || artisan.name" 
-                    :profile-photo="profile_photo"
+                    :profile-photo="artisan.profile_photo"
                 />
                 <RekaCollapsible 
                     class="artisan-collapsible" 
@@ -73,7 +73,7 @@
                         <p>Fotogalerie</p><ChevronDownIcon :size="20" />
                     </template>
                     <template #content>
-                        <ArtisanGalleryForm :gallery="gallery" />
+                        <ArtisanGalleryForm :gallery="artisan.gallery" />
                     </template>
                 </RekaCollapsible> 
                 <RekaCollapsible 
@@ -138,17 +138,10 @@ import type {
     Address,
     ArtisanPublicProfile, 
     GroupedBakedGoods,
-    Image, 
 } from "@/types/users";
 
-const { 
-    artisan,
-    profile_photo, 
-    gallery 
-} = defineProps<{
+const { artisan, } = defineProps<{
     artisan: ArtisanPublicProfile;
-    profile_photo?: Image;
-    gallery: Image[];
 }>();
 
 const bakedGoodStore = useBakedGoodStore();

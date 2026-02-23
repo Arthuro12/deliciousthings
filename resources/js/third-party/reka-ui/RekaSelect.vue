@@ -25,6 +25,10 @@
                         </SelectItemText>
                     </SelectItem>
                 </SelectViewport>
+
+                <SelectScrollDownButton class="select__scroll-button">
+                    <ChevronDownIcon />
+                </SelectScrollDownButton>
             </SelectContent>
         </SelectPortal>
     </SelectRoot>
@@ -41,6 +45,7 @@ import {
     SelectRoot,
     SelectTrigger,
     SelectViewport,
+    SelectScrollDownButton,
 } from "reka-ui";
 
 import { CheckIcon, ChevronDownIcon } from "lucide-vue-next";
