@@ -13,7 +13,7 @@ export async function get<T>(url: string): Promise<Response<T>> {
             const json = await response.json();
             data = json.data;
         }
-    } catch(err: any) {
+    } catch (err: any) {
         error = err;
     }
 

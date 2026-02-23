@@ -1,5 +1,9 @@
 <template>
-    <Link class="artisan-card card" :href="`/artisan/${artisan.name}`">
+    <a 
+        class="artisan-card card" 
+        :href="`/artisan/${artisan.name}`" 
+        target="_blank"
+    >
         <img class="artisan-image" :src="artisan.profile_photo?.url ?? chefHatFallback" />
         <div class="artisan-details">
             <div>
@@ -8,12 +12,11 @@
             </div>
             <span>{{ priceDetails }}</span>
         </div>
-    </Link>
+    </a>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { Link } from "@inertiajs/vue3";
 
 import chefHatFallback from "../../../../images/chef-hat-fallback.webp";
 
@@ -25,7 +28,7 @@ const { artisan } = defineProps<{
 }>();
 
 const priceDetails = computed(() => {
-    return `${getPriceDisplay(artisan.average_rate)}${artisan.price_level ? ` . ${getPriceLevelSymbol(artisan.price_level)}` : ''}`;
+    return `${getPriceDisplay(artisan.average_rate)}${artisan.price_level ? ` | ${getPriceLevelSymbol(artisan.price_level)}` : ''}`;
 });
 </script>
 
