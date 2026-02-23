@@ -16,7 +16,11 @@
                     v-for="result in suggestions" 
                     :key="result"
                 >
-                    <button class="select-location-button">
+                    <button 
+                        class="select-location-button"
+                        type="button"  
+                        @click="selectLocation(result)"
+                    >
                         <StoreIcon :style="{ color: 'var(--color-primary-50)' }" />
                         <span>{{ result}}</span>
                     </button>
@@ -37,9 +41,18 @@ const MIN_ADDRESS_LENGHT = 3;
 const DEBOUNCE_DELAY = 500;
 let currentTimeout = 0;
 
+const emit = defineEmits<{
+    (e: "change", value: string): void;
+}>();
+
 const searchTerm = ref("");
 const suggestions = ref<string[]>([]);
 const selectedLocation = ref("");
+
+function selectLocation(location: string): void {
+    selectedLocation.value = location;
+    emit("change", selectedLocation.value);
+}
 
 async function triggerSuggestionSearch(input: string): Promise<void> {
     if (searchTerm.value.length < MIN_ADDRESS_LENGHT) return;
