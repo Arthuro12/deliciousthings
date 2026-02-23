@@ -30,9 +30,9 @@ import { useAlert } from "@/composables/use-alert";
 import { defaultArtisan } from "@/utils/artisans";
 import type { FlashProps, FileValue } from "@/types/ui";
 import type { Auth } from "@/types/users";
-import type { ArtisanPublicProfile } from "@/types/users";
+import type { ArtisanProfile } from "@/types/users";
 
-export type ProfileFormData = ArtisanPublicProfile & { gallery: FileValue };
+export type ProfileFormData = ArtisanProfile & { gallery: FileValue };
 
 const { auth, flash } = defineProps<{
     auth: Auth;
@@ -47,7 +47,7 @@ const {
 const formData: ProfileFormData = Object.assign(defaultArtisan(), { gallery: null });
 const artisanForm = useForm<ProfileFormData>(formData);
 
-function submit(artisan: ArtisanPublicProfile): void {
+function submit(artisan: ArtisanProfile): void {
     try {
         if (!auth.user) {
             throw new Error("Can not create profile.");

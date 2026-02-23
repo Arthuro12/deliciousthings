@@ -49,9 +49,9 @@ import ProfileAvartar from "../profile/ProfileAvartar.vue";
 import type { FileValue } from "@/types/ui";
 import type { Image } from "@/types/users";
 
-const { profilePhoto } = defineProps<{
+const { profilePhoto = null } = defineProps<{
     profileName: string;
-    profilePhoto?: Image;
+    profilePhoto?: Image | null;
 }>();
 
 const disableDeleteButton = computed(() => !profilePhoto);

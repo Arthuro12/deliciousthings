@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+use App\Enums\PriceLevel;
+
 class Artisan extends Model
 {
     protected $fillable = [
@@ -38,6 +40,7 @@ class Artisan extends Model
         return [
             'offers_delivery' => 'boolean',
             'pick_up_on_site' => 'boolean',
+            'price_level' => PriceLevel::class,
         ];
     }
 

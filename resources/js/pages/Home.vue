@@ -41,7 +41,7 @@ import ArtisansSearch from "@/components/search/ArtisansSearch.vue";
         justify-content: center;
         align-items: center;
         row-gap: 24px;
-        background-image: url("../../images/butter-cream.png");
+        background-image: url("../../images/butter-cream.webp");
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;

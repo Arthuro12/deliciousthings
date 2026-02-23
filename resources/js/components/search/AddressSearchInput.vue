@@ -5,18 +5,21 @@
                 class="truncate" 
                 id="autocomplete-input" 
                 type="text" 
-                placeholder="Standort eingeben (optional)" 
+                placeholder="Standort eingeben (optional)"
+                v-model="searchTerm" 
             />
             <MapPinIcon :style="{ color: 'var(--color-neutral-30)' }" />
         </div>
         <div class="suggestion-list-wrapper">
-            <ul v-show="false">
+            <ul class="suggestion-list" v-if="suggestions.length">
                 <li 
-                    v-for="result in FAKE_ADDRESS_SUGGESTIONS" 
-                    :key="result.id"
+                    v-for="result in suggestions" 
+                    :key="result"
                 >
-                    <StoreIcon :style="{ color: 'var(--color-primary-50)' }" />
-                    <span>{{ result.city }}</span>
+                    <button class="select-location-button">
+                        <StoreIcon :style="{ color: 'var(--color-primary-50)' }" />
+                        <span>{{ result}}</span>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -24,13 +27,42 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from "vue";
+
 import { MapPinIcon, StoreIcon } from "lucide-vue-next";
 
-import { FAKE_ADDRESS_SUGGESTIONS } from "@/fake-data";
+import { get } from "@/api";
+
+const MIN_ADDRESS_LENGHT = 3;
+const DEBOUNCE_DELAY = 500;
+let currentTimeout = 0;
+
+const searchTerm = ref("");
+const suggestions = ref<string[]>([]);
+const selectedLocation = ref("");
+
+async function triggerSuggestionSearch(input: string): Promise<void> {
+    if (searchTerm.value.length < MIN_ADDRESS_LENGHT) return;
+
+    const { data } = await get<string[]>(`/api/addresses/autocomplete?text=${input}`);
+    suggestions.value = [...data];
+}
+
+watch(searchTerm, (newTerm) => {
+    if (currentTimeout > 0) {
+        clearTimeout(currentTimeout);
+    }
+    
+    currentTimeout = setTimeout(() => triggerSuggestionSearch(newTerm), DEBOUNCE_DELAY);
+});
 </script>
 
 <style scoped lang="scss">
 .address-autocomplete-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
     .autocomplete-input-wrapper {
 		position: relative;
 		width: 100%;
@@ -54,22 +86,39 @@ import { FAKE_ADDRESS_SUGGESTIONS } from "@/fake-data";
     }
 
 	.suggestion-list-wrapper {
+        position: relative;;
 		width: 97%;
 		margin: auto auto 16px;
 
 		ul {
+            position: absolute;
 			border: 1px solid var(--color-neutral-30);
 			border-radius: 12px;
 			list-style-type: none;
+            width: 100%;
+            background-color: var(--color-neutral-0);
+            z-index: 1;
 
 			li {
-				display: flex;
-				align-items: center;
-				gap: 6px;
-				padding: 8px;
+                padding: 12px;
+
+                > .select-location-button {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    > span {
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
 
 				&:hover {
 					background-color: var(--color-primary-0);
+                    border-radius: 12px;
+                    cursor: pointer;
 				}
 			}
 		}

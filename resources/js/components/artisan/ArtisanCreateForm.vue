@@ -131,16 +131,16 @@ import { useDietaryOptionStore } from "@/stores/dietary-option";
 import { defaultArtisan, getBasicProfile } from "@/utils/artisans";
 import { bakedGoodsByCategory, mapGroupsToDisplayName } from "@/utils/baked-good";
 import type { FileValue } from "@/types/ui";
-import type { ArtisanPublicProfile, GroupedBakedGoods } from "@/types/users";
+import type { ArtisanProfile, GroupedBakedGoods } from "@/types/users";
 
 const emit = defineEmits<{
     (e: "photos-updated", value: FileValue): void;
-    (e: "submit", value: ArtisanPublicProfile): void;
+    (e: "submit", value: ArtisanProfile): void;
 }>();
 
 const bakedGoodStore = useBakedGoodStore();
 const dietaryOptionStore = useDietaryOptionStore();
-const artisan = ref<ArtisanPublicProfile>(defaultArtisan());
+const artisan = ref<ArtisanProfile>(defaultArtisan());
 const basicProfile = ref(getBasicProfile(artisan.value));
 const selectedFiles = ref<FileValue>([]);
 

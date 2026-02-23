@@ -1,3 +1,5 @@
+import { PriceLevel } from "@/enums";
+
 export interface Auth {
     user: User | null;
 }
@@ -53,9 +55,10 @@ export type ArtisanProfile = BasicProfile & {
     instagram_url?: string;
     website_url?: string;
     average_rate: string;
+    price_level?: PriceLevel;
     offers_delivery: boolean;
     pick_up_on_site: boolean;
-    user: User;
+    user?: User;
 };
 
 export type Message = {
@@ -67,7 +70,10 @@ export type Message = {
     content: string;
 }
 
-export type ArtisanPublicProfile = Omit<ArtisanProfile, "user">;
+export type ArtisanPublicProfile = Omit<ArtisanProfile, "user"> & {
+    profile_photo?: Image | null;
+    gallery: Image[];
+};
 
 export type BakedGood = {
     key: string;
