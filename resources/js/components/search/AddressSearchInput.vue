@@ -6,25 +6,32 @@
                 id="autocomplete-input" 
                 type="text" 
                 placeholder="Standort eingeben (optional)"
-                v-model="searchTerm" 
+                :value="locationText"
+                @input="handleInput"
             />
             <MapPinIcon :style="{ color: 'var(--color-neutral-30)' }" />
         </div>
-        <div class="suggestion-list-wrapper">
-            <ul class="suggestion-list" v-if="suggestions.length">
-                <li 
-                    v-for="result in suggestions" 
-                    :key="result"
-                >
-                    <button 
-                        class="select-location-button"
-                        type="button"  
-                        @click="selectLocation(result)"
+        <div 
+            class="suggestions-list-wrapper" 
+            v-if="isOpen"
+            ref="suggestionsListDropdown"
+        >
+            <ul class="suggestions-list">
+                <div class="suggestions-list-content">
+                    <li 
+                        v-for="result in suggestions" 
+                        :key="result"
                     >
-                        <StoreIcon :style="{ color: 'var(--color-primary-50)' }" />
-                        <span>{{ result}}</span>
-                    </button>
-                </li>
+                        <button 
+                            class="select-location-button"
+                            type="button"  
+                            @click="selectLocation(result)"
+                        >
+                            <StoreIcon class="store-icon" :style="{ color: 'var(--color-primary-50)' }" />
+                            <span>{{ result }}</span>
+                        </button>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>
@@ -38,35 +45,67 @@ import { MapPinIcon, StoreIcon } from "lucide-vue-next";
 import { get } from "@/api";
 
 const MIN_ADDRESS_LENGHT = 3;
-const DEBOUNCE_DELAY = 500;
+const DEBOUNCE_DELAY = 300;
 let currentTimeout = 0;
 
 const emit = defineEmits<{
-    (e: "change", value: string): void;
+    (e: "selected", value: string): void;
 }>();
 
-const searchTerm = ref("");
-const suggestions = ref<string[]>([]);
-const selectedLocation = ref("");
+let controller: AbortController | null = null;
 
-function selectLocation(location: string): void {
+const locationText = ref("");
+const selectedLocation = ref("");
+const searchTerm = ref(locationText.value);
+
+const suggestions = ref<string[]>([]);
+const isOpen = ref(false);
+
+function handleInput(event: Event): void {
+    locationText.value = (event.target as HTMLInputElement).value;
+    searchTerm.value = locationText.value;
+}
+
+function selectLocation(location: string): void {    
     selectedLocation.value = location;
-    emit("change", selectedLocation.value);
+    locationText.value = selectedLocation.value;
+    emit("selected", selectedLocation.value);
+    isOpen.value = false;
 }
 
 async function triggerSuggestionSearch(input: string): Promise<void> {
-    if (searchTerm.value.length < MIN_ADDRESS_LENGHT) return;
+    if (controller != null) {
+        controller.abort({ type: "AUTOCOMPLETE_ABORT", message: "User query updated." });
+    }
 
-    const { data } = await get<string[]>(`/api/addresses/autocomplete?text=${input}`);
-    suggestions.value = [...data];
+    if (input.length == 0) {
+        suggestions.value = [];
+        return;
+    } else if (input.length < MIN_ADDRESS_LENGHT) {
+        return;
+    }
+
+    controller = new AbortController();
+    try {
+        const { data } = await get<string[]>(`/api/addresses/autocomplete?text=${input}`, {
+            signal: controller.signal,
+        });
+        suggestions.value = [...data];
+    } catch (error: any) {
+        console.error(error);
+    }
 }
 
 watch(searchTerm, (newTerm) => {
     if (currentTimeout > 0) {
         clearTimeout(currentTimeout);
     }
-    
+
     currentTimeout = setTimeout(() => triggerSuggestionSearch(newTerm), DEBOUNCE_DELAY);
+});
+
+watch(suggestions, (newSuggestions) => {
+    isOpen.value = newSuggestions.length > 0;
 });
 </script>
 
@@ -75,6 +114,7 @@ watch(searchTerm, (newTerm) => {
     display: flex;
     flex-direction: column;
     row-gap: 16px;
+    margin-bottom: 16px;
 
     .autocomplete-input-wrapper {
 		position: relative;
@@ -98,30 +138,44 @@ watch(searchTerm, (newTerm) => {
         }
     }
 
-	.suggestion-list-wrapper {
-        position: relative;;
-		width: 97%;
-		margin: auto auto 16px;
+	.suggestions-list-wrapper {
+        position: relative;
+		width: 100%;
 
-		ul {
+		.suggestions-list {
             position: absolute;
 			border: 1px solid var(--color-neutral-30);
 			border-radius: 12px;
 			list-style-type: none;
             width: 100%;
+            left: 0;
+            right: 0;
+            padding: 12px 8px;
             background-color: var(--color-neutral-0);
             z-index: 1;
 
+            > .suggestions-list-content {
+                max-height: 240px;
+                overflow: auto;
+            }
+
 			li {
-                padding: 12px;
+                width: 100%;
+                padding: 8px;
 
                 > .select-location-button {
+                    width: 100%;
                     display: flex;
                     align-items: center;
                     gap: 8px;
 
+                    > .store-icon {
+                        width: 24px;
+                    }
+
                     > span {
-                        width: 100%;
+                        width: 80%;
+                        text-align: start;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
