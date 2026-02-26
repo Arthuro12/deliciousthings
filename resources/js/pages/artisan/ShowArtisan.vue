@@ -189,6 +189,7 @@ const showNetworkInfo = computed(() => artisan.website_url || artisan.instagram_
     &__image {
         width: 100%;
         height: 250px;
+        object-fit: cover;
     }
 }
 

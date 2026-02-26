@@ -24,6 +24,8 @@ class AutocompleteController extends Controller
             $response = Http::acceptJson()->get(self::API_END_POINT, [
                 'text' => $text,
                 'format' => 'json',
+                'lang' => 'de',
+                'limit' => 7,
                 'apiKey' => config('services.geoapify.key'),
             ]);
             $suggestions = array_map(function ($item) {
