@@ -76,6 +76,7 @@ function uploadPhotos(): void {
             width: 100%;
             height: 130px;
             border-radius: 5px;
+            object-fit: cover;
         }
 
         .delete-button {
