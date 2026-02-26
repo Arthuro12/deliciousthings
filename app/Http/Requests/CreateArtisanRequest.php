@@ -24,7 +24,8 @@ class CreateArtisanRequest extends FormRequest
     public function rules(): array
     {
         $address = $this->data()['first_address'];
-        $requireAddressFields = array_any($address, function ($value) {
+        $requireAddressFields = array_any($address, function ($value, $key) {
+            if ($key == 'address_line_2') return false;
             return !is_null($value);
         });
 
