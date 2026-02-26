@@ -150,7 +150,7 @@ function buildSearchParameters(filters: SearchFilters): string {
 		params.set("dietary_option", filters.dietary_options.join(","))
 	}
 	if (filters.dietary_options && filters.dietary_options.length > 0) {
-		params.set("dietary_option", filters.dietary_options.join(","))
+		params.set("dietary_options", filters.dietary_options.join(","))
 	}
 	if (filters.price_levels.length > 0) {
 		params.set("price_levels", filters.price_levels.join(","));
