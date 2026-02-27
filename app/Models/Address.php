@@ -13,5 +13,16 @@ class Address extends Model
         'city',
         'country',
         'address_line_2',
+        'lat',
+        'lon',
+        'shows_full_address',
+        'formatted',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'shows_full_address' => 'boolean',
+        ];
+    }
 }

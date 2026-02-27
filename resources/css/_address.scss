@@ -1,0 +1,10 @@
+.address-preview {
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+    }
+}
