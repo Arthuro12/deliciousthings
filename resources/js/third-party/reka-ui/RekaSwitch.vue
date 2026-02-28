@@ -12,7 +12,7 @@ defineProps<{
     label: string;
 }>();
 
-const modelValue = defineModel<boolean | null>({ default: null });
+const modelValue = defineModel<boolean | null>({ default: null, });
 </script>
 
 <style scoped lang="scss">

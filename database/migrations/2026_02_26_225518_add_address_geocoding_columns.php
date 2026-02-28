@@ -15,7 +15,7 @@ return new class extends Migration
             $table->double('lat')->nullable()->after('address_line_2');
             $table->double('lon')->nullable()->after('lat');
             $table->string('formatted')->nullable()->after('lon');
-            $table->boolean('shows_full_address')->after('formatted');
+            $table->boolean('shows_full_address')->default(false)->after('formatted');
         });
     }
 

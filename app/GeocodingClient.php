@@ -32,7 +32,11 @@ class GeocodingClient
             ]);
 
             $suggestions = array_map(function ($item) {
-                return $item['formatted'];
+                return [
+                    'formatted' => $item['formatted'],
+                    'lat' => $item['lat'],
+                    'lon' => $item['lon'],
+                ];
             }, $response->json('results'));
             return $suggestions;
         } catch (HttpException $e) {

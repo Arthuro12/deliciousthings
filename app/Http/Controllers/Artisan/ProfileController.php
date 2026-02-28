@@ -124,12 +124,12 @@ class ProfileController extends Controller
         });
         if ($hasRequiredAddressFields) {
             $addressDto = new AddressDto(
-                $attrs['street'], 
-                $attrs['house_number'],
-                $attrs['city'],
-                $attrs['country'],
-                $attrs['postal_code'],
-                $attrs['address_line_2'],
+                $attrs['first_address']['street'], 
+                $attrs['first_address']['house_number'],
+                $attrs['first_address']['city'],
+                $attrs['first_address']['country'],
+                $attrs['first_address']['postal_code'],
+                $attrs['first_address']['address_line_2'],
             );
             $match = $this->geocodingClient->geocode($addressDto);
 
