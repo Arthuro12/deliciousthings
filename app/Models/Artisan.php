@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 
 use App\Enums\PriceLevel;
 
@@ -84,5 +86,42 @@ class Artisan extends Model
     public function getFirstAddressAttribute()
     {
         return $this->addresses()->first();
+    }
+
+    /**
+     * Scope a query to include only records within a given radius.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  float|int  $distance
+     * @param  float  $lat
+     * @param  float  $lng
+     * @param  string  $units
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    #[Scope]
+    public function distance(Builder $query, float|int $distance, float $lat, float $lng, string $units = 'kilometers')
+    {
+        if ($distance == null || $lat == null || $lng == null) {
+            return $query; // nothing to filter
+        }
+
+        $radius = $units === 'miles' ? 3959 : 6371; // Earth radius
+
+        // Haversine formula (placeholders only)
+        $haversine = "(
+            ? * ACOS(
+                COS(RADIANS(?)) *
+                COS(RADIANS(addresses.lat)) *
+                COS(RADIANS(addresses.lon) - RADIANS(?)) +
+                SIN(RADIANS(?)) *
+                SIN(RADIANS(lat))
+            )
+        )";
+
+        $bindings = [$radius, $lat, $lng, $lat];
+    return $query->whereHas('addresses', fn ($q) =>
+        $q->selectRaw("ROUND($haversine, 2) AS distance", $bindings)
+            ->having('distance', '<=', $distance)
+            ->orderBy('distance', 'asc'));
     }
 }

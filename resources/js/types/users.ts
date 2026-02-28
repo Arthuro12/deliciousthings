@@ -21,6 +21,10 @@ export type Address = {
     city: string;
     country: string;
     address_line_2: string | null;
+    lat?: number | null;
+    lon?: number | null;
+    formatted?: string | null;
+    shows_full_address: boolean;
 }
 
 export type Media = {

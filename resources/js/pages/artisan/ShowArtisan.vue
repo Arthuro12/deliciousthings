@@ -65,7 +65,11 @@
                 </div>
                 <div v-if="address">
                     <div class="card profile-card">
-                        <AddressPreview :address="address" />
+                        <PublicAddress v-if="address.shows_full_address" :address />
+                        <div class="address-preview" v-else>
+                            <MapPinIcon color="#e680a5" :size="20" />
+                            <span class="address-preview__details">{{ `${address.city}, ${address.country}` }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="profile__services">
@@ -96,13 +100,13 @@ import { computed } from "vue";
 
 import { Head } from "@inertiajs/vue3";
 
-import { CheckIcon, ExternalLinkIcon } from "lucide-vue-next";
+import { CheckIcon, ExternalLinkIcon, MapPinIcon } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import ProfileAvartar from "@/components/profile/ProfileAvartar.vue";
-import AddressPreview from "@/components/address/AddressPreview.vue";
+import PublicAddress from "@/components/address/PublicAddress.vue";
 import ContactArtisan from "@/components/artisan/ArtisanContactDialog.vue";
 
 import { useAlert } from "@/composables/use-alert";

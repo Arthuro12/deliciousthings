@@ -21,6 +21,9 @@ class SearchController extends Controller
             'price_levels' => 'nullable|string',
             'offers_delivery' => 'nullable|boolean',
             'pick_up_on_site' => 'nullable|boolean',
+            'lat' => 'nullable|numeric',
+            'lont' => 'nullable|numeric',
+            'radius' => 'nullable|string',
         ]);
 
         $results = [];
@@ -41,7 +44,7 @@ class SearchController extends Controller
         });
 
         if ($request->has('price_levels')) {
-            $priceLevels =explode(',', $request->query('price_levels'));
+            $priceLevels = explode(',', $request->query('price_levels'));
             $artisans->whereIn('price_level', $priceLevels);
         }
         if ($request->has('offers_delivery')) {
@@ -49,6 +52,14 @@ class SearchController extends Controller
         }
         if ($request->has('pick_up_on_site')) {
             $artisans->orWhere('pick_up_on_site', $request->query('pick_up_on_site'));
+        }
+
+        if ($request->has('lat') && $request->has('lon') && $request->has('radius')) {
+            $artisans->distance(
+                distance: intval(json_decode($request->query('radius'))), 
+                lat: floatval($request->query('lat')),
+                lng: floatval($request->query('lon')),
+            );
         }
         
         $collections = $artisans->get()->map(function ($collection) {

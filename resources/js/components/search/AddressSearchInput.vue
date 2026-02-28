@@ -20,7 +20,7 @@
                 <div class="suggestions-list-content">
                     <li 
                         v-for="result in suggestions" 
-                        :key="result"
+                        :key="`${result.formatted}`"
                     >
                         <button 
                             class="select-location-button"
@@ -28,7 +28,7 @@
                             @click="selectLocation(result)"
                         >
                             <StoreIcon class="store-icon" :style="{ color: 'var(--color-primary-50)' }" />
-                            <span>{{ result }}</span>
+                            <span>{{ result.formatted }}</span>
                         </button>
                     </li>
                 </div>
@@ -43,33 +43,41 @@ import { ref, watch } from "vue";
 import { MapPinIcon, StoreIcon } from "lucide-vue-next";
 
 import { get } from "@/api";
+import type { AddressSuggestion } from "@/types/search";
 
 const MIN_ADDRESS_LENGHT = 3;
 const DEBOUNCE_DELAY = 300;
 let currentTimeout = 0;
 
+const props = defineProps<{
+    text?: string | null;
+}>();
+
 const emit = defineEmits<{
-    (e: "selected", value: string): void;
+    (e: "updated:text", value: string): void;
+    (e: "selected", value: AddressSuggestion): void;
 }>();
 
 let controller: AbortController | null = null;
 
-const locationText = ref("");
-const selectedLocation = ref("");
+const locationText = ref(props.text ?? "");
+const selectedLocation = ref<AddressSuggestion | undefined>(undefined);
 const searchTerm = ref(locationText.value);
 
-const suggestions = ref<string[]>([]);
+const suggestions = ref<AddressSuggestion[]>([]);
 const isOpen = ref(false);
 
 function handleInput(event: Event): void {
     locationText.value = (event.target as HTMLInputElement).value;
     searchTerm.value = locationText.value;
+    emit("updated:text", locationText.value);
 }
 
-function selectLocation(location: string): void {    
+function selectLocation(location: AddressSuggestion): void {    
     selectedLocation.value = location;
-    locationText.value = selectedLocation.value;
+    locationText.value = selectedLocation.value.formatted;
     emit("selected", selectedLocation.value);
+    emit("updated:text", locationText.value);
     isOpen.value = false;
 }
 
@@ -87,9 +95,10 @@ async function triggerSuggestionSearch(input: string): Promise<void> {
 
     controller = new AbortController();
     try {
-        const { data } = await get<string[]>(`/api/addresses/autocomplete?text=${input}`, {
+        const { data } = await get<AddressSuggestion[]>(`/api/addresses/autocomplete?text=${input}`, {
             signal: controller.signal,
         });
+
         suggestions.value = [...data];
     } catch (error: any) {
         console.error(error);
