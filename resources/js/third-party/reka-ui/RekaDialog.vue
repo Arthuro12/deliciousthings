@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DialogRoot>
+        <DialogRoot v-model:open="isOpen">
             <DialogTrigger as="div">
                 <slot name="trigger"></slot>
             </DialogTrigger>
@@ -40,4 +40,6 @@ import { XIcon } from "lucide-vue-next";
 defineProps<{
     title: string;
 }>();
+
+const isOpen = defineModel<boolean>("open", { required: false, });
 </script>

@@ -1,5 +1,6 @@
 <template>
     <RekaAvatar 
+        class="profile-avatar"
         :src="src" 
         :alt="alt" 
         :name="name"
@@ -15,3 +16,9 @@ defineProps<{
     name?: string;
 }>();
 </script>
+
+<style scoped>
+.profile-avatar :deep(.avatar__image) {
+    object-fit: cover;
+}
+</style>

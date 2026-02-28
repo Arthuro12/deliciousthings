@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Api\Addresses;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Log;
 
+use App\Http\Controllers\Controller;
+use App\GeocodingClient;
+
 class AutocompleteController extends Controller
 {
-    final const API_END_POINT = 'https://api.geoapify.com/v1/geocode/autocomplete';
-
-    public function __construct()
+    public function __construct(private GeocodingClient $geocodingClient)
     {}
 
     public function __invoke(Request $request)
@@ -21,14 +20,7 @@ class AutocompleteController extends Controller
         $suggestions = [];
         
         try {
-            $response = Http::acceptJson()->get(self::API_END_POINT, [
-                'text' => $text,
-                'format' => 'json',
-                'apiKey' => config('services.geoapify.key'),
-            ]);
-            $suggestions = array_map(function ($item) {
-                return $item['formatted'];
-            }, $response->json('results'));
+            $suggestions = $this->geocodingClient->autocomplete($text);
 
         } catch (HttpException $e) {
             $context = [

@@ -1,5 +1,5 @@
 <template>
-	<RekaDialog title="Suche">
+	<RekaDialog title="Suche" v-model:open="searchDialogIsOpen">
 		<template #trigger>
 			<button
 				class="search-button button button--with-icon button--medium"
@@ -15,8 +15,13 @@
 		<template #default>
 			<form @submit.prevent="onSearch">
 				<div class="artisans-search-form">
-					<div class="address-autocomplete-form">
-						<AddressSearchInput />
+					<div class="address-filter">
+						<AddressSearchInput 
+							:text="form.address_query"
+							@updated:text="(value) => form.address_query = value"
+							@selected="updateLocationFilters" 
+						/>
+						<RadiusFilter v-model="form.radius" />
 					</div>
 					<div class="filter-options">
 						<RekaSelect 
@@ -102,39 +107,54 @@ import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 import AddressSearchInput from "./AddressSearchInput.vue";
+import RadiusFilter from "./partials/RadiusFilter.vue";
 import PriceLevelSelect from "./PriceLevelSelect.vue";
 
 import { useBakedGoodStore } from "@/stores/baked-good";
 import { useDietaryOptionStore } from "@/stores/dietary-option";
 import type { BakedGood, DietaryOption } from "@/types/users";
+import type { AddressSuggestion } from "@/types/search";
 
 export type SearchFormData = {
+	address_query?: string | null;
 	goods: BakedGood[];
 	dietary_options?: DietaryOption[];
 	price_levels: string[];
 	offers_delivery?: boolean | null;
 	pick_up_on_site?: boolean | null;
+	lat?: number | null;
+	lon?: number | null;
+	radius?: number[] | null;
 };
 
 export type SearchFilters = {
+	address_query?: string | null;
 	goods: string[];
 	dietary_options?: string[];
 	price_levels: string[];
 	offers_delivery?: boolean | null;
 	pick_up_on_site?: boolean | null;
+	lat?: number | null;
+	lon?: number | null;
+	radius?: string | null;
 };
 
 const bakedGoodStore = useBakedGoodStore();
 const dietaryOptionStore = useDietaryOptionStore();
 
 const form = useForm<SearchFormData>("ArtisanSearch", {
+	address_query: "",
 	goods: [],
 	dietary_options: [],
 	price_levels: [],
 	offers_delivery: null,
 	pick_up_on_site: null,
+	lat: null,
+	lon: null,
+	radius: [0],
 });
 
+const searchDialogIsOpen = ref(false);
 const servicesContentIsVisible = ref(false);
 
 /**
@@ -150,7 +170,7 @@ function buildSearchParameters(filters: SearchFilters): string {
 		params.set("dietary_option", filters.dietary_options.join(","))
 	}
 	if (filters.dietary_options && filters.dietary_options.length > 0) {
-		params.set("dietary_option", filters.dietary_options.join(","))
+		params.set("dietary_options", filters.dietary_options.join(","))
 	}
 	if (filters.price_levels.length > 0) {
 		params.set("price_levels", filters.price_levels.join(","));
@@ -160,6 +180,12 @@ function buildSearchParameters(filters: SearchFilters): string {
 	}
 	if (filters.pick_up_on_site != null) {
 		params.set("pick_up_on_site", JSON.stringify(filters.pick_up_on_site ? 1 : 0));
+	}
+
+	if (filters.lat && filters.lon) {
+		params.set('lat', JSON.stringify(filters.lat));
+		params.set('lon', JSON.stringify(filters.lon));
+		params.set('radius', JSON.stringify(filters.radius));
 	}
 
 	return params.toString();
@@ -179,10 +205,19 @@ function onSearch(): void {
 		price_levels: form.price_levels,
 		offers_delivery: form.offers_delivery,
 		pick_up_on_site: form.pick_up_on_site,
+		lat: form.lat,
+		lon: form.lon,
+		radius: form.radius?.[0].toString(),
 	};
 	const urlParams = buildSearchParameters(filters);
 	const searchURL = `/search?${urlParams}`;
 	router.visit(searchURL, { preserveState: true });
+	searchDialogIsOpen.value = false;
+}
+
+function updateLocationFilters(location: AddressSuggestion): void {
+	form.lat = location.lat;
+	form.lon = location.lon;
 }
 
 onMounted(async () => {
@@ -194,6 +229,10 @@ onMounted(async () => {
 <style scoped lang="scss">
 @use '../../../css/abstracts/breakpoints' as breakpoints;
 
+.search-dialog-content {
+	max-height: 580px;
+}
+
 .search-button {
     background-color: var(--color-neutral-0);
     color: var(--color-primary-50);
@@ -203,6 +242,21 @@ onMounted(async () => {
 
 .artisans-search-form {
 	margin-top: 24px;
+	overflow: auto;
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	@media (max-height: 800px) {
+		max-height: 650px;
+	}
+
+	.address-filter {
+		margin-bottom: 20px;
+	}
 
 	.search-artisans-button {
 		margin-top: 20px;

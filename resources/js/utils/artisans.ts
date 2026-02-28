@@ -21,7 +21,8 @@ export function defaultAddress(): Address {
         postal_code: null,
         city: "",
         country: "",
-        address_line_2: null
+        address_line_2: null,
+        shows_full_address: false,
     };
 }
 

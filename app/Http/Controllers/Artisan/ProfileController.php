@@ -20,12 +20,15 @@ use App\Enums\PriceLevel;
 use App\Http\Requests\CreateArtisanRequest;
 use App\Mail\MessageSent;
 use App\Services\ArtisanService;
+use App\GeocodingClient;
+use App\Dtos\AddressDto;
 
 class ProfileController extends Controller
 {
 
     public function __construct(
         private ArtisanService $artisanService,
+        private GeocodingClient $geocodingClient,
     ) {}
 
     public function create()
@@ -120,18 +123,30 @@ class ProfileController extends Controller
             return !is_null($value);
         });
         if ($hasRequiredAddressFields) {
+            $addressDto = new AddressDto(
+                $attrs['first_address']['street'], 
+                $attrs['first_address']['house_number'],
+                $attrs['first_address']['city'],
+                $attrs['first_address']['country'],
+                $attrs['first_address']['postal_code'],
+                $attrs['first_address']['address_line_2'],
+            );
+            $match = $this->geocodingClient->geocode($addressDto);
+
             $artisan->addresses()->create([
-                'street' => $attrs['first_address']['street'],
-                'house_number' => $attrs['first_address']['house_number'],
-                'postal_code' => $attrs['first_address']['postal_code'],
-                'city' => $attrs['first_address']['city'],
-                'country' => $attrs['first_address']['country'],
-                'address_line_2' => $attrs['first_address']['address_line_2'],
+                'street' => $addressDto->street,
+                'house_number' => $addressDto->house_number,
+                'postal_code' => $addressDto->postal_code,
+                'city' => $addressDto->city,
+                'country' => $addressDto->country,
+                'address_line_2' => $addressDto->address_line_2,
+                'lat' => $match['lat'],
+                'lon' => $match['lon'],
+                'formatted' => $match['formatted'],
             ]);
         }
 
-        Log::notice("Artisan profile successfully created!");
-        
+        Log::notice("Artisan profile successfully created!");       
         return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));
     }
 
@@ -183,16 +198,28 @@ class ProfileController extends Controller
             'country' => 'required|string',
             'address_line_2' => 'nullable|string',
         ]);
+
+        $addressDto = new AddressDto(
+            $attrs['street'], 
+            $attrs['house_number'],
+            $attrs['city'],
+            $attrs['country'],
+            $attrs['postal_code'],
+            $attrs['address_line_2'],
+        );
+        $match = $this->geocodingClient->geocode($addressDto);
         
         $request->user()->artisan->addresses()->create([
-                'street' => $attrs['street'],
-                'house_number' => $attrs['house_number'],
-                'postal_code' => $attrs['postal_code'],
-                'city' => $attrs['city'],
-                'country' => $attrs['country'],
-                'address_line_2' => $attrs['address_line_2'],
-            ]   
-        );
+            'street' => $addressDto->street,
+            'house_number' => $addressDto->house_number,
+            'postal_code' => $addressDto->postal_code,
+            'city' => $addressDto->city,
+            'country' => $addressDto->country,
+            'address_line_2' => $addressDto->address_line_2,
+            'lat' => $match['lat'],
+            'lon' => $match['lon'],
+            'formatted' => $match['formatted'],
+        ]);
 
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
@@ -259,16 +286,28 @@ class ProfileController extends Controller
             'country' => 'required|string',
             'address_line_2' => 'nullable|string',
         ]);
+
+        $addressDto = new AddressDto(
+            $attrs['street'], 
+            $attrs['house_number'],
+            $attrs['city'],
+            $attrs['country'],
+            $attrs['postal_code'],
+            $attrs['address_line_2'],
+        );
+        $match = $this->geocodingClient->geocode($addressDto);
         
         $request->user()->artisan->addresses()->find($address->id)->update([
-                'street' => $attrs['street'],
-                'house_number' => $attrs['house_number'],
-                'postal_code' => $attrs['postal_code'],
-                'city' => $attrs['city'],
-                'country' => $attrs['country'],
-                'address_line_2' => $attrs['address_line_2'],
-            ]   
-        );
+            'street' => $addressDto->street,
+            'house_number' => $addressDto->house_number,
+            'postal_code' => $addressDto->postal_code,
+            'city' => $addressDto->city,
+            'country' => $addressDto->country,
+            'address_line_2' => $addressDto->address_line_2,
+            'lat' => $match['lat'],
+            'lon' => $match['lon'],
+            'formatted' => $match['formatted'],
+        ]);
 
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
@@ -291,6 +330,19 @@ class ProfileController extends Controller
             'about' => $attrs['about'],
         ]);
 
+        return back()->with('success', __('Artisan profile successfully updated.'));
+    }
+
+    public function updateFullAddressVisibility(Request $request, Address $address)
+    {   
+        $attrs = $request->validate([
+            'shows_full_address' => 'required|boolean',
+        ]);
+
+        $request->user()->artisan->addresses()->find($address->id)->update([
+            'shows_full_address' => $attrs['shows_full_address'],
+        ]);
+        
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
