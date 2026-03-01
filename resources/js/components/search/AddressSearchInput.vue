@@ -14,7 +14,7 @@
         <div 
             class="suggestions-list-wrapper" 
             v-if="isOpen"
-            ref="suggestionsListDropdown"
+            v-click-outside="closeDropdownList"
         >
             <ul class="suggestions-list">
                 <div class="suggestions-list-content">
@@ -42,6 +42,7 @@ import { ref, watch } from "vue";
 
 import { MapPinIcon, StoreIcon } from "lucide-vue-next";
 
+import { vClickOutside } from "@/directives/v-click-outside";
 import { get } from "@/api";
 import type { AddressSuggestion } from "@/types/search";
 
@@ -55,7 +56,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     (e: "updated:text", value: string): void;
-    (e: "selected", value: AddressSuggestion): void;
+    (e: "selected", value: AddressSuggestion | null): void;
 }>();
 
 let controller: AbortController | null = null;
@@ -67,8 +68,17 @@ const searchTerm = ref(locationText.value);
 const suggestions = ref<AddressSuggestion[]>([]);
 const isOpen = ref(false);
 
+function closeDropdownList(): void {
+    isOpen.value = false;
+}
+
 function handleInput(event: Event): void {
-    locationText.value = (event.target as HTMLInputElement).value;
+    const target = (event.target as HTMLInputElement);
+    if (target.value.length == 0) {
+        emit("selected", null);
+    }
+
+    locationText.value = target.value;
     searchTerm.value = locationText.value;
     emit("updated:text", locationText.value);
 }
@@ -78,12 +88,16 @@ function selectLocation(location: AddressSuggestion): void {
     locationText.value = selectedLocation.value.formatted;
     emit("selected", selectedLocation.value);
     emit("updated:text", locationText.value);
-    isOpen.value = false;
+    closeDropdownList();
 }
 
 async function triggerSuggestionSearch(input: string): Promise<void> {
     if (controller != null) {
-        controller.abort({ type: "AUTOCOMPLETE_ABORT", message: "User query updated." });
+        controller.abort({ 
+            name: "AbortError",
+            type: "AUTOCOMPLETE_ABORT", 
+            message: "User query updated." 
+        });
     }
 
     if (input.length == 0) {
