@@ -165,9 +165,8 @@ const servicesContentIsVisible = ref(false);
 function buildSearchParameters(filters: SearchFilters): string {
 	const params = new URLSearchParams();
 
-	params.set("goods", filters.goods.join(","))
-	if (filters.dietary_options && filters.dietary_options.length > 0) {
-		params.set("dietary_option", filters.dietary_options.join(","))
+	if (filters.goods && filters.goods.length > 0) {
+		params.set("goods", filters.goods.join(","))
 	}
 	if (filters.dietary_options && filters.dietary_options.length > 0) {
 		params.set("dietary_options", filters.dietary_options.join(","))
@@ -195,10 +194,6 @@ function buildSearchParameters(filters: SearchFilters): string {
  * Search for artisan profiles.
  */
 function onSearch(): void {
-	if (!form.goods || form.goods.length == 0) {
-		return;
-	}
-
 	const filters: SearchFilters = {
 		goods: form.goods.map(good => good.key),
 		dietary_options: form.dietary_options?.map(good => good.key),
@@ -215,7 +210,13 @@ function onSearch(): void {
 	searchDialogIsOpen.value = false;
 }
 
-function updateLocationFilters(location: AddressSuggestion): void {
+function updateLocationFilters(location: AddressSuggestion | null): void {
+	if (!location) {
+		form.lat = null;
+		form.lon = null;
+		return;
+	}
+
 	form.lat = location.lat;
 	form.lon = location.lon;
 }
