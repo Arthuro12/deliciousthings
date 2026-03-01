@@ -46,7 +46,7 @@ import ArtisansSearch from "@/components/search/ArtisansSearch.vue";
         background-size: cover;
         background-repeat: no-repeat;
         padding: 18px;
-        min-height: 100vh;
+        min-height: 75vh;
     }
 }
 </style>
