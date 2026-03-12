@@ -1,20 +1,20 @@
 <template>
-	<RekaDialog title="Suche" v-model:open="searchDialogIsOpen">
+	<RekaDialog 
+		title="Suche" 
+		v-model:open="searchDialogIsOpen"
+	>
 		<template #trigger>
 			<button
 				class="search-button button button--with-icon button--medium"
 				type="button" 
-				variant="primary" 
-				layout="with-icon"
-				size="large"
 			>
 				Suchen
 				<SlidersHorizontalIcon />
 			</button>
 		</template>
 		<template #default>
-			<form @submit.prevent="onSearch">
-				<div class="artisans-search-form">
+			<form class="artisans-search-form" @submit.prevent="onSearch">
+				<div class="search-form-content">
 					<div class="address-filter">
 						<AddressSearchInput 
 							:text="form.address_query"
@@ -238,22 +238,15 @@ onMounted(async () => {
     background-color: var(--color-neutral-0);
     color: var(--color-primary-50);
 	padding: 14px 25px;
+	margin-top: 16px;
     border-radius: 24px;
 }
 
-.artisans-search-form {
+.search-form-content {
+	padding: 1.5rem;
 	margin-top: 24px;
-	overflow: auto;
-	-ms-overflow-style: none;  /* IE and Edge */
-	scrollbar-width: none;  /* Firefox */
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
-
-	@media (max-height: 800px) {
-		max-height: 650px;
-	}
+	overflow: auto; 
+	max-height: calc(100vh - 242px);
 
 	.address-filter {
 		margin-bottom: 20px;
@@ -262,12 +255,6 @@ onMounted(async () => {
 	.search-artisans-button {
 		margin-top: 20px;
 		width: 100%;
-	}
-
-	@media (max-height: 668px) {
-		max-height: 420px;
-		overflow-y: auto;
-		scrollbar-width: none;
 	}
 }
 
@@ -306,5 +293,11 @@ onMounted(async () => {
 	.price-levels-wrapper {
 		margin-top: 16px;
 	}
+}
+</style>
+
+<style lang="scss">
+.search-dialog-content {
+	padding: 2rem 1rem;
 }
 </style>

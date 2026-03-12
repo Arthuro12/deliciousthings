@@ -47,7 +47,7 @@ import { get } from "@/api";
 import type { AddressSuggestion } from "@/types/search";
 
 const MIN_ADDRESS_LENGHT = 3;
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 200;
 let currentTimeout = 0;
 
 const props = defineProps<{
