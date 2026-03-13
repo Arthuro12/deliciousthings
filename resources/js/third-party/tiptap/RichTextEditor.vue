@@ -1,10 +1,10 @@
 <template>
     <div class="rich-text-editor">
         <div class="rich-text-editor__marks">
-            <button type="button" @click="toggleBold"><BoldIcon :size="14" /></button>
-            <button type="button" @click="toggleItalic"><ItalicIcon :size="14" /></button>
-            <button type="button" @click="toggleUnderline"><UnderlineIcon :size="14" /></button>
-            <button type="button" @click="toggleBulletList"><ListIcon :size="14" /></button>
+            <button type="button" @click="toggleBold"><BoldIcon color="#000000" :size="14" /></button>
+            <button type="button" @click="toggleItalic"><ItalicIcon color="#000000" :size="14" /></button>
+            <button type="button" @click="toggleUnderline"><UnderlineIcon color="#000000" :size="14" /></button>
+            <button type="button" @click="toggleBulletList"><ListIcon color="#000000" :size="14" /></button>
         </div>
         <EditorContent class="editor-content" :editor="editor" />
     </div>

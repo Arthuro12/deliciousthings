@@ -18,7 +18,7 @@
                         :key="getItemProp(item, labelProp)"
                     >
                         <SelectItemIndicator v-if="showItemIndicator">
-                            <CheckIcon :size="16" />
+                            <CheckIcon color="#000000" :size="16" />
                         </SelectItemIndicator>
                         <SelectItemText>
                             {{ getItemProp(item, labelProp) }}

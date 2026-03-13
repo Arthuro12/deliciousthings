@@ -16,7 +16,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Allgemeine Informationen</p><ChevronDownIcon :size="20" />
+                        <p>Allgemeine Informationen</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanBasicProfile :profile="basicProfile" />
@@ -28,7 +28,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Angebotene Backwaren</p><ChevronDownIcon :size="20" />
+                        <p>Angebotene Backwaren</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanEditBakedGoods 
@@ -43,7 +43,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Angebotene Ernährungsformen</p><ChevronDownIcon :size="20" />
+                        <p>Angebotene Ernährungsformen</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanEditDietaryOptions 
@@ -58,7 +58,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Adresse</p><ChevronDownIcon :size="20" />
+                        <p>Adresse</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanAddressSettings :address="firstAddress" />
@@ -70,7 +70,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Fotogalerie</p><ChevronDownIcon :size="20" />
+                        <p>Fotogalerie</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanGalleryForm :gallery="artisan.gallery" />
@@ -82,7 +82,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Leistungen</p><ChevronDownIcon :size="20" />
+                        <p>Leistungen</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanEditServices 
@@ -98,7 +98,7 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Netzwerk</p><ChevronDownIcon :size="20" />
+                        <p>Netzwerk</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
                         <ArtisanEditNetworkLinks
@@ -211,6 +211,7 @@ onMounted(async () => {
     }
 
     & > :deep(.artisan-collapsible__trigger) {
+        color: var(--color-neutral-50);
         display: flex;
         justify-content: space-between;
         width: 100%;

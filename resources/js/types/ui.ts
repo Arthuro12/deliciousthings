@@ -48,5 +48,5 @@ export type Checkbox = {
     id?: string;
     name?: string;
     label?: string;
-    value?: string;
+    value?: AcceptableValue;
 };

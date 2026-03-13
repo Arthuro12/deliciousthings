@@ -9,7 +9,7 @@
                 :value="locationText"
                 @input="handleInput"
             />
-            <MapPinIcon :style="{ color: 'var(--color-neutral-30)' }" />
+            <MapPinIcon color="#696c70" />
         </div>
         <div 
             class="suggestions-list-wrapper" 
@@ -27,8 +27,8 @@
                             type="button"  
                             @click="selectLocation(result)"
                         >
-                            <StoreIcon class="store-icon" :style="{ color: 'var(--color-primary-50)' }" />
-                            <span>{{ result.formatted }}</span>
+                            <MapPinIcon class="map-icon" color="#e680a5" />
+                            <span class="location-text">{{ result.formatted }}</span>
                         </button>
                     </li>
                 </div>
@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 
-import { MapPinIcon, StoreIcon } from "lucide-vue-next";
+import { MapPinIcon } from "lucide-vue-next";
 
 import { vClickOutside } from "@/directives/v-click-outside";
 import { get } from "@/api";
@@ -192,8 +192,12 @@ watch(suggestions, (newSuggestions) => {
                     align-items: center;
                     gap: 8px;
 
-                    > .store-icon {
+                    > .map-icon {
                         width: 24px;
+                    }
+
+                    > .location-text {
+                        color: var(--color-neutral-50);
                     }
 
                     > span {

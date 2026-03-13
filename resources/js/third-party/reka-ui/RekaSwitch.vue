@@ -35,6 +35,10 @@ const modelValue = defineModel<boolean | null>({ default: null, });
         cursor: pointer;
     }
 
+    &__label {
+        color: var(--color-neutral-50);
+    }
+
     &__thumb {
         position: absolute;
         left: var(--switch-padding);

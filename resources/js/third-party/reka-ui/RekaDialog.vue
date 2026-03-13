@@ -10,7 +10,7 @@
                     <div>
                         <div class="dialog__title">
                             <DialogTitle as="h4">{{ title }}</DialogTitle>
-                            <DialogClose><XIcon /></DialogClose>
+                            <DialogClose><XIcon color="#e680a5" /></DialogClose>
                         </div>
                         <div>
                             <DialogDescription as="div"><slot name="description"></slot></DialogDescription>

@@ -6,7 +6,7 @@
             layout="icon"
             @click="showContent = true"
         >
-            <template #leading><MenuIcon /></template>
+            <template #leading><MenuIcon color="#e680a5" /></template>
         </AppButton>
         <Teleport to="body">
             <div v-show="showContent" class="sidebar__content">
@@ -17,7 +17,7 @@
                         layout="icon"
                         @click="showContent = false"
                     >
-                        <template #leading><XIcon /></template>
+                        <template #leading><XIcon color="#e680a5" /></template>
                     </AppButton>
                 </div>
                 <ul class="sidebar__menu" v-if="isAuthenticated">

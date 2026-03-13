@@ -51,8 +51,8 @@
 							<template #trigger>
 								<header class="services-filter-header">
 									<span class="truncate">Abholart und Durchschnittspreis (in Euro)</span>
-									<PlusIcon v-show="!servicesContentIsVisible" color="#696c70" />
-									<MinusIcon v-show="servicesContentIsVisible" color="#696c70" />
+									<PlusIcon v-show="!servicesContentIsVisible" color="#000000" />
+									<MinusIcon v-show="servicesContentIsVisible" color="#000000" />
 								</header>
 							</template>
 							<template #content>
@@ -288,6 +288,10 @@ onMounted(async () => {
 	.services-filter-header {
 		display: flex;
 		justify-content: space-between;
+
+		> span {
+			color: var(--color-neutral-50);
+		}
 	}
 
 	.price-levels-wrapper {

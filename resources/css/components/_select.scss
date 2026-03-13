@@ -1,5 +1,6 @@
 .select {
     &__dropdown-button {
+        color: var(--color-neutral-50);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -27,6 +28,7 @@
     }
 
     &__item {
+        color: var(--color-neutral-50);
         display: flex;
         align-items: center;
         padding: 8px;
