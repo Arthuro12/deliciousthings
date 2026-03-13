@@ -10,7 +10,7 @@
             </div>
             <div class="search-results">
                 <ArtisanResults v-if="artisans.length > 0" :artisans />
-                <div v-else>keine Suchergebnisse gefunden. Probieren Sie mit einer anderer Filtereinstellung.</div>
+                <div v-else>Es wurde leide keine Ergebnisse hier gefunden. Wir arbeiten daran, weitere Regionen abzudecken.</div>
             </div>
         </main>
     </AppLayout>

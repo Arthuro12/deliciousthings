@@ -15,14 +15,14 @@ class SearchController extends Controller
 
     public function __invoke(Request $request)
     {
-        $request->validate([
+        $attrs = $request->validate([
             'goods' => 'nullable|string',
             'dietary_options' => 'nullable|string',
             'price_levels' => 'nullable|string',
             'offers_delivery' => 'nullable|boolean',
             'pick_up_on_site' => 'nullable|boolean',
             'lat' => 'nullable|numeric',
-            'lont' => 'nullable|numeric',
+            'lon' => 'nullable|numeric',
             'radius' => 'nullable|string',
         ]);
 

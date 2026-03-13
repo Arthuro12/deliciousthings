@@ -101,7 +101,7 @@ class Artisan extends Model
     #[Scope]
     public function distance(Builder $query, float|int $distance, float $lat, float $lng, string $units = 'kilometers')
     {
-        if ($distance == null || $lat == null || $lng == null) {
+        if (is_null($distance) || is_null($lat) || is_null($lng)) {
             return $query; // nothing to filter
         }
 
