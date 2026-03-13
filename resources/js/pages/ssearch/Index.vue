@@ -10,7 +10,7 @@
             </div>
             <div class="search-results">
                 <ArtisanResults v-if="artisans.length > 0" :artisans />
-                <div v-else>Es wurde leide keine Ergebnisse hier gefunden. Wir arbeiten daran, weitere Regionen abzudecken.</div>
+                <div class="search-results--empty" v-else>Es wurde leide keine Ergebnisse hier gefunden. Wir arbeiten daran, weitere Regionen abzudecken.</div>
             </div>
         </main>
     </AppLayout>
@@ -67,6 +67,10 @@ onUnmounted(() => {
         width: 85%;
         margin: 28px auto;
         min-height: 500px;
+
+        &--empty {
+            text-align: center;
+        }
     }
 }
 </style>
