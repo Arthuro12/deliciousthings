@@ -4,13 +4,13 @@
 		v-model:open="searchDialogIsOpen"
 	>
 		<template #trigger>
-			<button
+			<RekaDialogTrigger
 				class="search-button button button--with-icon button--medium"
 				type="button" 
 			>
 				Suchen
 				<SlidersHorizontalIcon />
-			</button>
+			</RekaDialogTrigger>
 		</template>
 		<template #default>
 			<form class="artisans-search-form" @submit.prevent="onSearch">
@@ -104,6 +104,7 @@ import {
 import AppButton from "../presentation/AppButton.vue";
 import RekaCollapsible from "@/third-party/reka-ui/RekaCollapsible.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
+import RekaDialogTrigger from "@/third-party/reka-ui/RekaDialogTrigger.vue";
 import RekaSelect from "@/third-party/reka-ui/RekaSelect.vue";
 import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 import AddressSearchInput from "./AddressSearchInput.vue";
@@ -240,6 +241,7 @@ onMounted(async () => {
 	padding: 14px 25px;
 	margin-top: 16px;
     border-radius: 24px;
+	width: fit-content;
 }
 
 .search-form-content {

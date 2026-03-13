@@ -20,14 +20,10 @@
         </div>
         <RekaDialog title="Adresse bearbeiten">
             <template #trigger>
-                <AppButton
-                    type="button"
-                    variant="tertiary"
-                    layout="with-icon"
-                >
-                    <template #leading><PencilIcon :size="16" /></template>
-                    <template #text>Adresse bearbeiten</template>
-                </AppButton>
+                <RekaDialogTrigger class="button button--tertiary button--with-icon">
+                    <PencilIcon color="#e680a5" :size="16" />
+                    Adresse bearbeiten         
+                </RekaDialogTrigger>
             </template>
             <template #default>
                 <ArtisanEditAddress class="address-form" :address="props.address" />
@@ -46,6 +42,7 @@ import { PencilIcon, TrashIcon } from "lucide-vue-next";
 import AppButton from "../presentation/AppButton.vue";
 import RekaSwitch from "@/third-party/reka-ui/RekaSwitch.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
+import RekaDialogTrigger from "@/third-party/reka-ui/RekaDialogTrigger.vue";
 import ArtisanEditAddress from "./partials/ArtisanEditAddress.vue";
 import PublicAddress from "../address/PublicAddress.vue";
 

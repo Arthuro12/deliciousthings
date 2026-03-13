@@ -1,13 +1,9 @@
 <template>
     <RekaDialog title="Kontaktformular">
         <template #trigger>
-            <AppButton
-                type="button"
-                variant="primary"
-                size="medium"
-            >
-                <template #text>Kontakt aufnehmen</template>
-            </AppButton>
+            <RekaDialogTrigger class="button button--primary button--medium">
+                Kontakt aufnehmen
+            </RekaDialogTrigger>
         </template>
         <template #default>
             <div class="contact-artisan-form">
@@ -45,6 +41,7 @@ import { useForm } from "@inertiajs/vue3";
 import AppButton from "../presentation/AppButton.vue";
 import TextField from "../presentation/TextField.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
+import RekaDialogTrigger from "@/third-party/reka-ui/RekaDialogTrigger.vue";
 import RichTextEditor from "@/third-party/tiptap/RichTextEditor.vue";
 
 import type { Message } from "@/types/users";

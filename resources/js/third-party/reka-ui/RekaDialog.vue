@@ -1,9 +1,7 @@
 <template>
     <div>
         <DialogRoot v-model:open="isOpen">
-            <DialogTrigger as="div">
-                <slot name="trigger"></slot>
-            </DialogTrigger>
+            <slot name="trigger"></slot>
             <DialogPortal>
                 <DialogOverlay class="app-overlay" />
                 <DialogContent class="dialog__content">
@@ -28,7 +26,6 @@ import {
     DialogRoot,
     DialogPortal, 
     DialogOverlay,
-    DialogTrigger, 
     DialogContent,
     DialogTitle,
     DialogDescription,
