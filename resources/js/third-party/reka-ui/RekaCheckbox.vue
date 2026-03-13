@@ -6,10 +6,11 @@
             :id="id"
             :name="name"
             :value="value"
-            v-model="modelValue"
+            v-model:model-value="modelValue"
+            v-slot="{ state }"
         >
-            <CheckboxIndicator>
-                <CheckIcon color="#e680a5" :size="16"/>
+            <CheckboxIndicator >
+                <CheckIcon v-if="Boolean(state) || state == 'indeterminate'" color="#e680a5" :size="16"/>
             </CheckboxIndicator>
         </CheckboxRoot>
         <label class="checkbox__label" :for="id">{{ label }}</label>
@@ -29,7 +30,7 @@ export type CheckboxProps = Checkbox;
 
 defineProps<CheckboxProps>();
 
-const modelValue = defineModel<CheckboxValue>({ default: "indeterminate" });
+const modelValue = defineModel<CheckboxValue>({ required: false, });
 </script>
 
 <style scoped lang="scss">
