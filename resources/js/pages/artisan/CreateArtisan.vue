@@ -26,6 +26,7 @@ import AppLayout from "@/layout/AppLayout.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import ArtisanForm from "@/components/artisan/ArtisanCreateForm.vue";
 
+import { usePageDbClick } from "@/composables/use-page-db-click";
 import { useAlert } from "@/composables/use-alert";
 import { defaultArtisan } from "@/utils/artisans";
 import type { FlashProps, FileValue } from "@/types/ui";
@@ -39,6 +40,7 @@ const { auth, flash } = defineProps<{
     flash: FlashProps;
 }>();
 
+usePageDbClick();
 const {
     showAlert,
     alertMessage

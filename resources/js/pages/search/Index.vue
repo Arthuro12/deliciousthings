@@ -24,17 +24,19 @@ import AppLayout from "@/layout/AppLayout.vue";
 import ArtisansSearch from "@/components/search/ArtisansSearch.vue";
 import ArtisanResults from "@/components/search/ArtisanResults.vue";
 
+import { usePageDbClick } from "@/composables/use-page-db-click";
 import { useBodyAppearance } from "@/composables/use-body-appearance";
 import type { ArtisanPublicProfile } from "@/types/users";
 
- const { artisans } = defineProps<{
+const { artisans } = defineProps<{
     artisans: ArtisanPublicProfile[];
- }>();
+}>();
 
- const {
+const {
     setBodyBackgroundColor,
     removeBodyBackgroundColor,
 } = useBodyAppearance("#fcf1f5");
+usePageDbClick();
 
 onMounted(() => {
     setBodyBackgroundColor();

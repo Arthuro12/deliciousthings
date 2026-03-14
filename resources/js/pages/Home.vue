@@ -87,6 +87,10 @@ import {
 } from "lucide-vue-next";
 
 import AppLayout from "@/layout/AppLayout.vue";
+
+import { usePageDbClick } from "@/composables/use-page-db-click";
+
+usePageDbClick();
 </script>
 
 <style scoped lang="scss">

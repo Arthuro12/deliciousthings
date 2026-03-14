@@ -1,12 +1,38 @@
+@use '../abstracts/breakpoints';
+
 .app-footer {
+    ul li {
+        list-style: none;
+    }
+
     background-color: var(--color-primary-50);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5rem 0;
+    padding: 24px;
     min-height: 350px;
 
+    .footer {
+        &__content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__item {
+            padding: 14px;
+        }
+
+        &__header {
+            font-weight: 700;
+            color: var(--color-neutral-10);
+            margin-bottom: 14px;
+        }
+    }
+
     * {
-        color: white;
+        color: var(--color-neutral-0);
+    }
+
+    @include breakpoints.respond-to('medium') {
+        .copyright {
+            align-self: end;
+        }
     }
 }
