@@ -8,6 +8,8 @@ use Illuminate\Validation\Rules\File;
 
 class CreateArtisanRequest extends FormRequest
 {
+    final const OPTIONAL_ADDRESS_FIELDS = ['address_liine_2', 'shows_full_address'];
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,7 +27,7 @@ class CreateArtisanRequest extends FormRequest
     {
         $address = $this->data()['first_address'];
         $requireAddressFields = array_any($address, function ($value, $key) {
-            if ($key == 'address_line_2') return false;
+            if (in_array($key, self::OPTIONAL_ADDRESS_FIELDS)) return false;
             return !is_null($value);
         });
 
@@ -42,7 +44,10 @@ class CreateArtisanRequest extends FormRequest
             'pick_up_on_site' => 'required|boolean',
             'addresses' => 'array|size:0',
             'medias' => 'array|size:0',
-            'first_address' => 'array:street,house_number,postal_code,city,country,address_line_2,shows_full_address',
+            'first_address' => [
+                'nullable',
+                'array:street,house_number,postal_code,city,country,address_line_2,shows_full_address'
+            ],
             'first_address.street' => Rule::requiredIf($requireAddressFields),
             'first_address.house_number' => Rule::requiredIf($requireAddressFields),
             'first_address.postal_code' => Rule::requiredIf($requireAddressFields),
