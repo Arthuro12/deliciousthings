@@ -22,8 +22,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-        node-version: "25.0.0"
-        cache: "npm"
+          node-version: "25.0.0"
+          cache: "npm"
       
       - name: Install Composer deps
         run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
