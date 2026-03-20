@@ -10,7 +10,10 @@
                 <span class="artisan-card__title">{{ artisan.name }}</span><br />
                 <span class="artisan-card__subtitle" v-if="artisan.company_name">{{ artisan.company_name }}</span>
             </div>
-            <span>{{ priceDetails }}</span>
+            <div class="artisan-detail">
+                <span>{{ priceDetails }}</span>
+                <span v-if="artisan.offers_delivery">Lieferdienst angeboten</span>
+            </div>
         </div>
     </a>
 </template>
@@ -67,6 +70,11 @@ const priceDetails = computed(() => {
         flex-direction: column;
         row-gap: 4px;
         padding: 22px;
+
+        > .artisan-detail {
+            display: flex;
+            column-gap: 4px
+        }
     }
 }
 </style>
