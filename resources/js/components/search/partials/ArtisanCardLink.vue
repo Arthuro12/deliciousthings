@@ -73,7 +73,7 @@ const priceDetails = computed(() => {
 
         > .artisan-detail {
             display: flex;
-            column-gap: 8px
+            column-gap: 4px
         }
     }
 }
