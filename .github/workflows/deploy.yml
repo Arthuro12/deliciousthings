@@ -33,15 +33,31 @@ jobs:
           npm ci
           npm run build
 
-      - uses: webfactory/ssh-agent@v0.9.0
-        with: { ssh-private-key: ${{ secrets.SSH_KEY }} }
-        - run: |
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Add known hosts
+        run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
-        - run: |
+
+      - name: Deploy with rsync
+        run: |
           rsync -az --delete \
-          --exclude=".git" --exclude=".github" --exclude=".env" --exclude="storage/**" \
-          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.STAGING_DEPLOY_PATH }}/
-        - run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd '${{ secrets.STAGING_DEPLOY_PATH }}' && \
-          php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude=".env" \
+            --exclude="storage/**" \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.STAGING_DEPLOY_PATH }}/
+
+      - name: Run Laravel commands
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd "${{ secrets.STAGING_DEPLOY_PATH }}"
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+          EOF
