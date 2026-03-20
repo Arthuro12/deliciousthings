@@ -7,44 +7,41 @@ on:
       - dev
 
 jobs:
-  build:
+  deploy-staging:
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
-
+    
     steps:
       - uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ env.PHP_VERSION }}
+          php-version: "8.4"
 
-      - name: Check if composer.json exists
-        id: check_files
-        uses: andstor/file-existence-action@2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
-          files: 'composer.json'
+        node-version: "25.0.0"
+        cache: "npm"
+      
+      - name: Install Composer deps
+        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
 
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        if: steps.check_files.outputs.files_exists == 'true'
+      - name: Build frontend (Vite)
         run: |
-          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+          npm ci
+          npm run build
 
-      - name: Set up dependency caching for faster installs
-        uses: actions/cache@v4
-        if: steps.check_files.outputs.files_exists == 'true'
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Run composer install if composer.json exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: php-app
-          path: .
+      - uses: webfactory/ssh-agent@v0.9.0
+        with: { ssh-private-key: ${{ secrets.SSH_KEY }} }
+        - run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+        - run: |
+          rsync -az --delete \
+          --exclude=".git" --exclude=".github" --exclude=".env" --exclude="storage/**" \
+          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.STAGING_DEPLOY_PATH }}/
+        - run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd '${{ secrets.STAGING_DEPLOY_PATH }}' && \
+          php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"
