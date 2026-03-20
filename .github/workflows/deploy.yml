@@ -55,7 +55,7 @@ jobs:
 
       - name: Run Laravel commands
         run: |
-          ssh ${{ secrets.SSH_PORT }}${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd "${{ secrets.STAGING_DEPLOY_PATH }}"
             php artisan migrate --force
             php artisan config:cache
