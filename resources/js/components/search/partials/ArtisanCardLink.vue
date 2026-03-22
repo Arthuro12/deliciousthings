@@ -12,7 +12,6 @@
             </div>
             <div class="artisan-detail">
                 <span>{{ priceDetails }}</span>
-                <span v-if="artisan.offers_delivery">Lieferdienst angeboten</span>
             </div>
         </div>
     </a>
