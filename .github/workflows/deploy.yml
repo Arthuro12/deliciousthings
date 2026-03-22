@@ -49,8 +49,12 @@ jobs:
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
             --exclude=".git" \
             --exclude=".github" \
+            --exclude="node_modules" \
             --exclude=".env" \
             --exclude="storage/**" \
+            --exclude=".editorconfig" \
+            --exclude=.prettierignore \
+            --exclude=.prettierrc \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.STAGING_DEPLOY_PATH }}/
 
       - name: Run Laravel commands
@@ -82,9 +86,6 @@ jobs:
             
             # Restart queue workers (if using queues)
             php artisan queue:restart || true
-            
-            # Restart Horizon (if using Laravel Horizon)
-            php artisan horizon:terminate || true
             
             # Clear application cache
             php artisan cache:clear
