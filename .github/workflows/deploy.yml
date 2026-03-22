@@ -94,89 +94,89 @@ jobs:
             php artisan opcache:clear || true
           EOF
 
-deploy-prod:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.4"
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: "25.0.0"
-          cache: "npm"
+  deploy-prod:
+      if: github.ref == 'refs/heads/main'
+      runs-on: ubuntu-latest
       
-      - name: Install Composer deps
-        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+      steps:
+        - uses: actions/checkout@v6
 
-      - name: Build frontend (Vite)
-        run: |
-          npm ci
-          npm run build
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: "8.4"
 
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+        - name: Setup Node
+          uses: actions/setup-node@v6
+          with:
+            node-version: "25.0.0"
+            cache: "npm"
+        
+        - name: Install Composer deps
+          run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
 
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+        - name: Build frontend (Vite)
+          run: |
+            npm ci
+            npm run build
 
-      - name: Deploy with rsync
-        run: |
-          rsync -az --delete \
-            -e "ssh -p ${{ secrets.SSH_PORT }}" \
-            --exclude=".git" \
-            --exclude=".github" \
-            --exclude="node_modules" \
-            --exclude=".env" \
-            --exclude="storage/**" \
-            --exclude=".editorconfig" \
-            --exclude=.prettierignore \
-            --exclude=.prettierrc \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.PROD_DEPLOY_PATH }}/
+        - name: Setup SSH agent
+          uses: webfactory/ssh-agent@v0.9.0
+          with:
+            ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Run Laravel commands
-        run: |
-          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd "${{ secrets.PROD_DEPLOY_PATH }}"
-            # Run migrations
-            php artisan migrate --force
-            
-            # Clear and cache configuration
-            php artisan config:clear
-            php artisan config:cache
-            
-            # Clear and cache routes
-            php artisan route:clear
-            php artisan route:cache
-            
-            # Clear and cache views
-            php artisan view:clear
-            php artisan view:cache
-            
-            # Optimize application
-            php artisan optimize:clear
-            php artisan optimize
-            
-            # Clear and cache events (if available)
-            php artisan event:clear || true
-            php artisan event:cache || true
-            
-            # Restart queue workers (if using queues)
-            php artisan queue:restart || true
-            
-            # Clear application cache
-            php artisan cache:clear
-            
-            # Clear OPcache (if available)
-            php artisan opcache:clear || true
-          EOF
+        - name: Add known hosts
+          run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+        - name: Deploy with rsync
+          run: |
+            rsync -az --delete \
+              -e "ssh -p ${{ secrets.SSH_PORT }}" \
+              --exclude=".git" \
+              --exclude=".github" \
+              --exclude="node_modules" \
+              --exclude=".env" \
+              --exclude="storage/**" \
+              --exclude=".editorconfig" \
+              --exclude=.prettierignore \
+              --exclude=.prettierrc \
+              ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.PROD_DEPLOY_PATH }}/
+
+        - name: Run Laravel commands
+          run: |
+            ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+              cd "${{ secrets.PROD_DEPLOY_PATH }}"
+              # Run migrations
+              php artisan migrate --force
+              
+              # Clear and cache configuration
+              php artisan config:clear
+              php artisan config:cache
+              
+              # Clear and cache routes
+              php artisan route:clear
+              php artisan route:cache
+              
+              # Clear and cache views
+              php artisan view:clear
+              php artisan view:cache
+              
+              # Optimize application
+              php artisan optimize:clear
+              php artisan optimize
+              
+              # Clear and cache events (if available)
+              php artisan event:clear || true
+              php artisan event:cache || true
+              
+              # Restart queue workers (if using queues)
+              php artisan queue:restart || true
+              
+              # Clear application cache
+              php artisan cache:clear
+              
+              # Clear OPcache (if available)
+              php artisan opcache:clear || true
+            EOF
