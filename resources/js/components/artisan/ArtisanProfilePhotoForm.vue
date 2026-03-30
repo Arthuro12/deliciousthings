@@ -15,13 +15,14 @@
         />
         <div class="actions">
             <label 
-                class="button button--primary button--with-icon button--small cursor--pointer" 
+                class="button-input button--primary" 
                 for="profile-photo"
             >
-                <UploadIcon color="#fff" :size="16" />
-                <p>Bild hochladen</p>
+                <UploadIcon color="#fff" :size="18"  />
+                <span>Bild hochladen</span>
             </label>
             <AppButton
+                class="button-input"
                 type="button"
                 variant="secondary"
                 layout="with-icon"
@@ -29,8 +30,8 @@
                 :disabled="disableDeleteButton"
                 @click="deleteProfilePhoto"
             >
-                <template #leading><TrashIcon :size="16" /></template>
-                <template #text><p>Bild löschen</p></template>
+                <template #leading><TrashIcon :size="18" /></template>
+                <template #text><span>Bild löschen</span></template>
             </AppButton>
         </div>
     </div>
@@ -72,6 +73,8 @@ function handleUpdate(event: Event): void {
 </script>
 
 <style scoped lang="scss">
+@use "../../../css/abstracts/breakpoints" as breakpoints;
+
 .profile-photo-form {
     display: flex;
     flex-direction: column;
@@ -85,6 +88,23 @@ function handleUpdate(event: Event): void {
         display: flex;
         justify-content: center;
         column-gap: 16px;
+    }
+
+    .button-input {
+        font-size: var(--text-sm);
+        display: flex;
+        justify-content: center;
+        column-gap: 12px;
+        align-items: center;
+        line-height: 1.4;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 12px;
+        cursor: pointer;
+
+        @include breakpoints.respond-to('medium') {
+            font-size: var(--text-base);
+        }
     }
 }
 </style>
