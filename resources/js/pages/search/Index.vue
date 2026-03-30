@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Konditor/-innen und Bäcker/-innen online finden</title>
+            <title>Konditor:innen und Bäcker:innen online finden</title>
         </Head>
 
         <main class="wrapper">
@@ -10,7 +10,7 @@
             </div>
             <div class="search-results">
                 <ArtisanResults v-if="artisans.length > 0" :artisans />
-                <div class="search-results--empty" v-else>Es wurde leide keine Ergebnisse hier gefunden. Wir arbeiten daran, weitere Regionen abzudecken.</div>
+                <div class="search-results--empty" v-else>Es wurde leide keine passende Ergebnisse gefunden.</div>
             </div>
         </main>
     </AppLayout>
