@@ -49,7 +49,6 @@
             <HelperText v-if="form.errors.password" class="form__helper-text" :text="form.errors.password" />
         </div>
         <p>Sie haben bereits ein Konto? <Link class="link--primary" href="/login">Anmelden</Link></p>
-        <p>Hier kommt ein infotext mit Erklärung zur AGBs und -Datenschutzerklärung-Genehmigung.</p>
         <AppButton
             type="submit"
             variant="primary"
