@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Konditor/-innen und Bäcker/-innen online finden</title>
+            <title>Konditor:innen und Bäcker:innen online finden</title>
         </Head>
 
         <main class="home-page">
