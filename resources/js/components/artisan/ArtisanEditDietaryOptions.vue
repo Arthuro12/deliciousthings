@@ -8,8 +8,13 @@
             label-prop="label"
             value-prop="key"
             multiple
+            :select-value-option="{ as: 'p' }"
             v-model:selected-value="form.dietary_options"
-        />
+        >
+            <template #itemLabel="{ text }">
+                <p>{{ text }}</p>
+            </template>
+        </RekaSelect>
         <AppButton
             class="align-end"
             type="button"

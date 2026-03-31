@@ -25,6 +25,13 @@ export type SelectItem = AcceptableValue | {
     [key: string]: any;
 };
 
+export type SelectValueOption = {
+    /**
+     * The element the select value wrapper should be rendered as.
+     */
+    as?: string;
+};
+
 export type SelectProps = {
     placeholder?: string;
     showItemIndicator?: boolean;
@@ -32,6 +39,7 @@ export type SelectProps = {
     labelProp?: string;
     valueProp?: string;
     multiple?: boolean;
+    selectValueOption?: SelectValueOption;
 }
 
 export type SelectGroupProps = {
@@ -41,6 +49,7 @@ export type SelectGroupProps = {
     labelProp?: string;
     valueProp?: string;
     multiple?: boolean;
+    selectValueOption?: SelectValueOption;
 };
 
 export type Checkbox = {

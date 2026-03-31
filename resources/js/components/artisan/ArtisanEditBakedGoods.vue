@@ -8,8 +8,13 @@
             label-prop="label"
             value-prop="key"
             multiple
+            :select-value-option="{ as: 'p' }"
             v-model:selected-value="form.baked_goods"
-        />
+        >
+            <template #itemLabel="{ text }">
+                <p>{{ text }}</p>
+            </template>
+        </RekaSelectGroup>
         <AppButton
             class="align-end"
             type="button"
