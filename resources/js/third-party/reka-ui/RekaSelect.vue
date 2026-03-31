@@ -1,7 +1,10 @@
 <template>
     <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
-            <SelectValue class="select__dropdown-text" :placeholder="placeholder" />
+            <SelectValue  
+                :placeholder="placeholder" 
+                :as="selectValueOption?.as"
+            />
             <ChevronDownIcon />
         </SelectTrigger>
         <SelectPortal>
@@ -21,7 +24,7 @@
                             <CheckIcon color="#000000" :size="16" />
                         </SelectItemIndicator>
                         <SelectItemText>
-                            {{ getItemProp(item, labelProp) }}
+                            <slot name="itemLabel" :text="getItemProp(item, labelProp)">{{ getItemProp(item, labelProp) }}</slot>
                         </SelectItemText>
                     </SelectItem>
                 </SelectViewport>

@@ -17,8 +17,13 @@
                     label-prop="label"
                     value-prop="key"
                     multiple
+                    :select-value-option="{ as: 'p' }"
                     v-model:selected-value="artisan.baked_goods"
-                />
+                >
+                    <template #itemLabel="{ text }">
+                        <p>{{ text }}</p>
+                    </template>
+                </RekaSelectGroup>
             </div>
         </div>
         <div class="row">
@@ -32,7 +37,11 @@
                     value-prop="key"
                     multiple
                     v-model:selected-value="artisan.dietary_options"
-                />
+                >
+                    <template #itemLabel="{ text }">
+                        <p>{{ text }}</p>
+                    </template>
+                </RekaSelect>
             </div>
         </div>
         <AppDivider variant="horizontal" />

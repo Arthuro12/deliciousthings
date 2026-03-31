@@ -32,8 +32,13 @@
 							label-prop="label"
 							value-prop="key"
 							multiple
+							:select-value-option="{ as: 'p' }"
 							v-model:selected-value="form.goods"
-						/>
+						>
+							<template #itemLabel="{ text }">
+								<p>{{ text }}</p>
+							</template>
+						</RekaSelect>
 						<RekaSelect 
 							class="search-filter"
 							placeholder="Ernährungsformen" 
@@ -42,15 +47,20 @@
 							label-prop="label"
 							value-prop="key"
 							multiple
+							:select-value-option="{ as: 'p' }"
 							v-model:selected-value="form.dietary_options"
-						/>
+						>
+							<template #itemLabel="{ text }">
+								<p>{{ text }}</p>
+							</template>
+						</RekaSelect>
 						<RekaCollapsible 
 							class="services-filter" 
 							v-model:open="servicesContentIsVisible"
 						>
 							<template #trigger>
 								<header class="services-filter-header">
-									<span class="truncate">Abholart und Durchschnittspreis (in Euro)</span>
+									<p class="truncate">Abholart und Durchschnittspreis (in Euro)</p>
 									<PlusIcon v-show="!servicesContentIsVisible" color="#000000" />
 									<MinusIcon v-show="servicesContentIsVisible" color="#000000" />
 								</header>
