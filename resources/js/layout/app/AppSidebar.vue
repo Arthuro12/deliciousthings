@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 import { MenuIcon, XIcon } from "lucide-vue-next";
 
@@ -73,7 +73,7 @@ const props = defineProps<{
     zIndex?: number;
 }>();
 
-const { isAuthenticated, hasArtisanProfile } = useAuth(usePage().props.auth);
+const { isAuthenticated, hasArtisanProfile } = useAuth();
 
 const top = ref(props.top ?? 0);
 const left = ref(props.left ?? 0);
