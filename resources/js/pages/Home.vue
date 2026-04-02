@@ -7,18 +7,24 @@
         <main class="home-page">
             <div>   
                 <section class="hero-section"> 
-                    <h2 class="title">Gewinnen Sie lokale Kunden ohne Aufwand.</h2> 
-                    <h3 class="subtitle">Erweitern Sie Ihre Klientel und zeigen Sie Kunden Ihre Kreationen.</h3>                   
-                    <div class="cta">
+                    <h2 class="title">Gewinnen Sie lokale Kund:innen ohne Aufwand.</h2> 
+                    <h3 class="subtitle">Erweitern Sie Ihre Klientel und zeigen Sie Ihre Kreationen.</h3>                   
+                    <div>
                         <a 
-                            class="button button--primary button--large"
+                            v-show="!isAuthenticated"
+                            class="cta-link cta-link--primary"
                             href="/register" 
                             target="_blank"
                         >
                             Profil erstellen
+                            <ChevronRightIcon :size="20" />
                         </a>
                         <a 
-                            class="cta__link" 
+                            class="cta-link"
+                            :class="{ 
+                                'cta-link--neutral': !isAuthenticated,
+                                'cta-link--primary': isAuthenticated 
+                            }" 
                             href="/search" 
                             target="_blank"
                         >
@@ -88,13 +94,19 @@ import {
 
 import AppLayout from "@/layout/AppLayout.vue";
 
+import { useAuth } from "@/composables/use-auth";
 import { usePageDbClick } from "@/composables/use-page-db-click";
+import { computed } from "vue";
 
+const { isAuthenticated } = useAuth();
 usePageDbClick();
+
+// const isNeutralAction = computed(() => isAuthenticated);
 </script>
 
 <style scoped lang="scss">
 @use '../../css/abstracts/breakpoints' as breakpoints; 
+@use '../../css/components/buttons' as buttons;
 
 ul li {
     list-style: none;
@@ -142,18 +154,24 @@ ul li {
         padding: 18px;
         min-height: 85vh;
 
-        .cta {
-            &__link {
-                font-weight: 600;
+        .cta-link {
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 12px;
+            border-radius: 5px;
+            padding: 14px 24px;
+            margin-top: 24px;
+
+            &--primary {
+                color: var(--color-primary-0);
+                background-color: var(--color-primary-50);
+            }
+
+            &--neutral {
                 color: var(--color-neutral-0);
                 background-color: var(--cta-background-color-secondary);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                column-gap: 12px;
-                border-radius: 5px;
-                padding: 14px 24px;
-                margin-top: 24px;
             }
         }
     }
