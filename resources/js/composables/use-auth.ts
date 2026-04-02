@@ -1,14 +1,12 @@
 import { computed } from "vue";
-import type { Reactive } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
-import type { Auth } from "@/types/users";
+export function useAuth() {
+    const user = usePage().props.auth.user;
 
-export function useAuth(auth: Reactive<Auth>) {
-    const user = computed(() => auth.user);
+    const isAuthenticated = computed(() => user != null);
 
-    const isAuthenticated = computed(() => user.value != null);
-
-    const hasArtisanProfile = computed(() => user.value?.artisan_profile != undefined);
+    const hasArtisanProfile = computed(() => user?.artisan_profile != undefined);
 
     return {
         isAuthenticated,

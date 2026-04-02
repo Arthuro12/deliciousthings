@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 import { UserIcon } from "lucide-vue-next";
 
@@ -30,5 +30,5 @@ import LogoutButton from "@/components/auth/LogoutButton.vue";
 
 import { useAuth } from "@/composables/use-auth";
 
-const { isAuthenticated } = useAuth(usePage().props.auth);
+const { isAuthenticated } = useAuth();
 </script>
