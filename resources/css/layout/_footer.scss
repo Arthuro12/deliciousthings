@@ -24,6 +24,18 @@
             color: var(--color-neutral-10);
             margin-bottom: 14px;
         }
+
+        &__contact {
+            margin-bottom: 14px;
+        }
+
+        &__social-links {
+            width: fit-content;
+            
+            .footer__social-link {
+                display: block;
+            }
+        }
     }
 
     * {
