@@ -96,12 +96,9 @@ import AppLayout from "@/layout/AppLayout.vue";
 
 import { useAuth } from "@/composables/use-auth";
 import { usePageDbClick } from "@/composables/use-page-db-click";
-import { computed } from "vue";
 
 const { isAuthenticated } = useAuth();
 usePageDbClick();
-
-// const isNeutralAction = computed(() => isAuthenticated);
 </script>
 
 <style scoped lang="scss">
