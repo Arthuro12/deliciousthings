@@ -46,6 +46,10 @@ import RichTextEditor from "@/third-party/tiptap/RichTextEditor.vue";
 
 import type { Message } from "@/types/users";
 
+const { artisanId, } = defineProps<{
+    artisanId: string;
+}>();
+
 const form = useForm<Message>({
     sender_email: "",
     sender_name: "",
@@ -55,7 +59,7 @@ const form = useForm<Message>({
 
 function sendMessage(): void {
     form.sent_at = new Date().toISOString();
-    form.post("/artisan/messages");
+    form.post(`/artisan/${artisanId}/messages`);
 }
 </script>
 

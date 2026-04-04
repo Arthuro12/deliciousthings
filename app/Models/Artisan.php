@@ -19,7 +19,6 @@ class Artisan extends Model
         'company_name',
         'main_occupation',
         'e164phone',
-        'email',
         'short_description',
         'about',
         'website_url',
