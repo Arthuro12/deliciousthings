@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Http\Controllers\Controller;
+use App\Models\Artisan;
 use App\Models\Message;
 use App\Mail\MessageSent;
 
@@ -22,7 +23,7 @@ class MessageController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Artisan $artisan)
     {
         $attrs = $request->validate([
             'sender_email' => 'required|string',
@@ -32,14 +33,14 @@ class MessageController extends Controller
         ]);
 
         $sanitizedContent = strip_tags($attrs['content'], '<p><br><strong><em><u><ul><li>');
-        $request->user()->artisan->messages()->create([
+        $artisan->messages()->create([
             'sender_email' => $attrs['sender_email'],
             'sender_name' => $attrs['sender_name'],
             'content' => $sanitizedContent,
             'sent_at' => Carbon::parse($attrs['sent_at']),
         ]);
 
-        Mail::to($request->user())->send(new MessageSent($attrs['sender_name']));
+        Mail::to($artisan->user)->send(new MessageSent($attrs['sender_name']));
 
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
