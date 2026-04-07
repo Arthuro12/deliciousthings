@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="column contact-dialog-wrapper">
-                <ContactArtisan :artisan-id="artisan.id" />
+                <ContactArtisan :artisan-id="artisan.id.toString()" />
             </div>
         </main>
     </AppLayout>
