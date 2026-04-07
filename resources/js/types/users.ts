@@ -5,7 +5,7 @@ export interface Auth {
 }
 
 export interface User {
-    id?: number;
+    id: number;
     first_name: string;
     last_name: string;
     full_name: string;
@@ -39,7 +39,7 @@ export type Image = {
 };
 
 export type BasicProfile = {
-    id?: number;
+    id: number;
     /**
      * The public profile name.
      */

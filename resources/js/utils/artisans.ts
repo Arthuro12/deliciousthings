@@ -12,7 +12,7 @@ import type {
 /**
  * Gets a default address.
  * 
- * @returns A default default address.
+ * @returns A default address.
  */
 export function defaultAddress(): Address {
     return {
@@ -33,6 +33,7 @@ export function defaultAddress(): Address {
  */
 export function defaultArtisan(): ArtisanProfile {
     return {
+        id: 0,
         name: "",
         company_name: "",
         main_occupation: "",
@@ -53,6 +54,7 @@ export function defaultArtisan(): ArtisanProfile {
 
 export function getBasicProfile(profile: ArtisanProfile | ArtisanPublicProfile): BasicProfile {
     return {
+        id: profile.id,
         name: profile.name,
         company_name: profile.company_name,
         main_occupation: profile.main_occupation,
