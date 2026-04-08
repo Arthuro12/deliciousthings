@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Create .env file
-        run: echo "${{ vars.Vite.APP.NAME }} > .env"
+        run: echo "${{ vars.VITE_APP_NAME }} > .env"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
