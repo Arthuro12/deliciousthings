@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Create .env file
+        run: echo "VITE_APP_NAME=${{ vars.VITE_APP_NAME }}" > .env
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -100,6 +103,9 @@ jobs:
       
       steps:
         - uses: actions/checkout@v6
+
+        - name: Create .env file
+          run: echo "VITE_APP_NAME=${{ vars.VITE_APP_NAME }}" > .env
 
         - name: Setup PHP
           uses: shivammathur/setup-php@v2
