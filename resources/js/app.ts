@@ -4,6 +4,7 @@ import { createApp, h } from "vue";
 import type { DefineComponent } from "vue";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+console.info(import.meta.env);
 
 createInertiaApp({
     title: (title) => (title ? `${title} | ${appName}` : appName),
