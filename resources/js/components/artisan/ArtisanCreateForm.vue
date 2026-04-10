@@ -36,6 +36,7 @@
                     label-prop="label"
                     value-prop="key"
                     multiple
+                    :select-value-option="{ as: 'p' }"
                     v-model:selected-value="artisan.dietary_options"
                 >
                     <template #itemLabel="{ text }">
