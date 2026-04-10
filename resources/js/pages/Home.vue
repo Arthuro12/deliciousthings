@@ -1,7 +1,8 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Konditor:innen und Bäcker:innen online finden</title>
+            <title>Konditoreien & Bäckereien: Handwerk erleben</title>
+            <meta name="description" content="Bringen Sie Ihre Handwerkskunst ans Licht. Verbinden Sie sich mit Liebhaber:innen, die es kaum erwarten können, Ihre Backwaren zu genießen. Jetzt Teil werden!" />
         </Head>
 
         <main class="home-page">
