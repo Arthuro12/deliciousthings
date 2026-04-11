@@ -1,59 +1,79 @@
 <template>
-    <form class="form__group">
+    <form class="form__group" @submit.prevent="onSubmit">
         <div class="form__control">
-            <label for="first-name">Vorname *</label>
-            <input 
-               :class="{
-                    'is-invalid': form.errors.first_name
-                }" 
-                type="text" 
-                id="first-name" 
-                v-model.trim="form.first_name" 
-            />
-            <HelperText v-if="form.errors.first_name" class="form__helper-text" :text="form.errors.first_name" />
+            <TextField
+                id="first-name"
+                type="text"
+                label="Vorname *"
+                :error="!!form.errors.first_name"
+                v-model.trim="form.first_name"
+            >
+                <template #helper>
+                    <HelperText 
+                        v-if="form.errors.first_name" 
+                        class="form__helper-text" 
+                        variant="error"
+                        :text="form.errors.first_name" 
+                    />
+                </template>
+            </TextField>
         </div>
         <div class="form__control">
-            <label for="last-name">Nachname *</label>
-            <input 
-               :class="{
-                    'is-invalid': form.errors.last_name
-                }" 
-                type="text" 
+            <TextField
                 id="last-name"
-                v-model.trim="form.last_name" 
-            />
-            <HelperText v-if="form.errors.last_name" class="form__helper-text" :text="form.errors.last_name" />
+                type="text"
+                label="Nachname *"
+                :error="!!form.errors.last_name"
+                v-model.trim="form.last_name"
+            >
+                <template #helper>
+                    <HelperText 
+                        v-if="form.errors.last_name" 
+                        class="form__helper-text" 
+                        variant="error"
+                        :text="form.errors.last_name" 
+                    />
+                </template>
+            </TextField>
         </div>
         <div class="form__control">
-            <label for="email">E-Mail *</label>
-            <input 
-                :class="{
-                    'is-invalid': form.errors.email
-                }" 
-                type="email" 
-                id="email" 
-                v-model.trim="form.email" 
-            />
-            <HelperText v-if="form.errors.email" class="form__helper-text" :text="form.errors.email" />
+            <TextField
+                id="email"
+                type="email"
+                label="E-Mail *"
+                :error="!!form.errors.email"
+                v-model.trim="form.email"
+            >
+                <template #helper>
+                    <HelperText 
+                        v-if="form.errors.email" 
+                        class="form__helper-text" 
+                        variant="error"
+                        :text="form.errors.email" 
+                    />
+                </template>
+            </TextField>
         </div>
         <div class="form__control">
-            <label for="password">Passwort *</label>
-            <input                
-                :class="{
-                    'is-invalid': form.errors.password
-                }"  
-                type="password" 
-                id="password" 
-                v-model.trim="form.password" 
-            />
-            <HelperText v-if="form.errors.password" class="form__helper-text" :text="form.errors.password" />
+            <PasswordInput
+                v-model.trim="form.password"
+                :error="form.errors.password"
+            >
+                <template #helper>
+                    <HelperText 
+                        v-if="form.errors.password" 
+                        class="form__helper-text" 
+                        variant="error"
+                        :text="form.errors.password" 
+                    />
+                </template>
+            </PasswordInput>
         </div>
         <p>Sie haben bereits ein Konto? <Link class="link--primary" href="/login">Anmelden</Link></p>
         <AppButton
             type="submit"
             variant="primary"
             size="medium"
-            @click.prevent="onSubmit"
         >
             <template #text>Registrieren</template>
         </AppButton>
@@ -65,7 +85,9 @@ import { useForm } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 
 import AppButton from "@/components/presentation/AppButton.vue"; 
-import HelperText from "../presentation/HelperText.vue";
+import TextField from "@/components/presentation/TextField.vue";
+import PasswordInput from "../presentation/PasswordInput.vue";
+import HelperText from "@/components/presentation/HelperText.vue";
 
 import { FORM_ERRORS } from "@/constants";
 

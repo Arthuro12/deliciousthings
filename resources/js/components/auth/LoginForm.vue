@@ -5,29 +5,37 @@
     >
         <ShowError v-if="loginErrorMessage" :message="loginErrorMessage" />
         <div class="form__control">
-            <label for="email">E-Mail *</label>
-            <input 
-                :class="{
-                    'is-invalid': form.errors.email
-                }" 
-                type="email" 
-                id="email" 
+            <TextField
+                id="email"
+                type="email"
+                label="E-Mail *"
+                :error="!!form.errors.email"
                 v-model.trim="form.email" 
-                required
-            />
-            <HelperText v-if="form.errors.email" class="form__helper-text" :text="form.errors.email" />
+            >
+                <template #helper>
+                    <HelperText 
+                        v-if="form.errors.email" 
+                        class="form__helper-text" 
+                        variant="error"
+                        :text="form.errors.email" 
+                    />
+                </template>
+            </TextField>
         </div>
         <div class="form__control">
-            <label for="password">Passwort *</label>
-            <input 
-                :class="{
-                    'is-invalid': form.errors.password
-                }" 
-                type="password" 
-                id="password" 
+            <PasswordInput 
                 v-model.trim="form.password" 
-            />
-            <HelperText v-if="form.errors.password" class="form__helper-text" :text="form.errors.password" />
+                :error="form.errors.password" 
+            >
+                <template #helper>
+                    <HelperText
+                        v-if="form.errors.password" 
+                        class="form__helper-text"
+                        variant="error" 
+                        :text="form.errors.password" 
+                    />
+                </template>
+            </PasswordInput>
             <Link class="link--primary" href="">Passwort vergessen?</Link>
         </div>
         <AppButton
@@ -47,6 +55,8 @@ import { Link } from "@inertiajs/vue3";
 import { usePage, useForm } from "@inertiajs/vue3";
 
 import AppButton from "@/components/presentation/AppButton.vue";
+import TextField from "../presentation/TextField.vue";
+import PasswordInput from "@/components/presentation/PasswordInput.vue";
 import ShowError from "@/components/presentation/ShowError.vue";
 import HelperText from "@/components/presentation/HelperText.vue";
 
