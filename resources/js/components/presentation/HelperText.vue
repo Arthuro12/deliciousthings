@@ -1,15 +1,20 @@
 <template>
     <div class="wrapper">
-        <Info fill="#f73003" /><p>{{ text  }}</p>
+        <template v-if="variant != 'default'">
+            <CircleAlertIcon :size="24" color="#f73003" />
+        </template>
+        <p :class="textClass">{{ text  }}</p>
     </div>
 </template>
 
 <script setup lang="ts">
-import Info from "@/components/icons/Info.vue";
+import { CircleAlertIcon } from "lucide-vue-next";
 
-defineProps<{
-    text: string;
-}>();
+import type { HelperTextProps } from "@/types/ui";
+
+const { variant = "default", } = defineProps<HelperTextProps>();
+
+const textClass = variant != "default" ? `text--${variant}` : "";
 </script>
 
 <style scoped lang="scss">
@@ -18,8 +23,10 @@ defineProps<{
     align-items: center;
     column-gap: 4px;
 
-    > p {
-        color: var(--color-input-error);
+    > .text {
+        &--error {
+            color: var(--color-input-error);
+        }
     }
 }
 </style>

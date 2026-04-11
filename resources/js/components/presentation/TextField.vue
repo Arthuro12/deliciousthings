@@ -1,7 +1,6 @@
 <template>
     <div class="text-field__wrapper">
         <label v-if="label" :for="id">{{ label }}</label>
-        <slot name="leadingIcon"></slot>
         <input 
             :id="id"
             :class="{
@@ -12,6 +11,7 @@
             @input="onInput"
             @change="onChange"
         />
+        <slot name="icon"></slot>
         <slot name="helper"></slot>
     </div>
 </template>
