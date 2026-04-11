@@ -57,7 +57,7 @@
         <div class="form__control">
             <PasswordInput
                 v-model.trim="form.password"
-                :error="form.errors.password"
+                :error="!!form.errors.password"
             >
                 <template #helper>
                     <HelperText 
@@ -69,7 +69,15 @@
                 </template>
             </PasswordInput>
         </div>
-        <p>Sie haben bereits ein Konto? <Link class="link--primary" href="/login">Anmelden</Link></p>
+        <p>Sie haben bereits ein Konto? 
+            <Link 
+                class="link--primary" 
+                :class="classes.inline" 
+                href="/login"
+            >
+                Anmelden
+            </Link>
+        </p>
         <AppButton
             type="submit"
             variant="primary"
@@ -81,6 +89,8 @@
 </template>
 
 <script setup lang="ts">
+import { useCssModule } from "vue";
+
 import { useForm } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 
@@ -90,6 +100,8 @@ import PasswordInput from "../presentation/PasswordInput.vue";
 import HelperText from "@/components/presentation/HelperText.vue";
 
 import { FORM_ERRORS } from "@/constants";
+
+const classes = useCssModule();
 
 const form = useForm({
     first_name: '',
@@ -125,8 +137,10 @@ function onSubmit(): void {
 button {
     margin-top: 14px;
 }
+</style>
 
-.info-text > a {
-    display: inline;
+<style module>
+.inline {
+    display: inline;;
 }
 </style>

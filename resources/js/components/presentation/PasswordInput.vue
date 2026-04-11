@@ -1,58 +1,102 @@
 <template>
-    <TextField
-        class="password-input"
-        id="password"
-        :type="showPassword ? 'text' : 'password'"
-        label="Passwort *"
-        :error="!!error"
-        v-model="modelValue"
-    >
-        <template #icon>
+    <div>
+        <label for="password">Passwort *</label>
+        <div 
+            class="input-wrapper"
+            :class="{ 'is-invalid': error }"
+            :tabindex="-1"
+        >
+            <input 
+                class="password-input"
+                id="password"
+                :type="showPassword ? 'text' : 'password'" 
+                v-model="modelValue"
+            />
             <AppButton
-                class="password-input__icon"
+                v-if="showRevealIcon"
+                class="reveal-icon"
                 type="button"
                 layout="icon"
                 @click="showPassword = !showPassword"
             >
                 <template #leading>
-                    <EyeClosedIcon v-if="!showPassword" :size="24" />
-                    <EyeIcon v-else :size="24" />
+                    <EyeIcon 
+                        v-if="showPassword" 
+                        :size="24" 
+                        color="#000000"
+                    />
+                    <EyeClosedIcon 
+                        v-else
+                        :size="24" 
+                        color="#000000" 
+                    />
                 </template>
             </AppButton>
-        </template>
-        <template #helper>
-            <slot name="helper"></slot>
-        </template>
-    </TextField>
+        </div>
+        <slot name="helper"></slot>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 import { EyeIcon, EyeClosedIcon } from "lucide-vue-next"; 
 
-import TextField from "./TextField.vue";
 import AppButton from "./AppButton.vue";
 
 defineProps<{
-    error?: string;
+    error?: boolean;
 }>();
 
 const modelValue = defineModel<string | undefined>();
+
 const showPassword = ref(false);
+
+const showRevealIcon = computed(() => !!(modelValue.value && modelValue.value.length > 0));
 </script>
 
 <style scoped lang="scss">
-.password-input {
-    position: relative;
+@use "../../../css/abstracts/breakpoints" as breakpoints;
 
-    &__icon {
+:deep(input[type="password"]::-ms-reveal) {
+    opacity: 0;
+}
+
+.input-wrapper {
+    display: flex;
+    position: relative;
+    border: 1px solid var(--color-neutral-50);
+    border-radius: 5px;
+
+    &:focus-within {
+        outline: 1px solid var(--color-neutral-50);
+    }
+
+    .password-input {
+        border: none;
+        outline: none;
+        width: 85%;
+
+        @include breakpoints.respond-to("medium") {
+            width: 90%;
+        }
+    }
+
+    .reveal-icon {
         position: absolute;
         right: 10px;
-        top: 35px;
+        top: 13px;
         width: fit-content;
         height: fit-content;
         padding: 0;
+    }
+}
+
+.is-invalid {
+    border: 2px solid var(--color-input-error);
+    
+    &:focus-within {
+        outline: none;
     }
 }
 </style>

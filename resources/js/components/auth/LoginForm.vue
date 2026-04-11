@@ -25,7 +25,7 @@
         <div class="form__control">
             <PasswordInput 
                 v-model.trim="form.password" 
-                :error="form.errors.password" 
+                :error="!!form.errors.password" 
             >
                 <template #helper>
                     <HelperText
@@ -36,7 +36,7 @@
                     />
                 </template>
             </PasswordInput>
-            <Link class="link--primary" href="">Passwort vergessen?</Link>
+            <Link class="link--primary w-fit" href="">Passwort vergessen?</Link>
         </div>
         <AppButton
             type="submit"
@@ -45,7 +45,7 @@
         >
             <template #text>Einloggen</template>
         </AppButton>
-        <Link class="link--primary" href="/register">Neues Konto erstellen</Link>
+        <Link class="link--primary w-fit" href="/register">Neues Konto erstellen</Link>
     </form>
 </template>
 
