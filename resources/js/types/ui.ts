@@ -15,6 +15,11 @@ export type FlashToast = {
 
 export type FlashProps = FlashSession | FlashToast;
 
+export type HelperTextProps = {
+    variant: "default" | "error";
+    text: string;
+};
+
 export type FileValue = File[] | File | null;
 
 export type SelectValue = AcceptableValue | AcceptableValue[] | undefined;
