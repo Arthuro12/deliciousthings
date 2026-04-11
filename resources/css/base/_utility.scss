@@ -5,6 +5,14 @@
     font-weight: bold;
 }
 
+.block {
+    display: block;
+}
+
+.inline {
+    display: inline;
+}
+
 .logo {
     display: block;
 }
@@ -42,4 +50,8 @@
 
 .divider--vertical {
     border-left: 0.5px solid var(--color-neutral-10);
+}
+
+.w-fit {
+    width: fit-content;
 }
