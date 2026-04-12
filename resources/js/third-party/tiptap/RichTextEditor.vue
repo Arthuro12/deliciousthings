@@ -1,16 +1,54 @@
 <template>
-    <div class="rich-text-editor">
+    <div class="rich-text-editor" :tabindex="-1">
         <div class="rich-text-editor__marks">
-            <button type="button" @click="toggleBold"><BoldIcon color="#000000" :size="14" /></button>
-            <button type="button" @click="toggleItalic"><ItalicIcon color="#000000" :size="14" /></button>
-            <button type="button" @click="toggleUnderline"><UnderlineIcon color="#000000" :size="14" /></button>
-            <button type="button" @click="toggleBulletList"><ListIcon color="#000000" :size="14" /></button>
+            <button 
+                class="marks__button"
+                type="button" 
+                @click="toggleBold"
+            >
+                <BoldIcon 
+                    :color="isBoldActive ? '#e680a5' : '#000000'" 
+                    :size="14" 
+                />
+            </button>
+            <button 
+                class="marks__button"
+                type="button" 
+                @click="toggleItalic"
+            >
+                <ItalicIcon 
+                    :color="isItalicActive ? '#e680a5' : '#000000'"
+                    :size="14" 
+                />
+            </button>
+            <button 
+                class="marks__button"
+                type="button" 
+                @click="toggleUnderline"
+            >
+                <UnderlineIcon 
+                    :color="isUnderlineActive ? '#e680a5' : '#000000'"
+                    :size="14" 
+                />
+            </button>
+            <button 
+                class="marks__button"
+                type="button" 
+                @click="toggleBulletList"
+            >
+                <ListIcon 
+                    :color="isBulletListActive ? '#e680a5' : '#000000'" 
+                    :size="14" 
+                />
+            </button>
         </div>
         <EditorContent class="editor-content" :editor="editor" />
     </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -31,6 +69,14 @@ const editor = useEditor({
         emit("update:content", editor.value?.getHTML() ?? "");
     }
 });
+
+const isBoldActive = computed(() => !!editor.value?.isActive("bold"));
+
+const isBulletListActive = computed(() => !!editor.value?.isActive("bulletList"));
+
+const isItalicActive = computed(() => !!editor.value?.isActive("italic"));
+
+const isUnderlineActive = computed(() => !!editor.value?.isActive("underline"));
 
 function toggleBold(): void {
     editor.value?.chain().focus().toggleBold().run();
@@ -55,12 +101,26 @@ function toggleUnderline(): void {
     border-radius: 12px;
     width: 100%;
 
+    &:focus-within {
+        border-color: var(--color-primary-50);
+        box-shadow: 0 0 0 2px var(--color-primary-10);
+    }
+
     &__marks {
         display: flex;
         justify-content: start;
         column-gap: 5px;
         padding: 12px;
         border-bottom: 1px solid var(--color-neutral-50);
+
+        > .marks__button {
+            padding: 4px;
+
+            &:hover {
+                background-color: var(--color-primary-10);
+                border-radius: 5px;
+            }
+        }
     }
 }
 
@@ -82,5 +142,9 @@ function toggleUnderline(): void {
     p:focus-visible {
         outline: none;
     }
+}
+
+.is-active {
+    color: var(--color-primary-50);;
 }
 </style>

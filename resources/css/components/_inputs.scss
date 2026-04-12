@@ -10,6 +10,16 @@ input[type="number"] {
 }
 
 input[type="text"],
+input[type="email"],
+input[type="number"] {
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary-50);
+        box-shadow: 0 0 0 2px var(--color-primary-10);
+    }
+}
+
+input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"] {
@@ -30,5 +40,12 @@ input[type="number"] {
         border: 1px solid black;
         border-radius: 5px;
         padding: 12px;
+
+        &:focus {
+            outline: none;
+            border: 1px solid var(--color-primary-50);
+            box-shadow: 0 0 0 2px var(--color-primary-10);
+            border-radius: 5px;
+        }
     }
 }
