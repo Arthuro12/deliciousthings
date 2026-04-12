@@ -149,6 +149,10 @@ watch(suggestions, (newSuggestions) => {
             padding: 14px 34px;
             border-radius: 24px;
 
+            &:focus {
+                border-color: var(--color-primary-50);
+            }
+
             &:focus-visible {
                 outline: none;
             }

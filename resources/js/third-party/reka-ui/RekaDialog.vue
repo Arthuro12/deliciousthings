@@ -8,7 +8,7 @@
                     <div>
                         <div class="dialog__title">
                             <DialogTitle as="h4">{{ title }}</DialogTitle>
-                            <DialogClose><XIcon color="#e680a5" /></DialogClose>
+                            <DialogClose class="dialog__close-button"><XIcon color="#e680a5" /></DialogClose>
                         </div>
                         <div>
                             <DialogDescription as="div"><slot name="description"></slot></DialogDescription>

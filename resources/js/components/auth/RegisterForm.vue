@@ -56,7 +56,7 @@
         </div>
         <div class="form__control">
             <PasswordInput
-                v-model.trim="form.password"
+                v-model="form.password"
                 :error="!!form.errors.password"
             >
                 <template #helper>

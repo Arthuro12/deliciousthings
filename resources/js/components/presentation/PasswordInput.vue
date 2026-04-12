@@ -69,7 +69,8 @@ const showRevealIcon = computed(() => !!(modelValue.value && modelValue.value.le
     border-radius: 5px;
 
     &:focus-within {
-        outline: 1px solid var(--color-neutral-50);
+        border-color: var(--color-primary-50);
+        box-shadow: 0 0 0 2px var(--color-primary-10);
     }
 
     .password-input {

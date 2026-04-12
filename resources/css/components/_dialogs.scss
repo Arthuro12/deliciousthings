@@ -6,6 +6,18 @@
         justify-content: space-between;
     }
 
+    &__close-button {
+        width: fit-content;
+        height: fit-content;
+
+        &:focus-visible {
+            outline: none;
+            border: 1px solid var(--color-primary-50);
+            box-shadow: 0 0 0 2px var(--color-primary-10);
+            border-radius: 5px;
+        }
+    }
+
     &__content {
         position: fixed;
         background-color: var(--color-neutral-0);
