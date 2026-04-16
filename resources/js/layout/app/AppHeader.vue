@@ -1,7 +1,7 @@
 <template>
     <header class="app-header">
         <AppSidebar class="header__sidebar" :z-index="1" />
-        <a href="/"><AppLogo class="logo" /></a>
+        <a href="/"><AppLogo class="block" /></a>
         <div class="header__separator"></div>
         <nav class="navbar">
             <ul v-if="isAuthenticated">

@@ -1,19 +1,20 @@
 @use '../abstracts/breakpoints';
 
 .app-header {
-    padding: 1rem;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     background-color: white;
+    height: 64px;
 
     ul {
         list-style: none;
     }
 
     .header__sidebar {
-        margin-right: 12px;
+        margin-top: 4px;
     }
 
     .header__separator {
