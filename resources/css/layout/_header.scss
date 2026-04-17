@@ -14,7 +14,11 @@
     }
 
     .header__sidebar {
-        margin-top: 4px;
+        margin-top: 5px;
+
+        @include breakpoints.respond-to('medium') {
+            margin-top: 4px;
+        }
     }
 
     .header__separator {
