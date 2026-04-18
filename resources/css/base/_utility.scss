@@ -51,3 +51,8 @@
 .w-fit {
     width: fit-content;
 }
+
+.circle--focused:focus {
+    border-radius: 50%;
+    background-color: var(--color-primary-10);
+}

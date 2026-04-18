@@ -1,7 +1,7 @@
 @use '../abstracts/breakpoints';
 
 .app-header {
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,14 +11,6 @@
 
     ul {
         list-style: none;
-    }
-
-    .header__sidebar {
-        margin-top: 5px;
-
-        @include breakpoints.respond-to('medium') {
-            margin-top: 4px;
-        }
     }
 
     .header__separator {

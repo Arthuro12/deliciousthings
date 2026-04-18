@@ -8,11 +8,13 @@
         <template #default>
             <div class="contact-artisan-form">
                 <TextField 
+                    id="name"
                     type="text" 
                     label="Ihr Name" 
                     v-model="form.sender_name"
                 />
                 <TextField 
+                    id="email"
                     type="email" 
                     label="Ihre E-Mail-Adresse" 
                     v-model="form.sender_email"
