@@ -17,13 +17,6 @@
             white-space: nowrap;
         }
 
-        // &:focus-visible {
-        //     outline: none;
-        //     border: 1px solid var(--color-primary-50);
-        //     box-shadow: 0 0 0 2px var(--color-primary-10);
-        //     border-radius: 5px;
-        // }
-
         span {
             width: 100%;
             text-align: start;
@@ -36,7 +29,6 @@
     &__content {
         padding: 12px;
         background-color: var(--color-neutral-0);
-        // border: 1px solid var(--color-neutral-50);
         box-shadow: 0 0 10px rgba(0,0,0,.3);
         border-radius: 5px;
         width: var(--reka-select-trigger-width);
@@ -72,4 +64,12 @@
 
 .select-group__label {
     font-weight: bold;
+}
+
+// Highlight select trigger when the select content is open.
+button.select__dropdown-button[data-state="open"] {
+    outline: none;
+    border: 2px solid var(--color-primary-50);
+    border-color: var(--color-primary-50);
+    box-shadow: 0 0 0 2px var(--color-primary-10);
 }
