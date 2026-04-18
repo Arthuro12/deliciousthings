@@ -78,4 +78,18 @@ h6 {
 button {
     background: none;
     border: none;
+
+    &:focus,
+    &:focus-visible {
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+a {
+    &:focus,
+    &:focus-visible {
+        box-shadow: none;
+        outline: none;
+    }
 }
