@@ -59,7 +59,7 @@ const showRevealIcon = computed(() => !!(modelValue.value && modelValue.value.le
 @use "../../../css/abstracts/breakpoints" as breakpoints;
 
 input[type="password"] {
-    ::-ms-reveal {
+    &::-ms-reveal {
         opacity: 0;
     }
     
@@ -86,6 +86,7 @@ input[type="password"] {
     .password-input {
         border: none;
         outline: none;
+        padding: 0;
         width: 85%;
 
         @include breakpoints.respond-to("medium") {
