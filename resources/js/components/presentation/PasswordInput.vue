@@ -65,8 +65,8 @@ input[type="password"] {
     
     &:focus,
     &:focus-visible {
+        outline: none;
         border: none;
-        box-shadow: none;
     }
 }
 
@@ -75,6 +75,7 @@ input[type="password"] {
     position: relative;
     border: 1px solid var(--color-neutral-20);
     border-radius: 5px;
+    padding: 12px;
 
     &:focus-within {
         border-width: 2px;

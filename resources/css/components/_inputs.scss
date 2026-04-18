@@ -1,5 +1,4 @@
 input[type="text"], 
-input[type="password"], 
 input[type="email"],
 input[type="number"] {
     border: 1px solid var(--color-neutral-20);
@@ -11,7 +10,6 @@ input[type="number"] {
 
 input[type="text"],
 input[type="email"],
-input[type="password"],
 input[type="number"] {
     &:focus,
     &:focus-visible {
@@ -23,7 +21,6 @@ input[type="number"] {
 }
 
 input[type="text"],
-input[type="password"],
 input[type="email"],
 input[type="number"] {
     &.is-invalid {
