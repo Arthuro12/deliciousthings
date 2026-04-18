@@ -2,7 +2,7 @@
     <div>
         <label for="password">Passwort *</label>
         <div 
-            class="input-wrapper"
+            class="input-wrapper input--focused"
             :class="{ 'is-invalid': error }"
             :tabindex="-1"
         >
@@ -58,17 +58,26 @@ const showRevealIcon = computed(() => !!(modelValue.value && modelValue.value.le
 <style scoped lang="scss">
 @use "../../../css/abstracts/breakpoints" as breakpoints;
 
-:deep(input[type="password"]::-ms-reveal) {
-    opacity: 0;
+input[type="password"] {
+    ::-ms-reveal {
+        opacity: 0;
+    }
+    
+    &:focus,
+    &:focus-visible {
+        border: none;
+        box-shadow: none;
+    }
 }
 
 .input-wrapper {
     display: flex;
     position: relative;
-    border: 1px solid var(--color-neutral-50);
+    border: 1px solid var(--color-neutral-20);
     border-radius: 5px;
 
     &:focus-within {
+        border-width: 2px;
         border-color: var(--color-primary-50);
         box-shadow: 0 0 0 2px var(--color-primary-10);
     }

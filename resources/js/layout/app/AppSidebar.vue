@@ -1,7 +1,7 @@
 <template>
     <div class="app-sidebar">
         <AppButton
-            class="sidebar__icon-button" 
+            class="sidebar__icon-button circle--focused" 
             type="button"
             layout="icon"
             @click="showContent = true"
@@ -12,7 +12,7 @@
             <div v-show="showContent" class="sidebar__content">
                 <div class="icon-wrapper">
                     <AppButton 
-                        class="sidebar__icon-button"
+                        class="sidebar__icon-button circle--focused"
                         type="button"
                         layout="icon"
                         @click="showContent = false"
@@ -37,7 +37,7 @@
                     <AppDivider variant="horizontal" />
                     <li class="sidebar__item"><LogoutButton /></li>
                 </ul>
-                <ul class="sidebar__menu" v-else>
+                <ul class="sidebar__menu menu--auth" v-else>
                     <li class="sidebar__item">
                         <Link class="button button--primary button--medium" href="/register">Beitreten</Link>
                     </li>
@@ -114,13 +114,17 @@ const showContent = ref(false);
     }
 
     &__icon-button {
-        padding: 0;
+        padding: 8px;
     }
 
     &__menu {
         display: flex;
         flex-direction: column;
         row-gap: 16px;
+    }
+
+    .menu--auth {
+        padding: 1px 6px;
     }
 
     &__item > .button {

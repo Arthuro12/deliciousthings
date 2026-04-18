@@ -97,21 +97,23 @@ function toggleUnderline(): void {
 
 <style scoped lang="scss">
 .rich-text-editor {
-    border: 1px solid var(--color-neutral-50);
+    border: 1px solid var(--color-neutral-20);
     border-radius: 12px;
     width: 100%;
 
+    &focus,
     &:focus-within {
-        border-color: var(--color-primary-50);
-        box-shadow: 0 0 0 2px var(--color-primary-10);
-    }
+            outline: none;
+            border: 2px solid var(--color-primary-50);
+            box-shadow: 0 0 0 2px var(--color-primary-10);
+        }
 
     &__marks {
         display: flex;
         justify-content: start;
         column-gap: 5px;
         padding: 12px;
-        border-bottom: 1px solid var(--color-neutral-50);
+        border-bottom: 1px solid var(--color-neutral-20);
 
         > .marks__button {
             padding: 4px;

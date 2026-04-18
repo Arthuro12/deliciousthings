@@ -2,6 +2,7 @@
     <SelectRoot :multiple v-model="selectedValue">
         <SelectTrigger class="select__dropdown-button">
             <SelectValue 
+                class="dropdown-button__text"
                 :placeholder="placeholder" 
                 :as="selectValueOption?.as" 
             />

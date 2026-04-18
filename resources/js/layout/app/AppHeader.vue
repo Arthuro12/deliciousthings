@@ -1,6 +1,6 @@
 <template>
     <header class="app-header">
-        <AppSidebar class="header__sidebar" :z-index="1" />
+        <AppSidebar :z-index="1" />
         <a href="/"><AppLogo class="block" /></a>
         <div class="header__separator"></div>
         <nav class="navbar">
