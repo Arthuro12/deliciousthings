@@ -145,12 +145,16 @@ watch(suggestions, (newSuggestions) => {
 
         > input {
 			width: 100%;
-            border: 1px solid var(--color-neutral-30);
+            border: 1px solid var(--color-neutral-20);
             padding: 14px 34px;
             border-radius: 24px;
 
-            &:focus {
+            &:focus,
+            &:focus-visible {
+                outline: none;
+                border: 2px solid var(--color-primary-50);
                 border-color: var(--color-primary-50);
+                box-shadow: 0 0 0 2px var(--color-primary-10);
             }
 
             &:focus-visible {

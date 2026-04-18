@@ -275,14 +275,14 @@ onMounted(async () => {
 	flex-direction: column;
 	row-gap: 16px;
 
-	:deep(> .select__dropdown-button) {
-		border: 1px solid var(--color-neutral-30);
-		width: 100%;
+	// :deep(> .select__dropdown-button) {
+	// 	border: 1px solid var(--color-neutral-30);
+	// 	width: 100%;
 
-		&:focus-visible {
-			border: 1px solid var(--color-primary-50);
-		}
-	}
+	// 	&:focus-visible {
+	// 		border: 1px solid var(--color-primary-50);
+	// 	}
+	// }
 
 	.services-filter {
 		border-bottom: 1px solid var(--color-neutral-30);
