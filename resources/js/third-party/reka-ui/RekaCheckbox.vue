@@ -39,7 +39,7 @@ const modelValue = defineModel<CheckboxValue>({ required: false, });
         display: flex;
         column-gap: 12px;
         align-items: center;
-        height: 36px;
+        // height: 36px;
     }
 
     &__root {
