@@ -9,7 +9,7 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header class="form__group__header">Angebotene Backwaren</header>
+                <header class="form__group__header">Angebot</header>
                 <RekaSelectGroup 
                     placeholder="Backwaren auswählen" 
                     show-item-indicator
@@ -24,9 +24,23 @@
                         <p>{{ text }}</p>
                     </template>
                 </RekaSelectGroup>
+                <RekaSelect 
+                    placeholder="Ernährungsformen auswählen" 
+                    show-item-indicator
+                    :items="dietaryOptionStore.dietaryOptions"
+                    label-prop="label"
+                    value-prop="key"
+                    multiple
+                    :select-value-option="{ as: 'p' }"
+                    v-model:selected-value="artisan.dietary_options"
+                >
+                    <template #itemLabel="{ text }">
+                        <p>{{ text }}</p>
+                    </template>
+                </RekaSelect>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="wrapper">
                 <header class="form__group__header">Angebotene Ernährungsformen</header>
                 <RekaSelect 
@@ -44,7 +58,7 @@
                     </template>
                 </RekaSelect>
             </div>
-        </div>
+        </div> -->
         <AppDivider variant="horizontal" />
         <AddressCollapsible class="row" v-slot="{ show }">
             <AddressForm v-show="show" v-model:address="artisan.first_address" />
@@ -71,7 +85,7 @@
                     <TextField 
                         id="website" 
                         type="text" 
-                        label="Update UI appearance in search page"
+                        label="Webseite-Url (optional)"
                         v-model="artisan.website_url"
                     ></TextField>
                 </div>

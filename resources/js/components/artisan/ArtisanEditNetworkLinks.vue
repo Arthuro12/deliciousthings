@@ -2,18 +2,18 @@
     <div class="form__group">
         <slot name="header"></slot>
         <div>
-            <span>Webseite-Url (optional)</span>
             <TextField 
-                type="text" 
-                id="website" 
+                id="website"
+                type="text"  
+                label="Webseite-Url (optional)"
                 v-model="form.website_url"
             />
         </div>
         <div>
-            <span>Instagram-Profil-Url (optional)</span>
             <TextField 
-                type="text" 
-                id="instagram" 
+                label="Instagram-Profil-Url (optional)"
+                id="instagram"
+                type="text"  
                 v-model="form.instagram_url"
             />
         </div>
