@@ -64,12 +64,12 @@ input[type="password"] {
     }
 }
 
-input[type="text"],
-input[type="password"] {
+input[type="text"] {
     &:focus,
     &:focus-visible {
         outline: none;
         border: none;
+        box-shadow: none;
     }
 }
 
