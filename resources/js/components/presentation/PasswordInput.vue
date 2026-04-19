@@ -62,11 +62,14 @@ input[type="password"] {
     &::-ms-reveal {
         opacity: 0;
     }
-    
+}
+
+input[type="text"] {
     &:focus,
     &:focus-visible {
         outline: none;
         border: none;
+        box-shadow: none;
     }
 }
 

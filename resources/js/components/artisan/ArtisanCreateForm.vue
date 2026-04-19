@@ -3,13 +3,13 @@
         <h1>Profil erstellen</h1>
         <div class="row">
             <BasicProfileForm v-model:profile="basicProfile">
-                <template #header><header>Allgemeine Informationen</header></template>
+                <template #header><header class="form__group__header">Allgemeine Informationen</header></template>
             </BasicProfileForm>
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header>Angebotene Backwaren</header>
+                <header class="form__group__header">Angebot</header>
                 <RekaSelectGroup 
                     placeholder="Backwaren auswählen" 
                     show-item-indicator
@@ -24,11 +24,6 @@
                         <p>{{ text }}</p>
                     </template>
                 </RekaSelectGroup>
-            </div>
-        </div>
-        <div class="row">
-            <div class="wrapper">
-                <header>Angebotene Ernährungsformen</header>
                 <RekaSelect 
                     placeholder="Ernährungsformen auswählen" 
                     show-item-indicator
@@ -45,6 +40,25 @@
                 </RekaSelect>
             </div>
         </div>
+        <!-- <div class="row">
+            <div class="wrapper">
+                <header class="form__group__header">Angebotene Ernährungsformen</header>
+                <RekaSelect 
+                    placeholder="Ernährungsformen auswählen" 
+                    show-item-indicator
+                    :items="dietaryOptionStore.dietaryOptions"
+                    label-prop="label"
+                    value-prop="key"
+                    multiple
+                    :select-value-option="{ as: 'p' }"
+                    v-model:selected-value="artisan.dietary_options"
+                >
+                    <template #itemLabel="{ text }">
+                        <p>{{ text }}</p>
+                    </template>
+                </RekaSelect>
+            </div>
+        </div> -->
         <AppDivider variant="horizontal" />
         <AddressCollapsible class="row" v-slot="{ show }">
             <AddressForm v-show="show" v-model:address="artisan.first_address" />
@@ -52,7 +66,7 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                 <header>Fotos für Ihre Bildergalerie</header>
+                 <header class="form__group__header">Fotos für Ihre Bildergalerie</header>
                 <FileUpload
                     id="gallery"
                     accept=".jpg, .jpeg, .png"
@@ -65,21 +79,21 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header>Netzwerk</header>
+                <header class="form__group__header">Netzwerk</header>
                 <!-- Todo: validate and sanitize urls -->
                 <div>
-                    <span>Webseite-Url (optional)</span>
                     <TextField 
-                        type="text" 
                         id="website" 
+                        type="text" 
+                        label="Webseite-Url (optional)"
                         v-model="artisan.website_url"
                     ></TextField>
                 </div>
                 <div>
-                    <span>Instagram-Profil-Url (optional)</span>
                     <TextField 
+                        id="instagram"
                         type="text" 
-                        id="instagram" 
+                        label="Instagram-Profil-Url (optional)" 
                         v-model="artisan.instagram_url"
                     ></TextField>
                 </div>
@@ -88,7 +102,7 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header>Leistungen</header>
+                <header class="form__group__header">Leistungen</header>
                 <RekaCheckbox 
                     id="offers-delivery" 
                     label="Ich bitte Lieferung an" 
