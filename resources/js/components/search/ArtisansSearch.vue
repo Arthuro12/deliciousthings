@@ -67,7 +67,7 @@
 							</template>
 							<template #content>
 								<div class="service-options">
-									<div>	
+									<div class="form__group">	
 										<RekaCheckbox 
 											id="pick-up-on-site"
 											label="Lieferung angeboten"
@@ -81,7 +81,7 @@
 									</div>
 									<div class="price-levels-wrapper form__group">
 										<header>Preiskategorie</header>
-										<PriceLevelSelect v-model="form.price_levels" />
+										<PriceLevelSelect class="form__group" v-model="form.price_levels" />
 									</div>
 								</div>
 							</template>
@@ -274,15 +274,6 @@ onMounted(async () => {
 	display: flex;
 	flex-direction: column;
 	row-gap: 16px;
-
-	// :deep(> .select__dropdown-button) {
-	// 	border: 1px solid var(--color-neutral-30);
-	// 	width: 100%;
-
-	// 	&:focus-visible {
-	// 		border: 1px solid var(--color-primary-50);
-	// 	}
-	// }
 
 	.services-filter {
 		border-bottom: 1px solid var(--color-neutral-30);

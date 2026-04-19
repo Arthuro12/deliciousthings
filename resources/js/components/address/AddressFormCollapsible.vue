@@ -22,6 +22,7 @@ const formIsVisible = ref(false);
 
 <style scoped lang="scss">
 .toggle-button {
+    font-size: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;

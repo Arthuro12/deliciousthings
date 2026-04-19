@@ -62,7 +62,10 @@ input[type="password"] {
     &::-ms-reveal {
         opacity: 0;
     }
-    
+}
+
+input[type="text"],
+input[type="password"] {
     &:focus,
     &:focus-visible {
         outline: none;
