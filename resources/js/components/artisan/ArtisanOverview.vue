@@ -35,7 +35,7 @@
                             <template #leading>
                                 <PlusIcon color="#e680a5" :size="20" />
                             </template>
-                            <template #text>mehr anzeigen</template>
+                            <template #text>{{ !!toggleBiography ? 'mehr anzeigen' : 'weniger anzeigen' }}</template>
                         </AppButton>
                     </div>
                 </div>
