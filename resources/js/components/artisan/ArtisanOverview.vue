@@ -61,13 +61,13 @@
                 </li>
             </ul>
         </div>
-        <div>
+        <div v-show="artisan.first_address">
             <h4 class="option-header"><MapPinHouseIcon color="#e680a5" :size="32" />Standort</h4>
             <ProfileAddress :address="artisan.first_address" />
         </div>
         <div>
             <h4 class="option-header">
-                <ReceiptEuroIcon color="#e680a5" :size="32" />Durschnittlicher Einkaufpreis
+                <ReceiptEuroIcon color="#e680a5" :size="32" />Durschnittlicher Einkaufspreis
             </h4>
             <div class="option--flex">
                 <EuroIcon color="#e680a5" :size="24" />
@@ -110,7 +110,7 @@ import ProfileAddress from "../profile/ProfileAddress.vue";
 import ArtisanContactDialog from "./ArtisanContactDialog.vue";
 
 import { bakedGoodsByCategory, getCategoryDisplayName } from "@/utils/baked-good";
-import { getPriceDisplay, getPriceLevelSymbol } from "@/utils/artisans";
+import { getPriceDisplay, } from "@/utils/artisans";
 import type { ArtisanPublicProfile } from "@/types/users";
 
 const { artisan, } = defineProps<{
@@ -189,6 +189,8 @@ onMounted(() => {
     margin: 16px 0;
 
     @include breakpoints.respond-to('medium') {
+        justify-content: start;
+
         :deep(> .button--primary) {
             flex-basis: 40%;
         }
