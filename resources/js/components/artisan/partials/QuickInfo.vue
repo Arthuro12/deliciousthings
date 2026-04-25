@@ -13,6 +13,7 @@
                 v-if="moreButtonIsVisible"
                 type="button"
                 :style="{
+                    color: '#0f0f0f',
                     left: moreButtonLeft,
                 }"
             @click="onShowInfo"
@@ -27,6 +28,9 @@
             >{{ profile.website_url }}</a>
             <button 
                 class="font-semibold"
+                :style="{
+                    color: '#0f0f0f',
+                }"
                 v-if="profile.instagram_url && moreButtonIsVisible"
                 type="button"
                 @click="onShowInfo"
