@@ -1,4 +1,4 @@
-import { PriceLevel } from "@/enums";
+import { PriceLevel, AddressVisibility } from "@/enums";
 
 export interface Auth {
     user: User | null;
@@ -24,7 +24,7 @@ export type Address = {
     lat?: number | null;
     lon?: number | null;
     formatted?: string | null;
-    shows_full_address: boolean;
+    visibility: AddressVisibility;
 }
 
 export type Media = {
@@ -48,6 +48,7 @@ export type BasicProfile = {
     main_occupation?: string;
     short_description: string | null;
     about: string;
+    created_at?: string;
 };
 
 export type ArtisanProfile = BasicProfile & {

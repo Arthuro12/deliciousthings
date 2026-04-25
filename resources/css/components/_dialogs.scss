@@ -21,14 +21,19 @@
     &__content {
         position: fixed;
         background-color: var(--color-neutral-0);
-        border-radius: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         height: fit-content;
-        width: 80%;
+        width: 100%;
         padding: 2rem;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        left: 0;
+        right: 0;
+        bottom: 0;
         overflow: auto;
+
+        // transform: translate(-50%, -50%);
+        // top: 50%;
+        // left: 50%;
 
         @include breakpoints.respond-to('medium') {
             width: 50%;

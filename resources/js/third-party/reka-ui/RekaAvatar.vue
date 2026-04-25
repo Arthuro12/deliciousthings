@@ -1,6 +1,11 @@
 <template>
     <div>
-        <AvatarRoot>
+        <AvatarRoot 
+            class="avatar__root"
+            :class="{
+                'avatar--small': miniature,
+            }"
+        >
             <AvatarImage 
                 class="avatar__image" 
                 :src="src" 
@@ -21,6 +26,7 @@ import { getNameIntials } from "@/utils/users";
 const { src, alt = "", name } = defineProps<{
     src: string;
     alt?: string;
+    miniature?: boolean;
     /**
      * The name to use to derive the fallback text.
      */
@@ -34,18 +40,40 @@ const avatarText = computed(() => getNameIntials(name ?? ""));
 @use "../../../css/abstracts/breakpoints" as breakpoints;
 
 .avatar {
+    &__root {
+        display: block;
+        width: 72px;
+        height: 72px;
+
+        &.avatar--small {
+            width: 38px;
+            height: 38px;
+
+            .avatar__fallback {
+                font-size: 0.875rem;
+            }
+        }
+
+        @include breakpoints.respond-to('medium') {
+            width: 160px;
+            height: 160px;
+
+            &--small {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    }
+
     &__image,
     &__fallback {
         border-radius: 50%;
         width: 100%;
         height: 100%;
-        width: 120px;
-        height: 120px;
+    }
 
-        @include breakpoints.respond-to('medium') {
-            width: 200px;
-            height: 200px;
-        }
+    &__image {
+        object-fit: cover;
     }
 
     &__fallback {
