@@ -42,8 +42,8 @@ import { router, useForm } from "@inertiajs/vue3";
 
 import { TrashIcon } from "lucide-vue-next";
 
-import AppButton from "../presentation/AppButton.vue";
-import FileUpload from "../presentation/FileUpload.vue";
+import AppButton from "../../presentation/AppButton.vue";
+import FileUpload from "../../presentation/FileUpload.vue";
 
 import type { FileValue } from "@/types/ui";
 import type { Image } from "@/types/users";

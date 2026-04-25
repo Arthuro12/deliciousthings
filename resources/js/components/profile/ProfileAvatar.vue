@@ -4,6 +4,7 @@
         :src="src" 
         :alt="alt" 
         :name="name"
+        :miniature
     />
 </template>
 
@@ -14,11 +15,6 @@ defineProps<{
     src: string;
     alt?: string;
     name?: string;
+    miniature?: boolean
 }>();
 </script>
-
-<style scoped>
-.profile-avatar :deep(.avatar__image) {
-    object-fit: cover;
-}
-</style>

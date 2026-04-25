@@ -126,7 +126,7 @@ import ArtisanBasicProfile from "@/components/artisan/ArtisanBasicProfile.vue";
 import ArtisanEditBakedGoods from "@/components/artisan/ArtisanEditBakedGoods.vue";
 import ArtisanEditDietaryOptions from "@/components/artisan/ArtisanEditDietaryOptions.vue";
 import ArtisanAddressSettings from "@/components/artisan/ArtisanAddressSettings.vue";
-import ArtisanGalleryForm from "@/components/artisan/ArtisanGalleryForm.vue";
+import ArtisanGalleryForm from "@/components/artisan/gallery/ArtisanGalleryForm.vue";
 import ArtisanEditNetworkLinks from "@/components/artisan/ArtisanEditNetworkLinks.vue";
 import ArtisanEditServices from "@/components/artisan/ArtisanEditServices.vue";
 

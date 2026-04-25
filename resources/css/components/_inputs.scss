@@ -15,7 +15,6 @@ input[type="number"] {
     &:focus-visible {
         outline: none;
         border: 2px solid var(--color-primary-50);
-        border-color: var(--color-primary-50);
         box-shadow: 0 0 0 2px var(--color-primary-10);
     }
 }

@@ -45,7 +45,7 @@ import { router } from "@inertiajs/vue3";
 import { UploadIcon, TrashIcon } from "lucide-vue-next";
 
 import AppButton from "../presentation/AppButton.vue";
-import ProfileAvartar from "../profile/ProfileAvartar.vue";
+import ProfileAvartar from "../profile/ProfileAvatar.vue";
 
 import type { FileValue } from "@/types/ui";
 import type { Image } from "@/types/users";

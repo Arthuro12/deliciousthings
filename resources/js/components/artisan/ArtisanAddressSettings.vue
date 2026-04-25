@@ -1,13 +1,15 @@
 <template>
     <div>
         <div v-if="address" class="address-panel">
-            <PublicAddress :address="address" />
-            <RekaSwitch 
-                class="address-visibility-switch"
-                label="vollständige Adresse anzeigen"
-                :model-value="showsFullAddress"
-                @update:model-value="(value) => updateFullAddressVisibility(!!value)" 
-            />
+            <PublicAddress :address="address" />         
+            <section class="form__group">
+                <header class="form__group__header">Sichbartkeit der Adresse</header>
+                <RekaRadioGroup 
+                    :radios="addressVisibilityInputs"
+                    :model-value="visibility"
+                    @update:model-value="(value) => updateAddressVisibility(value as AddressVisibilityState)"
+                />
+            </section>
             <AppButton
                 class="delete-button"
                 type="button"
@@ -21,7 +23,7 @@
         <RekaDialog title="Adresse bearbeiten">
             <template #trigger>
                 <RekaDialogTrigger class="button button--tertiary button--with-icon">
-                    <PencilIcon color="#e680a5" :size="16" />
+                    <PencilIcon color="#e680a5" :size="18" />
                     Adresse bearbeiten         
                 </RekaDialogTrigger>
             </template>
@@ -40,19 +42,44 @@ import { router } from "@inertiajs/vue3";
 import { PencilIcon, TrashIcon } from "lucide-vue-next";
 
 import AppButton from "../presentation/AppButton.vue";
-import RekaSwitch from "@/third-party/reka-ui/RekaSwitch.vue";
+import RekaRadioGroup from "@/third-party/reka-ui/RekaRadioGroup.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import RekaDialogTrigger from "@/third-party/reka-ui/RekaDialogTrigger.vue";
 import ArtisanEditAddress from "./partials/ArtisanEditAddress.vue";
 import PublicAddress from "../address/PublicAddress.vue";
 
+import { AddressVisibility } from "@/enums";
 import type { Address } from "@/types/users";
+import type { Radio } from "@/types/ui";
+
+type AddressVisibilityState = string | undefined | null;
+
+const addressVisibilityInputs: Radio[] = [
+    {
+        id: "public",
+        value: "public",
+        name: "public",
+        label: "Öffentlich"
+    },
+    {
+        id: "private",
+        value: "private",
+        name: "private",
+        label: "Privat"
+    },
+    {
+        id: "city",
+        value: "city",
+        name: "city",
+        label: "Nur Stadt"
+    },
+];
 
 const props = defineProps<{
     address?: Address;
 }>();
 
-const showsFullAddress = ref(props.address?.shows_full_address || false);
+const visibility = ref<AddressVisibilityState>(props.address?.visibility.toString());
 
 function deleteAddress(): void {
     if (!props.address?.id) return;
@@ -60,17 +87,17 @@ function deleteAddress(): void {
     router.delete(`/artisan/profile/addresses/${props.address.id}`);
 }
 
-function updateFullAddressVisibility(showsFullAddress: boolean): void  {
-    if (!props.address?.id) return;
+function updateAddressVisibility(visibility: AddressVisibilityState): void  {
+    if (!props.address?.id || !visibility) return;
 
-    router.patch(`/artisan/profile/addresses/${props.address.id}/full-address-visibility`, 
-        { shows_full_address: showsFullAddress },
+    router.patch(`/artisan/profile/addresses/${props.address.id}/visibility`, 
+        { visibility: visibility as AddressVisibility },
         { preserveState: true }
     );
 }
 
 watch(() => props.address, (newAddress) => {
-    showsFullAddress.value = !!newAddress?.shows_full_address;
+    visibility.value = newAddress?.visibility;
 });
 </script>
 

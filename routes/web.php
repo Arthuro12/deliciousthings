@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/artisan/profile/addresses', 'storeAddress');
         Route::patch('/artisan/profile/addresses/{address}', 'updateAddress');
         Route::delete('/artisan/profile/addresses/{address}', 'deleteAddress');
-        Route::patch('/artisan/profile/addresses/{address}/full-address-visibility', 'updateFullAddressVisibility');
+        Route::patch('/artisan/profile/addresses/{address}/visibility', 'updateAddressVisibility');
         Route::post('/artisan/profile/gallery', 'uploadPhotos');
         Route::delete('/artisan/profile/gallery/{media}', 'deletePhoto');
         Route::patch('/artisan/profile/services', 'updateServices');

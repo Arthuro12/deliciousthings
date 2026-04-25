@@ -118,9 +118,9 @@ class Artisan extends Model
         )";
 
         $bindings = [$radius, $lat, $lng, $lat];
-    return $query->whereHas('addresses', fn ($q) =>
-        $q->selectRaw("ROUND($haversine, 2) AS distance", $bindings)
-            ->having('distance', '<=', $distance)
-            ->orderBy('distance', 'asc'));
+        return $query->whereHas('addresses', fn ($q) =>
+            $q->selectRaw("ROUND($haversine, 2) AS distance", $bindings)
+                ->having('distance', '<=', $distance)
+                ->orderBy('distance', 'asc'));
     }
 }
