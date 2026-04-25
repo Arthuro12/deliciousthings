@@ -67,7 +67,7 @@ const moreButtonLeft = ref<number | string>(0);
 
 const moreButtonIsVisible = computed(() => {
     const text = shortDescriptionDisplay.value;
-    return text && text.length > 40;
+    return text && text.length > 38;
 });
 
 const moreLinksButtonIsVisible = computed(() => {
@@ -85,7 +85,7 @@ const shortDescriptionDisplay = computed(() => {
     return description;
 });
 
-const visibleDescriptionLength = computed(() => isSmallDevice.value ? 40 : 80);
+const visibleDescriptionLength = computed(() => isSmallDevice.value ? 38 : 75);
 
 function onShowInfo(): void {
     if (!showInfo.value) {
@@ -95,7 +95,7 @@ function onShowInfo(): void {
 
 function updateMoreButtonLeft(): void {
     if (shortDescriptionText.value) {
-        moreButtonLeft.value = shortDescriptionText.value.clientWidth + 5 + "px";
+        moreButtonLeft.value = shortDescriptionText.value.clientWidth + 12 + "px";
     }
 }
 
