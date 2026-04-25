@@ -16,7 +16,7 @@
                     color: '#0f0f0f',
                     left: moreButtonLeft,
                 }"
-            @click="onShowInfo"
+                @click="onShowInfo"
             >...mehr</button>
         </div>
         <div class="profile-links">
@@ -31,7 +31,7 @@
                 :style="{
                     color: '#0f0f0f',
                 }"
-                v-if="profile.instagram_url && moreButtonIsVisible"
+                v-if="moreLinksButtonIsVisible"
                 type="button"
                 @click="onShowInfo"
             >
@@ -66,12 +66,12 @@ const showInfo = ref(false);
 const moreButtonLeft = ref<number | string>(0);
 
 const moreButtonIsVisible = computed(() => {
-    const hasMoreLinks = !!(profile.website_url && profile.instagram_url);
-    if (profile.short_description || hasMoreLinks) {
-        return true;
-    }
+    const text = shortDescriptionDisplay.value;
+    return text && text.length > 38;
+});
 
-    return false;
+const moreLinksButtonIsVisible = computed(() => {
+    return !!(profile.website_url && profile.instagram_url);
 });
 
 const shortDescriptionDisplay = computed(() => {
@@ -85,7 +85,7 @@ const shortDescriptionDisplay = computed(() => {
     return description;
 });
 
-const visibleDescriptionLength = computed(() => isSmallDevice.value ? 40 : 150);
+const visibleDescriptionLength = computed(() => isSmallDevice.value ? 38 : 75);
 
 function onShowInfo(): void {
     if (!showInfo.value) {
@@ -95,7 +95,7 @@ function onShowInfo(): void {
 
 function updateMoreButtonLeft(): void {
     if (shortDescriptionText.value) {
-        moreButtonLeft.value = shortDescriptionText.value.clientWidth + 5 + "px";
+        moreButtonLeft.value = shortDescriptionText.value.clientWidth + 12 + "px";
     }
 }
 
