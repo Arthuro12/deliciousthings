@@ -64,3 +64,10 @@ export type Checkbox = {
     label?: string;
     value?: AcceptableValue;
 };
+
+export type Radio = {
+    id?: string;
+    value: AcceptableValue;
+    name?: string;
+    label: string;
+};

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Enums\AddressVisibility;
+
 class Address extends Model
 {
     protected $fillable = [
@@ -15,14 +17,14 @@ class Address extends Model
         'address_line_2',
         'lat',
         'lon',
-        'shows_full_address',
+        'visibility',
         'formatted',
     ];
 
     protected function casts(): array
     {
         return [
-            'shows_full_address' => 'boolean',
+            'visibility' => AddressVisibility::class,
         ];
     }
 }

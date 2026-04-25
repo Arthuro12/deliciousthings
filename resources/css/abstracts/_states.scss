@@ -1,0 +1,5 @@
+@mixin focused($border-color: var(--color-primary-50), $shadow-color: var(--color-primary-50)) {
+    outline: none;
+    border: 2px solid $border-color;
+    box-shadow: 0 0 0 2px $shadow-color;
+}

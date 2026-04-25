@@ -14,20 +14,20 @@ $breakpoints: (
 /// @param {String} $breakpoint - Breakpoint
 /// @requires $breakpoints
 @mixin respond-to($breakpoint) {
-  $raw-query: map.get($breakpoints, $breakpoint);
+	$raw-query: map.get($breakpoints, $breakpoint);
 
-  @if $raw-query {
-    $query: if(
-      type($raw-query) == 'string',
-      string.unquote($raw-query),
-      meta.inspect($raw-query)
-    );
+  	@if $raw-query {
+    	$query: if(
+      		type($raw-query) == 'string',
+      		string.unquote($raw-query),
+      		meta.inspect($raw-query)
+    	);
 
-    @media #{$query} {
-      @content;
-    }
-  } @else {
-    @error 'No value found for `#{$breakpoint}`. '
-         + 'Please make sure it is defined in `$breakpoints` map.';
-  }
+    	@media #{$query} {
+      		@content;
+    	}
+  	} @else {
+    	@error 'No value found for `#{$breakpoint}`. '
+         	+ 'Please make sure it is defined in `$breakpoints` map.';
+  	}	
 }

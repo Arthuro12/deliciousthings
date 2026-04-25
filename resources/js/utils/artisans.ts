@@ -1,4 +1,4 @@
-import { PriceLevel } from "@/enums";
+import { PriceLevel, AddressVisibility } from "@/enums";
 import type { 
     Address, 
     ArtisanProfile,
@@ -22,7 +22,7 @@ export function defaultAddress(): Address {
         city: "",
         country: "",
         address_line_2: null,
-        shows_full_address: false,
+        visibility: AddressVisibility.City
     };
 }
 
@@ -60,6 +60,7 @@ export function getBasicProfile(profile: ArtisanProfile | ArtisanPublicProfile):
         main_occupation: profile.main_occupation,
         short_description: profile.short_description,
         about: profile.about,
+        created_at: profile.created_at,
     };
 };
 

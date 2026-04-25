@@ -19,6 +19,11 @@ const isDeviceWidthInRange = (width: number, range: BreakpointRange = 'small'): 
 
 export function useDeviceSize() {
     const isSmallDevice = ref(isDeviceWidthInRange(window.innerWidth));
+    const width = ref(window.innerWidth);
+
+    function updateWidth(): void {
+        width.value = window.innerWidth;
+    }
 
     function setIsSmallDevice(): void {
         isSmallDevice.value = isDeviceWidthInRange(window.innerWidth);
@@ -26,13 +31,16 @@ export function useDeviceSize() {
 
     onMounted(() => {
         window.addEventListener('resize', setIsSmallDevice);
+        window.addEventListener('resize', updateWidth);
     });
 
     onUnmounted(() => {
         window.removeEventListener('resize', setIsSmallDevice);
+        window.addEventListener('resize', updateWidth);
     });
 
     return {
-        isSmallDevice: readonly(isSmallDevice)
+        isSmallDevice: readonly(isSmallDevice),
+        deviceWidth: readonly(width),
     };
 }

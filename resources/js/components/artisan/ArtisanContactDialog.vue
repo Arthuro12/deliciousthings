@@ -1,8 +1,9 @@
 <template>
-    <RekaDialog title="Kontaktformular">
+    <RekaDialog :title="`Anfrage an ${artisan.name}`">
         <template #trigger>
-            <RekaDialogTrigger class="button button--primary button--medium">
-                Kontakt aufnehmen
+            <RekaDialogTrigger class="button button--primary button--medium button--with-icon">
+                <MessageCirclePlusIcon :size="18" />
+                Anfrage senden
             </RekaDialogTrigger>
         </template>
         <template #default>
@@ -30,7 +31,7 @@
                     size="medium"
                     @click="sendMessage"
                 >
-                    <template #text>Nachricht senden</template>
+                    <template #text>senden</template>
                 </AppButton>
             </div>
         </template>
@@ -40,16 +41,18 @@
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
 
+import { MessageCirclePlusIcon } from "lucide-vue-next";
+ 
 import AppButton from "../presentation/AppButton.vue";
 import TextField from "../presentation/TextField.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import RekaDialogTrigger from "@/third-party/reka-ui/RekaDialogTrigger.vue";
 import RichTextEditor from "@/third-party/tiptap/RichTextEditor.vue";
 
-import type { Message } from "@/types/users";
+import type { ArtisanPublicProfile, Message } from "@/types/users";
 
-const { artisanId, } = defineProps<{
-    artisanId: string;
+const { artisan, } = defineProps<{
+    artisan: ArtisanPublicProfile;
 }>();
 
 const form = useForm<Message>({
@@ -61,7 +64,7 @@ const form = useForm<Message>({
 
 function sendMessage(): void {
     form.sent_at = new Date().toISOString();
-    form.post(`/artisan/${artisanId}/messages`);
+    form.post(`/artisan/${artisan.id}/messages`);
 }
 </script>
 
