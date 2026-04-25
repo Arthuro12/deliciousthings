@@ -23,4 +23,9 @@
         align-items: center;
         column-gap: 12px;
     }
+
+    @include breakpoints.respond-to('medium') {
+        width: 80%;
+        margin: auto;
+    }
 }
