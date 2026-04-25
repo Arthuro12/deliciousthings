@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
@@ -16,6 +17,7 @@ use App\Models\Media;
 use App\Models\BakedGood;
 use App\Models\DietaryOption;
 use App\Models\Address;
+use App\Enums\AddressVisibility;
 use App\Enums\PriceLevel;
 use App\Http\Requests\CreateArtisanRequest;
 use App\Mail\MessageSent;
@@ -333,14 +335,14 @@ class ProfileController extends Controller
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
-    public function updateFullAddressVisibility(Request $request, Address $address)
+    public function updateAddressVisibility(Request $request, Address $address)
     {   
         $attrs = $request->validate([
-            'shows_full_address' => 'required|boolean',
+            'visibility' => [Rule::enum(AddressVisibility::class)],
         ]);
 
         $request->user()->artisan->addresses()->find($address->id)->update([
-            'shows_full_address' => $attrs['shows_full_address'],
+            'visibility' => $attrs['visibility'],
         ]);
         
         return back()->with('success', __('Artisan profile successfully updated.'));
