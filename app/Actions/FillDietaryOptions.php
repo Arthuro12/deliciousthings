@@ -27,12 +27,19 @@ class FillDietaryOptions
             'name' => 'sugar-free',
             'label' => 'zuckerfrei'
         ],
+        [
+            'key' => 'bio-organic',
+            'name' => 'organic-sustainable',
+            'label' => 'bio / nachhaltig'
+        ],
     ];
 
     public function handle(): void
     {
         foreach (self::DIETARY_OPTIONS as $option) {
-            DietaryOption::create($option);
+            DietaryOption::updateOrCreate([
+                'key' => $option,
+            ], $option);
         }
     }
 }
