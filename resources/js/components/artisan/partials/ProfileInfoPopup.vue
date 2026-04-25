@@ -36,11 +36,11 @@
 
             <section 
                 class="info__section info__location" 
-                v-show="profile.first_address">
+                v-if="profile.first_address && profile.first_address.visibility != AddressVisibility.Private">
                 <header class="info-section-header">Standort</header>
                 <div class="info__detail">
                     <MapPinIcon color="#0f0f0f" />
-                    {{ profile.first_address?.city }}
+                    {{ profile.first_address.city }}
                 </div>
             </section>
         </div>
@@ -52,6 +52,7 @@ import { GlobeIcon, MapPinIcon } from "lucide-vue-next";
 
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 
+import { AddressVisibility } from "@/enums";
 import type { ArtisanPublicProfile, } from "@/types/users";
 import Instagram from "@/components/icons/Instagram.vue";
 
