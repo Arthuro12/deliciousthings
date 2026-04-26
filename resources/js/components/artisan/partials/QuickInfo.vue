@@ -21,11 +21,11 @@
         </div>
         <div class="profile-links">
             <a
-                v-if="profile.website_url"
+                v-if="displayLink"
                 class="link--blue"
-                :href="profile.website_url" 
+                :href="displayLink" 
                 target="_blank"
-            >{{ profile.website_url }}</a>
+            >{{ displayLink }}</a>
             <button 
                 class="font-semibold"
                 :style="{
@@ -64,6 +64,8 @@ const shortDescriptionText = useTemplateRef("shortDescriptionText");
 
 const showInfo = ref(false);
 const moreButtonLeft = ref<number | string>(0);
+
+const displayLink = computed(() => profile.website_url ?? profile.instagram_url);
 
 const moreButtonIsVisible = computed(() => {
     const text = shortDescriptionDisplay.value;
