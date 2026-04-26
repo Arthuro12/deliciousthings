@@ -139,12 +139,16 @@ class FillBakedGoods
         foreach (self::BAKED_GOODS as $category => $goods) {
             $totalGoods = count($goods);
             for ($i = 0; $i < $totalGoods; $i++) {
-                DB::table('baked_goods')->insert([
-                    'category' => $category, 
-                    ...$goods[$i],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                DB::table('baked_goods')->updateOrInsert(
+                    [ 
+                        'key' => $goods[$i]['key'] 
+                    ],
+                    [
+                        'category' => $category, 
+                        ...$goods[$i],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
             }
         }
     }
