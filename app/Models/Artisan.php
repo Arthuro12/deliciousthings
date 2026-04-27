@@ -59,7 +59,7 @@ class Artisan extends Model
     public function dietaryOptions(): BelongsToMany
     {
         return $this->belongsToMany(DietaryOption::class)
-            ->withTimestamps();;
+            ->withTimestamps();
     }
 
     public function medias(): MorphMany
@@ -80,6 +80,12 @@ class Artisan extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class)
+            ->withTimestamps();
     }
 
     public function getFirstAddressAttribute()

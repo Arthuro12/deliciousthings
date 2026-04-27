@@ -58,6 +58,21 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
+                        <p>Leistungen</p><ChevronDownIcon color="#000000" :size="20" />
+                    </template>
+                    <template #content>
+                        <ArtisanEditServices 
+                            :rate="artisan.average_rate"
+                            :services="artisan.services"
+                        />
+                    </template>
+                </RekaCollapsible>
+                <RekaCollapsible 
+                    class="artisan-collapsible" 
+                    trigger-button-class="artisan-collapsible__trigger"
+                    content-class="artisan-collapsible__content"
+                >
+                    <template #trigger>
                         <p>Adresse</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
@@ -82,13 +97,12 @@
                     content-class="artisan-collapsible__content"
                 >
                     <template #trigger>
-                        <p>Leistungen</p><ChevronDownIcon color="#000000" :size="20" />
+                        <p>Abholart</p><ChevronDownIcon color="#000000" :size="20" />
                     </template>
                     <template #content>
-                        <ArtisanEditServices 
-                            :offers-delivery="services.offersDelivery"
-                            :pick-up-on-site="services.pickUpOnSite"
-                            :average-rate="services.averageRate"
+                        <ArtisanEditPickupMethods 
+                            :offers-delivery="artisan.offers_delivery"
+                            :pick-up-on-site="artisan.pick_up_on_site"
                         />
                     </template>
                 </RekaCollapsible>  
@@ -125,15 +139,17 @@ import ArtisanProfilePhotoForm from "@/components/artisan/ArtisanProfilePhotoFor
 import ArtisanBasicProfile from "@/components/artisan/ArtisanBasicProfile.vue";
 import ArtisanEditBakedGoods from "@/components/artisan/ArtisanEditBakedGoods.vue";
 import ArtisanEditDietaryOptions from "@/components/artisan/ArtisanEditDietaryOptions.vue";
+import ArtisanEditServices from "@/components/artisan/ArtisanEditServices.vue";
 import ArtisanAddressSettings from "@/components/artisan/ArtisanAddressSettings.vue";
 import ArtisanGalleryForm from "@/components/artisan/gallery/ArtisanGalleryForm.vue";
 import ArtisanEditNetworkLinks from "@/components/artisan/ArtisanEditNetworkLinks.vue";
-import ArtisanEditServices from "@/components/artisan/ArtisanEditServices.vue";
+import ArtisanEditPickupMethods from "@/components/artisan/ArtisanPickupMethods.vue";
 
 import { useBakedGoodStore } from "@/stores/baked-good";
 import { useDietaryOptionStore } from "@/stores/dietary-option";
 import { getBasicProfile } from "@/utils/artisans";
-import { bakedGoodsByCategory, mapGroupsToDisplayName } from "@/utils/baked-good";
+import { BAKED_GOODS, } from "@/constants";
+import { groupByCategories, mapGroupsToDisplayName, } from "@/utils/options";
 import type { 
     Address,
     ArtisanPublicProfile, 
@@ -152,17 +168,12 @@ if (artisan.first_address) {
     firstAddress.value = { ...artisan.first_address };
 }
 const basicProfile = getBasicProfile(artisan);
-const services = {
-    offersDelivery: artisan.offers_delivery,
-    pickUpOnSite: artisan.pick_up_on_site,
-    averageRate: artisan.average_rate,
-};
 
 const bakedGoodsGroups = computed<GroupedBakedGoods>(() => {
-    let groups = bakedGoodsByCategory(bakedGoodStore.bakedGoods);
-    groups = mapGroupsToDisplayName(groups);
+    let groups = groupByCategories(bakedGoodStore.bakedGoods);
+    groups = mapGroupsToDisplayName(groups, BAKED_GOODS.CATEGORY);
 
-    return groups;
+    return groups as GroupedBakedGoods;
 });
 
 watch(

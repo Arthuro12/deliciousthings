@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Artisan;
 use App\Models\Media;
 use App\Models\BakedGood;
+use App\Models\Service;
 use App\Models\DietaryOption;
 use App\Models\Address;
 use App\Enums\AddressVisibility;
@@ -43,7 +44,7 @@ class ProfileController extends Controller
         $artisan = $request->user()->artisan;
 
         $profile = $this->artisanService
-            ->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
+            ->getProfile($artisan, ['bakedGoods', 'dietaryOptions', 'services']);
         $profile['profile_photo'] = $this->artisanService->getProfilePhoto($artisan);
         $profile['gallery'] = [...$this->artisanService->getGallery($artisan)];
 
@@ -60,7 +61,7 @@ class ProfileController extends Controller
         }
 
         $profile = $this->artisanService
-            ->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
+            ->getProfile($artisan, ['bakedGoods', 'dietaryOptions', 'services']);
         $profile['profile_photo'] = $this->artisanService->getProfilePhoto($artisan);
         $profile['gallery'] = [...$this->artisanService->getGallery($artisan)];
 
@@ -314,6 +315,19 @@ class ProfileController extends Controller
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
+    public function updateAddressVisibility(Request $request, Address $address)
+    {   
+        $attrs = $request->validate([
+            'visibility' => [Rule::enum(AddressVisibility::class)],
+        ]);
+
+        $request->user()->artisan->addresses()->find($address->id)->update([
+            'visibility' => $attrs['visibility'],
+        ]);
+        
+        return back()->with('success', __('Artisan profile successfully updated.'));
+    }
+
     public function updateBasicProfile(Request $request)
     {
         $attrs = $request->validate([
@@ -335,19 +349,6 @@ class ProfileController extends Controller
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
-    public function updateAddressVisibility(Request $request, Address $address)
-    {   
-        $attrs = $request->validate([
-            'visibility' => [Rule::enum(AddressVisibility::class)],
-        ]);
-
-        $request->user()->artisan->addresses()->find($address->id)->update([
-            'visibility' => $attrs['visibility'],
-        ]);
-        
-        return back()->with('success', __('Artisan profile successfully updated.'));
-    }
-
     public function updateNetwork(Request $request)
     {   
         $attrs = $request->validate([
@@ -363,23 +364,46 @@ class ProfileController extends Controller
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
-    public function updateServices(Request $request)
+    public function updatePickupMethods(Request $request)
     {
         $attrs = $request->validate([
             'offers_delivery' => 'required|boolean',
             'pick_up_on_site' => 'required|boolean',
-            'average_rate' => 'required|string',
+        ]);
+
+        $request->user()->artisan->update([
+            'offers_delivery' => $attrs['offers_delivery'],
+            'pick_up_on_site' => $attrs['pick_up_on_site'],
+        ]);
+
+        return back()->with('success', __('Artisan profile successfully updated.'));
+    }
+
+    public function updateServices(Request $request) 
+    {
+        $attrs = $request->validate([
+            'services' => 'nullable|array',
+            'services.*.key' => 'required|string',
+            'services.*.name' => 'required|string',
+            'services.*.label' => 'required|string',
+            'average_rate' => 'required|string'
         ]);
 
         $rate = intval($attrs['average_rate']);
         $price_level = PriceLevel::fromPrice($rate);
 
         $request->user()->artisan->update([
-            'offers_delivery' => $attrs['offers_delivery'],
-            'pick_up_on_site' => $attrs['pick_up_on_site'],
             'average_rate' => $attrs['average_rate'],
             'price_level' => $price_level,
         ]);
+        
+        if (!empty($attrs['services'])) {
+            $selectedServices = Arr::map($attrs['services'], function ($value) {
+                return $value['key'];
+            });
+            $servicesIds = Service::whereIn('key', $selectedServices)->pluck('id')->toArray();
+            $request->user()->artisan->services()->sync($servicesIds);
+        }
 
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
