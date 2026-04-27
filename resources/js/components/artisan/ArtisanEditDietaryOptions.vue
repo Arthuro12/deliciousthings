@@ -1,20 +1,24 @@
 <template>
     <div class="form__group">
-        <slot name="header"></slot>
-        <RekaSelect 
-            placeholder="Ernährungsformen auswählen" 
-            show-item-indicator
-            :items="options"
-            label-prop="label"
-            value-prop="key"
-            multiple
-            :select-value-option="{ as: 'p' }"
-            v-model:selected-value="form.dietary_options"
-        >
-            <template #itemLabel="{ text }">
-                <p>{{ text }}</p>
-            </template>
-        </RekaSelect>
+        <div class="select-input-wrapper">
+            <slot name="header"></slot>
+            <RekaSelect 
+                label="Ernährungsformen (optional)"
+                placeholder="Ernährungsformen auswählen" 
+                show-item-indicator
+                :items="options"
+                label-prop="label"
+                value-prop="key"
+                multiple
+                :select-value-option="{ as: 'p' }"
+                v-model:selected-value="form.dietary_options"
+            >
+                <template #itemLabel="{ text }">
+                    <p>{{ text }}</p>
+                </template>
+            </RekaSelect>
+        </div>
+
         <AppButton
             class="align-end"
             type="button"
@@ -46,3 +50,13 @@ function syncDietaryOptions(): void {
     form.put("/artisan/profile/dietary-options");
 }
 </script>
+
+<style scoped lang="scss">
+.select-input-wrapper {
+    width: 100%;
+
+    :deep(.select__dropdown-button) {
+        width: 100%;
+    }
+}
+</style>

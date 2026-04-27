@@ -1,20 +1,24 @@
 <template>
     <div class="form__group">
         <slot name="header"></slot>
-        <RekaSelectGroup 
-            placeholder="Backwaren auswählen" 
-            show-item-indicator
-            :groups="options"
-            label-prop="label"
-            value-prop="key"
-            multiple
-            :select-value-option="{ as: 'p' }"
-            v-model:selected-value="form.baked_goods"
-        >
-            <template #itemLabel="{ text }">
-                <p>{{ text }}</p>
-            </template>
-        </RekaSelectGroup>
+        <div class="select-input-wrapper">
+            <RekaSelectGroup 
+                label="Backwaren"
+                placeholder="Backwaren auswählen" 
+                show-item-indicator
+                :groups="options"
+                label-prop="label"
+                value-prop="key"
+                multiple
+                :select-value-option="{ as: 'p' }"
+                v-model:selected-value="form.baked_goods"
+            >
+                <template #itemLabel="{ text }">
+                    <p>{{ text }}</p>
+                </template>
+            </RekaSelectGroup>
+        </div>
+
         <AppButton
             class="align-end"
             type="button"
@@ -46,3 +50,13 @@ function syncBakedGoods(): void {
     form.put("/artisan/profile/baked-goods");
 }
 </script>
+
+<style scoped lang="scss">
+.select-input-wrapper {
+    width: 100%;
+
+    :deep(.select__dropdown-button) {
+        width: 100%;
+    }
+}
+</style>

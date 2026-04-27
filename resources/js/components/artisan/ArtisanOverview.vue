@@ -49,7 +49,7 @@
                     v-for="(group, category) in bakedGoods" :key="category"
                 >
                     <div class="menu-card__group">
-                        <h5 class="menu-card__group-label">{{ getCategoryDisplayName(category) }}</h5>
+                        <h5 class="menu-card__group-label">{{ getCategoryDisplayName(BAKED_GOODS.CATEGORY, category) }}</h5>
                         <div 
                             class="menu-card__item"
                             v-for="(good, idx) in group" 
@@ -61,10 +61,12 @@
                 </li>
             </ul>
         </div>
-        <div v-show="artisan.first_address">
-            <h4 class="option-header"><MapPinHouseIcon color="#e680a5" :size="32" />Standort</h4>
-            <ProfileAddress :address="artisan.first_address" />
+
+        <div v-if="artisan.services && artisan.services.length > 0">
+            <h4 class="option-header">Besondere Leistungen</h4>
+            <ServicesList class="card" :services="artisan.services" />
         </div>
+
         <div>
             <h4 class="option-header">
                 <ReceiptEuroIcon color="#e680a5" :size="32" />Durschnittlicher Einkaufspreis
@@ -84,6 +86,11 @@
                 <StoreIcon color="#e680a5" :size="24" />
                 <p>Abholung vor Ort</p>
             </div>
+        </div>
+
+        <div v-show="artisan.first_address">
+            <h4 class="option-header"><MapPinHouseIcon color="#e680a5" :size="32" />Standort</h4>
+            <ProfileAddress :address="artisan.first_address" />
         </div>
 
         <ArtisanContactDialog class="contact-artisan-dialog" :artisan />
@@ -107,9 +114,11 @@ import {
 import AppButton from "../presentation/AppButton.vue";
 import ProfileAvatar from "../profile/ProfileAvatar.vue";
 import ProfileAddress from "../profile/ProfileAddress.vue";
+import ServicesList from "./services/ServicesList.vue";
 import ArtisanContactDialog from "./ArtisanContactDialog.vue";
 
-import { bakedGoodsByCategory, getCategoryDisplayName } from "@/utils/baked-good";
+import { BAKED_GOODS, } from "@/constants";
+import { getCategoryDisplayName, groupByCategories, } from "@/utils/options";
 import { getPriceDisplay, } from "@/utils/artisans";
 import type { ArtisanPublicProfile } from "@/types/users";
 
@@ -122,7 +131,7 @@ const biographyText = useTemplateRef("biographyText");
 const showToggleButton = ref(false);
 const toggleBiography = ref(true);
 
-const bakedGoods = bakedGoodsByCategory(artisan.baked_goods);
+const bakedGoods = groupByCategories(artisan.baked_goods);
 
 const showPickupMethods = computed(() => artisan.pick_up_on_site || artisan.offers_delivery);
 

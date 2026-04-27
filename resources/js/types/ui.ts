@@ -38,6 +38,7 @@ export type SelectValueOption = {
 };
 
 export type SelectProps = {
+    label?: string;
     placeholder?: string;
     showItemIndicator?: boolean;
     items: SelectItem[];
@@ -48,6 +49,7 @@ export type SelectProps = {
 }
 
 export type SelectGroupProps = {
+    label?: string;
     placeholder?: string;
     showItemIndicator?: boolean;
     groups: Record<string, SelectItem[]>;

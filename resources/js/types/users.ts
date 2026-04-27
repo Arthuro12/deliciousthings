@@ -55,6 +55,7 @@ export type ArtisanProfile = BasicProfile & {
     medias: Media[];
     baked_goods: BakedGood[];
     dietary_options?: DietaryOption[];
+    services?: Service[];
     addresses: Address[];
     first_address?: Address;
     instagram_url?: string;
@@ -87,6 +88,13 @@ export type BakedGood = {
     category: string;
 }
 
+export type Service = {
+    key: string;
+    name: string;
+    label: string;
+    category: string;
+}
+
 export type DietaryOption = {
     key: string;
     name: string;
@@ -94,3 +102,5 @@ export type DietaryOption = {
 }
 
 export type GroupedBakedGoods = Record<string, BakedGood[]>;
+
+export type GroupedServices = Record<string, Service[]>;

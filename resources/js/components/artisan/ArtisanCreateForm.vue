@@ -8,36 +8,45 @@
         </div>
         <AppDivider variant="horizontal" />
         <div class="row">
-            <div class="wrapper">
+            <div>
                 <header class="form__group__header">Angebot</header>
-                <RekaSelectGroup 
-                    placeholder="Backwaren auswählen" 
-                    show-item-indicator
-                    :groups="bakedGoodsGroups"
-                    label-prop="label"
-                    value-prop="key"
-                    multiple
-                    :select-value-option="{ as: 'p' }"
-                    v-model:selected-value="artisan.baked_goods"
-                >
-                    <template #itemLabel="{ text }">
-                        <p>{{ text }}</p>
-                    </template>
-                </RekaSelectGroup>
-                <RekaSelect 
-                    placeholder="Ernährungsformen auswählen" 
-                    show-item-indicator
-                    :items="dietaryOptionStore.dietaryOptions"
-                    label-prop="label"
-                    value-prop="key"
-                    multiple
-                    :select-value-option="{ as: 'p' }"
-                    v-model:selected-value="artisan.dietary_options"
-                >
-                    <template #itemLabel="{ text }">
-                        <p>{{ text }}</p>
-                    </template>
-                </RekaSelect>
+            </div>
+            <div class="wrapper">
+                <div class="select-input-wrapper">
+                    <RekaSelectGroup 
+                        label="Backwaren"
+                        placeholder="Backwaren auswählen" 
+                        show-item-indicator
+                        :groups="bakedGoodsGroups"
+                        label-prop="label"
+                        value-prop="key"
+                        multiple
+                        :select-value-option="{ as: 'p' }"
+                        v-model:selected-value="artisan.baked_goods"
+                    >
+                        <template #itemLabel="{ text }">
+                            <p>{{ text }}</p>
+                        </template>
+                    </RekaSelectGroup>
+                </div>
+
+                <div class="select-input-wrapper">
+                    <RekaSelect 
+                        label="Ernährungsformen (optional)"
+                        placeholder="Ernährungsformen auswählen" 
+                        show-item-indicator
+                        :items="dietaryOptionStore.dietaryOptions"
+                        label-prop="label"
+                        value-prop="key"
+                        multiple
+                        :select-value-option="{ as: 'p' }"
+                        v-model:selected-value="artisan.dietary_options"
+                    >
+                        <template #itemLabel="{ text }">
+                            <p>{{ text }}</p>
+                        </template>
+                    </RekaSelect>
+                </div>
             </div>
         </div>
         <!-- <div class="row">
@@ -102,7 +111,7 @@
         <AppDivider variant="horizontal" />
         <div class="row">
             <div class="wrapper">
-                <header class="form__group__header">Leistungen</header>
+                <header class="form__group__header">Abholart und Enkaufspreis</header>
                 <RekaCheckbox 
                     id="offers-delivery" 
                     label="Ich bitte Lieferung an" 
@@ -153,7 +162,8 @@ import RekaCheckbox from "@/third-party/reka-ui/RekaCheckbox.vue";
 import { useBakedGoodStore } from "@/stores/baked-good";
 import { useDietaryOptionStore } from "@/stores/dietary-option";
 import { defaultArtisan, getBasicProfile } from "@/utils/artisans";
-import { bakedGoodsByCategory, mapGroupsToDisplayName } from "@/utils/baked-good";
+import { BAKED_GOODS, } from "@/constants";
+import { groupByCategories, mapGroupsToDisplayName, } from "@/utils/options";
 import type { FileValue } from "@/types/ui";
 import type { ArtisanProfile, GroupedBakedGoods } from "@/types/users";
 
@@ -169,10 +179,10 @@ const basicProfile = ref(getBasicProfile(artisan.value));
 const selectedFiles = ref<FileValue>([]);
 
 const bakedGoodsGroups = computed<GroupedBakedGoods>(() => {
-    let groups = bakedGoodsByCategory(bakedGoodStore.bakedGoods);
-    groups = mapGroupsToDisplayName(groups);
+    let groups = groupByCategories(bakedGoodStore.bakedGoods);
+    groups = mapGroupsToDisplayName(groups, BAKED_GOODS.CATEGORY);
 
-    return groups;
+    return groups as GroupedBakedGoods;
 });
 
 function updateFileSelection(files: FileValue): void {
@@ -213,6 +223,14 @@ onMounted(async () => {
 
     .wrapper {
         row-gap: 16px;
+
+        > .select-input-wrapper {
+            width: 100%;
+
+            :deep(.select__dropdown-button) {
+                width: 100%;
+            }
+        }
     }
 
     .row {
