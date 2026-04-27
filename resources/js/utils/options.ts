@@ -8,8 +8,8 @@ export type GroupOption = {
     [key: string]: any;
 };
 
-export function groupByCategories<I extends GroupOption>(items: I[]): GroupType {
-    const result = Object.groupBy(items, item => item.category);
+export function groupByCategories<O extends GroupOption>(options: O[]): GroupType {
+    const result = Object.groupBy(options, option => option.category);
     return result as GroupType;
 }
 
