@@ -37,13 +37,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::patch('/artisan/profile/basic', 'updateBasicProfile');
         Route::put('/artisan/profile/baked-goods', 'syncBakedGoods');
         Route::put('/artisan/profile/dietary-options', 'syncDietaryOptions');
+        Route::patch('/artisan/profile/services', 'updateServices');
         Route::post('/artisan/profile/addresses', 'storeAddress');
         Route::patch('/artisan/profile/addresses/{address}', 'updateAddress');
         Route::delete('/artisan/profile/addresses/{address}', 'deleteAddress');
         Route::patch('/artisan/profile/addresses/{address}/visibility', 'updateAddressVisibility');
         Route::post('/artisan/profile/gallery', 'uploadPhotos');
         Route::delete('/artisan/profile/gallery/{media}', 'deletePhoto');
-        Route::patch('/artisan/profile/services', 'updateServices');
+        Route::patch('/artisan/profile/pickup-methods', 'updatePickupMethods');
         Route::patch('/artisan/profile/network', 'updateNetwork');
     });
 });

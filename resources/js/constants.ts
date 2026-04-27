@@ -30,3 +30,19 @@ export const LINK_CLASSES = Object.freeze({
         medium: "link--medium",
     }
 });
+
+export const BAKED_GOODS = {
+    CATEGORY: {
+        "breads_and_rolls": "Brot und Brötchen",
+        "pastries": "Konditorei",
+        "viennoiserie": "Feingebäck",
+        "chocolate": "Schokolade",
+        "fried_sweet_pastries": "Frittiertes / Süßes Gebäck",
+    },
+};
+
+export const SERVICES_CATEGORIES = {
+    pastry_shop: "Konditorei",
+    bakery: "Bäckerei",
+    catering: "Catering",
+};

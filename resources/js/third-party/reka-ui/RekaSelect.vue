@@ -1,5 +1,6 @@
 <template>
     <SelectRoot :multiple v-model="selectedValue">
+        <label v-if="label">{{  label  }}</label>
         <SelectTrigger class="select__dropdown-button">
             <SelectValue 
                 class="dropdown-button__text" 
