@@ -9,7 +9,7 @@
             <div>   
                 <section class="hero-section"> 
                     <header class="hero-header">
-                        <h2 class="title">Entdecken Sie <span>einzigartige</span> handwerkliche Kreationen und Konditor:innen</h2> 
+                        <h2 class="title">Entdecken Sie <span>geschmackvolle</span> Kreationen und Konditor:innen</h2> 
                         <h3 class="subtitle">Reservieren Sie verfügbare Kreationen oder finden Sie passende Konditor:innen für Ihre persönlichen Wünsche.</h3> 
                     </header>
                     <div class="hero-overlay"></div>
@@ -111,7 +111,7 @@ ul li {
             width: 100%;
             inset: 0;
             object-fit: cover;
-            object-fit: 50% 50%;
+            object-position: right center;
         }
 
         .hero-overlay {
