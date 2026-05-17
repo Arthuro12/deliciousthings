@@ -1,5 +1,9 @@
 <template>
-    <RekaDialog :title="`Anfrage an ${artisan.name}`">
+    <RekaDialog 
+        content-class="contact-artisan-dialog"
+        :title="`Anfrage an ${artisan.name}`"
+        description="Senden Sie eine Frage oder eine Vorbestellung"
+    >
         <template #trigger>
             <RekaDialogTrigger class="button button--primary button--medium button--with-icon">
                 <MessageCirclePlusIcon :size="18" />
@@ -7,74 +11,46 @@
             </RekaDialogTrigger>
         </template>
         <template #default>
-            <div class="contact-artisan-form">
-                <TextField 
-                    id="name"
-                    type="text" 
-                    label="Ihr Name" 
-                    v-model="form.sender_name"
-                />
-                <TextField 
-                    id="email"
-                    type="email" 
-                    label="Ihre E-Mail-Adresse" 
-                    v-model="form.sender_email"
-                />
-                <div>
-                    <header>Ihre Nachricht</header>
-                    <RichTextEditor v-model:content="form.content" />
-                </div>
-                <AppButton
-                    class="align-end"
-                    type="button"
-                    variant="primary"
-                    size="medium"
-                    @click="sendMessage"
-                >
-                    <template #text>senden</template>
-                </AppButton>
-            </div>
+            <ArtisanContactTabs class="contact-tabs">
+                <template #question>
+                    <SendMessage class="send-message-form" :artisan-id="artisan.id" />
+                </template>
+
+                <template #preOrder>
+                    <PreOrderForm :artisan />
+                </template>
+            </ArtisanContactTabs>
         </template>
     </RekaDialog>
 </template>
 
 <script setup lang="ts">
-import { useForm } from "@inertiajs/vue3";
-
 import { MessageCirclePlusIcon } from "lucide-vue-next";
  
-import AppButton from "../presentation/AppButton.vue";
-import TextField from "../presentation/TextField.vue";
 import RekaDialog from "@/third-party/reka-ui/RekaDialog.vue";
 import RekaDialogTrigger from "@/third-party/reka-ui/RekaDialogTrigger.vue";
-import RichTextEditor from "@/third-party/tiptap/RichTextEditor.vue";
+import ArtisanContactTabs from "./ArtisanContactTabs.vue";
+import PreOrderForm from "./PreOrderForm.vue";
+import SendMessage from "../message/SendMessage.vue";
 
-import type { ArtisanPublicProfile, Message } from "@/types/users";
+import type { ArtisanPublicProfile, } from "@/types/users";
 
 const { artisan, } = defineProps<{
     artisan: ArtisanPublicProfile;
 }>();
-
-const form = useForm<Message>({
-    sender_email: "",
-    sender_name: "",
-    sent_at: "",
-    content: "",
-});
-
-function sendMessage(): void {
-    form.sent_at = new Date().toISOString();
-    form.post(`/artisan/${artisan.id}/messages`);
-}
 </script>
 
 <style scoped lang="scss">
 @use '../../../css/abstracts/breakpoints' as breakpoints;
 
-.contact-artisan-form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 16px;
+.send-message-form {
     margin: 24px 0;
+}
+
+.contact-tabs {
+    margin-top: 14px;
+    padding: 0 24px;
+    // max-height: 560px;
+    // overflow-y: scroll;
 }
 </style>

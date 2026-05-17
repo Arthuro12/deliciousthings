@@ -5,7 +5,7 @@
         list-style: none;
     }
 
-    background-color: var(--color-primary-50);
+    background-color: var(--color-secondary-50);
     padding: 24px;
     min-height: 350px;
 
@@ -16,12 +16,11 @@
         }
 
         &__item {
-            padding: 14px;
+            padding: 14px 0;
         }
 
         &__header {
             font-weight: 700;
-            color: var(--color-neutral-10);
             margin-bottom: 14px;
         }
 

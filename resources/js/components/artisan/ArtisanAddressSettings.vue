@@ -39,7 +39,7 @@ import { ref, watch } from "vue";
 
 import { router } from "@inertiajs/vue3";
 
-import { PencilIcon, TrashIcon } from "lucide-vue-next";
+import { PencilIcon, TrashIcon, } from "lucide-vue-next";
 
 import AppButton from "../presentation/AppButton.vue";
 import RekaRadioGroup from "@/third-party/reka-ui/RekaRadioGroup.vue";

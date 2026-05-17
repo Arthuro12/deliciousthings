@@ -69,7 +69,7 @@ const displayLink = computed(() => profile.website_url ?? profile.instagram_url)
 
 const moreButtonIsVisible = computed(() => {
     const text = shortDescriptionDisplay.value;
-    return text && text.length > 38;
+    return text && text.length > visibleDescriptionLength.value;
 });
 
 const moreLinksButtonIsVisible = computed(() => {
@@ -87,7 +87,7 @@ const shortDescriptionDisplay = computed(() => {
     return description;
 });
 
-const visibleDescriptionLength = computed(() => isSmallDevice.value ? 38 : 75);
+const visibleDescriptionLength = computed(() => isSmallDevice.value ? 28 : 59);
 
 function onShowInfo(): void {
     if (!showInfo.value) {

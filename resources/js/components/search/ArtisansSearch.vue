@@ -102,8 +102,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { ref, onMounted, } from "vue";
+import { router, useForm, } from "@inertiajs/vue3";
 
 import { 
 	MinusIcon,
