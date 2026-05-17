@@ -13,7 +13,12 @@
                         <h3 class="subtitle">Reservieren Sie verfügbare Kreationen oder finden Sie passende Konditor:innen für Ihre persönlichen Wünsche.</h3> 
                     </header>
                     <div class="hero-overlay"></div>
-                    <img class="hero-image" :src="heroImage" />
+                    <img 
+                        class="hero-image" 
+                        alt="elegante und geschmackvolle Torte"
+                        :src="heroImage" 
+                        fetchpriority="high"
+                    />
                 </section>
             </div>
         </main>
