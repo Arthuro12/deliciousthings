@@ -13,7 +13,7 @@ class SearchController extends Controller
     public function __construct(private ArtisanService $artisanService) 
     {}
 
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         $attrs = $request->validate([
             'goods' => 'nullable|string',

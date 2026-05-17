@@ -103,10 +103,10 @@ function toggleUnderline(): void {
 
     &focus,
     &:focus-within {
-            outline: none;
-            border: 2px solid var(--color-primary-50);
-            box-shadow: 0 0 0 2px var(--color-primary-10);
-        }
+        outline: none;
+        border: 2px solid var(--color-primary-50);
+        box-shadow: 0 0 0 2px var(--color-primary-10);
+    }
 
     &__marks {
         display: flex;

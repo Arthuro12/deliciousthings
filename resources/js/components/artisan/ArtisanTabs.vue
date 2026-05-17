@@ -1,18 +1,18 @@
 <template>
     <TabsRoot 
-        class="tabs-root" 
+        class="tabs__root" 
         default-value="overview"
         v-model="modelValue"
     >
         <TabsList class="tabs__list">
             <TabsIndicator class="tabs__indicator"></TabsIndicator>
-            <TabsTrigger class="tab-trigger" value="overview">
+            <TabsTrigger class="tabs__trigger" value="overview">
                 <header>Übersicht</header>
             </TabsTrigger>
-            <TabsTrigger class="tab-trigger" value="bestsellers">
+            <TabsTrigger class="tabs__trigger" value="bestsellers">
                 Bestsellers
             </TabsTrigger>
-            <TabsTrigger class="tab-trigger" value="gallery">
+            <TabsTrigger class="tabs__rigger" value="gallery">
                 Galerie
             </TabsTrigger>
         </TabsList>
@@ -51,12 +51,12 @@ const modelValue = defineModel<string>({ required: false, });
 </script>
 
 <style scoped lang="scss">
-.tabs-root {
+.tabs__root {
     --border-color: #e5e7eb;
     --text-color: #111827;
 }
 
-.tabs-root {
+.tabs__root {
     display: block;
     width: 100%;
 } 
@@ -84,7 +84,7 @@ const modelValue = defineModel<string>({ required: false, });
     transform: translateX(var(--reka-tabs-indicator-position));
 }
 
-.tab-trigger {
+.tabs__trigger {
     all: unset;
     cursor: pointer;
     padding: 0.75rem 1rem;
@@ -95,12 +95,12 @@ const modelValue = defineModel<string>({ required: false, });
     border-radius: 6px 6px 0 0;
 }
 
-.tab-trigger:hover {
+.tabs__trigger:hover {
     color: var(--text-color);
 }
 
-.tab-trigger[aria-selected="true"],
-.tab-trigger[data-state="active"] {
+.tabs__trigger[aria-selected="true"],
+.tabs__trigger[data-state="active"] {
     color: var(--text-color);
     font-weight: 600;
 }
@@ -113,7 +113,6 @@ const modelValue = defineModel<string>({ required: false, });
    RESPONSIVE
    ========================= */
 
-/* TABLETTE */
 @media (max-width: 768px) {
   .tabs__list {
         gap: 0.25rem;
@@ -125,7 +124,6 @@ const modelValue = defineModel<string>({ required: false, });
     }
 }
 
-/* MOBILE */
 @media (max-width: 480px) {
   .tabs__list {
         justify-content: flex-start;

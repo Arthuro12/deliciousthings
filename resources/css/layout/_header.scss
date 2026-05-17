@@ -8,9 +8,10 @@
     justify-content: space-between;
     width: 100%;
     background-color: white;
+    box-shadow: 0 1px 5px var(--color-neutral-20);
     height: 64px;
     top: 0;
-    z-index: 1;
+    z-index: 3;
 
     ul {
         list-style: none;
@@ -26,14 +27,44 @@
         &__menu {
             display: flex;
             align-items: center;
-            column-gap: 12px;
+
+            &:nth-child(3) {
+                column-gap: 15px;
+            }
+        }
+
+        .menu-link {
+            border-radius: 5px; 
+            
+            &:hover {
+                color: var(--color-neutral-40)
+            }
+        }
+
+        .link--active,
+        .menu-link.link--active:hover {
+            background-color: var(--color-primary-10);
+            color: var(--color-primary-50)
+        }
+    }
+
+    .user-nav {
+        .navmenu__content {
+            right: 0;
         }
     }
 
     @include breakpoints.respond-to('medium') {
         justify-content: start;
-        position: sticky;
-        box-shadow: 0 1px 5px var(--color-neutral-20);
+
+        .logo {
+            margin-right: 25px;
+        }
+
+        .app-nav,
+        .user-nav {
+            display: none;
+        }
 
         .header__separator {
             display: block;
@@ -41,7 +72,8 @@
         }
 
         .navbar {
-            display: block;
+            display: flex;
+            flex: 1;
         }
     }
 }

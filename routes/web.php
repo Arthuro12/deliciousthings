@@ -9,11 +9,16 @@ use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Artisan\ProfileController;
 use App\Http\Controllers\Artisan\PublicProfileController;
 use App\Http\Controllers\Artisan\MessageController;
+use App\Http\Controllers\Artisan\PreOrderController;
 use App\Http\Controllers\SearchController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::get('/search', SearchController::class);
+Route::controller(SearchController::class)->group(function () {
+    Route::get('/search', 'index');
+    Route::get('/artisans', 'index');
+    Route::get('/creations', 'index');
+});
 
 Route::controller(RegistrationController::class)->group(function () {
     Route::get('/register', 'create')->name('register.create');
@@ -56,6 +61,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 });
 
+// Route::group(['middleware' => 'auth:sanctum'], function () {
+//     Route::controller(MessageController::class)->group(function () {
+//         Route::get('/artisan/pre-orders/{message}', 'show');
+//         Route::get('/artisan/messages', 'index');
+//     });
+// });
+
 Route::get('/artisan/{artisan:name}', [PublicProfileController::class, 'show']);
 
 Route::post('/artisan/{artisan}/messages', [MessageController::class, 'store']);
+
+Route::post('/artisan/{artisan}/pre-orders', [PreOrderController::class, 'store']);

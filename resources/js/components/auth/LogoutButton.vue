@@ -14,7 +14,7 @@ import { router } from "@inertiajs/vue3";
 
 import AppButton from "../presentation/AppButton.vue";
 
-function logout() {
+function logout(): void {
     router.post("/logout", {}, { preserveState: false });
 }
 </script>
