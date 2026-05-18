@@ -1,49 +1,52 @@
 @use '../abstracts/breakpoints';
 
-.app-footer {
-    ul li {
-        list-style: none;
-    }
-
-    background-color: var(--color-secondary-50);
-    padding: 24px;
-    min-height: 350px;
-
-    .footer {
-        &__content {
-            display: flex;
-            flex-direction: column;
+.footer-wrapper {
+    .app-footer {
+        ul li {
+            list-style: none;
         }
 
-        &__item {
-            padding: 14px 0;
+        * {
+            color: var(--color-neutral-0);
         }
 
-        &__header {
-            font-weight: 700;
-            margin-bottom: 14px;
-        }
+        background-color: var(--color-secondary-50);
+        padding: 24px;
 
-        &__contact {
-            margin-bottom: 14px;
-        }
+        .footer {
+            &__content {
+                display: flex;
+                flex-direction: column;
+            }
 
-        &__social-links {
-            width: fit-content;
-            
-            .footer__social-link {
-                display: block;
+            &__item {
+                padding: 14px 0;
+            }
+
+            &__header {
+                font-weight: 700;
+                margin-bottom: 14px;
+            }
+
+            &__contact {
+                margin-bottom: 14px;
+            }
+
+            &__social-links {
+                width: fit-content;
+                
+                .footer__social-link {
+                    display: block;
+                }
             }
         }
     }
 
-    * {
-        color: var(--color-neutral-0);
+    .copyright {
+        background-color: var(--color-neutral-0);
+        color: var(--color-neutral-40);
+        padding: 24px;
+        text-align: center;
     }
 
-    @include breakpoints.respond-to('medium') {
-        .copyright {
-            align-self: end;
-        }
-    }
 }

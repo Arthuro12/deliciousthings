@@ -32,10 +32,8 @@ import AppLayout from "@/layout/AppLayout.vue";
 
 import heroImage from "../../images/hero-image.webp";
 
-import { useAuth } from "@/composables/use-auth";
 import { usePageDbClick } from "@/composables/use-page-db-click";
 
-const { isAuthenticated } = useAuth();
 usePageDbClick();
 </script>
 
@@ -84,14 +82,14 @@ ul li {
         align-items: center;
         row-gap: 24px;
         padding: 18px;
-        min-height: 90vh;
+        min-height: 80vh;
 
         .hero-header {
             position: absolute;
             display: flex;
             flex-direction: column;
             row-gap: 16px;
-            padding: 0 24px;
+            padding: 0 18px;
             top: 5%;
             z-index: 2;  
 
