@@ -28,7 +28,7 @@ Route::controller(RegistrationController::class)->group(function () {
 Route::controller(SessionController::class)->group(function () {
     Route::get('/login', 'create')->name('login');
     Route::post('/login', 'store')->name('login.store');
-    Route::post('/logout', 'destroy')->name('login.destroy');
+    Route::post('/logout', 'destroy')->middleware('auth')->name('login.destroy');
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
