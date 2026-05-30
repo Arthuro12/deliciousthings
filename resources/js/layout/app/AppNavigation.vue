@@ -3,7 +3,7 @@
         <NavigationMenuList class="list-none navmenu__list">
             <NavigationMenuItem class="navmenu__item">
                 <NavigationMenuTrigger>
-                    <MenuIcon color="#e680a5" :size="24" />
+                    <MenuIcon color="#dc4b82" :size="24" />
                 </NavigationMenuTrigger>
                 <NavigationMenuContent 
                     class="list-none navmenu__content"

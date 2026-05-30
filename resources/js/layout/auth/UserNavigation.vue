@@ -3,36 +3,39 @@
         <NavigationMenuList class="navmenu__list">
             <NavigationMenuItem class="navmenu__item">
                 <NavigationMenuTrigger>
-                    <UserIcon color="#e680a5" />
+                    <UserIcon color="#dc4b82" :size="24" />
                 </NavigationMenuTrigger>
 
                 <NavigationMenuContent
                     class="list-none navmenu__content"
-                    as="ul"
                 >
                     <template v-if="isAuthenticated">
-                        <li class="navmenu__content__item">
-                            <LogoutButton class="menu-link menu-link--secondary" />
-                        </li>
+                        <ul class="content__menu">
+                            <li class="content__menu__item">
+                                <LogoutButton class="menu-link menu-link--secondary" />
+                            </li>
+                        </ul>
                     </template>
 
                     <template v-else>
-                        <li class="navmenu__content__item">
-                            <NavigationMenuLink 
-                                class="menu-link menu-link--primary" 
-                                href="/register" 
-                                :as="Link">
-                                Beitreten
-                            </NavigationMenuLink>
-                        </li>
-                        <li class="navmenu__content__item">
-                            <NavigationMenuLink 
-                                class="menu-link menu-link--secondary" 
-                                href="/login" 
-                                :as="Link">
-                                Anmelden
-                            </NavigationMenuLink>
-                        </li>
+                        <ul class="content__menu">
+                            <li class="content__menu__item">
+                                <NavigationMenuLink 
+                                    class="menu-link--primary" 
+                                    href="/register" 
+                                    :as="Link">
+                                    Beitreten
+                                </NavigationMenuLink>
+                            </li>
+                            <li class="content__menu__item">
+                                <NavigationMenuLink 
+                                    class="menu-link--secondary" 
+                                    href="/login" 
+                                    :as="Link">
+                                    Anmelden
+                                </NavigationMenuLink>
+                            </li>
+                        </ul>
                     </template>
                 </NavigationMenuContent>
             </NavigationMenuItem>
@@ -61,7 +64,7 @@ const { isAuthenticated, } = useAuth();
 </script>
 
 <style scoped lang="scss">
-.navmenu__content__item {
+.content__menu__item {
     margin: 8px;
 }
 </style>
