@@ -6,12 +6,7 @@
             <link 
                 rel="preload" 
                 as="image" 
-                href="/hero-image-1919.webp" 
-                imagesrcset="
-                    /hero-image-768.webp 768w,
-                    /hero-image-1280.webp 1280w,
-                    /hero-image-1919.webp 1919w          
-                "
+                href="/hero-image.webp" 
             />
         </Head>
 
@@ -30,12 +25,8 @@
                     <img 
                         class="hero-image" 
                         alt="elegante und geschmackvolle Torte"
-                        src="/hero-image-1919.webp" 
-                        srcset="
-                            /hero-image-768.webp 768w,
-                            /hero-image-1280.webp 1280w,
-                            /hero-image-1919.webp 1919w          
-                        "
+                        src="/hero-image.webp" 
+                        sizes="100vw"
                         fetchpriority="high"
                         loading="eager"
                     />
