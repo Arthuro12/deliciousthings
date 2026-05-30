@@ -37,8 +37,11 @@
         }
 
         .menu-link--primary {
-            background-color: var(--color-primary-50);
+            @extend .menu-link;
+            background-image: linear-gradient(to left, var(--color-primary-30) 0%, var(--color-primary-40) 50%, var(--color-primary-50) 100%);
             color: var(--color-neutral-0);
+            padding: 8px 24px;
+            border-radius: 99em;
             text-align: center;
             width: 100%;
 
@@ -48,9 +51,13 @@
         }
 
         .menu-link--secondary {
+            @extend .menu-link;
+            display: flex;
+            justify-content: center;
             background: none;
             color: var(--color-primary-50);
             border: 1px solid var(--color-primary-50);
+            border-radius: 99em;
             text-align: center;
             width: 100%;
 
