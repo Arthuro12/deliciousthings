@@ -2,78 +2,116 @@
 
 .app-header {
     position: sticky;
-    padding: 0 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 1px 5px var(--color-neutral-20);
-    height: 64px;
     top: 0;
-    z-index: 3;
+    z-index: var(--z-index-header);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.94);
+    border-bottom: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(16px);
+}
 
-    ul {
-        list-style: none;
+.app-header__inner {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    align-items: center;
+    gap: var(--space-4);
+    width: min(100% - calc(var(--layout-page-padding-tablet) * 2), var(--layout-container-xl));
+    height: var(--layout-header-height-mobile);
+    margin: 0 auto;
+
+    @include breakpoints.respond-to('medium') {
+        grid-template-columns: auto 1fr auto;
+        gap: var(--space-6);
+        width: min(100% - calc(var(--layout-page-padding-desktop) * 2), var(--layout-container-2xl));
+        height: var(--layout-header-height-desktop);
     }
+}
 
-    .header__separator {
-        display: none;
-    }
+.app-header__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+    color: var(--color-brand-primary-500);
+    text-decoration: none;
 
-    .navbar {
-        display: none;
-
-        &__menu {
-            display: flex;
-            align-items: center;
-
-            &:nth-child(3) {
-                column-gap: 15px;
-            }
-        }
-
-        .menu-link {
-            border-radius: 5px; 
-            
-            &:hover {
-                color: var(--color-neutral-40)
-            }
-        }
-
-        .link--active,
-        .menu-link.link--active:hover {
-            background-color: var(--color-primary-10);
-            color: var(--color-primary-50)
-        }
-    }
-
-    .user-nav {
-        .navmenu__content {
-            right: 0;
-        }
+    svg {
+        display: block;
+        width: 10.25rem;
+        height: auto;
     }
 
     @include breakpoints.respond-to('medium') {
-        justify-content: start;
+        justify-self: start;
+    }
+}
 
-        .logo {
-            margin-right: 25px;
-        }
+/* Desktop Navigation */
+.app-header__nav {
+    display: none;
 
-        .app-nav,
-        .user-nav {
-            display: none;
-        }
+    @include breakpoints.respond-to('medium') {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-8);
+    }
+}
 
-        .header__separator {
-            display: block;
-            flex: 1;
-        }
+.app-header__nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: var(--layout-header-height-desktop);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
 
-        .navbar {
-            display: flex;
-            flex: 1;
-        }
+.app-header__nav-link::after {
+    position: absolute;
+    right: 0;
+    bottom: 1.25rem;
+    left: 0;
+    height: 2px;
+    background-color: var(--color-brand-primary-500);
+    border-radius: var(--radius-full);
+    content: "";
+    opacity: 0;
+    transform: scaleX(0.4);
+    transition:
+        opacity var(--transition-base),
+        transform var(--transition-base);
+}
+
+.app-header__nav-link:hover,
+.app-header__nav-link.is-active {
+    color: var(--color-brand-primary-600);
+}
+
+.app-header__nav-link.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Desktop Actions */
+.app-header__actions {
+    display: none;
+
+    @include breakpoints.respond-to('medium') {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: var(--space-3);
+    }
+}
+
+.app-header__mobile-menu {
+    display: inline-flex;
+    justify-self: start;
+
+    @include breakpoints.respond-to('medium') {
+        display: none;
     }
 }

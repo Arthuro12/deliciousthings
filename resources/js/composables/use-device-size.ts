@@ -1,9 +1,8 @@
 import { readonly, ref, onMounted, onUnmounted } from "vue";
 
-export type BreakpointRange = 'small' | 'medium';
+import { BREAKPOINTS } from "@/constants";
 
-const SMALL_DEVICE_BREAKPOINT = 767;
-const MEDIUM_DEVICE_BREAKPOINT = 991;
+export type BreakpointRange = 'small' | 'medium';
 
 /**
  * Checks whether the size of the user's device is within a breakpoint range.
@@ -12,9 +11,9 @@ const MEDIUM_DEVICE_BREAKPOINT = 991;
  * @param range - The range to use. Default is small device breakpoint range.
  */
 const isDeviceWidthInRange = (width: number, range: BreakpointRange = 'small'): boolean => {
-    if (range == 'medium') return width <= MEDIUM_DEVICE_BREAKPOINT;
+    if (range == 'medium') return width <= BREAKPOINTS.MEDIUM_DEVICE;
 
-    return width <= SMALL_DEVICE_BREAKPOINT;
+    return width <= BREAKPOINTS.SMALL_DEVICE;
 }
 
 export function useDeviceSize() {

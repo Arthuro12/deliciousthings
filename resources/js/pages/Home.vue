@@ -78,7 +78,7 @@ ul li {
     }
 
     .hero-section {
-        background-color: var(--color-neutral-50);
+        background-color: var(--color-neutral-900);
         position: relative;
         display: flex;
         flex-direction: column;

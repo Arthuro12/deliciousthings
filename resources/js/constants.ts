@@ -1,6 +1,4 @@
-export const FORM_ERRORS = Object.freeze({
-    REQUIRED: `Bitte füllen sie dieses Feld aus.`
-});
+import type { Link } from "./types/ui";
 
 export const BUTTON_CLASSES = Object.freeze({
     LAYOUTS: {
@@ -29,6 +27,29 @@ export const LINK_CLASSES = Object.freeze({
     SIZES: {
         medium: "link--medium",
     }
+});
+
+export const BREAKPOINTS = {
+    SMALL_DEVICE: 767,
+    MEDIUM_DEVICE: 991,
+};
+
+export const NAV_MENUS = {
+    PUBLIC: [
+        {
+            href: '/artisans',
+            title: 'Konditor:innen',
+        },
+        {
+            href: '/creations',
+            title: 'Kreationen',
+        },
+    ] as Link[],
+    // USER: [] as Link[],
+};
+
+export const FORM_ERRORS = Object.freeze({
+    REQUIRED: `Bitte füllen sie dieses Feld aus.`
 });
 
 export const BAKED_GOODS = {
