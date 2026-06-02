@@ -1,12 +1,13 @@
 <template>
-    <AppButton
+    <button
+        class="button button--ghost button--medium button--text-only button--full"
         type="button"
         variant="secondary"
         size="medium"
         @click="logout"
     >
-        <template #text>Abmelden</template>
-    </AppButton>
+       <span class="button__label">Abmelden</span>
+    </button>
 </template>
 
 <script setup lang="ts">

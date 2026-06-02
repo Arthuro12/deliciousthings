@@ -73,3 +73,8 @@ export type Radio = {
     name?: string;
     label: string;
 };
+
+export type Link = {
+    href: string;
+    title: string;
+};
