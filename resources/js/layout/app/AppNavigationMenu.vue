@@ -7,8 +7,18 @@
                 aria-label="Menü öffnen"
                 color="#654f47"
             >
-                <Menu v-if="!menuIsOpen" class="button__icon" aria-hidden="true" />
-                <X v-else class="button__icon" aria-hidden="true" />
+                <Menu 
+                    v-if="!menuIsOpen" 
+                    class="button__icon" 
+                    aria-hidden="true" 
+                    color="#654f47"
+                />
+                <X 
+                    v-else 
+                    class="button__icon" 
+                    aria-hidden="true" 
+                    color="#654f47"
+                />
                 <span class="button__label">Menu</span>
             </button>
         </DropdownMenuTrigger>
