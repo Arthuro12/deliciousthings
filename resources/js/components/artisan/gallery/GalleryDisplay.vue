@@ -25,14 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { useDeviceSize } from "@/composables/use-media-query";
 import type { Image } from "@/types/users";
 
 const { gallery, } = defineProps<{
     gallery: Image[];
 }>();
 
-const { deviceWidth } = useDeviceSize();
+const deviceWidth = document.body.clientWidth;
 
 const totalRows = Math.ceil(gallery.length / 3);
 
