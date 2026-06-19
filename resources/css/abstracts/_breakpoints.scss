@@ -4,9 +4,10 @@
 
 $breakpoints: (
     'x-small': (min-width: 0px),
-    'small': (min-width: 576px),
+    'small': (min-width: 640px),
     'medium': (min-width: 768px),
-    'large': (min-width: 992px),
+    'large': (min-width: 1024px),
+	'x-large': (min-width: 1280px),
 );
 
 /// Responsive breakpoint manager

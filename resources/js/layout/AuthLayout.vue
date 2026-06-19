@@ -1,12 +1,14 @@
 <template>
     <div class="wrapper">
-        <div class="logo-wrapper"><a href="/"><AppLogo /></a></div>
+        <div class="logo-wrapper">
+            <Link class="logo" href="/">DELICIOUSthings</Link>
+        </div>
         <slot></slot>
     </div>
 </template>
 
 <script setup lang="ts">
-import AppLogo from "@/components/icons/AppLogo.vue";
+import { Link, } from "@inertiajs/vue3";
 </script>
 
 <style scoped>

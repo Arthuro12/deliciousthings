@@ -5,8 +5,8 @@
                 <AppNavigationMenu />
             </div>
 
-            <Link class="app-header__logo" href="/" aria-label="Retour à l'accueil">
-                <AppLogo />
+            <Link class="app-header__logo logo" href="/" aria-label="Retour à l'accueil">
+                DELICIOUSTHINGS
             </Link>
 
             <nav class="app-header__nav" aria-label="Navigation principale">
@@ -47,20 +47,19 @@ import { computed, } from "vue";
 
 import { Link, usePage } from "@inertiajs/vue3";
 
-import AppLogo from "@/components/icons/AppLogo.vue";
 import AppNavigationMenu from "./AppNavigationMenu.vue";
 import UserNavigationMenu from "../auth/UserNavigationMenu.vue";
 
 import { useAuth, } from "@/composables/use-auth";
-import { useDeviceSize, } from "@/composables/use-device-size";
+import { useBreakpoints, } from "@/composables/use-breakpoints"
 import { NAV_MENUS, } from "@/constants.js";
 
 const page = usePage();
 const { isAuthenticated, } = useAuth();
-const { isSmallDevice, } = useDeviceSize();
+const { isAtMostMediumDevice, } = useBreakpoints();
 
 const hasUserNavMenu = computed(() => {
-    return isAuthenticated.value || isSmallDevice.value;
+    return isAuthenticated.value || isAtMostMediumDevice.value;
 });
 
 const isActive = (href: string) => {

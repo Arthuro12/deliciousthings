@@ -1,7 +1,7 @@
 <template>
     <a 
         class="artisan-card card" 
-        :href="`/artisan/${artisan.name}`" 
+        :href="`/artisans/${artisan.name}`" 
         target="_blank"
     >
         <img class="artisan-image" :src="artisan.profile_photo?.url ?? chefHatFallback" />

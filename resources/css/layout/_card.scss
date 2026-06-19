@@ -30,6 +30,6 @@
     border-radius: 0;
 }
 
-body:has(.card-layout)  {
+body:has(> .card-layout)  {
     background-color: var(--color-primary-10);
 }

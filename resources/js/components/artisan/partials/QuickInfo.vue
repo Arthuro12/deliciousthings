@@ -51,7 +51,7 @@ import { computed, ref, useTemplateRef, onMounted, onUnmounted, } from "vue";
 
 import ProfileInfoPopup from "./ProfileInfoPopup.vue";
 
-import { useDeviceSize, } from "@/composables/use-device-size";
+import { useDeviceSize, } from "@/composables/use-media-query.js";
 import type { ArtisanPublicProfile } from "@/types/users";
 
 const { profile, } = defineProps<{

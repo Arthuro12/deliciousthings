@@ -77,4 +77,11 @@ export type Radio = {
 export type Link = {
     href: string;
     title: string;
+    class?: VueClass;
 };
+
+export type NavMenuType = "PUBLIC" | "USER";
+
+export type NavMenuLink = Link;
+
+export type NavMenuRecord = Record<NavMenuType, NavMenuLink[]>;

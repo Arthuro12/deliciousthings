@@ -3,7 +3,7 @@ import { type Ref, onMounted, onUnmounted, } from "vue";
 import { BREAKPOINTS } from "@/constants";
 
 export function useCloseOnDekstop(isOpen: Ref<boolean>): void {
-    const mql = window.matchMedia(`(width >= ${BREAKPOINTS.SMALL_DEVICE}px)`);
+    const mql = window.matchMedia(`(width >= ${BREAKPOINTS.MEDIUM_DEVICE}px)`);
 
     function close(): void {
         isOpen.value = false;

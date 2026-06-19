@@ -27,21 +27,16 @@
                     </DropdownMenuItem>
 
                     <template v-else>
-                        <DropdownMenuItem as-child>
+                        
+                        <DropdownMenuItem 
+                            v-for="item in NAV_MENUS.USER"
+                            :key="item.title"
+                            as-child>
                             <Link
-                                class="button button--ghost button--medium button--full button--text-only"
-                                href="/login"
+                                :class="item.class"
+                                :href="item.href"
                             >
-                                <span class="button__label">Anmelden</span>
-                            </Link>
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem as-child>
-                            <Link
-                                class="button button--primary button--medium button--full button--text-only"
-                                href="/register"
-                            >
-                                <span class="button__label">Beitreten</span>
+                                <span class="button__label">{{ item.title }}</span>
                             </Link>
                         </DropdownMenuItem>
                     </template>
@@ -70,6 +65,7 @@ import LogoutButton from "@/components/auth/LogoutButton.vue";
 
 import { useAuth, } from "@/composables/use-auth";
 import { useCloseOnDekstop, } from "@/composables/use-close-on-dekstop";
+import { NAV_MENUS } from "@/constants";
 
 const { isAuthenticated } = useAuth();
 const menuIsOpen = ref(false);

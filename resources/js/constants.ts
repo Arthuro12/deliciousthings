@@ -1,4 +1,4 @@
-import type { Link } from "./types/ui";
+import type { NavMenuRecord,  } from "./types/ui";
 
 export const BUTTON_CLASSES = Object.freeze({
     LAYOUTS: {
@@ -30,22 +30,48 @@ export const LINK_CLASSES = Object.freeze({
 });
 
 export const BREAKPOINTS = {
-    SMALL_DEVICE: 767,
-    MEDIUM_DEVICE: 991,
+    SMALL_DEVICE: 640,
+    MEDIUM_DEVICE: 768,
+    LARGE_DEVICE: 1024,
+    EXTRA_LARGE: 1280,
 };
 
-export const NAV_MENUS = {
+export const NAV_MENUS: NavMenuRecord = {
     PUBLIC: [
         {
-            href: '/artisans',
-            title: 'Konditor:innen',
+            href: "/projects/explore",
+            title: "Projekte entdecken",
         },
         {
-            href: '/creations',
-            title: 'Kreationen',
+            href: "/for-artisans",
+            title: "Für Backprofis",
+
         },
-    ] as Link[],
-    // USER: [] as Link[],
+        {
+            href: '/about',
+            title: 'Über uns',
+        },
+        // {
+        //     href: '/artisans',
+        //     title: 'Konditoreien',
+        // },
+        // {
+        //     href: '/creations',
+        //     title: 'Kreationen',
+        // },
+    ],
+    USER: [
+        {
+            class: "button button--ghost button--medium button--full button--text-only",
+            href: '/login',
+            title: 'Anmelden', 
+        },
+        {
+            class: "button button--primary button--medium button--full button--text-only",
+            href: '/register',
+            title: 'Beitreten', 
+        },
+    ],
 };
 
 export const FORM_ERRORS = Object.freeze({
