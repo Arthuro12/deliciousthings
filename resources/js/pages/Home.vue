@@ -1,35 +1,23 @@
 <template>
     <AppLayout>
         <Head>
-            <title>Lokale Patisserie und kreative Torten</title>
+            <title>Backprojekte für Geburtstag, Hochzeit und besondere Anlässe planen</title>
             <meta name="description" content="" />
-            <link 
-                rel="preload" 
-                as="image" 
-                href="/hero-image.webp" 
-            />
         </Head>
 
         <main class="home-page">
-            <div>   
+            <div class="page-content">   
                 <section class="hero-section"> 
-                    <div class="hero-content">
+                    <div class="hero-inner">
                         <header class="hero-header">
-                            <h1 class="title hero-title">Entdecken Sie geschmackvolle Kreationen und Konditor:innen</h1> 
-                            <p class="subtitle hero-description">Reservieren Sie verfügbare Kreationen oder finden Sie passende Konditor:innen für Ihre persönlichen Wünsche.</p> 
+                            <h1 class="hero-header__headline">Plane deine persönliche <span class="hero-gradient-text">Backkreation.</span></h1>
+                            <p>Plane dein Backprojekt und begleite es mit passenden Konditor:innen oder Cake Designer.</p>
                         </header>
-
-                        <QuickSearch />
+                        <div class="cta-buttons">
+                            <Link class="button button--primary button--header-cta" href="/projects/create">Backprojekt planen</Link>
+                            <Link class="button button--secondary button--header-cta" href="/for-artisans">Professionelle Vitrine erstellen</Link>
+                        </div>
                     </div>
-                    <div class="hero-overlay"></div>
-                    <img 
-                        class="hero-image" 
-                        alt="elegante und geschmackvolle Torte"
-                        src="/hero-image.webp" 
-                        sizes="100vw"
-                        fetchpriority="high"
-                        loading="eager"
-                    />
                 </section>
             </div>
         </main>
@@ -37,10 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import { Head, } from "@inertiajs/vue3";
+import { Head, Link, } from "@inertiajs/vue3";
 
 import AppLayout from "@/layout/AppLayout.vue";
-import QuickSearch from "@/components/search/quick-search/QuickSearch.vue";
 
 import { usePageDbClick, } from "@/composables/use-page-db-click";
 
@@ -52,84 +39,56 @@ usePageDbClick();
 @use '../../css/abstracts/breakpoints' as breakpoints; 
 @use '../../css/components/buttons' as buttons;
 
-.home-page {
-    --title-font-size-3xl: 1.875rem;
-    --title-font-size-4xl: 2.25rem;
-    --title-font-weight: 600;
-    --subtitle-font-size-xl: 1.25rem;
-    --subtitle-font-size-2xl: 1.5rem;
-    --subtitle-font-weight: 500;
+.page-content {
+    width: 100%;
 
-    --cta-background-color-secondary: #fff3;
-
-    --left-gradient: linear-gradient(80deg, rgba(0, 0, 0, .14), transparent 41%);
-    --bottom-gradient: linear-gradient(0deg, rgba(0, 0, 0, .45) 0%, rgba(0, 0, 0, .36) 5%, rgba(0, 0, 0, .27) 9%, rgba(0, 0, 0, .18) 16%, rgba(0, 0, 0, .09) 22%, rgba(0, 0, 0, .02) 29%, transparent 36%);
-    --radial-gradient: radial-gradient(circle 100vmax at 66.7% 0%, transparent 0%, rgba(0, 0, 0, .04) 19%, rgba(0, 0, 0, .15) 36%, rgba(0, 0, 0, .3) 51%, rgba(0, 0, 0, .33) 53%, rgba(0, 0, 0, .49) 65%, rgba(0, 0, 0, .67) 77%, rgba(0, 0, 0, .85) 89%, #000 100%);
-}
-
-ul li {
-    list-style: none;
-}
-
-.home-page {
-    .title,
-    .subtitle {
-        color: var(--color-neutral-0);
+    .hero-gradient-text {
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1.2;
+        background: linear-gradient(
+            100deg,
+            var(--color-brand-primary-800) 0%,
+            var(--color-brand-primary-600) 35%,
+            var(--color-brand-primary-400) 68%,
+            var(--color-brand-primary-200) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 
-    .hero-section {
-        background-color: var(--color-neutral-900);
-        position: relative;
+    @include breakpoints.respond-to('medium') {
+        font-size: 2rem;;
+    }
+}
+
+.hero-section {
+    background-color: var(--color-brand-primary-50);
+    padding: var(--space-12) var(--space-4);
+    width: 100%;
+    height: 100%;
+
+    .hero-inner {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        padding: 18px;
-        min-height: 90vh;
+        gap: var(--space-5);
+    }
 
-        .hero-content {
-            transition: opacity 2s ease, transform 1.2s ease;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            row-gap: 24px;
-            padding: 0 18px;
-            inset-block-end: 30px;
-            z-index: 2;  
+    .hero-header {
+        text-align: center;
+
+        &__headline {
+            margin-bottom: var(--space-5);
         }
+    }
 
-        .hero-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            row-gap: 20px;
-
-            > .hero-title,
-            > .hero-description {
-                text-align: center;
-            }
-
-            > .subtitle {
-                // width: 85%;
-            }
-        }
-
-        .hero-image {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            inset: 0;
-            object-fit: cover;
-            object-position: right center;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background-image: var(--left-gradient), var(--bottom-gradient), var(--radial-gradient);
-            z-index: 1;
-        }
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--space-3);
     }
 }
 </style>

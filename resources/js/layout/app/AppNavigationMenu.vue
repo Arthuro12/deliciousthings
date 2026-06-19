@@ -31,7 +31,7 @@
             >
                 <DropdownMenuItem
                     v-for="item in NAV_MENUS.PUBLIC"
-                    :key="item.href"
+                    :key="item.title"
                     as-child
                 >
                     <Link

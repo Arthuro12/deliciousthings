@@ -50,7 +50,7 @@ const form = useForm<Message>({
 
 function sendMessage(): void {
     form.sent_at = new Date().toISOString();
-    form.post(`/artisan/${artisanId.toString()}/messages`);
+    form.post(`/artisans/${artisanId.toString()}/messages`);
 }
 </script>
 

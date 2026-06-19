@@ -1,22 +1,22 @@
 import { onMounted, onUnmounted } from "vue";
 
-import { useDeviceSize } from "./use-device-size";
+import { useBreakpoints } from "./use-breakpoints";
 
-export function usePageDbClick(): void {
-const { isSmallDevice, } = useDeviceSize()
+export function usePageDbClick() {
+const { isAtMostMediumDevice, } = useBreakpoints();
 
     function handlePageDbClick(event: Event): void {
         event.preventDefault();
     }
 
     onMounted(() => {
-        if (isSmallDevice.value) {
+        if (isAtMostMediumDevice.value) {
             document.body.addEventListener("dblclick", handlePageDbClick);
         }
     });
 
     onUnmounted(() => {
-        if (isSmallDevice.value) {
+        if (isAtMostMediumDevice.value) {
             document.body.removeEventListener("dblclick", handlePageDbClick);
         }
     });

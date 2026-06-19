@@ -14,6 +14,22 @@ use App\Http\Controllers\SearchController;
 
 Route::get('/', HomeController::class)->name('home');
 
+Route::get('/for-artisans', function () {
+    return Inertia::render('ForArtisans');
+});
+
+Route::get('/projects/explore', function () {
+    return Inertia::render('projects/Explore');
+});
+
+Route::get('/projects/create', function () {
+    return Inertia::render('projects/CreateProject');
+});
+
+Route::get('/about', function () {
+    return Inertia::render('AboutUs');
+});
+
 Route::controller(SearchController::class)->group(function () {
     Route::get('/search', 'index');
     Route::get('/artisans', 'index');
@@ -63,13 +79,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 // Route::group(['middleware' => 'auth:sanctum'], function () {
 //     Route::controller(MessageController::class)->group(function () {
-//         Route::get('/artisan/pre-orders/{message}', 'show');
-//         Route::get('/artisan/messages', 'index');
+//         Route::get('/artisans/pre-orders/{message}', 'show');
+//         Route::get('/artisans/messages', 'index');
 //     });
 // });
 
-Route::get('/artisan/{artisan:name}', [PublicProfileController::class, 'show']);
+Route::get('/artisans/{artisan:name}', [PublicProfileController::class, 'show']);
 
-Route::post('/artisan/{artisan}/messages', [MessageController::class, 'store']);
+Route::post('/artisans/{artisan}/messages', [MessageController::class, 'store']);
 
-Route::post('/artisan/{artisan}/pre-orders', [PreOrderController::class, 'store']);
+Route::post('/artisans/{artisan}/pre-orders', [PreOrderController::class, 'store']);
