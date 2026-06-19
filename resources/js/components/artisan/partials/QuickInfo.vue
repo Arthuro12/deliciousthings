@@ -51,14 +51,14 @@ import { computed, ref, useTemplateRef, onMounted, onUnmounted, } from "vue";
 
 import ProfileInfoPopup from "./ProfileInfoPopup.vue";
 
-import { useDeviceSize, } from "@/composables/use-media-query.js";
+import { useBreakpoints, } from "@/composables/use-breakpoints";
 import type { ArtisanPublicProfile } from "@/types/users";
 
 const { profile, } = defineProps<{
     profile: ArtisanPublicProfile;
 }>();
 
-const { isSmallDevice, } = useDeviceSize();
+const { isSmallDevice, } = useBreakpoints();
 
 const shortDescriptionText = useTemplateRef("shortDescriptionText");
 
