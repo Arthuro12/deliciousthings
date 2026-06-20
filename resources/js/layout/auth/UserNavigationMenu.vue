@@ -1,49 +1,51 @@
 <template>
-    <DropdownMenuRoot :modal="false" v-model:open="menuIsOpen">
-        <DropdownMenuTrigger as-child>
-            <button
-                class="button button--ghost button--medium button--icon-only menu-trigger"
-                type="button"
-                aria-label="Benutzermenü öffnen"
-            >
-                <CircleUserRound 
-                    class="button__icon" 
-                    aria-hidden="true"
-                    color="#654f47"
-                />
-                <span class="button__label">Benutzermenü</span>
-            </button>
-        </DropdownMenuTrigger>
+    <div>
+        <DropdownMenuRoot :modal="false" v-model:open="menuIsOpen">
+            <DropdownMenuTrigger as-child>
+                <button
+                    class="button button--ghost button--medium button--icon-only menu-trigger"
+                    type="button"
+                    aria-label="Benutzermenü öffnen"
+                >
+                    <CircleUserRound 
+                        class="button__icon" 
+                        aria-hidden="true"
+                        color="#654f47"
+                    />
+                    <span class="button__label">Benutzermenü</span>
+                </button>
+            </DropdownMenuTrigger>
 
-        <DropdownMenuPortal>
-            <DropdownMenuContent
-                class="menu-content menu-content"
-                :side-offset="10"
-                align="end"
-            >
-                <DropdownMenuGroup class="menu-group">
-                    <DropdownMenuItem v-if="isAuthenticated" as-child>
-                        <LogoutButton />
-                    </DropdownMenuItem>
-
-                    <template v-else>
-                        
-                        <DropdownMenuItem 
-                            v-for="item in NAV_MENUS.USER"
-                            :key="item.title"
-                            as-child>
-                            <Link
-                                :class="item.class"
-                                :href="item.href"
-                            >
-                                <span class="button__label">{{ item.title }}</span>
-                            </Link>
+            <DropdownMenuPortal>
+                <DropdownMenuContent
+                    class="menu-content menu-content"
+                    :side-offset="10"
+                    align="end"
+                >
+                    <DropdownMenuGroup class="menu-group">
+                        <DropdownMenuItem v-if="isAuthenticated" as-child>
+                            <LogoutButton />
                         </DropdownMenuItem>
-                    </template>
-                </DropdownMenuGroup>
-            </DropdownMenuContent>
-        </DropdownMenuPortal>
-    </DropdownMenuRoot>
+
+                        <template v-else>
+                            
+                            <DropdownMenuItem 
+                                v-for="item in NAV_MENUS.USER"
+                                :key="item.title"
+                                as-child>
+                                <Link
+                                    :class="item.class"
+                                    :href="item.href"
+                                >
+                                    <span class="button__label">{{ item.title }}</span>
+                                </Link>
+                            </DropdownMenuItem>
+                        </template>
+                    </DropdownMenuGroup>
+                </DropdownMenuContent>
+            </DropdownMenuPortal>
+        </DropdownMenuRoot>
+    </div>
 </template>
 
 <script setup lang="ts">
