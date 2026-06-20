@@ -11,7 +11,7 @@
                     <div class="hero-inner">
                         <header class="hero-header">
                             <h1 class="hero-header__headline">Plane deine persönliche <span class="hero-gradient-text">Backkreation.</span></h1>
-                            <p>Klare Ideen, strukturierte Projekte — für entspannte Tortenplanungen.</p>
+                            <p>Klare Ideen, strukturierte Anfragen — für entspannte Tortenplanungen.</p>
                         </header>
                         <div class="cta-buttons">
                             <Link class="button button--primary button--header-cta" href="/projects/create">Backprojekt planen</Link>
