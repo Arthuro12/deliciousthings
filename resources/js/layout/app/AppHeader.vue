@@ -12,7 +12,7 @@
             <nav class="app-header__nav" aria-label="Navigation principale">
                 <Link
                     v-for="item in NAV_MENUS.PUBLIC"
-                    :key="item.href"
+                    :key="item.title"
                     class="app-header__nav-link"
                     :class="{ 'is-active': isActive(item.href) }"
                     :href="item.href"
