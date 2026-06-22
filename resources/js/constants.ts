@@ -26,7 +26,7 @@ export const LINK_CLASSES = Object.freeze({
     },
     SIZES: {
         medium: "link--medium",
-    }
+    },
 });
 
 export const BREAKPOINTS = {
@@ -45,7 +45,6 @@ export const NAV_MENUS: NavMenuRecord = {
         {
             href: "/for-artisans",
             title: "Für Backprofis",
-
         },
         {
             href: '/about',

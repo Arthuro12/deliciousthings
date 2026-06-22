@@ -10,12 +10,12 @@
                 <section class="hero-section"> 
                     <div class="hero-inner">
                         <header class="hero-header">
-                            <h1 class="hero-header__headline">Plane deine persönliche <span class="hero-gradient-text">Backkreation.</span></h1>
+                            <h1 class="hero-header__headline">Plane deine persönliche <span class="hero-gradient-text">Backkreationen.</span></h1>
                             <p>Klare Ideen, strukturierte Anfragen — für entspannte Tortenplanungen.</p>
                         </header>
                         <div class="cta-buttons">
                             <Link class="button button--primary button--header-cta" href="/projects/create">Backprojekt planen</Link>
-                            <Link class="button button--secondary button--header-cta" href="/for-artisans">Als Anbieter:in starten</Link>
+                            <!-- <Link class="button button--secondary button--header-cta" href="/for-artisans">Als Artisan registrieren</Link> -->
                         </div>
                     </div>
                 </section>

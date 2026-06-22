@@ -17,12 +17,6 @@
     gap: var(--space-4);
     height: var(--layout-header-height-mobile);
 
-    // @include breakpoints.respond-to('medium') {
-    //     grid-template-columns: auto 1fr auto;
-    //     gap: var(--space-6);
-    //     height: var(--layout-header-height-desktop);
-    // }
-
     @include breakpoints.respond-to('large') {
         grid-template-columns: auto 1fr auto;
         gap: var(--space-6);

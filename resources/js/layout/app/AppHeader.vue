@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { computed, } from "vue";
 
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link, usePage, } from "@inertiajs/vue3";
 
 import AppNavigationMenu from "./AppNavigationMenu.vue";
 import UserNavigationMenu from "../auth/UserNavigationMenu.vue";

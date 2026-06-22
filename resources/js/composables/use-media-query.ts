@@ -14,7 +14,6 @@ export function useMediaQuery(query: string) {
     });
 
     onUnmounted(() => {
-        updateMatches();
         mql.removeEventListener("change", updateMatches);
     });
 

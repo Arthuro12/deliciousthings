@@ -1,29 +1,17 @@
-import { type Ref, onMounted, onUnmounted, } from "vue";
+import { type Ref, watch, } from "vue";
 
-import { BREAKPOINTS } from "@/constants";
+import { useBreakpoints } from "./use-breakpoints";
 
 export function useCloseOnDekstop(isOpen: Ref<boolean>): void {
-    const mql = window.matchMedia(`(width >= ${BREAKPOINTS.MEDIUM_DEVICE}px)`);
+    const { isAtLeastLargeDevice } = useBreakpoints();
 
     function close(): void {
         isOpen.value = false;
     }
 
-    function handleClose(e: MediaQueryListEvent): void {
-        if (e.matches) {
+    watch(isAtLeastLargeDevice, (newValue) => {
+        if (newValue) {
             close();
         }
-    }
-
-    onMounted(() => {
-        if (mql.matches) {
-            close();
-        }
-
-        mql.addEventListener("change", handleClose);
-    });
-
-    onUnmounted(() => {
-        mql.removeEventListener("change", handleClose);
-    });
+    }, { immediate: true, });
 }
