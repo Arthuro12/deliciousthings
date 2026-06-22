@@ -27,8 +27,7 @@
                             <LogoutButton />
                         </DropdownMenuItem>
 
-                        <template v-else>
-                            
+                        <template v-else>         
                             <DropdownMenuItem 
                                 v-for="item in NAV_MENUS.USER"
                                 :key="item.title"
