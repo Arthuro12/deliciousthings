@@ -14,20 +14,8 @@ use App\Http\Controllers\SearchController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::get('/for-artisans', function () {
-    return Inertia::render('ForArtisans');
-});
-
-Route::get('/projects/explore', function () {
-    return Inertia::render('projects/Explore');
-});
-
-Route::get('/projects/create', function () {
-    return Inertia::render('projects/CreateProject');
-});
-
-Route::get('/about', function () {
-    return Inertia::render('AboutUs');
+Route::get('/inspirations', function () {
+    return Inertia::render('Inspirations');
 });
 
 Route::controller(SearchController::class)->group(function () {

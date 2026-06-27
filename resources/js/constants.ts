@@ -39,17 +39,21 @@ export const BREAKPOINTS = {
 export const NAV_MENUS: NavMenuRecord = {
     PUBLIC: [
         {
-            href: "/projects/explore",
-            title: "Projekte entdecken",
+            href: "/inspirations",
+            title: "Inspirationen",
         },
-        {
-            href: "/for-artisans",
-            title: "Für Backprofis",
-        },
-        {
-            href: '/about',
-            title: 'Über uns',
-        },
+        // {
+        //     href: "/projects/explore",
+        //     title: "Projekte entdecken",
+        // },
+        // {
+        //     href: "/for-artisans",
+        //     title: "Für Backprofis",
+        // },
+        // {
+        //     href: '/about',
+        //     title: 'Über uns',
+        // },
         // {
         //     href: '/artisans',
         //     title: 'Konditoreien',

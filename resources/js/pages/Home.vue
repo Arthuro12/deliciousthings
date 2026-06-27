@@ -10,12 +10,12 @@
                 <section class="hero-section"> 
                     <div class="hero-inner">
                         <header class="hero-header">
-                            <h1 class="hero-header__headline">Plane deine persönliche <span class="hero-gradient-text">Backkreationen.</span></h1>
-                            <p>Klare Ideen, strukturierte Anfragen — für entspannte Tortenplanungen.</p>
+                            <h1 class="hero-header__headline">Klare Anfragen.<span class="hero-gradient-text">Organisierte Backprojekte.</span></h1>
+                            <p class="hero-description">Erhalten Sie klare Anfragen für individuelle Backkreationen. Verwalten Sie Ihre Backprojekte und behalten Sie alle Schritte übersichtlich an einem zentralen Ort im Blick.</p>
                         </header>
                         <div class="cta-buttons">
-                            <Link class="button button--primary button--header-cta" href="/projects/create">Backprojekt planen</Link>
-                            <!-- <Link class="button button--secondary button--header-cta" href="/for-artisans">Als Artisan registrieren</Link> -->
+                            <Link class="button button--primary button--header-cta" href="/register">Kostenlos loslegen</Link>
+                            <!-- <Link class="button button--secondary button--header-cta" href="#">Demo-Profil asehen</Link> -->
                         </div>
                     </div>
                 </section>
@@ -43,9 +43,6 @@ usePageDbClick();
     width: 100%;
 
     .hero-gradient-text {
-        font-size: 1.75rem;
-        font-weight: 700;
-        line-height: 1.2;
         background: linear-gradient(
             100deg,
             var(--color-brand-primary-800) 0%,
@@ -58,36 +55,46 @@ usePageDbClick();
     }
 
     @include breakpoints.respond-to('medium') {
-        font-size: 2rem;;
+        font-size: 2rem;
     }
 }
 
 .hero-section {
     background-color: var(--color-brand-primary-50);
-    padding: var(--space-12) var(--space-4);
+    padding: var(--space-12) var(--space-5);
     width: 100%;
     height: 100%;
 
-    .hero-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--space-5);
-    }
-
     .hero-header {
-        text-align: center;
+        .hero-gradient-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
 
         &__headline {
+            display: flex;
+            flex-direction: column;
             margin-bottom: var(--space-5);
         }
     }
 
     .cta-buttons {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: var(--space-3);
+        margin-top: var(--space-5);
+        // display: flex;
+        // justify-content: center;
+        // flex-wrap: wrap;
+        // gap: var(--space-3);
+    }
+
+    @include breakpoints.respond-to('medium') {
+        .hero-inner {
+            max-width: 52rem;
+
+            .hero-description {
+                max-width: 40rem;
+            }
+        }
     }
 }
 </style>
