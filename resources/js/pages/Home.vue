@@ -10,8 +10,8 @@
                 <section class="hero-section"> 
                     <div class="hero-inner">
                         <header class="hero-header">
-                            <h1 class="hero-header__headline">Klare Anfragen.<span class="hero-gradient-text">Organisierte Backprojekte.</span></h1>
-                            <p class="hero-description">Erhalten Sie klare Anfragen für individuelle Backkreationen. Verwalten Sie Ihre Backprojekte und behalten Sie alle Schritte übersichtlich an einem zentralen Ort im Blick.</p>
+                            <h1 class="hero-header__headline">Klare Anfragen.<span class="hero-gradient-text">Organisierte Tortenprojekte.</span></h1>
+                            <p class="hero-header__description">Erhalten Sie klare Anfragen für individuelle Kreationen. Verwalten Sie Ihre Tortenprojekte und behalten Sie alle Schritte übersichtlich an einem zentralen Ort im Blick.</p>
                         </header>
                         <div class="cta-buttons">
                             <Link class="button button--primary button--header-cta" href="/register">Kostenlos loslegen</Link>
@@ -53,10 +53,6 @@ usePageDbClick();
         background-clip: text;
         color: transparent;
     }
-
-    @include breakpoints.respond-to('medium') {
-        font-size: 2rem;
-    }
 }
 
 .hero-section {
@@ -66,8 +62,12 @@ usePageDbClick();
     height: 100%;
 
     .hero-header {
+        &__headline,
         .hero-gradient-text {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
+        }
+
+        .hero-gradient-text {
             font-weight: 700;
             line-height: 1.2;
         }
@@ -76,6 +76,13 @@ usePageDbClick();
             display: flex;
             flex-direction: column;
             margin-bottom: var(--space-5);
+        }
+
+        @include breakpoints.respond-to('medium') {
+            &__headline,
+            .hero-gradient-text {
+                font-size: 3rem;
+            }
         }
     }
 
@@ -91,7 +98,7 @@ usePageDbClick();
         .hero-inner {
             max-width: 52rem;
 
-            .hero-description {
+            .hero-header__description {
                 max-width: 40rem;
             }
         }
