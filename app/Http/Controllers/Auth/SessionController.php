@@ -26,7 +26,7 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/');
+            return Inertia::location('/');
         }
 
         return back()->withErrors(['message' => __('The provided credential do not match our records.')], 'login');
@@ -40,6 +40,6 @@ class SessionController extends Controller
         $request->session()->regenerateToken();
         Log::notice(now()->toString() . json_encode(Auth::user()));
 
-        return redirect('/');
+        return Inertia::location('/');
     }
 }
