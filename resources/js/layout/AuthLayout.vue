@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="logo-wrapper">
-            <Link class="logo" href="/">DELICIOUSthings</Link>
+            <a class="logo" href="/">DELICIOUSthings</a>
         </div>
         <slot></slot>
     </div>
