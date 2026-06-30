@@ -9,7 +9,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.scss', 
-                'resources/css/home.scss', 
+                'resources/css/pages/home.scss', 
                 'resources/js/plattform/app.ts'
             ],
             // ssr: 'resources/js/ssr.ts',
