@@ -22,7 +22,7 @@
 import { useForm } from "@inertiajs/vue3";
 import { Head } from "@inertiajs/vue3";
 
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from "@/plattform/layout/AppLayout.vue";
 import RekaToast from "@/third-party/reka-ui/RekaToast.vue";
 import ArtisanForm from "@/components/artisan/ArtisanCreateForm.vue";
 
@@ -66,7 +66,7 @@ function submit(artisan: ArtisanProfile): void {
 </script>
 
 <style scoped lang="scss">
-@use '../../../css/abstracts/breakpoints' as breakpoints;
+@use '../../../../css/abstracts/breakpoints' as breakpoints;
 
 .wrapper {
     border-radius: 0;

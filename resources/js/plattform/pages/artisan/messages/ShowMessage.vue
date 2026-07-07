@@ -30,7 +30,7 @@ import { Head } from "@inertiajs/vue3";
 
 import { MoveLeftIcon } from "lucide-vue-next";
 
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from "@/plattform/layout/AppLayout.vue";
 import AppLink from "@/components/presentation/AppLink.vue";
 
 import { toLocalDate } from "@/utils/date";

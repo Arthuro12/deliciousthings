@@ -133,7 +133,7 @@ import { Head } from "@inertiajs/vue3";
 
 import { ChevronDownIcon } from "lucide-vue-next";
 
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from "@/plattform/layout/AppLayout.vue";
 import RekaCollapsible from "@/third-party/reka-ui/RekaCollapsible.vue";
 import ArtisanProfilePhotoForm from "@/components/artisan/ArtisanProfilePhotoForm.vue";
 import ArtisanBasicProfile from "@/components/artisan/ArtisanBasicProfile.vue";
@@ -195,7 +195,7 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
-@use '../../../css/abstracts/breakpoints' as breakpoints;
+@use '../../../../css/abstracts/breakpoints' as breakpoints;
 
 .wrapper {
     border-radius: 0;

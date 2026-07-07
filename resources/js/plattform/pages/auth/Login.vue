@@ -1,11 +1,11 @@
 <template>
     <AuthLayout>
         <Head>
-            <title>Registrieren</title>
+            <title>Anmelden</title>
         </Head>
         <div :style="{ maxWidth: '500px' }" class="card-layout wrapper">
-            <h1 class="heading">Erstelle dein kostenloses Konto</h1>
-            <RegisterForm />
+            <h1 class="heading">Anmelden</h1>
+            <LoginForm />
         </div>
     </AuthLayout>
 </template>
@@ -13,8 +13,8 @@
 <script setup lang="ts">
 import { Head } from "@inertiajs/vue3";
 
-import RegisterForm from "@/components/auth/RegisterForm.vue";
-import AuthLayout from "@/layout/AuthLayout.vue";
+import AuthLayout from "@/plattform/layout/AuthLayout.vue";
+import LoginForm from "@/components/auth/LoginForm.vue";
 </script>
 
 <style scoped> 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-    <head lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         
@@ -18,10 +18,10 @@
     </head>
 
     <body>
-        <x-header />
+        <x-layout.header />
 
         {{ $slot }}
 
-        <x-footer />
+        <x-layout.footer />
     </body>
 </html>

@@ -86,7 +86,7 @@ import {
     WheatIcon,
 } from "lucide-vue-next";
 
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from "@/plattform/layout/AppLayout.vue";
 import ArtisanTabs from "@/components/artisan/ArtisanTabs.vue";
 import AppButton from "@/components/presentation/AppButton.vue";
 import AppTag from "@/components/presentation/AppTag.vue";
@@ -97,7 +97,7 @@ import ArtisanOverview from "@/components/artisan/ArtisanOverview.vue";
 import QuickInfo from "@/components/artisan/partials/QuickInfo.vue";
 import GalleryDisplay from "@/components/artisan/gallery/GalleryDisplay.vue";
 
-import bakedGoods from "../../../images/pastries-and-baked-goods-assortment.webp";
+import bakedGoods from "../../../../images/pastries-and-baked-goods-assortment.webp";
 
 import { useAlert } from "@/composables/use-alert";
 import { getPriceLevelSymbol } from "@/utils/artisans";
@@ -134,7 +134,7 @@ const pageSubtitle = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@use '../../../css/abstracts/breakpoints' as breakpoints;
+@use '../../../../css/abstracts/breakpoints' as breakpoints;
 
 .short-description-wrapper,
 .profile-links {
