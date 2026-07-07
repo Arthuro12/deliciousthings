@@ -13,7 +13,7 @@ use App\Http\Controllers\Artisan\PreOrderController;
 use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('home');
 })->name('home');
 
 // Route::get('/', HomeController::class)->name('home');

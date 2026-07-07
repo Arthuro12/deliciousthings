@@ -13,7 +13,7 @@
         @vite([
             "resources/css/app.scss", 
             "resources/js/plattform/app.ts", 
-            "resources/js/pages/{$page['component']}.vue"
+            "resources/js/plattform/pages/{$page['component']}.vue"
         ])
         @inertiaHead
     </head>

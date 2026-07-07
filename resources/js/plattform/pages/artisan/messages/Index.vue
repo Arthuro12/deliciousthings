@@ -15,7 +15,7 @@
 import { onMounted, onUnmounted } from "vue";
 import { Head } from "@inertiajs/vue3";
 
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from "@/plattform/layout/AppLayout.vue";
 import MessagesList from "@/components/message/MessagesList.vue";
 
 import { useBodyAppearance } from "@/composables/use-body-appearance";

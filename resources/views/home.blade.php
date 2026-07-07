@@ -12,7 +12,7 @@
                         <p class="hero-header__description">Erhalten Sie klare Anfragen für individuelle Kreationen. Verwalten Sie Ihre Tortenprojekte und behalten Sie alle Schritte übersichtlich an einem zentralen Ort im Blick.</p>
                     </header>
                     <div class="cta-buttons">
-                        <a class="button button--primary button--header-cta" href="/register">Kostenlos loslegen</a>
+                        <a class="button button--primary button--header-cta" href="{{ url('/register') }}">Kostenlos loslegen</a>
                         <!-- <Link class="button button--secondary button--header-cta" href="#">Demo-Profil asehen</Link> -->
                     </div>
                 </div>

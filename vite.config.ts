@@ -1,5 +1,5 @@
-// import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import { defineConfig } from 'vite';
+import path from "path";
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
@@ -10,9 +10,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.scss', 
                 'resources/css/pages/home.scss', 
-                'resources/js/plattform/app.ts'
+                'resources/js/plattform/app.ts',
             ],
-            // ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),
         tailwindcss(),
@@ -24,8 +23,10 @@ export default defineConfig({
                 },
             },
         }),
-        // wayfinder({
-        //     formVariants: true,
-        // }),
     ],
+    resolve: {
+        alias: {
+            "@css": path.resolve(__dirname, "./resources/css"),
+        },
+    }
 });

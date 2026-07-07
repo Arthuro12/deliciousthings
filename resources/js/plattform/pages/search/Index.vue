@@ -21,7 +21,7 @@
 import { onMounted, onUnmounted } from "vue";
 import { Head } from "@inertiajs/vue3";
 
-import AppLayout from "@/layout/AppLayout.vue";
+import AppLayout from "@/plattform/layout/AppLayout.vue";
 import ArtisansSearch from "@/components/search/ArtisansSearch.vue";
 import ArtisanResults from "@/components/search/ArtisanResults.vue";
 
