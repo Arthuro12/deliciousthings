@@ -1,6 +1,4 @@
 
-@use '../abstracts/breakpoints' as breakpoints;
-
 .font-medium  {
     font-weight: 500;
 }
@@ -11,10 +9,6 @@
 
 .font-bold {
     font-weight: bold;
-}
-
-.flex {
-    display: flex;
 }
 
 .block {
@@ -35,8 +29,35 @@
 
 .logo {
     font-family: var(--font-heading);
-    font-size: var(--font-size-md);
+    font-size: 1.5rem;
     color: var(--color-brand-primary-500);
+    text-decoration: none;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+
+    * {
+        font-size: 1.5rem;
+    }
+
+    > .logo__inner:first-child {
+        font-weight: 650;
+        letter-spacing: -0.035em;
+    }
+
+    > .logo__inner:last-child {
+        font-weight: 450;
+        font-style: italic;
+        letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 1025px) {
+        font-size: 1.75rem;
+
+        * {
+            font-size: 1.75rem;
+        }
+    }
 }
 
 .cursor--pointer {
@@ -50,10 +71,6 @@
 
 .text--center {
     text-align: center;
-}
-
-.align-end {
-    align-self: end;
 }
 
 .truncate {
@@ -81,4 +98,16 @@
 
 .list-none {
     list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.align-end {
+    align-self: end;
+}
+
+.justify-end {
+    justify-content: end
 }

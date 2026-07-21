@@ -8,9 +8,9 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.scss', 
-                'resources/css/pages/home.scss', 
-                'resources/js/plattform/app.ts',
+                'resources/css/website.scss',
+                'resources/js/third-party/alpinejs.ts',
+                'resources/js/app.ts',
             ],
             refresh: true,
         }),
