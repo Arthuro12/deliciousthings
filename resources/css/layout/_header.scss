@@ -1,9 +1,13 @@
 .header-wrapper {
-    position: sticky;
+    background-color: var(--color-neutral-0);
+    position: fixed;
     z-index: 1;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
     
     .header {
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
