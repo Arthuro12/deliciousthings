@@ -29,6 +29,7 @@
 
             <div 
                class="mobile-menu__content"
+               x-cloak
                x-show="open"
             >
                <div class="flex justify-end">
