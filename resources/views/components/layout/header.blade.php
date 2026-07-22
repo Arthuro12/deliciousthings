@@ -3,42 +3,64 @@
       <div class="header__inner">
          <a 
             class="logo" 
-            aria-label="Deliciousthings Homepage"
+            aria-label="Deliciousthings Homeseite"
             href="{{ url('/') }}"
          >
-            <span class="logo__inner">D</span><span class="logo__inner">ts</span>
+            <span class="logo__prefix">D</span><span class="logo__suffix">ts</span>
          </a>
 
          <nav 
-            class="header__navmenu mobile-menu"
+            class="header__navmenu"
+            :class="{ 'drawer-panel--open': open }"
             x-data="mobileMenu"
          >
-            <div class="header__cta-buttons">
-               <a class="cta--secondary" href="{{ url('/login') }}">Anmelden</a>
-               <a class="cta--primary" href="{{ url('/register') }}">Loslegen</a>
+            <div class="header__navmenu-content">
+               <ul class="list-none header__navmenu-items">
+                  <li class="navmenu-item">
+                     <a class="navmenu__link" href=""><span class="navmenu__link-text">Inspirationen</span></a>
+                  </li>
+                  <li class="navmenu-item">
+                     <a class="navmenu__link" href=""><span class="navmenu__link-text">Über Uns</span></a>
+                  </li>
+               </ul>
+               <div class="header__cta-buttons">
+                  <a class="cta--secondary" href="{{ url('/login') }}">Anmelden</a>
+                  <a class="cta--primary" href="{{ url('/register') }}">Loslegen</a>
+               </div>
             </div>
+
             <button 
-               class="mobile-menu__trigger" 
-               :class="{ 'mobile-menu__trigger--open': open }"
+               class="drawer-panel__trigger" 
                type="button"
                @click="toggle"
             >
-               <svg class="mobile-menu__trigger__icon mobile-menu__trigger__icon--hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df4d69" width="18">
+               <svg class="drawer-panel__trigger-icon drawer-panel__trigger-icon--hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df4d69" width="18">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                </svg>
-               <svg class="mobile-menu__trigger__icon mobile-menu__trigger__icon--close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df4d69" width="18">
+               <svg class="drawer-panel__trigger-icon drawer-panel__trigger-icon--close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df4d69" width="18">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                </svg>
             </button>
 
             <div 
-               class="mobile-menu__content"
+               class="drawer-panel"
                x-cloak
                x-show="open"
             >
-               <div class="header__cta-buttons--mobile">
-                  <a class="cta--secondary" href="{{ url('/login') }}">Anmelden</a>
-                  <a class="cta--primary" href="{{ url('/register') }}">Loslegen</a>
+               <div class="drawer-panel__inner">
+                  <ul class="list-none drawer-panel__items">
+                     <li class="navmenu__item">
+                        <a class="navmenu__link" href=""><span class="navmenu__link-text">Inspirationen</span></a>
+                     </li>
+                     <li class="navmenu__item">
+                        <a class="navmenu__link" href=""><span class="navmenu__link-text">Über Uns</span></a>
+                     </li>
+                  </ul>
+
+                  <div class="drawer-separator header__cta-buttons header__cta-buttons--mobile">
+                     <a class="cta--secondary" href="{{ url('/login') }}">Anmelden</a>
+                     <a class="cta--primary" href="{{ url('/register') }}">Loslegen</a>
+                  </div>                
                </div>
             </div>
          </nav>
