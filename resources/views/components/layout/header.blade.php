@@ -9,12 +9,11 @@
             <span class="logo__prefix">D</span><span class="logo__suffix">ts</span>
          </a>
 
-         <nav 
-            class="header__navmenu"
-            :class="{ 'drawer-panel--open': open }"
+         <div 
+            class="header__navmenu-wrapper"
             x-data="mobileMenu"
          >
-            <div class="header__navmenu-content">
+            <nav class="header__navmenu">
                <ul class="list-none header__navmenu-items">
                   <li class="navmenu-item">
                      <a class="navmenu__link" href=""><span class="navmenu__link-text">Inspirationen</span></a>
@@ -24,13 +23,14 @@
                   </li>
                </ul>
                <div class="header__cta-buttons">
-                  <a class="cta--secondary" href="{{ url('/login') }}">Anmelden</a>
-                  <a class="cta--primary" href="{{ url('/register') }}">Loslegen</a>
+                  <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
+                  <a class="cta--primary cta-link" href="{{ url('/register') }}">Loslegen</a>
                </div>
-            </div>
+            </nav>
 
             <button 
                class="drawer-panel__trigger" 
+               :class="{ 'drawer-panel__trigger--pressed': open }"
                type="button"
                @click="toggle"
             >
@@ -58,12 +58,12 @@
                   </ul>
 
                   <div class="drawer-separator header__cta-buttons header__cta-buttons--mobile">
-                     <a class="cta--secondary" href="{{ url('/login') }}">Anmelden</a>
-                     <a class="cta--primary" href="{{ url('/register') }}">Loslegen</a>
+                     <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
+                     <a class="cta--primary cta-link" href="{{ url('/register') }}">Loslegen</a>
                   </div>                
                </div>
             </div>
-         </nav>
+         </div>
       </div>
    </header>
 </div>
