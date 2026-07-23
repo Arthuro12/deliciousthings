@@ -80,14 +80,13 @@
             display: flex;
             background-color: var(--color-neutral-0);
             position: fixed;
-            top: var(--space-16);
-            inset-inline: 0;
+            inset: var(--space-16) 0 0;
             height: 100%;
             width: 100%;
             overflow-y: auto;
             -ms-overflow-style: none;
             scrollbar-width: none;
-            scroll-behavior: none;
+            overscroll-behavior: none;
             z-index: 1;
 
             .drawer-separator {
