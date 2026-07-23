@@ -1,3 +1,8 @@
+body[data-scroll-locked] {
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+
 .page-content {
     padding-top: var(--space-16);
 }
