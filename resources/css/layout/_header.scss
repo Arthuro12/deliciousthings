@@ -6,7 +6,6 @@
     width: 100%;
     
     .header {
-        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -74,15 +73,16 @@
         .navmenu__link {
             display: inline-flex;
             align-items: center;
+            width: 100%;
             height: 100%;
-
-            &:hover > .navmenu__link-text {
-                color: var(--color-neutral-700);
-            }
 
             .navmenu__link-text {
                 color: var(--color-neutral-500);
                 padding-inline: calc(0.25rem * 4);
+            }
+
+            &:hover > .navmenu__link-text {
+                color: var(--color-neutral-700);
             }
         }
 
@@ -91,12 +91,41 @@
             background-color: var(--color-neutral-0);
             position: fixed;
             inset: var(--space-16) 0 0;
-            height: 100%;
             width: 100%;
             overflow-y: auto;
             -ms-overflow-style: none;
             scrollbar-width: none;
             overscroll-behavior: none;
+            z-index: 2;
+            clip-path: inset(0);
+
+            &--enter {
+                transition: 
+                    clip-path 440ms cubic-bezier(.4, 0, .2, 1);
+                will-change: clip-path;
+            }
+
+            &--enter-start {
+                clip-path: inset(0 0 100% 0);
+            }
+
+            &--enter-end {
+                clip-path: inset(0);
+            }
+
+            &--leave {
+                transition:
+                    clip-path 320ms cubic-bezier(.4, 0, .2, 1);
+                will-change: clip-path;
+            }
+
+            &--leave-start {
+                clip-path: inset(0);
+            }
+
+            &--leave-end {
+                clip-path: inset(0 0 100% 0);
+            }
 
             .drawer-separator {
                 border-top: 1px solid var(--color-neutral-200);
@@ -141,10 +170,6 @@
                     transform: rotate(-45deg);
                     opacity: 0;
                 }
-
-                @media (prefers-reduced-motion: reduce) {
-                    transition: none; 
-                }
             }
 
             &__trigger--pressed {
@@ -171,8 +196,24 @@
                 }
             }
 
+
             @media (min-width: 1024px) {
                 display: none;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .drawer-panel--enter,
+                .drawer-panel--leave,
+                .drawer-panel--enter .drawer-panel__inner,
+                .drawer-panel--leave .drawer-panel__inner,
+                .drawer-panel__trigger-icon {
+                    transition-duration: 1ms;
+                    transition-delay: 0ms;
+                }
+
+                .drawer-panel__inner {
+                    transform: none;
+                }
             }
         }
 
