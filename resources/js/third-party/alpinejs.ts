@@ -1,16 +1,20 @@
 import Alpine from "alpinejs";
 
-// export type StateType<T> = infer T
-// export type AlpineWatchHandle<StateType> = {
-//     key: string;
-//     callback: (...parameter: StateType[]) => void;
-// };
+type WatchCallback<V = any, OV = any> = (value: V, oldValue: OV) => void
 
-// export interface AlpineComponent {
-//     $watch: AlpineWatchHandle<>;
-// }
+interface AlpineMagics {
+    $watch: (key: string, callback: WatchCallback) => void;
+}
 
-const mobileMenu = {
+type AlpineComponent<Component extends object> = Component & ThisType<Component & AlpineMagics>;
+
+interface MobileMenu {
+    open: boolean;
+    init: () => void;
+    toggle: () => void;
+}
+
+const mobileMenu: AlpineComponent<MobileMenu> = {
     open: false,
     init() {
         this.$watch('open', (isOpen: boolean): void => {
