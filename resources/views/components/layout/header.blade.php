@@ -44,8 +44,15 @@
 
             <div 
                class="drawer-panel"
+               :aria-hidden="(!open).toString()"
                x-cloak
                x-show="open"
+               x-transition:enter="drawer-panel--enter"
+               x-transition:enter-start="drawer-panel--enter-start"
+               x-transition:enter-end="drawer-panel--enter-end"
+               x-transition:leave="drawer-panel--leave"
+               x-transition:leave-start="drawer-panel--leave-start"
+               x-transition:leave-end="drawer-panel--leave-end"
             >
                <div class="drawer-panel__inner">
                   <ul class="list-none drawer-panel__items">
