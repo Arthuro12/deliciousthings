@@ -1,41 +1,21 @@
-    <div class="footer-wrapper">
-        <footer class="footer">
-            {{-- <div class="footer__inner">
-                <ul class="list-none">
-                    <li class="footer__item">
-                        <header class="footer__header">Kontakt</header>
-                        <ul class="list-none footer__contact">
-                            <li>support@deliciousthings.de</li>
-                        </ul> 
-                        <ul class="list-none footer__social-links">
-                            <li>
-                                <a 
-                                    class="footer__social-link"
-                                    href="https://www.instagram.com/deliciousthings.de?igsh=enJxa3NxcjU3amNv" 
-                                    target="_blank"
-                                >
-                                    <x-icons.instagram />
-                                </a>
-                            </li>
-                        </ul> 
-                    </li>
-                </ul>
-            </div> --}}
-            <div>
-                <div>
-                    <div>
-                        <header>Kontakt</header>
-                        <ul>
-                            <li>support@deliciousthings.de</li>
-                        </ul>
-                    </div>
+<div class="footer-wrapper">
+    <footer class="footer">
+        <div class="footer__main">
+            <div class="footer__sections">
+                <div class="footer__section">
+                    <header class="footer__section-header">Kontakt</header>
+                    <ul class="list-none footer__items">
+                        <li>support@deliciousthings.de</li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-        <div>
-            <ul>
-                <li></li>
+        </div>
+
+        <div class="footer__bottom">
+            <ul class="list-none">
+                <li><a href="https://www.instagram.com/deliciousthings.de?igsh=enJxa3NxcjU3amNv" target="_blank"><x-icons.instagram /></a></li>
             </ul>
             <div class="copyright">&copy; 2026 deliciousthings</div>
         </div>
-    </div>
+    </footer>
+</div>
