@@ -11,9 +11,9 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         @vite([
-            "resources/css/app.scss", 
-            "resources/js/app.ts", 
-            "resources/js/pages/{$page['component']}.vue"
+            "resources/css/platform.scss", 
+            "resources/js/platform/app.ts", 
+            "resources/js/platform/pages/{$page['component']}.vue"
         ])
         @inertiaHead
     </head>

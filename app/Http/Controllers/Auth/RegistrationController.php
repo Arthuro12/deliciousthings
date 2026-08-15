@@ -14,7 +14,7 @@ class RegistrationController extends Controller
 {
     public function create()
     {
-        return Inertia::render('auth/Register');
+        return view('signup');
     }
 
     public function store(Request $request)
@@ -30,6 +30,6 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return  to_route('artisan.profile.create');
+        return to_route('app.user.dashboard', ['id' => $user->id]);
     }
 }
