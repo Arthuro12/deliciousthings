@@ -1,27 +1,21 @@
 <?php
 
-// use Illuminate\Support\Facades\Route;
-// use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-// use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\HandleInertiaRequests;
 // use App\Http\Controllers\Auth\RegistrationController;
 // use App\Http\Controllers\Auth\SessionController;
 // use App\Http\Controllers\Artisan\ProfileController;
 // use App\Http\Controllers\Artisan\MessageController;
 // use App\Http\Controllers\SearchController;
 
-// Route::middleware(HandleInertiaRequests::class)->group(function () {
-//     Route::controller(RegistrationController::class)->group(function () {
-//         Route::get('/register', 'create')->name('register.create');
-//         Route::post('/register', 'store');
-//     });
+// Route::middleware(['auth:sanctum', HandleInertiaRequests::class])->domain('app.' . config('app.url'))->group(function () {
 
-//     Route::controller(SessionController::class)->group(function () {
-//         Route::get('/login', 'create')->name('login');
-//         Route::post('/login', 'store')->name('login.store');
-//         Route::post('/logout', 'destroy')->name('login.destroy')->middleware('auth');
-//     });
 // });
+Route::get('/user/dashboard', function () {
+    return Inertia::render('user/Dashboard');
+})->name('user.dashboard');
 
 // Route::middleware(['auth:sanctum', HandleInertiaRequests::class])->group(function () {
 //     Route::controller(ProfileController::class)->group(function () {

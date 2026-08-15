@@ -14,7 +14,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @var string
      */
-    protected $rootView = 'app';
+    protected $rootView = 'platform';
 
     /**
      * Determines the current asset version.
@@ -35,26 +35,27 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {     
-        $authenticatedUser = $request->user();
-        $userAccount = null;
-        if ($authenticatedUser) {
-            $userAccount = $authenticatedUser->only(['id', 'first_name', 'last_name']);
-            $userAccount['artisan_profile'] = $authenticatedUser->artisan?->only(['id', 'name']);
-        }  
+        $user = $request->user();
 
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => $userAccount,
+                $user->only(['id', 'first_name', 'last_name', 'email']),
             ],
-            'flash' => function () use ($request) {
-                return [
-                    'info' => $request->session()->get('info'),
-                    'success' => $request->session()->get('success'),
-                    'error' => $request->session()->get('error'),
-                ];
-            }
+            'urls' => [
+                [
+                    'title' => 'Home',
+                    'href' => route('home'),
+                ],
+            ],
+            // 'flash' => function () use ($request) {
+            //     return [
+            //         'info' => $request->session()->get('info'),
+            //         'success' => $request->session()->get('success'),
+            //         'error' => $request->session()->get('error'),
+            //     ];
+            // }
         ];
     }
 }

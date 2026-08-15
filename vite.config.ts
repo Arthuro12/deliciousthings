@@ -9,8 +9,11 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/website.scss',
+                'resources/css/pages/login.scss',
+                'resources/css/pages/signup.scss',
+                'resources/css/platform.scss',
                 'resources/js/third-party/alpinejs.ts',
-                'resources/js/app.ts',
+                'resources/js/platform/app.ts',
             ],
             refresh: true,
         }),

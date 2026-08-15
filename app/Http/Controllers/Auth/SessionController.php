@@ -26,13 +26,13 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return Inertia::location('/');
+            return to_route('app.user.dashboard');
         }
 
         return back()->withErrors(['message' => __('The provided credential do not match our records.')], 'login');
     }
 
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
 
@@ -40,6 +40,6 @@ class SessionController extends Controller
         $request->session()->regenerateToken();
         Log::notice(now()->toString() . json_encode(Auth::user()));
 
-        return Inertia::location('/');
+        return to_route('home');
     }
 }
