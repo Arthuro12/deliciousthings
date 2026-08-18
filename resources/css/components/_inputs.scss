@@ -3,6 +3,9 @@
 }
 
 .text-field__input {
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
     border-radius: 8px;
     border: 1px solid var(--input-border);
     padding-inline: 16px;
@@ -14,7 +17,8 @@
     }
 
     &:focus-visible, &:focus {
-        outline-color: var(--input-border-focus);
+        border-color: #df4d69;
+        box-shadow: 0 0 0 3px rgba(223, 77, 105, 0.15);
     }
 }
 
