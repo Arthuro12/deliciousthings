@@ -10,7 +10,11 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" size="180×180" href="/apple-touch-icon.png">
 
-        @vite(['resources/css/website.scss', 'resources/js/third-party/alpinejs.ts'])
+        @vite([            
+            'resources/css/tailwind.css', 
+            'resources/css/website.scss', 
+            'resources/js/third-party/alpinejs.ts'
+        ])
 
         @if (isset($head))
             {{ $head }} 
@@ -20,7 +24,9 @@
     <body>
         <x-layout.header />
 
-        {{ $slot }}
+        <div class="site-layout__content-wrapper">
+            {{ $slot }}
+        </div>
 
         <x-layout.footer />
     </body>
