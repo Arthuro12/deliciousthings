@@ -16,7 +16,7 @@
 
                     <div class="signup-form__group">
                         <div class="signup-form__textfield text-field">
-                            <label class="text-field__label" for="first-name">Vornane</label>
+                            <label class="text-field__label" for="first-name">Vorname</label>
                             <div class="input-wrapper">
                                 <input 
                                     class="text-field__input" 
