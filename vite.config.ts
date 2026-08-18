@@ -8,6 +8,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+               'resources/css/tailwind.css',
                 'resources/css/website.scss',
                 'resources/css/pages/login.scss',
                 'resources/css/pages/signup.scss',

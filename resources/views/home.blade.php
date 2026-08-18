@@ -3,7 +3,7 @@
         {{-- @vite(['resources/css/pages/home.scss']) --}}
     </x-slot:head>
 
-    <main class="page-content home-page">
+    <main class="home-page page-content">
         {{-- <div class="page-content">   
             <section class="hero-section"> 
                 <div class="hero-inner">

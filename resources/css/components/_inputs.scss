@@ -1,0 +1,26 @@
+.text-field {
+    width: 100%;
+}
+
+.text-field__input {
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    padding-inline: 16px;
+    padding-block: 10px;
+    width: 100%;
+
+    &:placeholder {
+        color: var(--input-placeholder);
+    }
+
+    &:focus-visible, &:focus {
+        outline-color: var(--input-border-focus);
+    }
+}
+
+.text-field__label {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-900);
+    margin-bottom: 8px;
+}

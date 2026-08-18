@@ -4,19 +4,6 @@
     z-index: 4;
     inset: 0 0 auto;
     width: 100%;
-
-    .logo {
-        display: inline-flex;
-        align-items: center;
-        flex-shrink: 0;
-        width: auto;
-        height: 100%;
-
-        &__image {
-            width: auto;
-            height: 100%;
-        }
-    }
     
     .header {
         display: flex;

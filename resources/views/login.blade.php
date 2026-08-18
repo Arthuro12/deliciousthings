@@ -1,17 +1,10 @@
-<x-layout.auth title="Anmelden">
-    <x-slot:login>
-        @vite(['resources/css/pages/login.scss']);
-    </x-slot:login>
+<x-layout.auth.app title="Anmelden">
+    <x-slot:head>
+        @vite(['resources/css/pages/login.scss'])
+    </x-slot:head>
     <main class="login-page">
-        <header>
-            <a
-                aria-label="Deliciousthings Homeseite"
-                href="{{ route('home') }}"
-            ><x-icons.logo /></a>
-        </header>
-
         <div>
-            <h1>Anmelden</h1>
+            <h1>Bei Deliciousthings anmelden</h1>
 
             <form method="POST" action="/login">
                 @csrf
@@ -30,4 +23,4 @@
             </form>
         </div>
     </main>
-</x-layout.auth>
+</x-layout.auth.app>
