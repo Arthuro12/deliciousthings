@@ -65,6 +65,18 @@
                         </div>
                         <button class="signup-form__button" type="submit">Konto erstellen</button>
                     </div>
+
+                    <div class="flex justify-center mt-8">
+                        <p class="auth-switch">
+                            Du hast bereits ein Konto?
+                            <a
+                                class="auth-switch__link"
+                                href="{{ route('login') }}"
+                            >
+                                Anmelden
+                            </a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </section>

@@ -11,9 +11,9 @@
         <link rel="apple-touch-icon" size="180×180" href="/apple-touch-icon.png">
         
         @vite([
-            'resources/css/tailwind.css', 
             'resources/css/website.scss', 
-            'resources/js/third-party/alpinejs.ts'
+            'resources/js/third-party/alpinejs.ts',
+            'resources/css/tailwind.css', 
         ])
 
         @if (isset($head))

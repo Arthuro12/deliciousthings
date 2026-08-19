@@ -1,10 +1,47 @@
 body {
   background-attachment: fixed;
+  color: var(--color-text-primary);
 }
 
-p {
-    font-size: 16px;
-    line-height: 1.2;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4,
+.heading-5,
+.heading-6,
+.display-lg,
+.display-md,
+.hero-title,
+.hero-title * {
+    color: var(--color-text-primary);
+}
+
+p,
+li,
+.body-lg,
+.body-md {
+    color: var(--color-text-primary);
+}
+
+label,
+.label-md,
+.label-sm {
+    color: var(--color-text-secondary);
+}
+
+small {
+    color: var(--color-text-muted);
+}
+
+.caption,
+.micro {
+    color: var(--color-text-muted);
 }
 
 a {

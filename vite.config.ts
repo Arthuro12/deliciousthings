@@ -8,11 +8,11 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-               'resources/css/tailwind.css',
                 'resources/css/website.scss',
                 'resources/css/pages/login.scss',
                 'resources/css/pages/signup.scss',
                 'resources/css/platform.scss',
+                'resources/css/tailwind.css', 
                 'resources/js/third-party/alpinejs.ts',
                 'resources/js/platform/app.ts',
             ],

@@ -6,6 +6,7 @@
     appearance: none;
     -webkit-appearance: none;
     outline: none;
+    color: var(--input-text);
     border-radius: 8px;
     border: 1px solid var(--input-border);
     padding-inline: 16px;
@@ -17,7 +18,7 @@
     }
 
     &:focus-visible, &:focus {
-        border-color: #df4d69;
+        border-color: var(--color-border-focus);
         box-shadow: 0 0 0 3px rgba(223, 77, 105, 0.15);
     }
 }
