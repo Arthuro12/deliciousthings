@@ -11,7 +11,7 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         @vite([
-            'resources/css/tailwind.css', 
+            'resources/css/styles.css', 
             "resources/css/platform.scss", 
             "resources/js/platform/app.ts", 
             "resources/js/platform/pages/{$page['component']}.vue"
