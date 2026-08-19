@@ -16,7 +16,7 @@
 
                     <div class="signup-form__group">
                         <div class="signup-form__textfield text-field">
-                            <label class="text-field__label" for="first-name">Vorname</label>
+                            <label class="text-field__label" for="first-name">Vorname (optional)</label>
                             <div class="input-wrapper">
                                 <input 
                                     class="text-field__input" 
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="signup-form__text-field text-field">
-                            <label class="text-field__label" for="last-name">Nachname</label>
+                            <label class="text-field__label" for="last-name">Nachname (optional)</label>
                             <div class="input-wrapper">
                                 <input 
                                     class="text-field__input" 
@@ -39,28 +39,57 @@
                                 />
                             </div>
                         </div>
-                        <div class="signup-form__text-field text-field">
+                        <div 
+                            class="signup-form__text-field text-field"
+                            x-data="{ invalid: @js($errors->has('email')) }"
+                            :class="{ 'text-field--invalid': invalid }"
+                        >
                             <label class="text-field__label" for="email">E-Mail-Adresse</label>
                             <div class="input-wrapper">
                                 <input 
                                     class="text-field__input" 
                                     id="email" 
+                                    required
                                     type="email" 
                                     name="email" 
-                                    placeholder="lucie@beispiel.de"    
+                                    placeholder="lucie@beispiel.de" 
+                                    @input="invalid = false"   
                                 />
+                                @error('email')
+                                    <p 
+                                        class="text-field__error"
+                                        x-show="invalid"
+                                    >
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                         </div>
-                        <div class="signup-form__text-field text-field">
+                        <div 
+                            class="signup-form__text-field text-field"
+                            x-data="{ invalid: @js($errors->has('password')) }"
+                            :class="{ 'text-field--invalid': invalid }"
+                        >
                             <label class="text-field__label" for="password">Passwort</label>
                             <div class="input-wrapper">
                                 <input 
                                     class="text-field__input" 
                                     id="password" 
+                                    required
+                                    minlength="8"
                                     type="password" 
                                     name="password" 
                                     placeholder="••••••••"
+                                    @input="invalid = false"
                                 />
+                                @error('password')
+                                    <p 
+                                        class="text-field__error"
+                                        x-show="invalid"
+                                    >
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                         </div>
                         <button class="signup-form__button" type="submit">Konto erstellen</button>

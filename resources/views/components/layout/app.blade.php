@@ -10,10 +10,10 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" size="180×180" href="/apple-touch-icon.png">
 
-        @vite([            
+        @vite([        
+            'resources/css/styles.css',     
             'resources/css/website.scss', 
             'resources/js/third-party/alpinejs.ts',
-            'resources/css/tailwind.css', 
         ])
 
         @if (isset($head))

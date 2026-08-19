@@ -66,6 +66,34 @@
     }
 }
 
+.auth-form__error-box {
+    display: flex;
+    justify-content: center;
+    padding: 0.875rem 1rem;
+
+    color: var(--color-brand-primary-800);
+    background-color: var(--color-brand-primary-50);
+
+    border: 1px solid var(--color-brand-primary-200);
+    border-radius: 0.625rem;
+
+    font-size: 0.875rem;
+    line-height: 1.5;
+
+    margin-bottom: 12px;
+}
+
+.auth-form__error-box .auth-form__error-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+}
+
+.auth-form__error-box strong {
+    font-weight: 600;
+}
+
 .marketing-text {
     font-family: var(--font-body);
     font-size: var(--font-size-sm);
