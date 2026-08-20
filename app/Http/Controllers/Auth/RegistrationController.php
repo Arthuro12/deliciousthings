@@ -17,7 +17,7 @@ class RegistrationController extends Controller
         return view('signup');
     }
 
-    public function store(Request $request)
+    public function signup(Request $request)
     {
         $attrs = $request->validate([
             'first_name' => 'nullable',
@@ -30,6 +30,6 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return to_route('app.user.dashboard', ['id' => $user->id]);
+        return to_route('app.user.dashboard');
     }
 }

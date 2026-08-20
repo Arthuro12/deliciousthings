@@ -1,21 +1,17 @@
 <x-layout.auth.app title="Registrieren">
-    <x-slot:head>
-        @vite(['resources/css/pages/signup.scss'])
-    </x-slot:head>
-    
-    <main class="signup-page page-content">
-        <section class="signup-section">
-            <div class="signup-form-wrapper">
-                <header class="signup-form__header">
+    <main class="auth-page signup-page page-content">
+        <section class="auth-form__section">
+            <div class="auth-form-wrapper">
+                <header class="auth-form__header">
                     <h1 class="auth-form__headline">Dein Ort für Backprojekte</h1>
                     <span class="marketing-text">Keine Kreditkarte nötig. Dauert etwa 10 Sekunden.</span>
                 </header>
 
-                <form class="signup-form" method="POST" action="/signup">
+                <form class="auth-form" method="POST" action="/signup">
                     @csrf
 
-                    <div class="signup-form__group">
-                        <div class="signup-form__textfield text-field">
+                    <div class="auth-form__group">
+                        <div class="text-field">
                             <label class="text-field__label" for="first-name">Vorname (optional)</label>
                             <div class="input-wrapper">
                                 <input 
@@ -24,10 +20,11 @@
                                     type="text" 
                                     name="first_name" 
                                     placeholder="Lucie"
+                                    value="{{ old('first_name') }}"
                                 />
                             </div>
                         </div>
-                        <div class="signup-form__text-field text-field">
+                        <div class="text-field">
                             <label class="text-field__label" for="last-name">Nachname (optional)</label>
                             <div class="input-wrapper">
                                 <input 
@@ -35,12 +32,13 @@
                                     id="last-name" 
                                     type="text" 
                                     name="last_name" 
-                                    placeholder="Müller"    
+                                    placeholder="Müller"   
+                                    value="{{ old('last_name') }}" 
                                 />
                             </div>
                         </div>
                         <div 
-                            class="signup-form__text-field text-field"
+                            class="text-field"
                             x-data="{ invalid: @js($errors->has('email')) }"
                             :class="{ 'text-field--invalid': invalid }"
                         >
@@ -49,10 +47,12 @@
                                 <input 
                                     class="text-field__input" 
                                     id="email" 
-                                    required
                                     type="email" 
                                     name="email" 
+                                    required
                                     placeholder="lucie@beispiel.de" 
+                                    pattern="{{ \App\Support\ValidationPatterns::EMAIL }}"
+                                    value="{{ old('email') }}"
                                     @input="invalid = false"   
                                 />
                                 @error('email')
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div 
-                            class="signup-form__text-field text-field"
+                            class="text-field"
                             x-data="{ invalid: @js($errors->has('password')) }"
                             :class="{ 'text-field--invalid': invalid }"
                         >
@@ -75,10 +75,10 @@
                                 <input 
                                     class="text-field__input" 
                                     id="password" 
-                                    required
                                     minlength="8"
                                     type="password" 
                                     name="password" 
+                                    required
                                     placeholder="••••••••"
                                     @input="invalid = false"
                                 />
@@ -92,7 +92,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <button class="signup-form__button" type="submit">Konto erstellen</button>
+                        <button class="auth-form__button" type="submit">Konto erstellen</button>
                     </div>
 
                     <div class="flex justify-center mt-8">

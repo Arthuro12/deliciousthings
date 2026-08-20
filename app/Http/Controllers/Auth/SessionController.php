@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -13,14 +14,14 @@ class SessionController extends Controller
 {
     public function create()
     {
-        return Inertia::render('auth/Login');
+        return view('login');
     }
 
-    public function store(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', Password::min(8)],
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -29,7 +30,9 @@ class SessionController extends Controller
             return to_route('app.user.dashboard');
         }
 
-        return back()->withErrors(['message' => __('The provided credential do not match our records.')], 'login');
+        return back()
+            ->withErrors(['message' => __('The provided credential do not match our records.')], 'login')
+            ->withInput($request->except('password'));
     }
 
     public function logout(Request $request)
