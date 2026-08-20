@@ -1,3 +1,5 @@
+@use('App\Support\ValidationPatterns', 'Patterns')
+
 <x-layout.auth.app title="Registrieren">
     <main class="auth-page login-page page-content">
         <section class="login-form__section">
@@ -28,7 +30,7 @@
                                     name="email" 
                                     required
                                     placeholder="lucie@beispiel.de" 
-                                    pattern="{{ \App\Support\ValidationPatterns::EMAIL }}"
+                                    pattern="{{ Patterns::EMAIL }}"
                                     value="{{ old('email') }}"
                                     @input="invalid = false"   
                                 />
@@ -74,6 +76,7 @@
                                         @click="showPassword = !showPassword"
                                     >
                                         <svg 
+                                            x-cloak
                                             x-show="showPassword"
                                             xmlns="http://www.w3.org/2000/svg" 
                                             fill="none" 
