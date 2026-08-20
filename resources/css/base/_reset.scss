@@ -78,6 +78,12 @@
         isolation: isolate;
     }
 
+    input[type="password"] {
+        &::-ms-reveal {
+            opacity: 0;
+        }
+    }
+
     button {
         appearance: none;
         background: none;
