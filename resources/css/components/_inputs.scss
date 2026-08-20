@@ -4,6 +4,50 @@
     width: 100%;
 }
 
+.password-input {
+    display: flex;
+    gap: 8px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--input-text);
+    padding-inline: 16px;
+    padding-block: 10px;
+
+    &:focus-within {
+        border-color: var(--color-border-focus);
+        box-shadow: 0 0 0 3px rgba(223, 77, 105, 0.15);
+    }
+
+    .text-field__input {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        width: 90%;
+        height: 100%;
+
+        &:focus-visible, &:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+    &--invalid {
+        border-color: var(--color-brand-primary-600);
+        background-color: var(--color-brand-primary-50);
+
+         &:focus-within .text-field__input:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+    &--invalid:focus-within {
+        border-color: var(--color-brand-primary-600);
+        box-shadow: 0 0 0 3px var(--color-brand-primary-100);
+    }
+}
+
 .input-wrapper {
     display: flex;
     flex-direction: column;
