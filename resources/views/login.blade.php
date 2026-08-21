@@ -64,6 +64,7 @@
                                         class="text-field__input" 
                                         id="password" 
                                         minlength="8"
+                                        type="password"
                                         :type="showPassword ? 'text' : 'password'" 
                                         name="password" 
                                         required
