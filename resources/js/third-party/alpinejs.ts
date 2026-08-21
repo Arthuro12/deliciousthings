@@ -14,6 +14,11 @@ interface MobileMenu {
     toggle: () => void;
 }
 
+interface Password  {
+    show: boolean;
+    invalid?: boolean;
+}
+
 const mobileMenu: AlpineComponent<MobileMenu> = {
     open: false,
     init() {
@@ -31,5 +36,11 @@ const mobileMenu: AlpineComponent<MobileMenu> = {
     }, 
 };
 
+const password: AlpineComponent<Password> = {
+    show: false,
+    invalid: undefined,
+};
+
 Alpine.data('mobileMenu', () => mobileMenu); 
+Alpine.data('password', () => password); 
 Alpine.start()
