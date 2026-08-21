@@ -24,14 +24,21 @@
                </ul>
 
                @auth
-                  <form class="logout-form" method="POST" action="/logout">
-                     @csrf
-                     <button class="logout-button" type="submit">Abmelden</button>
-                  </form>
+                  <div class="header__auth-buttons">
+                     <form class="logout-form" method="POST" action="/logout">
+                        @csrf
+                        <button class="logout-button cta--ghost" type="submit">Abmelden</button>
+                     </form>
+
+                     <a 
+                        class="cta--primary" 
+                        href="{{ route('app.user.dashboard') }}"
+                     >Zur App</a>
+                  </div>
                @endauth
 
                @guest
-                  <div class="header__cta-buttons">
+                  <div class="header__auth-buttons">
                      <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
                      <a class="cta--primary cta-link" href="{{ url('/signup') }}">Loslegen</a>
                   </div>          
@@ -75,14 +82,21 @@
                   </ul>
 
                   @auth
-                    <form class="drawer-separator logout-form drawer-panel__logout-form" method="POST" action="/logout">
-                     @csrf
-                        <button class="logout-button drawer-panel__logout-button" type="submit">Abmelden</button>
-                     </form>
+                     <div class="drawer-separator header__auth-buttons header__auth-buttons--mobile">
+                        <form class="drawer-panel__logout-form" method="POST" action="/logout">
+                           @csrf
+                           <button class="drawer-panel__logout-button cta--ghost" type="submit">Abmelden</button>
+                        </form>
+
+                        <a 
+                           class="cta--primary" 
+                           href="{{ route('app.user.dashboard') }}"
+                        >Zur App</a>
+                     </div>
                   @endauth
 
                   @guest
-                     <div class="drawer-separator header__cta-buttons header__cta-buttons--mobile">
+                     <div class="drawer-separator header__auth-buttons header__auth-buttons--mobile">
                         <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
                         <a class="cta--primary cta-link" href="{{ url('/signup') }}">Loslegen</a>
                      </div>  
