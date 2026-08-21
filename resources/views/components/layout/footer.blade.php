@@ -5,7 +5,7 @@
                 <div class="footer__section">
                     <header class="footer__section-header">Kontakt</header>
                     <ul class="list-none footer__items">
-                        <li>support@deliciousthings.de</li>
+                        <li class="footer__item">support@deliciousthings.de</li>
                     </ul>
                 </div>
             </div>

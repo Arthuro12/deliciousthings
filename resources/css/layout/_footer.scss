@@ -27,7 +27,7 @@
         }
 
         &__section-header {
-            color: var(--color-neutral-200);
+            color: var(--color-neutral-100);
         }
         
         &__sections {
@@ -46,6 +46,20 @@
             display: flex;
             gap: calc(0.25rem * 5);
             margin-top: calc(0.25rem * 4);
+        }
+
+        &__item {
+            color: var(--color-neutral-0);
+        }
+
+        &__link {
+            color: var(--color-neutral-0);
+        
+            &:hover {
+                color: var(--color-neutral-300);
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
         }
     }
 
