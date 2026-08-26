@@ -48,7 +48,7 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
 <style scoped>
 .bottom-navbar {
     position: fixed;
-    z-index: 40;
+    z-index: 3;
 
     right: 0;
     bottom: 0;
@@ -72,8 +72,8 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
         0 2px 8px rgb(54 36 29 / 4%);
 
     right: 8px;
-    bottom: 8px;
-    left: 16px;
+    left:8px;
+    bottom: 16px;
 
     box-shadow: 0 -4px 20px rgb(54 36 29 / 4%);
 
