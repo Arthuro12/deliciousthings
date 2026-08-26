@@ -87,9 +87,6 @@ function isActiveLink(url: string): boolean {
 
     background: var(--color-neutral-50, #fdfbf9);
     border-bottom: 1px solid var(--color-chocolate-100, #f4e8df);
-
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 }
 
 .app-header__inner {
