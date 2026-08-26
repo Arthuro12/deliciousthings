@@ -1,15 +1,15 @@
 <template>
     <nav
-        class="mobile-navigation"
+        class="bottom-navbar"
         aria-label="Mobile Hauptnavigation"
     >
         <Link
             v-for="link in mainNavigationLinks"
             :key="link.title"
             :href="link.href"
-            class="mobile-navigation__link"
+            class="bottom-navbar__link"
             :class="{
-                'mobile-navigation__link--active':
+                'bottom-navbar__link--active':
                     isActiveLink(link.href),
             }"
         >
@@ -22,7 +22,7 @@
                 "
             />
 
-            <span class="mobile-navigation__link-text">
+            <span class="bottom-navbar__link-text">
                 {{ link.title ?? link.title }}
             </span>
         </Link>
@@ -46,7 +46,7 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
 </script>
 
 <style scoped>
-.mobile-navigation {
+.bottom-navbar {
     position: fixed;
     z-index: 40;
 
@@ -65,7 +65,15 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
         calc(7px + env(safe-area-inset-bottom));
 
     background: rgb(255 255 255 / 96%);
-    border-top: 1px solid var(--color-chocolate-100, #f4e8df);
+    border: 1px solid var(--color-chocolate-100);
+    border-radius: 22px;
+    box-shadow:
+        0 8px 28px rgb(54 36 29 / 10%),
+        0 2px 8px rgb(54 36 29 / 4%);
+
+    right: 8px;
+    bottom: 8px;
+    left: 16px;
 
     box-shadow: 0 -4px 20px rgb(54 36 29 / 4%);
 
@@ -77,7 +85,7 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
     }
 }
 
-.mobile-navigation__link {
+.bottom-navbar__link {
     position: relative;
 
     display: flex;
@@ -106,15 +114,15 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
     -webkit-tap-highlight-color: transparent;
 }
 
-.mobile-navigation__link:active {
+.bottom-navbar__link:active {
     background: var(--color-chocolate-50, #fbf6f2);
 }
 
-.mobile-navigation__link--active {
+.bottom-navbar__link--active {
     color: var(--color-brand-primary-500);
 }
 
-.mobile-navigation__link-text {
+.bottom-navbar__link-text {
     overflow: hidden;
 
     max-width: 100%;
