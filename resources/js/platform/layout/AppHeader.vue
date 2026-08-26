@@ -85,6 +85,7 @@ function isActiveLink(url: string): boolean {
 
     width: 100%;
 
+    background: var(--color-neutral-50, #fdfbf9);
     border-bottom: 1px solid var(--color-chocolate-100, #f4e8df);
 
     backdrop-filter: blur(14px);
