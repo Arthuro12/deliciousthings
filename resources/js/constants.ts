@@ -1,4 +1,20 @@
-import type { NavMenuRecord,  } from "./types/ui";
+import { 
+    CircleUserRound,
+    Folder,
+    House,
+    Mail,
+    MessageSquare,
+} from "@lucide/vue";
+
+import type { NavMenuRecord, NavigationLinkIcons  } from "./types/ui";
+
+export const NAVIGATION_LINK_ICONS: NavigationLinkIcons = {
+    "circle-user-round": CircleUserRound,
+    "folder": Folder,
+    "house": House,
+    "mail": Mail,
+    "message-square": MessageSquare,
+};
 
 export const BUTTON_CLASSES = Object.freeze({
     LAYOUTS: {

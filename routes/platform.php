@@ -1,21 +1,32 @@
 <?php
 
+use App\Http\Controllers\User\CollaborationRequestController;
+use App\Http\Controllers\User\MessageController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\ProjectController;
 // use App\Http\Controllers\Auth\RegistrationController;
 // use App\Http\Controllers\Auth\SessionController;
 // use App\Http\Controllers\Artisan\ProfileController;
 // use App\Http\Controllers\Artisan\MessageController;
 // use App\Http\Controllers\SearchController;
 
-// Route::middleware(['auth:sanctum', HandleInertiaRequests::class])->domain('app.' . config('app.url'))->group(function () {
+Route::get('app/', function () {
+    return Inertia::render('Home');
+})->name('home');
 
-// });
-Route::get('/user/dashboard', function () {
-    return Inertia::render('user/Dashboard');
-})->name('user.dashboard');
+Route::get('app/projects/', [ProjectController::class, 'create'])->name('user.projects');
+
+Route::get('app/messages', [MessageController::class, 'create'])->name('user.messages');
+
+Route::get('app/requests', [CollaborationRequestController::class, 'create'])->name('user.requests');
+
+Route::get('app/profile', [ProfileController::class, 'create'])->name('user.profile');
+
 
 // Route::middleware(['auth:sanctum', HandleInertiaRequests::class])->group(function () {
 //     Route::controller(ProfileController::class)->group(function () {

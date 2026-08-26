@@ -1,6 +1,6 @@
 @use('App\Support\ValidationPatterns', 'Patterns')
 
-<x-layout.auth.app title="Registrieren">
+<x-layout.auth.app title="Anmelden">
     <main class="auth-page login-page page-content">
         <section class="login-form__section">
             <div class="login-form-wrapper">
