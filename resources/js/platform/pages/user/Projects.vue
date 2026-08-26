@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main>
+        <main class="app-content">
             <h1>Projekte</h1>
             <EmptyProjectsFallback v-if="projects.length == 0" />
         </main>
