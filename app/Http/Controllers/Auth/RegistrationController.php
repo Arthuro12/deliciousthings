@@ -30,6 +30,6 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return to_route('app.user.dashboard');
+        return to_route('app.home');
     }
 }

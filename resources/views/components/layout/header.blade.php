@@ -32,7 +32,7 @@
 
                      <a 
                         class="cta--primary" 
-                        href="{{ route('app.user.dashboard') }}"
+                        href="{{ route('app.user.projects') }}"
                      >Zur App</a>
                   </div>
                @endauth
@@ -90,7 +90,7 @@
 
                         <a 
                            class="cta--primary" 
-                           href="{{ route('app.user.dashboard') }}"
+                           href="{{ route('app.user.projects') }}"
                         >Zur App</a>
                      </div>
                   @endauth

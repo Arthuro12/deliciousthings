@@ -27,7 +27,7 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return to_route('app.user.dashboard');
+            return to_route('app.home');
         }
 
         return back()

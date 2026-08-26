@@ -41,13 +41,44 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                $user->only(['id', 'first_name', 'last_name', 'email']),
-            ],
-            'urls' => [
-                [
-                    'title' => 'Home',
-                    'href' => route('home'),
+                'user' => [
+                    $user->only(['id', 'first_name', 'last_name', 'email']),
                 ],
+            ],
+            'links' => [
+                'guest' => [ 
+                    [
+                        'title' => 'Website',
+                        'href' => route('home'),
+                    ],
+                ],
+                'user' => [
+                    [
+                        'title' => 'Startseite',
+                        'href' => route('app.home'),
+                        'iconName' => 'house',
+                    ], 
+                    [
+                        'title' => 'Projekte',
+                        'href' => route('app.user.projects'),
+                        'iconName' => 'folder',
+                    ],      
+                    [
+                        'title' => 'Chats',
+                        'href' => route('app.user.messages'),
+                        'iconName' => 'message-square',
+                    ], 
+                    [
+                        'title' => 'Anfragen',
+                        'href' => route('app.user.requests'),
+                        'iconName' => 'mail',
+                    ], 
+                    [
+                        'title' => 'Profil',
+                        'href' => route('app.user.profile'),
+                        'iconName' => 'circle-user-round',
+                    ], 
+                ]
             ],
             // 'flash' => function () use ($request) {
             //     return [
