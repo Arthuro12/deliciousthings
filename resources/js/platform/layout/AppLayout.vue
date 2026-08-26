@@ -2,12 +2,9 @@
     <div class="app-layout">
         <AppHeader :links />
 
-        <main class="app-content">
-            <div class="app-content__inner">
+            <div class="app-content-wrapper">
                 <slot></slot> 
             </div>
-        </main>
-
         <AppBottomNavBar :links />
     </div>
 
@@ -36,17 +33,7 @@ const websiteUrl = links.guest.find(link => link.title == "Website");
     color: var(--color-chocolate-900, #36241d);
 }
 
-
-
-/* -------------------------------------------------------
- * Page
- * ----------------------------------------------------- */
-
-.app-content {
-    width: 100%;
-}
-
-.app-content__inner {
+.app-content-wrapper {
     width: 100%;
     max-width: 1200px;
 

@@ -10,8 +10,13 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        return Inertia::render('user/Projects');
+        return Inertia::render(
+            'user/Projects',
+            [
+                'projects' => $request->user()->projects->toArray(),
+            ],
+        );
     }
 }

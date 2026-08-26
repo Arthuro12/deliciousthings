@@ -1,4 +1,4 @@
-import { PriceLevel, AddressVisibility } from "@/enums";
+import { PriceLevel, AddressVisibility, ProjectStatus, CurrencyCode } from "@/enums";
 
 export interface Auth {
     user: User | null;
@@ -65,6 +65,17 @@ export type ArtisanProfile = BasicProfile & {
     offers_delivery: boolean;
     pick_up_on_site: boolean;
     user?: User;
+};
+
+export type Project = {
+    owner_user_id: number;
+    name: string;
+    status: ProjectStatus;
+    description: string | null;
+    budget: number | null;
+    currency: CurrencyCode;
+    event_date: string | null;
+    event_time: number | null;
 };
 
 export type Message = {

@@ -57,19 +57,19 @@ return new class extends Migration
         Schema::table('artisan_baked_good', function (Blueprint $table) {
             $table->dropForeign(['artisan_id']);
             $table->dropForeign(['baked_good_id']);
+            $table->dropUnique(['artisan_id', 'baked_good_id']);
 
             $table->string('artisan_id')->change();
             $table->string('baked_good_id')->change();
-            $table->dropUnique(['artisan_id', 'baked_good_id']);
         });
 
         Schema::table('artisan_dietary_option', function (Blueprint $table) {
             $table->dropForeign(['artisan_id']);
             $table->dropForeign(['dietary_option_id']);
+            $table->dropUnique(['artisan_id', 'dietary_option_id']);
 
             $table->string('artisan_id')->change();
             $table->string('dietary_option_id')->change();
-            $table->unique(['artisan_id', 'dietary_option_id']);
         });
     }
 };

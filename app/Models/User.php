@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -55,6 +57,27 @@ class User extends Authenticatable
     public function artisan(): HasOne
     {
         return $this->hasOne(Artisan::class);
+    }
+
+    public function ownedProjects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'owner_user_id');
+    }
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Project::class,
+            'project_participants'
+        )->withPivot([
+            'role',
+            'status',
+            'invited_by_user_id',
+            'invited_at',
+            'joined_at',
+            'left_at',
+        ])
+        ->withTimestamps();
     }
 
     public function getFullNameAttribute()
