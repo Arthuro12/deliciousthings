@@ -44,12 +44,13 @@ const websiteUrl = links.guest.find(link => link.title == "Website");
      * from covering the page content.
      */
     padding:
-        28px
+        calc(28px + var(--app-header-height))
         20px
-        calc(104px + env(safe-area-inset-bottom));
+        calc(104px + env(safe-area-inset-bottom))
+        20px;
 
     @media (min-width: 768px) {
-        padding: 40px 32px 64px;
+        padding: calc(40px + var(--app-header-height)) 32px 64px 40px;
     }
 }
 </style>

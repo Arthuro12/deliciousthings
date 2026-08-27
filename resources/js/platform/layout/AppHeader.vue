@@ -79,11 +79,12 @@ function isActiveLink(url: string): boolean {
 
 <style scoped lang="scss">
 .app-header {
-    position: sticky;
+    position: fixed;
     z-index: 3;
     top: 0;
 
     width: 100%;
+    height: var(--app-header-height);
 
     background: var(--color-neutral-50, #fdfbf9);
     border-bottom: 1px solid var(--color-chocolate-100, #f4e8df);
@@ -96,7 +97,7 @@ function isActiveLink(url: string): boolean {
 
     width: 100%;
     max-width: 90rem;
-    height: var(--space-16);
+    height: 100%;
 
     margin-inline: auto;
     padding-inline: 20px;
