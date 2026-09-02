@@ -18,32 +18,35 @@
                 id="empty-projects-title"
                 class="empty-projects-state__title"
             >
-                Sie haben noch keine Projekte
+                Du hast noch keine Projekte
             </h2>
 
             <p class="empty-projects-state__description">
-                Erstellen Sie Ihr erstes Backprojekt, um Ideen,
+                Erstelle dein erstes Backprojekt, um Ideen,
                 Anforderungen und wichtige Informationen an einem Ort
                 zu organisieren.
             </p>
         </div>
 
-        <button
-            type="button"
+        <Link
+            href="/app/projects/create"
             class="empty-projects-state__button"
         >
             <Plus
                 :size="18"
                 :stroke-width="2"
+                color="#fff"
                 aria-hidden="true"
             />
 
             <span>Projekt erstellen</span>
-        </button>
+        </Link>
     </section>
 </template>
 
 <script setup lang="ts">
+import { Link } from "@inertiajs/vue3";
+
 import { FolderPlus, Plus } from "@lucide/vue";
 </script>
 

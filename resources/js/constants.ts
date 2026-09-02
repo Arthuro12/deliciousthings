@@ -112,3 +112,153 @@ export const SERVICES_CATEGORIES = {
     bakery: "Bäckerei",
     catering: "Catering",
 };
+
+export const OCCASIONS = [
+    {
+        key: "birthday",
+        value: "birthday",
+        label: "Geburtstag",
+    },
+    {
+        key: "wedding",
+        value: "wedding",
+        label: "Hochzeit",
+    },
+    {
+        key: "engagement",
+        value: "engagement",
+        label: "Verlobung",
+    },
+    {
+        key: "baptism",
+        value: "baptism",
+        label: "Taufe",
+    },
+    {
+        key: "baby-shower",
+        value: "baby-shower",
+        label: "Baby Shower",
+    },
+    {
+        key: "anniversary",
+        value: "anniversary",
+        label: "Jubiläum",
+    },
+    {
+        key: "graduation",
+        value: "graduation",
+        label: "Abschluss",
+    },
+    {
+        key: "retirement",
+        value: "retirement",
+        label: "Ruhestand",
+    },
+    {
+        key: "christmas",
+        value: "christmas",
+        label: "Weihnachten",
+    },
+    {
+        key: "easter",
+        value: "easter",
+        label: "Ostern",
+    },
+    {
+        key: "valentines-day",
+        value: "valentines-day",
+        label: "Valentinstag",
+    },
+    {
+        key: "corporate-event",
+        value: "corporate-event",
+        label: "Firmenfeier",
+    },
+    {
+        key: "housewarming",
+        value: "housewarming",
+        label: "Einweihung",
+    },
+];
+
+/**
+ * Available style for custom creation. If none is specified, the user 
+ * can indicate that they need recommendation.
+ */
+export const STYLES = [
+    {
+        key: "classic",
+        value: "classic",
+        label: "Klassisch",
+    },
+    {
+        key: "elegant",
+        value: "elegant",
+        label: "Elegant",
+    },
+    {
+        key: "modern",
+        value: "modern",
+        label: "Modern",
+    },
+    {
+        key: "minimalist",
+        value: "minimalist",
+        label: "Minimalistisch",
+    },
+    {
+        key: "romantic",
+        value: "romantic",
+        label: "Romantisch",
+    },
+    {
+        key: "playful",
+        value: "playful",
+        label: "Verspielt",
+    },
+    {
+        key: "luxurious",
+        value: "luxurious",
+        label: "Luxuriös",
+    },
+    {
+        key: "rustic",
+        value: "rustic",
+        label: "Rustikal",
+    },
+    {
+        key: "natural",
+        value: "natural",
+        label: "Natürlich",
+    },
+    {
+        key: "boho",
+        value: "boho",
+        label: "Boho",
+    },
+    {
+        key: "vintage",
+        value: "vintage",
+        label: "Vintage",
+    },
+    {
+        key: "floral",
+        value: "floral",
+        label: "Floral",
+    },
+    {
+        key: "whimsical",
+        value: "whimsical",
+        label: "Märchenhaft",
+    },
+    {
+        key: "colorful",
+        value: "colorful",
+        label: "Bunt",
+    },
+    {
+        key: "pastel",
+        value: "pastel",
+        label: "Pastell",
+    },
+];

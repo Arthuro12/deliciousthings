@@ -20,13 +20,12 @@
             gap: calc(0.25rem * 5);
             align-items: center;
             flex: 1;
-            height: 100%;
+            min-height: var(--website-header-height);
         }
 
         &__navmenu-wrapper {
             display: flex;
             margin-left: auto;
-            width: 100%;
             height: 100%;
         }
 
@@ -35,7 +34,7 @@
 
             @media (min-width: 1024px) {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 flex: 1;
                 height: 100%;
             }
@@ -54,6 +53,7 @@
         &__auth-buttons {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: calc(0.25rem * 4);
 
             .cta-link {
@@ -95,12 +95,17 @@
             position: fixed;
             inset: var(--space-16) 0 0;
             width: 100%;
+            min-height: calc(100dvh - var(--space-16));
             overflow-y: auto;
             -ms-overflow-style: none;
             scrollbar-width: none;
             overscroll-behavior: none;
             z-index: 2;
             clip-path: inset(0);
+
+            &::-webkit-scrollbar { 
+                display: none;
+            }
 
             &--enter {
                 transition: 
@@ -165,6 +170,7 @@
             }
 
             &__trigger-icon {
+                color: var(--color-brand-primary-500);
                 position: absolute;
                 transform-origin: center;
                 transition:

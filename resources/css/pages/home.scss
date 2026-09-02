@@ -1,0 +1,377 @@
+.home-page {
+    overflow: hidden;
+    background: var(--color-background-page);
+}
+
+.home-hero {
+    display: flex;
+    align-items: center;
+
+    min-height: min(
+        48rem,
+        calc(100dvh - var(--website-header-height))
+    );
+
+    padding:
+        calc(var(--space-12) + var(--website-header-height))
+        var(--layout-page-padding-mobile)
+        var(--space-12);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            var(--color-brand-primary-100),
+            transparent 42%
+        ),
+        var(--color-background-page);
+
+    @media (min-width: 768px) {
+        min-height: 44rem;
+
+        padding:
+            calc(var(--space-20) + var(--website-header-height))
+            var(--layout-page-padding-tablet)
+            var(--space-20);
+    }
+
+    @media (min-width: 1024px) {
+        padding-inline: var(--layout-page-padding-desktop);
+    }
+}
+
+.home-hero__inner {
+    width: 100%;
+    max-width: 820px;
+    margin-inline: auto;
+
+    text-align: center;
+}
+
+.home-hero__eyebrow,
+.home-section__eyebrow {
+    margin-bottom: var(--space-4);
+
+    color: var(--color-text-brand);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.02em;
+}
+
+.home-hero__title {
+    max-width: 760px;
+    margin-inline: auto;
+
+    color: var(--hero-title);
+
+    font-family: var(--font-heading);
+    font-size: clamp(2.75rem, 10vw, 5rem);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+
+    span {
+        display: block;
+        margin-top: 0.08em; 
+        color: var(--hero-title-accent); 
+        /* 
+         * Important sur mobile avec Fraunces : 
+         * on donne à la ligne sa propre hauteur de ligne 
+         * au lieu de l'hériter d'un line-height trop serré. 
+         */ 
+        line-height: 1.05;
+    }
+
+    @media (max-width: 767px) { 
+        font-size: clamp(2.35rem, 11vw, 3.5rem); 
+        line-height: 1.08; 
+        letter-spacing: -0.02em; 
+        span { 
+            line-height: 1.08; 
+        } 
+    } 
+    
+    @media (min-width: 768px) { 
+        letter-spacing: -0.02em;
+        line-height: 1; 
+        
+        span { 
+            line-height: 1; 
+        } 
+    }
+}
+
+.home-hero__description {
+    max-width: 620px;
+    margin:
+        var(--space-6)
+        auto
+        var(--space-10);
+
+    color: var(--hero-text);
+
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+}
+
+.home-hero__request {
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+}
+
+.request-intent-form {
+    padding: var(--space-4);
+
+    text-align: left;
+
+    background: var(--color-background-elevated);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-md);
+
+    @media (min-width: 768px) {
+        padding: var(--space-5);
+    }
+}
+
+.request-intent-form__label {
+    display: block;
+
+    margin-bottom: var(--space-3);
+
+    color: var(--color-text-primary);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.request-intent-form__textarea {
+    display: block;
+
+    width: 100%;
+    min-height: 150px;
+
+    padding: var(--space-3);
+
+    resize: vertical;
+
+    color: var(--input-text);
+    background: var(--input-background);
+
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-lg);
+
+    outline: none;
+
+    font-family: var(--font-body);
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background-color var(--transition-fast);
+
+    &::placeholder {
+        color: var(--input-placeholder);
+    }
+
+    &:hover {
+        border-color: var(--input-border-hover);
+        background: var(--input-background-hover);
+    }
+
+    &:focus {
+        border-color: var(--input-border-focus);
+        box-shadow: var(--shadow-focus);
+        background: var(--input-background);
+    }
+}
+
+.request-intent-form__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    margin-top: var(--space-3);
+
+    @media (min-width: 640px) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.request-intent-form__hint {
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-xs);
+}
+
+.request-intent-form__submit {
+    flex-shrink: 0;
+
+    min-width: 170px;
+
+    padding-inline: var(--space-5);
+
+    cursor: pointer;
+}
+
+.home-hero__note {
+    margin-top: var(--space-4);
+
+    color: var(--color-text-subtle);
+
+    font-size: var(--font-size-xs);
+}
+
+.home-process {
+    padding:
+        var(--space-20)
+        var(--layout-page-padding-mobile);
+
+    background: var(--color-background-elevated);
+
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
+
+    @media (min-width: 768px) {
+        padding-inline: var(--layout-page-padding-tablet);
+    }
+
+    @media (min-width: 1024px) {
+        padding-inline: var(--layout-page-padding-desktop);
+    }
+}
+
+.home-section__inner {
+    width: 100%;
+    max-width: var(--layout-container-xl);
+    margin-inline: auto;
+}
+
+.home-section__header {
+    max-width: 600px;
+    margin-bottom: var(--space-10);
+
+    h2 {
+        color: var(--color-text-primary);
+
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-tight);
+    }
+}
+
+.home-process__steps {
+    display: grid;
+    gap: var(--space-8);
+
+    list-style: none;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-6);
+    }
+}
+
+.home-process__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4);
+
+    padding-top: var(--space-5);
+
+    border-top: 1px solid var(--color-border-default);
+
+    h3 {
+        margin-bottom: var(--space-2);
+
+        color: var(--color-text-primary);
+
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    p {
+        color: var(--color-text-secondary);
+
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
+    }
+}
+
+.home-process__number {
+    color: var(--color-text-brand);
+
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.home-artisan {
+    padding:
+        var(--space-16)
+        var(--layout-page-padding-mobile);
+
+    @media (min-width: 768px) {
+        padding-inline: var(--layout-page-padding-tablet);
+    }
+
+    @media (min-width: 1024px) {
+        padding-inline: var(--layout-page-padding-desktop);
+    }
+}
+
+.home-artisan__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+
+    width: 100%;
+    max-width: var(--layout-container-xl);
+
+    margin-inline: auto;
+    padding: var(--space-8);
+
+    background: var(--color-background-warm);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-2xl);
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: var(--space-10);
+    }
+}
+
+.home-artisan__content {
+    max-width: 680px;
+
+    h2 {
+        margin-bottom: var(--space-3);
+
+        color: var(--color-text-primary);
+
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-tight);
+    }
+
+    p:last-child {
+        color: var(--color-text-secondary);
+        line-height: var(--line-height-relaxed);
+    }
+}
+
+.home-artisan__inner > .cta--secondary {
+    flex-shrink: 0;
+
+    padding-inline: var(--space-5);
+}

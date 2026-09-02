@@ -1,8 +1,10 @@
 <template>
     <div>
-        <main>
-            <h1>Home</h1>
-        </main>
+        <div class="app-content-wrapper">
+            <main class="app-content">
+                <h1>Home</h1>
+            </main>
+        </div>
     </div>
 </template>
 
