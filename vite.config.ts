@@ -10,6 +10,7 @@ export default defineConfig({
             input: [
                 'resources/css/styles.css', 
                 'resources/css/website.scss',
+                'resources/css/pages/home.scss',
                 'resources/css/platform.scss',
                 'resources/js/third-party/alpinejs.ts',
                 'resources/js/platform/app.ts',

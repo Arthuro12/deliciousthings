@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
-    public function create(): Response
+    public function index(): Response
     {
         return Inertia::render('user/Messages');
     }

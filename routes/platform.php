@@ -19,13 +19,22 @@ Route::get('app/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('app/projects/', [ProjectController::class, 'create'])->name('user.projects');
+Route::controller(ProjectController::class)->group(function () {
+    Route::get('app/projects', 'index')->name('user.projects');
+    Route::get('app/projects/create', 'create')->name('user.projects.create');
+});
 
-Route::get('app/messages', [MessageController::class, 'create'])->name('user.messages');
+Route::get('app/projects/', [ProjectController::class, 'index'])->name('user.projects');
 
-Route::get('app/requests', [CollaborationRequestController::class, 'create'])->name('user.requests');
+Route::get('app/messages', [MessageController::class, 'index'])->name('user.messages');
 
-Route::get('app/profile', [ProfileController::class, 'create'])->name('user.profile');
+Route::get('app/requests', [CollaborationRequestController::class, 'index'])->name('user.requests');
+
+Route::get('app/profile', [ProfileController::class, 'index'])->name('user.profile');
+
+Route::get('app/artisan/create', function () {
+    return Inertia::render('artisan/CreateArtisan');
+});
 
 
 // Route::middleware(['auth:sanctum', HandleInertiaRequests::class])->group(function () {

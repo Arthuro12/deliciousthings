@@ -14,14 +14,14 @@
             x-data="mobileMenu"
          >
             <nav class="header__navmenu">
-               <ul class="list-none header__navmenu-items">
+               {{-- <ul class="list-none header__navmenu-items">
                   <li class="navmenu-item">
                      <a class="navmenu__link" href=""><span class="navmenu__link-text">Inspirationen</span></a>
                   </li>
                   <li class="navmenu-item">
                      <a class="navmenu__link" href=""><span class="navmenu__link-text">Über Uns</span></a>
                   </li>
-               </ul>
+               </ul> --}}
 
                @auth
                   <div class="header__auth-buttons">
@@ -72,17 +72,17 @@
                x-transition:leave-end="drawer-panel--leave-end"
             >
                <div class="drawer-panel__inner">
-                  <ul class="list-none drawer-panel__items">
+                  {{-- <ul class="list-none drawer-panel__items">
                      <li class="navmenu__item">
                         <a class="navmenu__link" href=""><span class="navmenu__link-text">Inspirationen</span></a>
                      </li>
                      <li class="navmenu__item">
                         <a class="navmenu__link" href=""><span class="navmenu__link-text">Über Uns</span></a>
                      </li>
-                  </ul>
+                  </ul> --}}
 
                   @auth
-                     <div class="drawer-separator header__auth-buttons header__auth-buttons--mobile">
+                     <div class="header__auth-buttons header__auth-buttons--mobile">
                         <form class="drawer-panel__logout-form" method="POST" action="/logout">
                            @csrf
                            <button class="drawer-panel__logout-button cta--ghost" type="submit">Abmelden</button>
@@ -96,7 +96,7 @@
                   @endauth
 
                   @guest
-                     <div class="drawer-separator header__auth-buttons header__auth-buttons--mobile">
+                     <div class="header__auth-buttons header__auth-buttons--mobile">
                         <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
                         <a class="cta--primary cta-link" href="{{ url('/signup') }}">Loslegen</a>
                      </div>  

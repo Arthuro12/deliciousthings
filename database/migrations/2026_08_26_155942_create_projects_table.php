@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\FulfillmentMethod;
 use App\Enums\ProjectStatus;
 
 return new class extends Migration
@@ -21,16 +22,18 @@ return new class extends Migration
                 ->constrained('users')
                 ->nullOnDelete();
 
-            $table->string('name');
+            $table->string('name', 100);
             $table->enum('status', ProjectStatus::cases());
             $table->unsignedSmallInteger('servings')->nullable();
 
-            $table->decimal('budget', 10, 2)->nullable();
-            $table->char('currency', 3)->default('EUR');
             $table->text('description')->nullable();
+            $table->string('event_name');
             $table->date('event_date')->nullable();
             $table->time('event_time')->nullable();
-
+            $table->decimal('budget', 10, 2)->nullable();
+            $table->char('currency', 3)->default('EUR');
+            $table->enum('fullfilment_method', FulfillmentMethod::cases());
+            
             $table->softDeletes();
 
             $table->index(['owner_user_id', 'status']);

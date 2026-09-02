@@ -1,0 +1,20 @@
+.app-content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+
+    margin-inline: auto;
+
+    /*
+     * Extra space below prevents the mobile bottom navigation
+     * from covering the page content.
+     */
+    padding:
+        calc(28px + var(--app-header-height))
+        20px
+        calc(104px + env(safe-area-inset-bottom))
+        20px;
+
+    @media (min-width: 768px) {
+        padding: calc(40px + var(--app-header-height)) 32px 64px 40px;
+    }
+}
