@@ -212,8 +212,6 @@
 .request-intent-form__submit {
     flex-shrink: 0;
 
-    min-width: 170px;
-
     padding-inline: var(--space-5);
 
     cursor: pointer;
@@ -370,7 +368,7 @@
     }
 }
 
-.home-artisan__inner > .cta--secondary {
+.home-artisan__inner > .button--secondary {
     flex-shrink: 0;
 
     padding-inline: var(--space-5);
