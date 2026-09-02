@@ -10,7 +10,12 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
-    public function create(Request $request): Response
+    public function create(): Response
+    {
+        return Inertia::render('user/CreateProject');
+    }
+    
+    public function index(Request $request): Response
     {
         return Inertia::render(
             'user/Projects',

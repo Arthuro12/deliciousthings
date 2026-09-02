@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
-    public function create(): Response
+    public function index(): Response
     {
         return Inertia::render('user/Profile');
     }
