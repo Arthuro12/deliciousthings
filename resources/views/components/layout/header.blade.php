@@ -27,11 +27,11 @@
                   <div class="header__auth-buttons">
                      <form class="logout-form" method="POST" action="/logout">
                         @csrf
-                        <button class="logout-button cta--ghost" type="submit">Abmelden</button>
+                        <button class="logout-button button button--ghost button--sm button--radius-full" type="submit">Abmelden</button>
                      </form>
 
                      <a 
-                        class="cta--primary" 
+                        class="button button--primary button--sm button--radius-full" 
                         href="{{ route('app.user.projects') }}"
                      >Zur App</a>
                   </div>
@@ -39,8 +39,8 @@
 
                @guest
                   <div class="header__auth-buttons">
-                     <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
-                     <a class="cta--primary cta-link" href="{{ url('/signup') }}">Loslegen</a>
+                     <a class="button button--secondary button--sm button--radius-full cta-link" href="{{ url('/login') }}">Anmelden</a>
+                     <a class="button button--primary button--sm button--radius-full cta-link" href="{{ url('/signup') }}">Loslegen</a>
                   </div>          
                @endguest
             </nav>
@@ -85,11 +85,11 @@
                      <div class="header__auth-buttons header__auth-buttons--mobile">
                         <form class="drawer-panel__logout-form" method="POST" action="/logout">
                            @csrf
-                           <button class="drawer-panel__logout-button cta--ghost" type="submit">Abmelden</button>
+                           <button class="button button--ghost button--sm button--radius-full drawer-panel__logout-button" type="submit">Abmelden</button>
                         </form>
 
                         <a 
-                           class="cta--primary" 
+                           class="button button--primary button--sm button--radius-full" 
                            href="{{ route('app.user.projects') }}"
                         >Zur App</a>
                      </div>
@@ -97,8 +97,8 @@
 
                   @guest
                      <div class="header__auth-buttons header__auth-buttons--mobile">
-                        <a class="cta--secondary cta-link" href="{{ url('/login') }}">Anmelden</a>
-                        <a class="cta--primary cta-link" href="{{ url('/signup') }}">Loslegen</a>
+                        <a class="button button--secondary button--sm button--radius-full cta-link" href="{{ url('/login') }}">Anmelden</a>
+                        <a class="button button--primary button--sm button--radius-full cta-link" href="{{ url('/signup') }}">Loslegen</a>
                      </div>  
                   @endguest
                </div>

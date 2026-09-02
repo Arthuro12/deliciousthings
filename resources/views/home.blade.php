@@ -57,7 +57,7 @@
                             </span>
 
                             <button
-                                class="cta--primary request-intent-form__submit"
+                                class="button button--primary button--md request-intent-form__submit"
                                 type="submit"
                             >
                                 Anfrage starten
@@ -170,7 +170,7 @@
                 </div>
 
                 <a
-                    class="cta--secondary"
+                    class="button button--secondary button--radius-full"
                     href="{{ url('/signup') }}"
                 >
                     Als Bäcker:in starten
