@@ -46,6 +46,7 @@
                             name="intent"
                             class="request-intent-form__textarea"
                             rows="5"
+                            minlength="20"
                             maxlength="2000"
                             placeholder="Zum Beispiel: Ich suche eine elegante Hochzeitstorte für 50 Personen im Oktober. Sie soll zweistöckig sein und zu unserem Farbkonzept passen."
                             required
@@ -53,7 +54,7 @@
 
                         <div class="request-intent-form__footer">
                             <span class="request-intent-form__hint">
-                                Du musst noch nicht alle Details kennen.
+                                Beschreibe deine Idee mit mindestens 20 Zeichen. Du musst noch nicht alle Details kennen.
                             </span>
 
                             <button

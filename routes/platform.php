@@ -8,6 +8,7 @@ use Inertia\Inertia;
 
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\User\ProjectController;
 // use App\Http\Controllers\Auth\RegistrationController;
 // use App\Http\Controllers\Auth\SessionController;
@@ -18,6 +19,14 @@ use App\Http\Controllers\User\ProjectController;
 Route::get('app/', function () {
     return Inertia::render('Home');
 })->name('home');
+
+Route::controller(ServiceRequestController::class)->group(function () {
+    Route::get('/app/requests/create', 'create')->withoutMiddleware('auth:sanctum')->name('requests.create');
+    Route::post('/app/requests', 'store')->name('requests.store');
+    Route::patch('/app/requests/{serviceRequest}', 'update')->name('requests.update');
+    Route::post('/app/requests/{serviceRequest}/submit', 'submit')->name('requests.submit');
+    Route::post('/app/requests/{serviceRequest}/confirm', 'confirm')->name('requests.confirm');
+});
 
 Route::controller(ProjectController::class)->group(function () {
     Route::get('app/projects', 'index')->name('user.projects');
