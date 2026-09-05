@@ -15,3 +15,17 @@
         }
     }
 }
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: auto;
+    height: var(--space-10);
+
+    &__image {
+        display: block;
+        width: auto;
+        height: var(--space-10);
+    }
+}
