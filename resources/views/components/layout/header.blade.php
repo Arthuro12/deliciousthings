@@ -23,7 +23,7 @@
                   </li>
                </ul> --}}
 
-               @auth
+               {{-- @auth
                   <div class="header__auth-buttons">
                      <form class="logout-form" method="POST" action="/logout">
                         @csrf
@@ -42,7 +42,7 @@
                      <a class="button button--secondary button--sm button--radius-full cta-link" href="{{ url('/login') }}">Anmelden</a>
                      <a class="button button--primary button--sm button--radius-full cta-link" href="{{ url('/signup') }}">Loslegen</a>
                   </div>          
-               @endguest
+               @endguest --}}
             </nav>
 
             <button 
@@ -81,7 +81,7 @@
                      </li>
                   </ul> --}}
 
-                  @auth
+                  {{-- @auth
                      <div class="header__auth-buttons header__auth-buttons--mobile">
                         <form class="drawer-panel__logout-form" method="POST" action="/logout">
                            @csrf
@@ -100,7 +100,7 @@
                         <a class="button button--secondary button--sm button--radius-full cta-link" href="{{ url('/login') }}">Anmelden</a>
                         <a class="button button--primary button--sm button--radius-full cta-link" href="{{ url('/signup') }}">Loslegen</a>
                      </div>  
-                  @endguest
+                  @endguest --}}
                </div>
             </div>
          </div>
