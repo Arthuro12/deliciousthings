@@ -5,17 +5,21 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <title>
-        Deliciousthings — Exploring problems, building useful things
+        Deliciousthings | Exploring problems, building useful things
     </title>
 
     <meta
         name="description"
         content="Deliciousthings is an independent product lab exploring real problems and building useful digital products with real people."
     >
+
+    <link rel="icon" href="/favicon.png" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" size="180×180" href="/apple-touch-icon.png">
 
     @vite(['resources/css/pages/landing.scss'])
 </head>
@@ -616,7 +620,7 @@
 
 
                     <form
-                        action="#"
+                        action="{{ route('newsletter.subscribe') }}"
                         method="POST"
                         class="newsletter-form"
                     >
@@ -638,6 +642,7 @@
                                 placeholder="Your email address"
                                 autocomplete="email"
                                 required
+                                value="{{ old('email') }}"
                             >
 
                             <button
@@ -652,6 +657,24 @@
                         <span class="newsletter-form__hint">
                             No spam. Just product experiments and progress.
                         </span>
+
+                        @error('email')
+                            {{-- <p class="newsletter-form__error">
+                                {{ $message }}
+                            </p> --}}
+                            <x-ui.alert variant="error">
+                                {{ $message }}
+                            </x-ui.alert>
+                        @enderror
+
+                        @if (session('newsletter_success'))
+                            {{-- <p class="newsletter-form__success">
+                                {{ session('newsletter_success') }}
+                            </p> --}}
+                            <x-ui.alert variant="success">
+                                {{ session('newsletter_success') }}
+                            </x-ui.alert>
+                        @endif
 
                     </form>
 

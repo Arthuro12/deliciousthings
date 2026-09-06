@@ -1,4 +1,6 @@
 @use '../components/logo';
+@use '../components/alert';
+@use '../base/root';
 
 :root {
     --color-primary: #e96b8a;
@@ -13,14 +15,14 @@
     --color-neutral-500: #806f69;
     --color-neutral-700: #4c403c;
 
-    --font-sans: 'Inter', sans-serif;
-    --font-display: 'Fraunces', serif;
+    // --font-sans: 'Inter', sans-serif;
+    // --font-display: 'Fraunces', serif;
 
     --container: 1180px;
 
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 28px;
+    // --radius-sm: 8px;
+    // --radius-md: 16px;
+    // --radius-lg: 28px;
 
     --shadow-soft:
         0 20px 60px rgba(59, 37, 34, 0.08);

@@ -20,10 +20,6 @@ use App\Http\Controllers\User\ProjectController;
 //     return Inertia::render('Home');
 // })->name('home');
 
-// Route::get('/prototype', function () {
-//     return view('prototype');
-// })->name('prototype');
-
 // Route::get('/codura', function () {
 //     return view('codura');
 // })->name('codura');
