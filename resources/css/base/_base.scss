@@ -1,19 +1,51 @@
-* {
-    font-family: 'Roboto', sans-serif;
+html {
+    scrollbar-gutter: stable;
 }
 
 body {
   background-attachment: fixed;
+  color: var(--color-text-primary);
 }
 
-h1, h2, h3, h4, h5 {
-    color: var(--color-primary-50);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4,
+.heading-5,
+.heading-6,
+.display-lg,
+.display-md,
+.hero-title,
+.hero-title * {
+    color: var(--color-text-primary);
 }
 
-p {
-    font-size: 16px;
-    line-height: 1.2;
-    color: var(--color-neutral-50);
+p,
+li,
+.body-lg,
+.body-md {
+    color: var(--color-text-primary);
+}
+
+label,
+.label-md,
+.label-sm {
+    color: var(--color-text-secondary);
+}
+
+small {
+    color: var(--color-text-muted);
+}
+
+.caption,
+.micro {
+    color: var(--color-text-muted);
 }
 
 a {
@@ -22,11 +54,22 @@ a {
     color: var(--color-neutral-30);
 }
 
-
 button {
     cursor: pointer;
 }
 
 li {
     list-style-position: inside;
+}
+
+// Hides Alpine.js elements until the library has initialized to prevent flickering.
+[x-cloak] {
+    display: none !important;
+}
+
+button,
+a,
+[role="button"],
+[data-no-double-tap-zoom] {
+    touch-action: manipulation;
 }

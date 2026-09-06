@@ -1,82 +1,286 @@
-@use '../abstracts/breakpoints';
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('/public/fonts/Roboto-Regular.woff2') format('woff2');
-}
-
-h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    line-height: 1.2;
-
-    @include breakpoints.respond-to('medium') {
-        font-size: 2rem;
+@layer base {
+    /* fraunces-regular - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/public/fonts/fraunces-v38-latin/fraunces-v38-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
     }
-}
 
-h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.3;
-
-    @include breakpoints.respond-to('medium') {
-        font-size: 2rem;
+    /* fraunces-500 - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 500;
+        src: url('/public/fonts/fraunces-v38-latin/fraunces-v38-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
     }
-}
 
-h3 {
-    font-size: 1.375rem;
-    font-weight: 600;
-    line-height: 1.4;
-
-    @include breakpoints.respond-to('medium') {
-        font-size: 2rem;
+    /* fraunces-600 - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 600;
+        src: url('/public/fonts/fraunces-v38-latin/fraunces-v38-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
     }
-}
 
-h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.4;
+    /* fraunces-700 - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 700;
+        src: url('/public/fonts/fraunces-v38-latin/fraunces-v38-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
 
-    @include breakpoints.respond-to('medium') {
+    /* inter-regular - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/public/fonts/inter-v20-latin/inter-v20-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    /* inter-500 - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        src: url('/public/fonts/inter-v20-latin/inter-v20-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    /* inter-600 - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        src: url('/public/fonts/inter-v20-latin/inter-v20-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    /* inter-700 - latin */
+    @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        src: url('/public/fonts/inter-v20-latin/inter-v20-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    :root {
+        --font-heading: "Fraunces", serif;
+        --font-body: "Inter", sans-serif;
+    }
+
+    body {
+        font-family: var(--font-body);
+    }
+
+    h1,
+    h2 {
+        font-family: var(--font-heading);
+    }
+
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-body);
+    }
+
+    h1, .heading-1 {
+        font-size: 2.25rem;
+        font-weight: 600;
+        line-height: 1.1;
+
+        @media (min-width: 768px) {
+            font-size: 2.625rem;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 3rem;
+        }
+    }
+
+    h2, .heading-2 {
+        font-size: 1.875rem;
+        font-weight: 600;
+        line-height: 1.12;
+
+        @media (min-width: 768px) {
+            font-size: 2.25rem;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 2.625rem;
+        }
+    }
+
+    h3, .heading-3 {
+        font-size: 1.4375rem;
+        font-weight: 600;
+        line-height: 1.2;
+
+        @media (min-width: 768px) {
+            font-size: 1.75rem;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 1.875rem;
+        }
+    }
+
+    .heading-3--marketing {
+        font-family: var(--font-heading);
+    }
+
+    h4, .heading-4 {
         font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.25;
+
+        @media (min-width: 768px) {
+            font-size: 1.375rem;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 1.5rem;
+        }
     }
-}
 
-h5 {
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5;
-
-    @include breakpoints.respond-to('medium') {
+    h5, .heading-5 {
         font-size: 1.125rem;
+        font-weight: 600;
+        line-height: 1.3;
+
+        @media (min-width: 1024px) {
+            font-size: 1.25rem;
+        }
     }
-}
 
-h6 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.5;
-
-    @include breakpoints.respond-to('medium') {
+    h6, .heading-6 {
         font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.34;
+
+        @media (min-width: 1024px) {
+            font-size: 1.125rem;
+        }
     }
-}
 
-p, label, li {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.4;
-}
-
-span {
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 1.4;
-
-    @include breakpoints.respond-to('medium') {
+    p, li {
         font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.6;
     }
+
+    label, .label-md {
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    .label-sm {
+        font-family: var(--font-body);
+        font-size: 0.8125rem; // 13px
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    span {
+        font-family: var(--font-body);
+        font-size: 0.937rem;
+        font-weight: 400;
+        line-height: 1.5;
+
+        @media (min-width: 1024px) {
+            font-size: 1rem;
+        }
+    }
+
+    .display-lg {
+        font-family: var(--font-heading);
+        font-size: 2.5rem; // 40px
+        font-weight: 600;
+        line-height: 1.05;
+
+        @media (min-width: 768px) {
+            font-size: 3rem; // 48px
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 3.75rem; // 60px
+        }
+    }
+
+    .display-md {
+        font-family: var(--font-heading);
+        font-size: 2.25rem; // 36px
+        font-weight: 600;
+        line-height: 1.08;
+
+        @media (min-width: 768px) {
+            font-size: 2.625rem; // 42px
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 3rem; // 48px
+        }
+    }
+
+    .hero-title, .hero-title * {
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        font-weight: 600;
+        line-height: 1.05;
+
+        @media (min-width: 768px) {
+            font-size: 3rem;
+        }
+
+        @media (min-width: 1025px) {
+            font-size: 3.75rem;
+        }
+    }
+
+    .body-lg {
+        font-family: var(--font-body);
+        font-size: 1.125rem; // 18px
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .body-md {
+        font-family: var(--font-body);
+        font-size: 1rem; // 16px
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .body-sm {
+        font-family: var(--font-body);
+        font-size: 0.875rem; // 14px
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
+    .caption {
+        font-family: var(--font-body);
+        font-size: 0.8125rem; // 13px
+        font-weight: 400;
+        line-height: 1.45;
+    }
+
+    .micro {
+        font-family: var(--font-body);
+        font-size: 0.75rem; // 12px
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
 }

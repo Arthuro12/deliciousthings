@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -15,7 +14,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @var string
      */
-    protected $rootView = 'app';
+    protected $rootView = 'platform';
 
     /**
      * Determines the current asset version.
@@ -36,26 +35,58 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {     
-        $authenticatedUser = $request->user();
-        $userAccount = null;
-        if ($authenticatedUser) {
-            $userAccount = $authenticatedUser->only(['id', 'first_name', 'last_name']);
-            $userAccount['artisan_profile'] = $authenticatedUser->artisan?->only(['id', 'name']);
-        }  
+        $user = $request->user();
 
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => $userAccount,
+                'user' => [
+                    $user?->only(['id', 'first_name', 'last_name', 'email']),
+                ],
             ],
-            'flash' => function () use ($request) {
-                return [
-                    'info' => $request->session()->get('info'),
-                    'success' => $request->session()->get('success'),
-                    'error' => $request->session()->get('error'),
-                ];
-            }
+            'links' => [
+                'guest' => [ 
+                    [
+                        'title' => 'Website',
+                        'href' => route('home'),
+                    ],
+                ],
+                'user' => [
+                    [
+                        'title' => 'Startseite',
+                        'href' => route('app.home'),
+                        'iconName' => 'house',
+                    ], 
+                    [
+                        'title' => 'Projekte',
+                        'href' => route('app.user.projects'),
+                        'iconName' => 'folder',
+                    ],      
+                    [
+                        'title' => 'Chats',
+                        'href' => route('app.user.messages'),
+                        'iconName' => 'message-square',
+                    ], 
+                    [
+                        'title' => 'Anfragen',
+                        'href' => route('app.user.requests'),
+                        'iconName' => 'mail',
+                    ], 
+                    [
+                        'title' => 'Profil',
+                        'href' => route('app.user.profile'),
+                        'iconName' => 'circle-user-round',
+                    ], 
+                ]
+            ],
+            // 'flash' => function () use ($request) {
+            //     return [
+            //         'info' => $request->session()->get('info'),
+            //         'success' => $request->session()->get('success'),
+            //         'error' => $request->session()->get('error'),
+            //     ];
+            // }
         ];
     }
 }

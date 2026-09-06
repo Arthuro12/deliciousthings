@@ -1,0 +1,31 @@
+.logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: auto;
+    height: var(--space-16);
+
+    &__image {
+        display: block;
+        width: auto;
+        height: 2rem; /* 32 px */
+
+        @media (min-width: 48rem) {
+            height: 2.5rem; /* 40 px */
+        }
+    }
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: auto;
+    height: var(--space-10);
+
+    &__image {
+        display: block;
+        width: auto;
+        height: var(--space-10);
+    }
+}

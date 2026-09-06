@@ -1,0 +1,8 @@
+body[data-scroll-locked] {
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+
+.page-content {
+    width: 100%;
+}

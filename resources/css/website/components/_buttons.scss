@@ -1,0 +1,47 @@
+.website-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 3.25rem;
+
+    padding-inline: var(--space-6);
+
+    border: 1px solid var(--color-chocolate-900);
+    border-radius: var(--radius-full);
+
+    background: var(--color-chocolate-900);
+    color: var(--color-text-inverse);
+
+    font-size: var(--font-size-md-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.website-button:hover {
+    transform: translateY(-2px);
+}
+
+.website-button:active {
+    transform: translateY(0);
+}
+
+.website-button--small {
+    min-height: 2.625rem;
+    padding-inline: var(--space-5);
+
+    font-size: var(--font-size-sm);
+}
+
+.website-button--light {
+    border-color: var(--color-neutral-0);
+
+    background: var(--color-neutral-0);
+    color: var(--color-chocolate-900);
+}

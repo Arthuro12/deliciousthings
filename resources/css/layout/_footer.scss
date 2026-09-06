@@ -1,50 +1,78 @@
-@use '../abstracts/breakpoints';
+.footer-wrapper {
+    --footer-text-size: 0.8125rem;
 
-.app-footer {
-    ul li {
-        list-style: none;
+    container-type: inline-size;
+
+    * {
+        font-size: var(--footer-text-size);
+        font-weight: 500;
+        line-height: 1.23rem;
+        letter-spacing: 0;
     }
 
-    background-color: var(--color-primary-50);
-    padding: 24px;
-    min-height: 350px;
-
     .footer {
-        &__content {
+        &__main {
+            background-color: var(--color-neutral-900);
+            color: var(--color-neutral-0);
+            padding: 48px 24px 32px;
+        }
+
+        &__bottom {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+            gap: calc(0.25rem * 8);
+            width: 100%;
+        }
+
+        &__section-header {
+            color: var(--color-neutral-100);
+        }
+        
+        &__sections {
+            display: flex;
+            flex-direction: column;
+            gap: calc(0.25rem * 10);
+        }
+
+        &__section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        &__items {
+            display: flex;
+            gap: calc(0.25rem * 5);
+            margin-top: calc(0.25rem * 4);
         }
 
         &__item {
-            padding: 14px;
+            color: var(--color-neutral-0);
         }
 
-        &__header {
-            font-weight: 700;
-            color: var(--color-neutral-10);
-            margin-bottom: 14px;
-        }
-
-        &__contact {
-            margin-bottom: 14px;
-        }
-
-        &__social-links {
-            width: fit-content;
-            
-            .footer__social-link {
-                display: block;
+        &__link {
+            color: var(--color-neutral-0);
+        
+            &:hover {
+                color: var(--color-neutral-300);
+                text-decoration: underline;
+                text-underline-offset: 4px;
             }
         }
     }
 
-    * {
-        color: var(--color-neutral-0);
-    }
+    @container (min-width: 768px) {
+        .footer {
+            &__bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
 
-    @include breakpoints.respond-to('medium') {
-        .copyright {
-            align-self: end;
+            &__sections {
+                flex-direction: row;
+            }
         }
     }
 }

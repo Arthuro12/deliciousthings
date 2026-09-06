@@ -1,31 +1,4 @@
 :root {
-    --color-primary-0: #eee8ea;
-    --color-primary-10: #fcf1f5;
-    --color-primary-20: #f9e0e9;
-    --color-primary-30: #f0b2c9;
-    --color-primary-50: #e680a5;
-    --color-secondary-10: #c8aaa7;
-    --color-secondary-50: #5a3535;
-    --color-neutral-0: #ffffff;
-    --color-neutral-10: #e0e0e0;
-    --color-neutral-20: #99A3B5;
-    --color-neutral-30: #696c70;
-    --color-neutral-40: #0f0f0f;
-    --color-neutral-50: #000000;
-    --color-error-10: #e68e80;
-    --color-error-20: #d64425;
-    --color-error-40: #b62000;
-    --color-error-50: #9a0b00;
-    --color-success-0: #80e6c1;
-    --color-success-10: #00d295;
-    --color-success-20: #00c882;
-    --color-success-50: #007243;
-    --color-input-error: #f73003;
-    --color-link-blue: #065fd4;
-    --shadow-elevation-1: 0 0 5px 3px light-dark(#e680a5, #e680a5);
-}
-
-:root {
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
     --text-base: 1rem;
@@ -33,4 +6,284 @@
     --text-xl: 1.25rem;
     --text-2xl: 1.5rem;
     --text-3xl: 1.875rem;
+}
+
+:root {
+    /* Brand Colors */
+    --color-brand-primary-50: #fff3f5;
+    --color-brand-primary-100: #ffe4e8;
+    --color-brand-primary-200: #ffc9d3;
+    --color-brand-primary-300: #f99aaa;
+    --color-brand-primary-400: #ef6f86;
+    --color-brand-primary-500: #df4d69;
+    --color-brand-primary-600: #cf3d5b;
+    --color-brand-primary-700: #ad2f49;
+    --color-brand-primary-800: #8f2a3f;
+    --color-brand-primary-900: #752638;
+
+    /* Secondary Chocolate Colors */
+    --color-chocolate-50: #fbf6f2;
+    --color-chocolate-100: #f4e8df;
+    --color-chocolate-200: #e6cfc1;
+    --color-chocolate-300: #d2ad9a;
+    --color-chocolate-400: #b98269;
+    --color-chocolate-500: #985f45;
+    --color-chocolate-600: #794731;
+    --color-chocolate-700: #5d3323;
+    --color-chocolate-800: #432317;
+    --color-chocolate-900: #2b140d;
+
+    /* Neutral Colors */
+    --color-neutral-0: #ffffff;
+    --color-neutral-50: #fffaf8;
+    --color-neutral-100: #f8f1ee;
+    --color-neutral-200: #eadeda;
+    --color-neutral-300: #d7c6bf;
+    --color-neutral-400: #ad9890;
+    --color-neutral-500: #806a62;
+    --color-neutral-600: #654f47;
+    --color-neutral-700: #4b362f;
+    --color-neutral-800: #351f18;
+    --color-neutral-900: #20100b;
+
+    /* Semantic Colors */
+    --color-success-50: #eef9ef;
+    --color-success-100: #d8f1db;
+    --color-success-500: #48a85a;
+    --color-success-700: #2e7d3c;
+
+    --color-warning-50: #fff8e8;
+    --color-warning-100: #ffedbd;
+    --color-warning-500: #f2a33a;
+    --color-warning-700: #a76516;
+
+    --color-danger-50: #fff0f2;
+    --color-danger-100: #ffd9df;
+    --color-danger-500: #df4d69;
+    --color-danger-700: #ad2f49;
+
+    --color-info-50: #f2f7ff;
+    --color-info-100: #ddeaff;
+    --color-info-500: #4f7fcf;
+    --color-info-700: #345b99;
+
+    /* Text Colors */
+    --color-text-primary: #2b140d;
+    --color-text-secondary: #654f47;
+    --color-text-muted: #806a62;
+    --color-text-subtle: #ad9890;
+    --color-text-inverse: #ffffff;
+    --color-text-brand: #df4d69;
+    --color-text-link: #cf3d5b;
+    --color-text-success: #2e7d3c;
+    --color-text-warning: #a76516;
+    --color-text-danger: #ad2f49;
+
+    /* Background Colors */
+    --color-background-page: #fffaf8;
+    --color-background-soft: #fff3f5;
+    --color-background-elevated: #ffffff;
+    --color-background-muted: #f8f1ee;
+    --color-background-warm: #fbf6f2;
+    --color-background-blush: #ffeef1;
+    --color-background-overlay: rgba(43, 20, 13, 0.48);
+
+    /* Surface Colors */
+    --color-surface-card: #ffffff;
+    --color-surface-card-soft: #fffaf8;
+    --color-surface-input: #ffffff;
+    --color-surface-chip: #fff3f5;
+    --color-surface-chip-selected: #ffe4e8;
+    --color-surface-nav-active: #fff0f2;
+    --color-surface-disabled: #f4e8df;
+
+    /* Border Colors */
+    --color-border-subtle: #f0e4df;
+    --color-border-default: #e6d6cf;
+    --color-border-strong: #d7c6bf;
+    --color-border-brand: #ef6f86;
+    --color-border-brand-soft: #ffc9d3;
+    --color-border-focus: #df4d69;
+    --color-border-success: #a8dcae;
+    --color-border-warning: #f3cf85;
+    --color-border-danger: #ef6f86;
+
+    /* Button Colors */
+    --button-primary-background: #df4d69;
+    --button-primary-background-hover: #cf3d5b;
+    --button-primary-background-active: #ad2f49;
+    --button-primary-text: #ffffff;
+    --button-primary-border: #df4d69;
+
+    --button-secondary-background: #ffffff;
+    --button-secondary-background-hover: #fff3f5;
+    --button-secondary-text: #df4d69;
+    --button-secondary-border: #ef6f86;
+
+    --button-ghost-background: transparent;
+    --button-ghost-background-hover: #fff3f5;
+    --button-ghost-text: #654f47;
+    --button-ghost-text-hover: #df4d69;
+
+    /* Form Colors */
+    --input-background: #ffffff;
+    --input-background-hover: #fffaf8;
+    --input-background-disabled: #f8f1ee;
+    --input-border: #e6d6cf;
+    --input-border-hover: #d7c6bf;
+    --input-border-focus: #df4d69;
+    --input-text: #2b140d;
+    --input-placeholder: #ad9890;
+    --input-icon: #806a62;
+    --input-error: #df4d69;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.8125rem;
+    --font-size-md-sm: 0.875rem; 
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+
+    --line-height-tight: 1.15;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.7;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    /* Spacing */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+
+    /* Radius */
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 999px;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(43, 20, 13, 0.06);
+    --shadow-sm: 0 2px 6px rgba(43, 20, 13, 0.08);
+    --shadow-md: 0 8px 24px rgba(43, 20, 13, 0.1);
+    --shadow-lg: 0 16px 40px rgba(43, 20, 13, 0.14);
+    --shadow-xl: 0 24px 64px rgba(43, 20, 13, 0.18);
+    --shadow-focus: 0 0 0 4px rgba(223, 77, 105, 0.16);
+    --shadow-card-hover: 0 12px 32px rgba(43, 20, 13, 0.12);
+
+    /* Layout */
+    --layout-container-sm: 640px;
+    --layout-container-md: 768px;
+    --layout-container-lg: 1024px;
+    --layout-container-xl: 1200px;
+    --layout-container-2xl: 1320px;
+
+    --layout-page-padding-mobile: 1rem;
+    --layout-page-padding-tablet: 1.5rem;
+    --layout-page-padding-desktop: 2rem;
+
+    --website-header-height: var(--space-16);
+
+    --layout-header-height-mobile: 4rem;
+    --layout-header-height-desktop: 5rem;
+    --layout-bottom-nav-height: 4.5rem;
+    --layout-sidebar-width: 18rem;
+
+    /* Components */
+    --card-background: var(--color-surface-card);
+    --card-border: var(--color-border-subtle);
+    --card-radius: var(--radius-xl);
+    --card-shadow: var(--shadow-sm);
+    --card-shadow-hover: var(--shadow-card-hover);
+    --card-padding-sm: var(--space-4);
+    --card-padding-md: var(--space-5);
+    --card-padding-lg: var(--space-6);
+
+    --badge-background: var(--color-brand-primary-50);
+    --badge-text: var(--color-brand-primary-700);
+    --badge-border: var(--color-brand-primary-200);
+    --badge-success-background: var(--color-success-50);
+    --badge-success-text: var(--color-success-700);
+    --badge-warning-background: var(--color-warning-50);
+    --badge-warning-text: var(--color-warning-700);
+
+    --chip-background: var(--color-surface-chip);
+    --chip-background-selected: var(--color-surface-chip-selected);
+    --chip-text: var(--color-chocolate-700);
+    --chip-text-selected: var(--color-brand-primary-700);
+    --chip-border: var(--color-border-subtle);
+    --chip-border-selected: var(--color-brand-primary-300);
+
+    --tab-background: #ffffff;
+    --tab-background-active: #df4d69;
+    --tab-text: #654f47;
+    --tab-text-active: #ffffff;
+    --tab-border: #e6d6cf;
+
+    --search-panel-background: rgba(255, 255, 255, 0.94);
+    --search-panel-border: rgba(230, 214, 207, 0.8);
+    --search-panel-shadow: 0 12px 36px rgba(43, 20, 13, 0.12);
+
+    --hero-background: #fff3f5;
+    --hero-title: #2b140d;
+    --hero-title-accent: #df4d69;
+    --hero-text: #4b362f;
+
+    --bottom-nav-background: rgba(255, 255, 255, 0.96);
+    --bottom-nav-border: #f0e4df;
+    --bottom-nav-icon: #806a62;
+    --bottom-nav-icon-active: #df4d69;
+    --bottom-nav-text: #654f47;
+    --bottom-nav-text-active: #df4d69;
+
+    /* Icons */
+    --icon-color-default: #806a62;
+    --icon-color-muted: #ad9890;
+    --icon-color-brand: #df4d69;
+    --icon-color-chocolate: #794731;
+    --icon-color-success: #48a85a;
+    --icon-color-warning: #f2a33a;
+    --icon-size-xs: 0.875rem;
+    --icon-size-sm: 1rem;
+    --icon-size-md: 1.25rem;
+    --icon-size-lg: 1.5rem;
+    --icon-size-xl: 2rem;
+
+    /* Motion */
+    --transition-fast: 120ms ease;
+    --transition-base: 180ms ease;
+    --transition-slow: 260ms ease;
+    --transition-enter: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-exit: 160ms cubic-bezier(0.7, 0, 0.84, 0);
+
+    /* Z Index */
+    --z-index-base: 1;
+    --z-index-dropdown: 20;
+    --z-index-sticky: 30;
+    --z-index-header: 4;
+    --z-index-drawer: 50;
+    --z-index-modal: 60;
+    --z-index-toast: 70;
 }

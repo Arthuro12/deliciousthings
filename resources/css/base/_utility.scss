@@ -1,6 +1,4 @@
 
-@use '../abstracts/breakpoints' as breakpoints;
-
 .font-medium  {
     font-weight: 500;
 }
@@ -11,10 +9,6 @@
 
 .font-bold {
     font-weight: bold;
-}
-
-.flex {
-    display: flex;
 }
 
 .block {
@@ -33,6 +27,10 @@
     font-size: 14px;
 }
 
+.logo {
+    text-decoration: none;
+}
+
 .cursor--pointer {
     cursor: pointer;
 }
@@ -44,10 +42,6 @@
 
 .text--center {
     text-align: center;
-}
-
-.align-end {
-    align-self: end;
 }
 
 .truncate {
@@ -74,5 +68,17 @@
 }
 
 .list-none {
-    list-style-type: none;
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.align-end {
+    align-self: end;
+}
+
+.justify-end {
+    justify-content: end
 }

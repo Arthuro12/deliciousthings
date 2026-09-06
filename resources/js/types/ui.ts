@@ -1,3 +1,4 @@
+import type { FunctionalComponent, SVGAttributes } from "vue";
 import type { AcceptableValue } from "reka-ui";
 
 export type ClassType = string | Record<string, boolean>;
@@ -72,4 +73,32 @@ export type Radio = {
     value: AcceptableValue;
     name?: string;
     label: string;
+};
+
+export type Link = {
+    href: string;
+    title: string;
+    iconName?: string;
+    class?: VueClass;
+};
+
+export type AppLinkCategory = "guest" | "user";
+
+export type AppLinks = Record<AppLinkCategory, Link[]>;
+
+export type NavMenuType = "PUBLIC" | "USER";
+
+export type NavMenuLink = Link;
+
+export type NavMenuRecord = Record<NavMenuType, NavMenuLink[]>;
+
+export interface IconProps extends Partial<SVGAttributes> {
+    size?: 24 | number;
+    strokeWidth?: number | string;
+    absoluteStrokeWidth?: boolean;
+    "absolute-stroke-width"?: boolean;
+}
+
+export type NavigationLinkIcons = {
+    [key: string]: FunctionalComponent<IconProps>;
 };

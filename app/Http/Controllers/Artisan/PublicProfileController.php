@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Artisan;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Artisan;
@@ -16,7 +15,7 @@ class PublicProfileController extends Controller
 
     public function show(Artisan $artisan)
     {
-        $profile = $this->artisanService->getProfile($artisan, ['bakedGoods', 'dietaryOptions']);
+        $profile = $this->artisanService->getProfile($artisan, ['bakedGoods', 'dietaryOptions', 'services']);
         $profile['profile_photo'] = $this->artisanService->getProfilePhoto($artisan);
         $profile['gallery'] = [...$this->artisanService->getGallery($artisan)];
 

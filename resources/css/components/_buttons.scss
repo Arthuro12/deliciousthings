@@ -1,74 +1,403 @@
 .button {
-    font-size: 1rem;
-    line-height: 1.4;
-    display: flex;
+    --button-font-size: var(--font-size-md-sm, 14px);
+
+    font-size: var(--button-font-size);
+}
+
+// ==========================================================================
+// Buttons
+// ==========================================================================
+
+.button {
+    // ----------------------------------------------------------------------
+    // Tokens
+    // ----------------------------------------------------------------------
+
+    --button-height: 2.75rem;
+    --button-padding-inline: 1.125rem;
+    --button-gap: 0.5rem;
+    --button-radius: var(--border-radius-md, 0.625rem);
+    --button-font-size: var(--font-size-body-sm, 0.9375rem);
+    --button-font-weight: 600;
+    --button-line-height: 1.25;
+
+    --button-color: var(--color-text-primary);
+    --button-background: transparent;
+    --button-border-color: transparent;
+
+    --button-hover-color: var(--button-color);
+    --button-hover-background: var(--button-background);
+    --button-hover-border-color: var(--button-border-color);
+
+    --button-active-color: var(--button-hover-color);
+    --button-active-background: var(--button-hover-background);
+    --button-active-border-color: var(--button-hover-border-color);
+
+    --button-focus-visible-border-color: var(--color-brand-primary-500);
+
+    --button-radius: var(--border-radius-md, 0.625rem);
+
+    // ----------------------------------------------------------------------
+    // Base
+    // ----------------------------------------------------------------------
+
+    display: inline-flex;
+    min-height: var(--button-height);
+    padding-inline: var(--button-padding-inline);
+
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 5px;
-    padding: 0;
+    gap: var(--button-gap);
+
+    color: var(--button-color);
+    background-color: var(--button-background);
+    border: 1px solid var(--button-border-color);
+    border-radius: var(--button-radius);
+
+    font: inherit;
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    line-height: var(--button-line-height);
+
+    text-decoration: none;
+    white-space: nowrap;
+
     cursor: pointer;
-}
 
-// Rules for button layouts.
+    transition:
+        color 150ms ease,
+        background-color 150ms ease,
+        border-color 150ms ease,
+        transform 100ms ease;
 
-.button--with-icon {
-    align-items: center;
-    column-gap: 12px;
-}
-
-.button--icon {
-    display: block;
-    padding: 6px;
-}
-
-// Rules for button variants.
-
-.button--primary {
-    background-color: var(--color-primary-50);
-    color: var(--color-neutral-0);
-
-    * {
-        color: var(--color-neutral-0);
-    }
-}
-
-.button--secondary {
-    background: none;
-    color: var(--color-primary-50);
-    border: 1px solid var(--color-primary-50);
-
-    * {
-        color: var(--color-primary-50);
-    }
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
-        background-color: var(--color-primary-10);
+        color: var(--button-hover-color);
+        background-color: var(--button-hover-background);
+        border-color: var(--button-hover-border-color);
+    }
+
+    &:active {
+        color: var(--button-active-color);
+        background-color: var(--button-active-background);
+        border-color: var(--button-active-border-color);
+        transform: translateY(1px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--button-focus-visible-border-color);
+        outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    // ----------------------------------------------------------------------
+    // Icon
+    // ----------------------------------------------------------------------
+
+    > svg {
+        width: 1.125rem;
+        height: 1.125rem;
+        flex: 0 0 auto;
+        stroke-width: 2;
+    }
+
+    // ----------------------------------------------------------------------
+    // Sizes
+    // ----------------------------------------------------------------------
+
+    &--sm {
+        --button-height: 2.25rem;
+        --button-padding-inline: 0.875rem;
+        --button-gap: 0.375rem;
+        --button-radius: var(--border-radius-sm, 0.5rem);
+        --button-font-size: var(--font-size-body-xs, 0.875rem);
+
+        .button__loader {
+            width: 0.875rem;
+            height: 0.875rem;
+            border-width: 1.5px;
+        }
+
+        > svg {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    &--md {
+        // Default
+    }
+
+    &--lg {
+        --button-height: 3rem;
+        --button-padding-inline: 1.375rem;
+        --button-gap: 0.625rem;
+        --button-font-size: var(--font-size-body-md, 1rem);
+
+        .button__loader {
+            width: 1.125rem;
+            height: 1.125rem;
+            border-width: 2px;
+        }
+
+        > svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    // ----------------------------------------------------------------------
+    // Primary
+    // ----------------------------------------------------------------------
+
+    &--primary {
+        --button-color: var(--color-neutral-0, #fff);
+        --button-background: var(--color-brand-primary-500);
+        --button-border-color: var(--color-brand-primary-500);
+
+        --button-hover-background: var(--color-brand-primary-600);
+        --button-hover-border-color: var(--color-brand-primary-600);
+
+        --button-active-background: var(--color-brand-primary-700);
+        --button-active-border-color: var(--color-brand-primary-700);
+    }
+
+    // ----------------------------------------------------------------------
+    // Secondary
+    // ----------------------------------------------------------------------
+
+    &--secondary {
+        --button-color: var(--color-neutral-0, #fff);
+        --button-background: var(--color-chocolate-800);
+        --button-border-color: var(--color-chocolate-800);
+
+        --button-hover-background: var(--color-chocolate-900);
+        --button-hover-border-color: var(--color-chocolate-900);
+
+        --button-active-background: var(--color-chocolate-900);
+        --button-active-border-color: var(--color-chocolate-900);
+    }
+
+    // ----------------------------------------------------------------------
+    // Outline
+    // ----------------------------------------------------------------------
+
+    &--outline {
+        --button-color: var(--color-chocolate-800);
+        --button-background: transparent;
+        --button-border-color: var(--color-chocolate-200);
+
+        --button-hover-color: var(--color-chocolate-900);
+        --button-hover-background: var(--color-chocolate-50);
+        --button-hover-border-color: var(--color-chocolate-300);
+
+        --button-active-color: var(--color-chocolate-900);
+        --button-active-background: var(--color-chocolate-100);
+        --button-active-border-color: var(--color-chocolate-300);
+    }
+
+    // ----------------------------------------------------------------------
+    // Ghost
+    // ----------------------------------------------------------------------
+
+    &--ghost {
+        --button-color: var(--color-text-secondary);
+        --button-background: transparent;
+        --button-border-color: transparent;
+
+        --button-hover-color: var(--color-chocolate-800);
+        --button-hover-background: var(--color-chocolate-50);
+        --button-hover-border-color: transparent;
+
+        --button-active-color: var(--color-chocolate-900);
+        --button-active-background: var(--color-chocolate-100);
+        --button-active-border-color: transparent;
+
+        --button-focus-visible-border-color: var(--color-chocolate-100);
+
+
+
+        --button-padding-inline: 0.75rem;
+    }
+
+    // ----------------------------------------------------------------------
+    // Danger
+    // ----------------------------------------------------------------------
+
+    &--danger {
+        --button-color: var(--color-neutral-0, #fff);
+        --button-background: var(--color-error-500);
+        --button-border-color: var(--color-error-500);
+
+        --button-hover-background: var(--color-error-600);
+        --button-hover-border-color: var(--color-error-600);
+
+        --button-active-background: var(--color-error-700);
+        --button-active-border-color: var(--color-error-700);
+    }
+
+    // ----------------------------------------------------------------------
+    // Danger outline
+    // ----------------------------------------------------------------------
+
+    &--danger-outline {
+        --button-color: var(--color-error-600);
+        --button-background: transparent;
+        --button-border-color: var(--color-error-200);
+
+        --button-hover-color: var(--color-error-700);
+        --button-hover-background: var(--color-error-50);
+        --button-hover-border-color: var(--color-error-300);
+
+        --button-active-color: var(--color-error-700);
+        --button-active-background: var(--color-error-100);
+        --button-active-border-color: var(--color-error-300);
+    }
+
+    // ----------------------------------------------------------------------
+    // Full width
+    // ----------------------------------------------------------------------
+
+    &--full {
+        width: 100%;
+    }
+
+    &--radius-none { 
+        --button-radius: 0; 
+    } 
+    
+    &--radius-sm { 
+        --button-radius: var(--border-radius-sm, 0.5rem); 
+    } 
+    
+    &--radius-md { 
+        --button-radius: var(--border-radius-md, 0.625rem); 
+    } 
+    
+    &--radius-lg { 
+        --button-radius: var(--border-radius-lg, 0.75rem); 
+    } 
+    
+    &--radius-xl { 
+        --button-radius: var(--border-radius-xl, 1rem); 
+    } 
+    
+    &--radius-full { 
+        --button-radius: 9999px; 
+    }
+
+    // ----------------------------------------------------------------------
+    // Icon button
+    // ----------------------------------------------------------------------
+
+    &--icon,
+    &--circle { 
+        --button-radius: 50%; 
+    }
+
+    &--icon {
+        width: var(--button-height);
+        padding: 0;
+        border-radius: 50%;
+
+        > svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        &.button--sm {
+            > svg {
+                width: 1rem;
+                height: 1rem;
+            }
+        }
+
+        &.button--lg {
+            > svg {
+                width: 1.375rem;
+                height: 1.375rem;
+            }
+        }
+    }
+
+    // ----------------------------------------------------------------------
+    // Loading
+    // ----------------------------------------------------------------------
+
+    &.is-loading {
+        cursor: wait;
+        pointer-events: none;
+
+        .button__loader {
+            animation: button-loader-spin 700ms linear infinite;
+        }
+
+        > svg {
+            animation: button-spin 700ms linear infinite;
+        }
     }
 }
 
-.button--tertiary {
-    background: none;
-    color: var(--color-primary-50);
+
+// ==========================================================================
+// Button group
+// ==========================================================================
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &--end {
+        justify-content: flex-end;
+    }
+
+    &--full {
+        > .button {
+            flex: 1;
+        }
+    }
 }
 
-// Rules for button sizes.
 
-.button--small {
-    padding: 5px 12px;
+// ==========================================================================
+// Mobile
+// ==========================================================================
+
+@media (max-width: 39.99rem) {
+    .button {
+        // Slightly larger touch target on mobile.
+        &--lg {
+            --button-height: 3.25rem;
+        }
+    }
+
+    .button-group {
+        &--stack-mobile {
+            flex-direction: column;
+            align-items: stretch;
+
+            > .button {
+                width: 100%;
+            }
+        }
+    }
 }
 
-.button--medium {
-    padding: 10px 16px;
+
+// ==========================================================================
+// Animation
+// ==========================================================================
+
+@keyframes button-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
-
-.button--large {
-    padding: 14px 24px;
-}
-
-// Disabled state.
-
-.button--disabled {
-    opacity: 0.5;
-}
-

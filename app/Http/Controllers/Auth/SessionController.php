@@ -4,35 +4,51 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
-use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use App\Actions\ClaimGuestRequest;
 
 class SessionController extends Controller
 {
     public function create()
     {
-        return Inertia::render('auth/Login');
+        return view('login');
     }
 
-    public function store(Request $request)
-    {
+    public function login(
+        Request $request,
+        ClaimGuestRequest $claimGuestRequest,
+    ) {
         $credentials = $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', Password::min(8)],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect('/');
+        if (!Auth::attempt($credentials)) {
+            return back()
+                ->withErrors(
+                    ['message' => __('The provided credentials do not match our records.')],
+                    'login',
+                )
+                ->withInput($request->except('password'));
         }
 
-        return back()->withErrors(['message' => __('The provided credential do not match our records.')], 'login');
+        $request->session()->regenerate();
+        $claimGuestRequest->handle($request, $request->user());
+
+        if ($request->session()->pull('request_builder_after_auth', false)) {
+            return to_route('app.requests.create', [
+                'step' => 'preview',
+            ]);
+        }
+
+        return to_route('app.home');
     }
 
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
 
@@ -40,6 +56,6 @@ class SessionController extends Controller
         $request->session()->regenerateToken();
         Log::notice(now()->toString() . json_encode(Auth::user()));
 
-        return redirect('/');
+        return to_route('home');
     }
 }

@@ -9,3 +9,18 @@ export enum AddressVisibility {
     City = "city",
     Private = "private",
 };
+
+export enum ProjectStatus {
+    Draft = "draft",
+    Planning = "planning",
+    InProgress = "In-progress",
+    Completed = "completed",
+    Canclelled = "cancelled",
+};
+
+export enum CurrencyCode {
+    Eur = "EUR",
+    Usd = "USD",
+    Gbp = "GBP",
+    Chf = "CHF",
+};
