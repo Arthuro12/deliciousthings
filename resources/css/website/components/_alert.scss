@@ -1,4 +1,6 @@
 .alert {
+    --z-index-toast: 11;
+    
     position: fixed;
     top: 24px;
     right: 24px;

@@ -1,0 +1,29 @@
+.website-section {
+    padding-block: var(--space-24);
+}
+
+.website-section--soft {
+    background: var(--color-background-muted);
+}
+
+.website-section-heading {
+    max-width: 760px;
+    margin-bottom: var(--space-16);
+}
+
+.website-section-heading h2 {
+    margin-bottom: var(--space-5);
+
+    font-size: clamp(2.625rem, 5vw, 4rem);
+    line-height: 1.05;
+}
+
+.website-section-heading p {
+    max-width: 650px;
+
+    margin-bottom: 0;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-lg);
+}
