@@ -1,0 +1,243 @@
+:root {
+    /*
+    |--------------------------------------------------------------------------
+    | Typography
+    |--------------------------------------------------------------------------
+    */
+
+    --font-family-sans: 'Inter', sans-serif;
+    --font-family-display: 'Fraunces', serif;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.8125rem;
+    --font-size-md-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+
+    --line-height-tight: 1.15;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.7;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Brand
+    |--------------------------------------------------------------------------
+    */
+
+    --color-brand-primary-50: #fff3f5;
+    --color-brand-primary-100: #ffe4e8;
+    --color-brand-primary-200: #ffc9d3;
+    --color-brand-primary-300: #f99aaa;
+    --color-brand-primary-400: #ef6f86;
+    --color-brand-primary-500: #df4d69;
+    --color-brand-primary-600: #cf3d5b;
+    --color-brand-primary-700: #ad2f49;
+    --color-brand-primary-800: #8f2a3f;
+    --color-brand-primary-900: #752638;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Chocolate
+    |--------------------------------------------------------------------------
+    */
+
+    --color-chocolate: #3b2522;
+    --color-chocolate-50: #fbf6f2;
+    --color-chocolate-100: #f4e8df;
+    --color-chocolate-200: #e6cfc1;
+    --color-chocolate-300: #d2ad9a;
+    --color-chocolate-400: #b98269;
+    --color-chocolate-500: #985f45;
+    --color-chocolate-600: #794731;
+    --color-chocolate-700: #5d3323;
+    --color-chocolate-800: #432317;
+    --color-chocolate-900: #2b140d;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Neutral
+    |--------------------------------------------------------------------------
+    */
+
+    --color-neutral-0: #ffffff;
+    --color-neutral-50: #fffaf8;
+    --color-neutral-100: #f8f1ee;
+    --color-neutral-200: #eadeda;
+    --color-neutral-300: #d7c6bf;
+    --color-neutral-400: #ad9890;
+    --color-neutral-500: #806a62;
+    --color-neutral-600: #654f47;
+    --color-neutral-700: #4b362f;
+    --color-neutral-800: #351f18;
+    --color-neutral-900: #20100b;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Semantic
+    |--------------------------------------------------------------------------
+    */
+
+    --color-success-50: #eef9ef;
+    --color-success-100: #d8f1db;
+    --color-success-500: #48a85a;
+    --color-success-700: #2e7d3c;
+
+    --color-warning-50: #fff8e8;
+    --color-warning-100: #ffedbd;
+    --color-warning-500: #f2a33a;
+    --color-warning-700: #a76516;
+
+    --color-danger-50: #fff0f2;
+    --color-danger-100: #ffd9df;
+    --color-danger-500: #df4d69;
+    --color-danger-700: #ad2f49;
+
+    --color-info-50: #f2f7ff;
+    --color-info-100: #ddeaff;
+    --color-info-500: #4f7fcf;
+    --color-info-700: #345b99;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Semantic text
+    |--------------------------------------------------------------------------
+    */
+
+    --color-text-primary: var(--color-chocolate-900);
+    --color-text-secondary: var(--color-neutral-600);
+    --color-text-muted: var(--color-neutral-500);
+    --color-text-subtle: var(--color-neutral-400);
+    --color-text-inverse: var(--color-neutral-0);
+
+    --color-text-brand: var(--color-brand-primary-500);
+    --color-text-link: var(--color-brand-primary-600);
+
+    --color-text-success: var(--color-success-700);
+    --color-text-warning: var(--color-warning-700);
+    --color-text-danger: var(--color-danger-700);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Background
+    |--------------------------------------------------------------------------
+    */
+
+    --color-background-page: var(--color-neutral-50);
+    --color-background-soft: var(--color-brand-primary-50);
+    --color-background-elevated: var(--color-neutral-0);
+    --color-background-muted: var(--color-neutral-100);
+    --color-background-warm: var(--color-chocolate-50);
+    --color-background-brand: var(--color-brand-primary-500);
+    --color-background-dark: var(--color-chocolate-900);
+
+    --color-background-primary: #e96b8a;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Border
+    |--------------------------------------------------------------------------
+    */
+
+    --color-border-subtle: #f0e4df;
+    --color-border-default: #e6d6cf;
+    --color-border-strong: #d7c6bf;
+
+    --color-border-brand: var(--color-brand-primary-400);
+    --color-border-focus: var(--color-brand-primary-500);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Spacing
+    |--------------------------------------------------------------------------
+    */
+
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Radius
+    |--------------------------------------------------------------------------
+    */
+
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 999px;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Shadows
+    |--------------------------------------------------------------------------
+    */
+
+    --shadow-xs: 0 1px 2px rgba(43, 20, 13, 0.06);
+    --shadow-sm: 0 2px 6px rgba(43, 20, 13, 0.08);
+    --shadow-md: 0 8px 24px rgba(43, 20, 13, 0.10);
+    --shadow-lg: 0 16px 40px rgba(43, 20, 13, 0.14);
+    --shadow-xl: 0 24px 64px rgba(43, 20, 13, 0.18);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Layout
+    |--------------------------------------------------------------------------
+    */
+
+    --website-container-width: 1180px;
+
+    --website-page-padding-mobile: 1rem;
+    --website-page-padding-tablet: 1.5rem;
+    --website-page-padding-desktop: 2rem;
+
+    --website-header-height: 4.75rem;
+    --website-footer-height: 7.5rem;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Motion
+    |--------------------------------------------------------------------------
+    */
+
+    --transition-fast: 120ms ease;
+    --transition-base: 180ms ease;
+    --transition-slow: 260ms ease;
+}
