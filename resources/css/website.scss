@@ -2,6 +2,10 @@
 @use 'website/base';
 @use 'website/layout';
 
+@use 'layout/auth';
+@use 'base' as *;
+@use 'components';
+
 @use 'website/components/buttons';
 @use 'website/components/header';
 @use 'website/components/footer';

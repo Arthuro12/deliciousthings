@@ -15,7 +15,7 @@
     - `cp .env.example .env`
     - `composer install`
     - `php artisan key:generate` 
-    - `php artisan migrate` will run the migration files
+    - `php artisan migrate --seed` will run the migration files and seed the pastry catalog
     - `php artisan route:cache`
     - `npm install`
     - `npm run build`

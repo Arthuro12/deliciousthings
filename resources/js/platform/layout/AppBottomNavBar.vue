@@ -1,6 +1,7 @@
 <template>
     <nav
         class="bottom-navbar"
+        :style="{ '--bottom-nav-columns': mainNavigationLinks.length }"
         aria-label="Mobile Hauptnavigation"
     >
         <Link
@@ -55,7 +56,7 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
     left: 0;
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--bottom-nav-columns, 4), minmax(0, 1fr));
 
     min-height: 70px;
 
@@ -71,11 +72,11 @@ const { mainNavigationLinks } = useNavigation(props.links.user);
         0 8px 28px rgb(54 36 29 / 10%),
         0 2px 8px rgb(54 36 29 / 4%);
 
-    right: 8px;
-    left:8px;
-    bottom: 16px;
+    right: 12px;
+    left: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
 
-    box-shadow: 0 -4px 20px rgb(54 36 29 / 4%);
+    box-shadow: 0 8px 28px rgb(54 36 29 / 10%);
 
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);

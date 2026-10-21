@@ -1,80 +1,35 @@
 <?php
 
+use App\Http\Controllers\Artisan\ProfileController as ArtisanProfileController;
+use App\Http\Controllers\Artisan\CreationController as ArtisanCreationController;
+use App\Http\Controllers\Artisan\ServiceRequestController as ArtisanServiceRequestController;
+use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\User\CollaborationRequestController;
 use App\Http\Controllers\User\MessageController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Middleware\HandleInertiaRequests;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ServiceRequestController;
-use App\Http\Controllers\User\ProjectController;
-// use App\Http\Controllers\Auth\RegistrationController;
-// use App\Http\Controllers\Auth\SessionController;
-// use App\Http\Controllers\Artisan\ProfileController;
-// use App\Http\Controllers\Artisan\MessageController;
-// use App\Http\Controllers\SearchController;
+Route::get('/app', fn () => Inertia::render('Home'))->name('home');
 
-// Route::get('app/', function () {
-//     return Inertia::render('Home');
-// })->name('home');
+Route::post('/app/requests/{serviceRequest}/complete', [ServiceRequestController::class, 'complete'])->name('requests.complete');
+Route::post('/app/requests/{serviceRequest}/cancel', [ServiceRequestController::class, 'cancel'])->name('requests.cancel');
 
-// Route::get('/codura', function () {
-//     return view('codura');
-// })->name('codura');
+Route::get('/app/projects', [ProjectController::class, 'index'])->name('user.projects');
+Route::get('/app/projects/create', [ProjectController::class, 'create'])->name('user.projects.create');
+Route::get('/app/messages', [MessageController::class, 'index'])->name('user.messages');
+Route::get('/app/requests', [CollaborationRequestController::class, 'index'])->name('user.requests');
+Route::get('/app/profile', [ProfileController::class, 'index'])->name('user.profile');
 
-
-// Route::controller(ServiceRequestController::class)->group(function () {
-//     Route::get('/app/requests/create', 'create')->withoutMiddleware('auth:sanctum')->name('requests.create');
-//     Route::post('/app/requests', 'store')->name('requests.store');
-//     Route::patch('/app/requests/{serviceRequest}', 'update')->name('requests.update');
-//     Route::post('/app/requests/{serviceRequest}/submit', 'submit')->name('requests.submit');
-//     Route::post('/app/requests/{serviceRequest}/confirm', 'confirm')->name('requests.confirm');
-// });
-
-// Route::controller(ProjectController::class)->group(function () {
-//     Route::get('app/projects', 'index')->name('user.projects');
-//     Route::get('app/projects/create', 'create')->name('user.projects.create');
-// });
-
-// Route::get('app/projects/', [ProjectController::class, 'index'])->name('user.projects');
-
-// Route::get('app/messages', [MessageController::class, 'index'])->name('user.messages');
-
-// Route::get('app/requests', [CollaborationRequestController::class, 'index'])->name('user.requests');
-
-// Route::get('app/profile', [ProfileController::class, 'index'])->name('user.profile');
-
-// Route::get('app/artisan/create', function () {
-//     return Inertia::render('artisan/CreateArtisan');
-// });
-
-
-// Route::middleware(['auth:sanctum', HandleInertiaRequests::class])->group(function () {
-//     Route::controller(ProfileController::class)->group(function () {
-//         Route::get('/artisan/profile/create', 'create')->name('artisan.profile.create');
-//         Route::get('/artisan/profile/edit', 'edit')->name('artisan.profile.edit');
-//         Route::get('/artisan/profile', 'show')->name('artisan.profile.show');
-//         Route::post('/artisan/profile', 'store');
-//         Route::put('/artisan/profile/photo', 'storeProfilePhoto');
-//         Route::delete('/artisan/profile/photo/{media}', 'deleteProfilePhoto');
-//         Route::patch('/artisan/profile/basic', 'updateBasicProfile');
-//         Route::put('/artisan/profile/baked-goods', 'syncBakedGoods');
-//         Route::put('/artisan/profile/dietary-options', 'syncDietaryOptions');
-//         Route::patch('/artisan/profile/services', 'updateServices');
-//         Route::post('/artisan/profile/addresses', 'storeAddress');
-//         Route::patch('/artisan/profile/addresses/{address}', 'updateAddress');
-//         Route::delete('/artisan/profile/addresses/{address}', 'deleteAddress');
-//         Route::patch('/artisan/profile/addresses/{address}/visibility', 'updateAddressVisibility');
-//         Route::post('/artisan/profile/gallery', 'uploadPhotos');
-//         Route::delete('/artisan/profile/gallery/{media}', 'deletePhoto');
-//         Route::patch('/artisan/profile/pickup-methods', 'updatePickupMethods');
-//         Route::patch('/artisan/profile/network', 'updateNetwork');
-//     });
-
-//     Route::controller(MessageController::class)->group(function () {
-//         Route::get('/artisan/messages/{message}', 'show');
-//         Route::get('/artisan/messages', 'index');
-//     });
-// });
+Route::get('/app/artisan/requests', [ArtisanServiceRequestController::class, 'index'])->name('artisan.requests');
+Route::patch('/app/artisan/requests/{serviceRequest}/respond', [ArtisanServiceRequestController::class, 'respond'])->name('artisan.requests.respond');
+Route::get('/app/artisan/creations', [ArtisanCreationController::class, 'index'])->name('artisan.creations.index');
+Route::get('/app/artisan/creations/create', [ArtisanCreationController::class, 'create'])->name('artisan.creations.create');
+Route::post('/app/artisan/creations', [ArtisanCreationController::class, 'store'])->name('artisan.creations.store');
+Route::get('/app/artisan/creations/{creation}/edit', [ArtisanCreationController::class, 'edit'])->name('artisan.creations.edit');
+Route::put('/app/artisan/creations/{creation}', [ArtisanCreationController::class, 'update'])->name('artisan.creations.update');
+Route::patch('/app/artisan/creations/{creation}/publication', [ArtisanCreationController::class, 'togglePublication'])->name('artisan.creations.publication');
+Route::delete('/app/artisan/creations/{creation}', [ArtisanCreationController::class, 'destroy'])->name('artisan.creations.destroy');
+Route::get('/app/artisan/profile/create', [ArtisanProfileController::class, 'create'])->name('artisan.profile.create');
+Route::post('/app/artisan/profile', [ArtisanProfileController::class, 'store'])->name('artisan.profile.store');

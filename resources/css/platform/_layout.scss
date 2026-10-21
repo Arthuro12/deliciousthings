@@ -9,12 +9,11 @@
      * from covering the page content.
      */
     padding:
-        calc(28px + var(--app-header-height))
-        20px
-        calc(104px + env(safe-area-inset-bottom))
-        20px;
+        28px
+        var(--layout-page-padding-mobile)
+        calc(104px + env(safe-area-inset-bottom));
 
     @media (min-width: 768px) {
-        padding: calc(40px + var(--app-header-height)) 32px 64px 40px;
+        padding: 40px var(--layout-page-padding-desktop) 64px;
     }
 }

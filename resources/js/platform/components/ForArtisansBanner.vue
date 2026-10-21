@@ -19,8 +19,8 @@
                 <p class="for-artisan-banner__description">Bist du Konditor:in, Cake Designer:in oder Hobby-Bäcker:in? Zeig deine Kreationen und werde von neuen Kund:innen entdeckt.</p>
                 <Link 
                     class="for-artisan-banner__link"
-                    href="/app/artisan/create"
-                >Profil erstellen</Link>
+                    href="/app/artisan/profile/create"
+                >Mein Schaufenster erstellen</Link>
             </div>
         </div>
     </div>

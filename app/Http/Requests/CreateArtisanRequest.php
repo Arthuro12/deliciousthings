@@ -8,63 +8,57 @@ use Illuminate\Validation\Rules\File;
 
 class CreateArtisanRequest extends FormRequest
 {
-    final const OPTIONAL_ADDRESS_FIELDS = ['address_liine_2', 'shows_full_address'];
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    private function shouldRequireAddress(): bool
     {
-        return true;
+        $address = $this->input('first_address', []);
+
+        return collect($address)->contains(function ($value, $key) {
+            return ! in_array($key, ['address_line_2', 'shows_full_address'], true)
+                && $value !== null
+                && $value !== '';
+        });
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    public function authorize(): bool
+    {
+        return $this->user()?->artisan === null;
+    }
+
     public function rules(): array
     {
-        $address = $this->data()['first_address'];
-        $requireAddressFields = array_any($address, function ($value, $key) {
-            if (in_array($key, self::OPTIONAL_ADDRESS_FIELDS)) return false;
-            return !is_null($value);
-        });
+        $requireAddress = $this->shouldRequireAddress();
 
         return [
-            'name' => 'required|string|min:5',
-            'company_name' => 'nullable|string',
-            'main_occupation' => 'nullable|string',
-            'short_description' => 'nullable|string|max:200',
-            'about' => 'required|string',
-            'average_rate' => 'required|string',
-            'website_url' => 'nullable|string',
-            'instagram_url' => 'nullable|string',
-            'offers_delivery' => 'required|boolean',
-            'pick_up_on_site' => 'required|boolean',
-            'addresses' => 'array|size:0',
-            'medias' => 'array|size:0',
-            'first_address' => [
-                'nullable',
-                'array:street,house_number,postal_code,city,country,address_line_2,shows_full_address'
-            ],
-            'first_address.street' => Rule::requiredIf($requireAddressFields),
-            'first_address.house_number' => Rule::requiredIf($requireAddressFields),
-            'first_address.postal_code' => Rule::requiredIf($requireAddressFields),
-            'first_address.city' => Rule::requiredIf($requireAddressFields),
-            'first_address.country' => Rule::requiredIf($requireAddressFields),
-            'first_address.address_line_2' => 'nullable|string',
-            'first_address.shows_full_address' => 'nullable|boolean',
-            'baked_goods' => 'required|array',
-            'baked_goods.*.key' => 'required|string',
-            'baked_goods.*.name' => 'required|string',
-            'baked_goods.*.label' => 'required|string',
-            'dietary_options' => 'nullable|array',
-            'dietary_options.*.key' => 'required|string',
-            'dietary_options.*.name' => 'required|string',
-            'dietary_options.*.label' => 'required|string',
-            'gallery' => 'array|between:3,6',
-            'gallery.*' => File::image(),
+            'name' => ['required', 'string', 'min:5', 'max:100', Rule::unique('artisans', 'name')],
+            'company_name' => ['nullable', 'string', 'max:150'],
+            'main_occupation' => ['nullable', 'string', 'max:150'],
+            'short_description' => ['nullable', 'string', 'max:200'],
+            'about' => ['required', 'string', 'min:20', 'max:5000'],
+            'average_rate' => ['required', 'numeric', 'min:0', 'max:999999'],
+            'website_url' => ['nullable', 'url', 'max:255'],
+            'instagram_url' => ['nullable', 'url', 'max:255'],
+            'offers_delivery' => ['required', 'boolean'],
+            'pick_up_on_site' => ['required', 'boolean'],
+            'addresses' => ['nullable', 'array', 'size:0'],
+            'medias' => ['nullable', 'array', 'size:0'],
+            'first_address' => ['nullable', 'array:street,house_number,postal_code,city,country,address_line_2,shows_full_address'],
+            'first_address.street' => [Rule::requiredIf($requireAddress), 'nullable', 'string', 'max:255'],
+            'first_address.house_number' => [Rule::requiredIf($requireAddress), 'nullable', 'string', 'max:30'],
+            'first_address.postal_code' => [Rule::requiredIf($requireAddress), 'nullable', 'string', 'max:20'],
+            'first_address.city' => [Rule::requiredIf($requireAddress), 'nullable', 'string', 'max:100'],
+            'first_address.country' => [Rule::requiredIf($requireAddress), 'nullable', 'string', 'max:100'],
+            'first_address.address_line_2' => ['nullable', 'string', 'max:255'],
+            'first_address.shows_full_address' => ['nullable', 'boolean'],
+            'baked_goods' => ['required', 'array', 'min:1'],
+            'baked_goods.*.key' => ['required', 'string', 'exists:baked_goods,key'],
+            'baked_goods.*.name' => ['required', 'string'],
+            'baked_goods.*.label' => ['required', 'string'],
+            'dietary_options' => ['nullable', 'array'],
+            'dietary_options.*.key' => ['required', 'string', 'exists:dietary_options,key'],
+            'dietary_options.*.name' => ['required', 'string'],
+            'dietary_options.*.label' => ['required', 'string'],
+            'gallery' => ['nullable', 'array', 'max:6'],
+            'gallery.*' => [File::image()->max(3072)],
         ];
     }
 }

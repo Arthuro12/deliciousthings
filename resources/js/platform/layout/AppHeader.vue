@@ -5,41 +5,30 @@
                 <DeliciousthingsLogo class="logo__image" />
             </Link>
 
-            <nav
-                class="app-header__navigation"
-                aria-label="Hauptnavigation"
-            >
-                <Link
-                    v-for="link in mainNavigationLinks"
-                    :key="link.title"
-                    :href="link.href"
-                    class="app-header__navigation-link"
-                    :class="{
-                        'app-header__navigation-link--active':
-                            isActiveLink(link.href),
-                    }"
-                >
-                    <component
-                        v-if="link.iconName"
-                        :is="NAVIGATION_LINK_ICONS[link.iconName]"
-                        :size="20"
-                        :stroke-width="1.8"
-                    />
+            <DropdownMenuRoot v-if="user">
+                <DropdownMenuTrigger as-child>
+                    <button
+                        type="button"
+                        class="app-header__user-button"
+                        aria-label="Benutzermenü öffnen"
+                    >
+                        <span class="app-header__user-avatar" aria-hidden="true">{{ initials }}</span>
+                        <span class="app-header__user-name">{{ user.full_name }}</span>
+                    </button>
+                </DropdownMenuTrigger>
 
-                    <span>{{ link.title }}</span>
-                </Link>
-            </nav>
-
-            <button
-                type="button"
-                class="app-header__user-button"
-                aria-label="Benutzermenü öffnen"
-            >
-                <CircleUserRound
-                    :size="23"
-                    :stroke-width="1.7"
-                />
-            </button>
+                <DropdownMenuPortal>
+                    <DropdownMenuContent class="user-menu" align="end" :side-offset="8">
+                        <DropdownMenuLabel class="user-menu__name">
+                            {{ user.full_name }}
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator class="user-menu__separator" />
+                        <DropdownMenuItem class="user-menu__item" @select="logout">
+                            Abmelden
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenuPortal>
+            </DropdownMenuRoot>
         </div>
     </header>
 </template>
@@ -47,31 +36,36 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link, router, usePage } from "@inertiajs/vue3";
 
-import { 
-    CircleUserRound,
-} from "@lucide/vue";
+import {
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuRoot,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "reka-ui";
 
 import DeliciousthingsLogo from "@/platform/components/icons/DeliciousthingsLogo.vue";
 
-import { NAVIGATION_LINK_ICONS } from "@/constants";
+import { getNameIntials } from "@/utils/users";
 import type { AppLinks } from "@/types/ui";
+import type { AppPageProps } from "@/types";
 
 const props = defineProps<{
     links: AppLinks;
 }>();
 
 const page = usePage();
+const user = computed(() => (page.props as AppPageProps).auth.user);
+const initials = computed(() => user.value ? getNameIntials(user.value.full_name) : "");
 
 const appHomeUrl = props.links.user.find(link => link.title == "Startseite");
 
-const mainNavigationLinks = computed(() => {
-    return props.links.user.filter(link => !["Profil"].includes(link.title));
-});
-
-function isActiveLink(url: string): boolean {
-    return page.url === new URL(url).pathname;
+function logout(): void {
+    router.post("/logout");
 }
 </script>
 
@@ -84,8 +78,9 @@ function isActiveLink(url: string): boolean {
     width: 100%;
     height: var(--app-header-height);
 
-    background: var(--color-neutral-50, #fdfbf9);
-    border-bottom: 1px solid var(--color-chocolate-100, #f4e8df);
+    background: rgb(255 250 248 / 94%);
+    border-bottom: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(16px);
 }
 
 .app-header__inner {
@@ -98,10 +93,10 @@ function isActiveLink(url: string): boolean {
     height: 100%;
 
     margin-inline: auto;
-    padding-inline: 20px;
+    padding-inline: var(--layout-page-padding-mobile);
 
     @media (min-width: 768px) {
-        padding-inline: 32px;
+        padding-inline: var(--space-8);
     }
 }
 
@@ -110,66 +105,21 @@ function isActiveLink(url: string): boolean {
     z-index: 1;
 }
 
-.app-header__navigation {
-    display: none;
-
-    @media (min-width: 768px) {
-        position: absolute;
-        display: flex;
-        gap: 4px;
-        justify-content: center;
-        align-items: center;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-    }
-}
-
-.app-header__navigation-link {
-    position: relative;
-
-    display: inline-flex;
-    gap: 8px;
-    align-items: center;
-
-    height: 44px;
-
-    padding-inline: 14px;
-
-    color: var(--color-neutral-500);
-    border-radius: 999px;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    text-decoration: none;
-
-    transition:
-        color 140ms ease,
-        background-color 140ms ease;
-}
-
-.app-header__navigation-link:hover,
-.app-header__navigation-link--active {
-    color: var(--color-brand-primary-500);
-    background-color: var(--color-brand-primary-50);
-}
-
 .app-header__user-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    width: 42px;
-    height: 42px;
+    min-height: 42px;
+    gap: 10px;
 
-    padding: 0;
+    padding: 4px 12px 4px 4px;
 
     color: var(--color-chocolate-700, #563d33);
     background: #fff;
 
     border: 1px solid var(--color-chocolate-200, #e8d5c8);
-    border-radius: 50%;
+    border-radius: 999px;
 
     cursor: pointer;
 
@@ -188,5 +138,69 @@ function isActiveLink(url: string): boolean {
 
 .app-header__user-button:active {
     transform: scale(0.96);
+}
+
+.app-header__user-avatar {
+    display: inline-flex;
+    flex: 0 0 32px;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #fff;
+    background: var(--color-brand-primary-500, #ef6f86);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.app-header__user-name {
+    display: none;
+    max-width: 180px;
+    overflow: hidden;
+    color: var(--color-chocolate-700, #563d33);
+    font-size: 14px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (min-width: 768px) {
+        display: block;
+    }
+}
+
+:global(.user-menu) {
+    z-index: 10;
+    min-width: 220px;
+    padding: 6px;
+    color: var(--color-chocolate-900, #36241d);
+    background: #fff;
+    border: 1px solid var(--color-chocolate-100, #f4e8df);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgb(54 36 29 / 12%);
+}
+
+:global(.user-menu__name) {
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+:global(.user-menu__separator) {
+    height: 1px;
+    margin: 4px 0;
+    background: var(--color-chocolate-100, #f4e8df);
+}
+
+:global(.user-menu__item) {
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+}
+
+:global(.user-menu__item[data-highlighted]) {
+    color: var(--color-brand-primary-500, #ef6f86);
+    background: var(--color-brand-primary-50, #fff1f3);
 }
 </style>

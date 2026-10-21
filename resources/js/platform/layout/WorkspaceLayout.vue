@@ -1,13 +1,26 @@
 <template>
-    <div class="workspace-layout">
-        <WorkspaceHeader :back-link-href />
-
-        <slot></slot>
+    <div class="workspace-layout app-layout">
+        <AppHeader :links="links" />
+        <AppSidebar :links="links" />
+        <div class="app-main">
+        <WorkspaceHeader :back-link-href="backLinkHref ?? '/app/projects'" />
+            <slot />
+        </div>
+        <AppBottomNavBar :links="links" />
     </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import type { AppPageProps } from '@/types';
+import AppHeader from './AppHeader.vue';
+import AppSidebar from './AppSidebar.vue';
+import AppBottomNavBar from './AppBottomNavBar.vue';
 import WorkspaceHeader from "./workspace/WorkspaceHeader.vue";
+
+const page = usePage();
+const links = computed(() => (page.props as AppPageProps).links);
 
 defineProps<{
     /**
