@@ -11,7 +11,7 @@
         <link rel="apple-touch-icon" size="180×180" href="/apple-touch-icon.png">
         
         @vite([
-            'resources/css/styles.css', 
+            'resources/css/styles.css',
             'resources/css/website.scss', 
             'resources/js/third-party/alpinejs.ts',
         ])

@@ -12,6 +12,7 @@ use App\Models\ServiceRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -96,6 +97,14 @@ class ServiceRequestController extends Controller
 
     public function submit(Request $request, ServiceRequest $serviceRequest): RedirectResponse
     {
+        Gate::forUser($request->user())->authorize('view', $serviceRequest);
+
+        if ($serviceRequest->artisan_id === null) {
+            throw ValidationException::withMessages([
+                'recipient' => 'Bitte wähle zuerst einen Backprofi aus. Deine Anfrage wird nicht öffentlich geteilt.',
+            ]);
+        }
+
         Gate::forUser($request->user())->authorize('submit', $serviceRequest);
 
         if (! $request->user()) {
@@ -115,13 +124,29 @@ class ServiceRequestController extends Controller
             'request_builder_after_auth',
         ]);
 
-        return to_route('app.home');
+        return to_route('app.user.requests');
     }
 
+    public function complete(Request $request, ServiceRequest $serviceRequest): RedirectResponse
+    {
+        Gate::forUser($request->user())->authorize('complete', $serviceRequest);
+        $serviceRequest->update(['status' => ServiceRequestStatus::Completed]);
+
+        return to_route('app.user.requests')->with('success', 'Deine Anfrage wurde als abgeschlossen markiert.');
+    }
+
+    public function cancel(Request $request, ServiceRequest $serviceRequest): RedirectResponse
+    {
+        Gate::forUser($request->user())->authorize('cancel', $serviceRequest);
+        $serviceRequest->update(['status' => ServiceRequestStatus::Cancelled]);
+
+        return to_route('app.user.requests')->with('success', 'Deine Anfrage wurde storniert.');
+    }
     private function transform(ServiceRequest $request): array
     {
         return [
             'id' => $request->id,
+            'artisan_id' => $request->artisan_id,
             'status' => $request->status->value,
             'description' => $request->description,
             'category' => $request->category,
@@ -137,6 +162,8 @@ class ServiceRequestController extends Controller
             'style' => $request->style ?? [],
             'flavors' => $request->flavors ?? [],
             'requirements' => $request->requirements,
+            'artisan_response' => $request->artisan_response,
+            'quote_amount' => $request->quote_amount !== null ? (float) $request->quote_amount : null,
         ];
     }
 

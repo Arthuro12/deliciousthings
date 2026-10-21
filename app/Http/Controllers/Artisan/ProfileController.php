@@ -36,7 +36,9 @@ class ProfileController extends Controller
 
     public function create()
     {
-        return Inertia::render('artisan/CreateArtisan');
+        return Inertia::render('artisan/CreateArtisan', [
+            'bakedGoods' => BakedGood::query()->orderBy('category')->orderBy('label')->get(['key', 'name', 'label', 'category']),
+        ]);
     }
 
     public function edit(Request $request)
@@ -73,7 +75,7 @@ class ProfileController extends Controller
     public function store(CreateArtisanRequest $request)
     {
         $attrs = $request->validated();
-        $user = $request->user(); // Stores the request author to keep it up to date. 
+        $user = $request->user(); // Stores the request author to keep it up to date.
 
         $rate = intval($attrs['average_rate']);
         $price_level = PriceLevel::fromPrice($rate);
@@ -111,7 +113,7 @@ class ProfileController extends Controller
             }
         }
 
-        foreach ($request->file('gallery') as $photo) {
+        foreach ($request->file('gallery', []) as $photo) {
             $path = $photo->storePublicly('gallery', 'public');
             $artisan->medias()->create([
                 'category' => 'gallery',
@@ -119,7 +121,8 @@ class ProfileController extends Controller
             ]);
         }
 
-        $hasRequiredAddressFields = Arr::every($attrs['first_address'], function ($value, $key) {
+        $firstAddressData = $attrs['first_address'] ?? [];
+        $hasRequiredAddressFields = $firstAddressData !== [] && Arr::every($firstAddressData, function ($value, $key) {
             if ($key == 'address_line_2') {
                 return true;
             }
@@ -127,12 +130,12 @@ class ProfileController extends Controller
         });
         if ($hasRequiredAddressFields) {
             $addressDto = new AddressDto(
-                $attrs['first_address']['street'], 
-                $attrs['first_address']['house_number'],
-                $attrs['first_address']['city'],
-                $attrs['first_address']['country'],
-                $attrs['first_address']['postal_code'],
-                $attrs['first_address']['address_line_2'],
+                $firstAddressData['street'],
+                $firstAddressData['house_number'],
+                $firstAddressData['city'],
+                $firstAddressData['country'],
+                $firstAddressData['postal_code'],
+                $firstAddressData['address_line_2'] ?? null,
             );
             $match = $this->geocodingClient->geocode($addressDto);
 
@@ -149,8 +152,8 @@ class ProfileController extends Controller
             ]);
         }
 
-        Log::notice("Artisan profile successfully created!");       
-        return to_route('artisan.profile.show')->with('success', __('Your profile has been successfully created.'));
+        Log::notice("Artisan profile successfully created!");
+        return to_route('app.artisan.creations.index')->with('success', __('Your profile has been successfully created.'));
     }
 
     public function deleteAddress(Request $request, Address $address)
@@ -203,7 +206,7 @@ class ProfileController extends Controller
         ]);
 
         $addressDto = new AddressDto(
-            $attrs['street'], 
+            $attrs['street'],
             $attrs['house_number'],
             $attrs['city'],
             $attrs['country'],
@@ -211,7 +214,7 @@ class ProfileController extends Controller
             $attrs['address_line_2'],
         );
         $match = $this->geocodingClient->geocode($addressDto);
-        
+
         $request->user()->artisan->addresses()->create([
             'street' => $addressDto->street,
             'house_number' => $addressDto->house_number,
@@ -251,7 +254,7 @@ class ProfileController extends Controller
             'baked_goods.*.name' => 'required|string',
             'baked_goods.*.label' => 'required|string',
         ]);
-        
+
         $selectedBakedGoods = Arr::map($attrs['baked_goods'], function ($value) {
             return $value['key'];
         });
@@ -291,7 +294,7 @@ class ProfileController extends Controller
         ]);
 
         $addressDto = new AddressDto(
-            $attrs['street'], 
+            $attrs['street'],
             $attrs['house_number'],
             $attrs['city'],
             $attrs['country'],
@@ -299,7 +302,7 @@ class ProfileController extends Controller
             $attrs['address_line_2'],
         );
         $match = $this->geocodingClient->geocode($addressDto);
-        
+
         $request->user()->artisan->addresses()->find($address->id)->update([
             'street' => $addressDto->street,
             'house_number' => $addressDto->house_number,
@@ -316,7 +319,7 @@ class ProfileController extends Controller
     }
 
     public function updateAddressVisibility(Request $request, Address $address)
-    {   
+    {
         $attrs = $request->validate([
             'visibility' => [Rule::enum(AddressVisibility::class)],
         ]);
@@ -324,7 +327,7 @@ class ProfileController extends Controller
         $request->user()->artisan->addresses()->find($address->id)->update([
             'visibility' => $attrs['visibility'],
         ]);
-        
+
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
@@ -350,7 +353,7 @@ class ProfileController extends Controller
     }
 
     public function updateNetwork(Request $request)
-    {   
+    {
         $attrs = $request->validate([
             'website_url' => 'nullable|string',
             'instagram_url' => 'nullable|string',
@@ -360,7 +363,7 @@ class ProfileController extends Controller
             'website_url' => $attrs['website_url'],
             'instagram_url' => $attrs['instagram_url'],
         ]);
-        
+
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
@@ -379,7 +382,7 @@ class ProfileController extends Controller
         return back()->with('success', __('Artisan profile successfully updated.'));
     }
 
-    public function updateServices(Request $request) 
+    public function updateServices(Request $request)
     {
         $attrs = $request->validate([
             'services' => 'nullable|array',
@@ -396,7 +399,7 @@ class ProfileController extends Controller
             'average_rate' => $attrs['average_rate'],
             'price_level' => $price_level,
         ]);
-        
+
         if (!empty($attrs['services'])) {
             $selectedServices = Arr::map($attrs['services'], function ($value) {
                 return $value['key'];

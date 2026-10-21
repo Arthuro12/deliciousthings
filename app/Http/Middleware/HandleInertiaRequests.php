@@ -36,20 +36,20 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {     
         $user = $request->user();
+        $artisan = $user?->artisan;
 
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => [
-                    $user?->only(['id', 'first_name', 'last_name', 'email']),
-                ],
+                'user' => $user?->only(['id', 'first_name', 'last_name', 'full_name', 'email']),
+                'has_artisan_profile' => $user?->artisan()->exists() ?? false,
             ],
             'links' => [
                 'guest' => [ 
                     [
                         'title' => 'Website',
-                        'href' => route('home'),
+                        'href' => route('landing'),
                     ],
                 ],
                 'user' => [
@@ -70,9 +70,23 @@ class HandleInertiaRequests extends Middleware
                     ], 
                     [
                         'title' => 'Anfragen',
-                        'href' => route('app.user.requests'),
+                        'href' => route($user && $user->artisan ? 'app.artisan.requests' : 'app.user.requests'),
                         'iconName' => 'mail',
                     ], 
+                    ...(!($user?->artisan()->exists() ?? false) ? [[
+                        'title' => 'Mein Schaufenster erstellen',
+                        'href' => route('app.artisan.profile.create'),
+                        'iconName' => 'circle-user-round',
+                    ]] : []),
+                    ...($artisan ? [[
+                        'title' => 'Mein Schaufenster',
+                        'href' => route('artisan.public.show', $artisan),
+                        'iconName' => 'circle-user-round',
+                    ], [
+                        'title' => 'Meine Kreationen',
+                        'href' => route('app.artisan.creations.index'),
+                        'iconName' => 'folder',
+                    ]] : []),
                     [
                         'title' => 'Profil',
                         'href' => route('app.user.profile'),

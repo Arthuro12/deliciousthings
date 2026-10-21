@@ -37,10 +37,11 @@ class SessionController extends Controller
         }
 
         $request->session()->regenerate();
-        $claimGuestRequest->handle($request, $request->user());
+        $guestRequest = $claimGuestRequest->handle($request, $request->user());
 
-        if ($request->session()->pull('request_builder_after_auth', false)) {
+        if ($request->session()->pull('request_builder_after_auth', false) && $guestRequest) {
             return to_route('app.requests.create', [
+                'request_id' => $guestRequest->id,
                 'step' => 'preview',
             ]);
         }
@@ -56,6 +57,6 @@ class SessionController extends Controller
         $request->session()->regenerateToken();
         Log::notice(now()->toString() . json_encode(Auth::user()));
 
-        return to_route('home');
+        return to_route('landing');
     }
 }

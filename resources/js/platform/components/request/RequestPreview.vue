@@ -105,11 +105,16 @@
                 Du kannst die Anfrage noch bearbeiten. Erst mit deiner Bestätigung
                 wird sie für den nächsten Schritt freigegeben.
             </p>
+            <p v-else-if="request.artisan_id">
+                Deine Angaben sind bestätigt. Die Anfrage wird privat an den
+                ausgewählten Backprofi gesendet. Sie ist keine Bestellung und keine Reservierung.
+            </p>
             <p v-else>
-                Deine Angaben sind bestätigt. Mit „Anfrage senden“ gibst du sie
-                für die Vermittlung an passende Backprofis frei.
+                Wähle zuerst einen Backprofi aus. Deine Anfrage wird nicht öffentlich geteilt.
             </p>
         </div>
+
+        <p v-if="submitError" class="request-preview__error" role="alert">{{ submitError }}</p>
 
         <div class="request-preview__actions">
             <button
@@ -138,7 +143,7 @@
                 v-else
                 type="button"
                 class="button button--primary button--lg"
-                :disabled="processing"
+                :disabled="processing || !request.artisan_id"
                 @click="$emit('submit')"
             >
                 <ButtonLoader v-if="processing" />
@@ -174,6 +179,7 @@ const props = defineProps<{
     occasions: Array<{ value: string; label: string }>;
     fulfillmentMethods: Array<{ value: string; label: string }>;
     processing?: boolean;
+    submitError?: string;
 }>();
 
 defineEmits<{
@@ -542,6 +548,12 @@ const missingFields = computed(() =>
     margin: 0;
     font-size: 13px;
     line-height: 1.5;
+}
+
+.request-preview__error {
+    margin: 14px 0 0;
+    color: var(--color-error-600);
+    font-size: 14px;
 }
 
 .request-preview__actions {

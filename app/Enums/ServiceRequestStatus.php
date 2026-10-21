@@ -7,6 +7,8 @@ enum ServiceRequestStatus: string
     case Draft = 'draft';
     case Confirmed = 'confirmed';
     case Sent = 'sent';
+    case Responded = 'responded';
+    case Declined = 'declined';
     case ResponsesPending = 'responses_pending';
     case Completed = 'completed';
     case Cancelled = 'cancelled';

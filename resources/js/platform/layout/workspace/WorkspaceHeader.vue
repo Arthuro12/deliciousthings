@@ -27,22 +27,21 @@ defineProps<{
 
 <style scoped>
 .workspace-header {
-    height: var(--app-header-height);
-    background: var(--color-neutral-50, #fdfbf9);   
-    position: fixed;   
-    top: 0; 
-    left: 0; 
-    z-index: 3; 
-    width: 100%; 
+    height: 56px;
     display: flex; 
     align-items: center; 
-    padding: 0 24px; 
-    width: 100%;
+    padding-inline: var(--layout-page-padding-mobile);
+    background: var(--color-background-page);
+    border-bottom: 1px solid var(--color-border-subtle);
     margin: 0 auto;
+
+    @media (min-width: 768px) {
+        padding-inline: var(--layout-page-padding-desktop);
+    }
 }
 
 .workspace-header__inner {
-    max-width: 90rem;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
 }

@@ -2,7 +2,7 @@
     <a
         class="logo"
         aria-label="Deliciousthings Homeseite"
-        href="{{ route('home') }}"
+        href="{{ route('landing') }}"
     >
         <x-icons.logo class="logo__image" />
     </a>

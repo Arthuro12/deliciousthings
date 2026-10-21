@@ -4,6 +4,8 @@ export type RequestStatus =
     | "draft"
     | "confirmed"
     | "sent"
+    | "responded"
+    | "declined"
     | "responses_pending"
     | "completed"
     | "cancelled"
@@ -13,6 +15,7 @@ export type RequestStatus =
 
 export interface RequestData {
     id: number;
+    artisan_id: number | null;
     status: RequestStatus;
     description: string;
     category: string | null;

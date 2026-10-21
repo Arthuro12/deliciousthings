@@ -77,6 +77,11 @@ class Artisan extends Model
         return $this->hasMany(PreOrder::class);
     }
 
+    public function creations(): HasMany
+    {
+        return $this->hasMany(Creation::class);
+    }
+
     public function profilePhoto()
     {
         return $this->medias()->where('category', 'profile_photo')->first();

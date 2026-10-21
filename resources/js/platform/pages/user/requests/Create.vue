@@ -100,6 +100,7 @@
                     :occasions="occasions"
                     :fulfillment-methods="fulfillmentMethods"
                     :processing="processing"
+                    :submit-error="submitError"
                     @edit="qualificationOpen = true"
                     @confirm="confirmRequest"
                     @submit="submitRequest"
@@ -159,6 +160,7 @@ const description = ref(props.request?.description ?? props.intent ?? "");
 const qualificationOpen = ref(false);
 const creating = ref(false);
 const processing = ref(false);
+const submitError = ref("");
 const descriptionError = ref("");
 
 const categories = REQUEST_CATEGORIES;
@@ -268,6 +270,7 @@ function submitRequest() {
     if (!request.value || processing.value) return;
 
     processing.value = true;
+    submitError.value = "";
 
     router.post(
         `/app/requests/${request.value.id}/submit`,
@@ -279,6 +282,9 @@ function submitRequest() {
                 if (updatedRequest) {
                     request.value = updatedRequest;
                 }
+            },
+            onError: (errors) => {
+                submitError.value = errors.recipient ?? "Die Anfrage konnte nicht gesendet werden.";
             },
             onFinish: () => {
                 processing.value = false;

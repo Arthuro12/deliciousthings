@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        app(\App\Actions\FillBakedGoods::class)->handle();
+
         // User::factory(10)->create();
 
         User::factory()->create([

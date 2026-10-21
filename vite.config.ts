@@ -8,7 +8,8 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/styles.css', 
+                'resources/css/styles.css',
+                // 'resources/css/auth.scss',
                 'resources/css/website.scss',
                 'resources/css/pages/home.scss',
                 'resources/css/pages/landing.scss',

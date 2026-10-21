@@ -1,5 +1,6 @@
 :root {
     --app-header-height: var(--space-16);
+    --app-sidebar-width: 15.5rem;
 }
 
 html,
@@ -19,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-body);
+    font-family: var(--font-heading);
 }
 
 .page-loader-wrapper {
